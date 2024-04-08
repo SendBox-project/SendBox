@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../static/css/include/header.css">
+    <title>header</title>
+</head>
+<body>
+<header th:fragment="headerFragment">
+<!--    헤더 상단 네비게이션   -->
+    <div class="headerNav">
+        <div class="boardLink">
+            <ul>
+                <li>
+                    <a th:href="@{/board/notice}">공지사항</a>
+                </li>
+                <li>
+                    <a th:href="@{/board/service_center}">고객센터</a>
+            </ul>
+        </div>
+        <div class="accountLink">
+            <ul>
+                <li>
+                    <a th:href="@{/include/login}">로그인</a>
+                </li>
+                <li>
+                    <a th:href="@{/include/create_account}">회원가입</a>
+            </ul>
+        </div>
+    </div>
+<!--    헤더 중단   -->
+    <div class="headerCenter">
+        <div class="logo">
+            <h1>(로고 이미지)</h1>
+            <h2>백그라운드 이미지</h2>
+        </div>
+        <div class="search">
+            <form action="#" method="get">
+                <input type="text" name="search" placeholder="검색어를 입력하세요">
+                <button type="submit">검색</button>
+            </form>
+    </div>
+</header>
+</body>
+</html>
