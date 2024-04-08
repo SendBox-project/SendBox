@@ -26,6 +26,6 @@ public class Board extends BaseEntity {
     @Column(name = "a_m_no")
     private Integer aMNo;
 
-    @Column(length = 1, columnDefinition = "char(2)")
+    @Column(length = 2, columnDefinition = "char(2)")
     private String boardType;
 }
