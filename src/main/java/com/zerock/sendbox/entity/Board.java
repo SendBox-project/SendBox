@@ -1,5 +1,6 @@
 package com.zerock.sendbox.entity;
 
+
 import com.zerock.sendbox.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +23,7 @@ public class Board extends BaseEntity {
     @Column
     private String boardContent;
 
-    @Column
+    @Column(name = "a_m_no")
     private Integer aMNo;
 
     @Column(length = 1, columnDefinition = "char(2)")

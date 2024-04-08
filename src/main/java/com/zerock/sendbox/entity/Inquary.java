@@ -17,7 +17,7 @@ public class Inquary extends BaseEntity{
     @Column
     private Integer inquaryNo;
 
-    @Column
+    @Column(name = "u_m_no")
     private Integer uMNo;
 
     @Column

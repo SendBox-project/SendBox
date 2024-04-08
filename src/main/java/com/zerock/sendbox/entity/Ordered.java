@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @ToString
-public class Ordered extends BaseEntity{
+public class Ordered{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

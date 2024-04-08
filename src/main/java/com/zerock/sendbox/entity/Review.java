@@ -19,7 +19,7 @@ public class Review{
     @Column
     private Integer reviewNo;
 
-    @Column
+    @Column(name = "u_m_no")
     private Integer uMNo;
 
     @Column

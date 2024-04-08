@@ -23,7 +23,7 @@ public class AdminAnswer extends BaseEntity {
     @Column
     private String anContent;
 
-    @Column
+    @Column(name = "a_m_no")
     private Integer aMNo;
 
     @Column

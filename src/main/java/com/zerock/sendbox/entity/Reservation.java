@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @ToString
-public class Reservation extends BaseEntity{
+public class Reservation{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Reservation extends BaseEntity{
     @Column
     private Date reservationStatus;
 
-    @Column
+    @Column(name = "u_m_no")
     private Integer uMNo;
 
     @Column
