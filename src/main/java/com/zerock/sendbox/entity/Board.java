@@ -18,13 +18,13 @@ public class Board extends BaseEntity {
     private Integer boardNo;
 
     @Column
-    private String boardTitle;
+    private Integer adminNo;
 
     @Column
-    private String boardContent;
+    private String title;
 
-    @Column(name = "a_m_no")
-    private Integer aMNo;
+    @Column
+    private String content;
 
     @Column(length = 2, columnDefinition = "char(2)")
     private String boardType;

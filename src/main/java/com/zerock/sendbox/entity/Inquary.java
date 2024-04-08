@@ -16,12 +16,12 @@ public class Inquary extends BaseEntity{
     @Column
     private Integer inquaryNo;
 
-    @Column(name = "u_m_no")
-    private Integer uMNo;
+    @Column
+    private Integer userNo;
 
     @Column
-    private String inquaryTitle;
+    private String title;
 
     @Column
-    private String inquaryContent;
+    private String content;
 }

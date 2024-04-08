@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMemberRepository extends JpaRepository<UserMember, Integer> {
+
+    //개인 정보 수정폼
+    UserMember findByUserId(String userId);
+
 }

@@ -14,29 +14,29 @@ public class StoreInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer stNo;
-
-    @Column(name = "o_m_no")
-    private Integer oMNo;
+    private Integer storeNo;
 
     @Column
-    private  String stName;
+    private Integer ownerNo;
 
     @Column
-    private  String stNotice;
+    private  String storeName;
 
     @Column
-    private  String stAddress;
+    private  String notice;
 
     @Column
-    private  String stPhone;
+    private  String address;
 
     @Column
-    private  String stFilter;
+    private  String phone;
 
     @Column
-    private  String stThumbnail;
+    private  String filter;
 
-    @Column(name  = "st_info_photo")
-    private  String stPhoto;
+    @Column
+    private  String thumbnail;
+
+    @Column
+    private  String infoPhoto;
 }

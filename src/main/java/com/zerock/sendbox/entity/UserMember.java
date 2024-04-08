@@ -13,25 +13,25 @@ import lombok.*;
 public class UserMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "u_m_no")
-    private Integer uMNo;
+    @Column
+    private Integer userNo;
 
-    @Column(name = "u_m_id")
-    private String uMId;
+    @Column
+    private String userId;
 
-    @Column(name = "u_m_pw")
-    private String uMPw;
+    @Column
+    private String password;
 
-    @Column(name = "u_m_name")
-    private String uMName;
+    @Column
+    private String name;
 
-    @Column(length = 1, name = "u_m_gender", columnDefinition = "char(1)")
-    private String uMGender;
+    @Column(length = 1, columnDefinition = "char(1)")
+    private String gender;
 
-    @Column(name = "u_m_mail")
-    private String uMMail;
+    @Column
+    private String mail;
 
-    @Column(name = "u_m_phone")
-    private String uMPhone;
+    @Column
+    private String phone;
 
 }

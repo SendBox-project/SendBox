@@ -9,20 +9,20 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StoreRoom {
+public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roomNo;
 
     @Column
-    private Integer stNo;
+    private Integer storeNo;
 
     @Column
-    private Integer roomSize;
+    private Integer size;
 
     @Column
-    private Integer roomPrice;
+    private Integer price;
 
     @Column
-    private Integer roomRemain;
+    private Integer remain;
 }

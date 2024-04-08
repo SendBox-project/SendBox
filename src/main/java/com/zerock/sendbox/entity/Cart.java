@@ -13,11 +13,11 @@ import lombok.*;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_m_no")
-    private Integer cartMNo;
+    @Column
+    private Integer cartNo;
 
-    @Column(name = "u_m_no")
-    private Integer uMNO;
+    @Column
+    private Integer userNo;
 
     @Column
     private Integer orderNo;

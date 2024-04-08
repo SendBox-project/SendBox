@@ -3,6 +3,8 @@ package com.zerock.sendbox.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -11,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @ToString
-public class Ordered{
+public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +24,11 @@ public class Ordered{
     private Integer roomNo;
 
     @Column
-    private Integer orderPrice;
+    private Integer totalPrice;
 
     @Column
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Column
-    private Integer orderAmount;
+    private Integer totalAmount;
 }

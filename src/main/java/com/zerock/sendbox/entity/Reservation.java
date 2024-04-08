@@ -22,14 +22,20 @@ public class Reservation{
     private Integer orderNo;
 
     @Column
-    private Date reservationStatus;
+    private Integer userNo;
 
-    @Column(name = "u_m_no")
-    private Integer uMNo;
+    @Column
+    private String reservationStatus;
 
     @Column
     private String paymentType;
 
     @Column
     private String PaymentMethod;
+
+
+
+
+
+
 }

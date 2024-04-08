@@ -12,32 +12,31 @@ import lombok.*;
 public class AdminMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "a_m_no")
-    private Integer aMNo;
+    @Column
+    private Integer adminNo;
 
-    @Column(name = "a_m_id")
-    private String aMId;
+    @Column
+    private String adminId;
 
+    @Column
+    private Integer approval;
 
-    @Column(name = "a_m_approval")
-    private Integer aMApproval;
+    @Column
+    private String password;
 
-    @Column(name = "a_m_pw")
-    private String aMPw;
+    @Column
+    private String name;
 
-    @Column(name = "a_m_name")
-    private String aMName;
+    @Column(length = 1, columnDefinition = "char(1)")
+    private String gender;
 
-    @Column(length = 1, name = "a_m_gender", columnDefinition = "char(1)")
-    private String aMGender;
+    @Column
+    private String mail;
 
-    @Column(name = "a_m_mail")
-    private String aMMail;
+    @Column
+    private String phone;
 
-    @Column(name = "a_m_phone")
-    private String aMPhone;
-
-    @Column(length = 3, columnDefinition = "char(3)", name = "a_m_part")
-    private String aMPart;
+    @Column(length = 3, columnDefinition = "char(3)")
+    private String part;
 
 }

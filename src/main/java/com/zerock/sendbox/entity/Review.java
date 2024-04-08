@@ -3,6 +3,7 @@ package com.zerock.sendbox.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -18,15 +19,15 @@ public class Review{
     @Column
     private Integer reviewNo;
 
-    @Column(name = "u_m_no")
-    private Integer uMNo;
+    @Column
+    private Integer userNo;
 
     @Column
-    private Integer stNo;
+    private Integer storeNo;
 
     @Column
-    private String reviewContent;
+    private String content;
 
     @Column
-    private Date regDate;
+    private LocalDateTime regDate;
 }

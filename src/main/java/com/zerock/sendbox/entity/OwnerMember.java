@@ -13,35 +13,35 @@ import lombok.*;
 public class OwnerMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "o_m_no")
-    private Integer oMNo;
+    @Column
+    private Integer ownerNo;
 
-    @Column(name = "o_m_id")
-    private String oMId;
+    @Column
+    private String ownerId;
 
-    @Column(name = "o_m_pw")
-    private String oMPw;
+    @Column
+    private String password;
 
-    @Column(name = "o_m_name")
-    private String oMName;
+    @Column
+    private String name;
 
-    @Column(length = 1, name = "o_m_gender", columnDefinition = "char(1)")
-    private String oMGender;
+    @Column(length = 1, columnDefinition = "char(1)")
+    private String gender;
 
-    @Column(name = "o_m_mail")
-    private String oMMail;
+    @Column
+    private String mail;
 
-    @Column(name = "o_m_phone")
-    private String oMPhone;
+    @Column
+    private String phone;
 
-    @Column(length = 3, name = "o_m_region",  columnDefinition = "char(3)")
-    private String oMRegion;
+    @Column(length = 3, columnDefinition = "char(3)")
+    private String region;
 
-    @Column(name= "o_m_BRN")
-    private String oMBrn;
+    @Column
+    private String brn;
 
-    @Column(name = "o_m_store")
-    private String oMStore;
+    @Column
+    private String ownerStore;
 
 
 

@@ -14,18 +14,21 @@ public class AdminAnswer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer anNo;
+    private Integer answerNo;
 
     @Column
-    private String anTitle;
-
-    @Column
-    private String anContent;
-
-    @Column(name = "a_m_no")
-    private Integer aMNo;
+    private Integer adminNo;
 
     @Column
     private Integer inquaryNo;
+
+    @Column
+    private String title;
+
+    @Column
+    private String content;
+
+
+
 
 }
