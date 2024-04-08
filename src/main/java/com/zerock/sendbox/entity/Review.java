@@ -15,7 +15,6 @@ public class Review{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column
     private Integer reviewNo;
 

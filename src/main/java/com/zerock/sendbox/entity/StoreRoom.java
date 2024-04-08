@@ -9,13 +9,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StorageRoom {
+public class StoreRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roomNo;
 
     @Column
-    private String stNo;
+    private Integer stNo;
 
     @Column
     private Integer roomSize;

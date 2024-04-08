@@ -13,7 +13,6 @@ public class Inquary extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column
     private Integer inquaryNo;
 

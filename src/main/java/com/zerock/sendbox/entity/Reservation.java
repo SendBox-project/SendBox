@@ -15,7 +15,6 @@ public class Reservation{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column
     private Integer reservationNo;
 

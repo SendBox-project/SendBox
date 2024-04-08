@@ -15,7 +15,6 @@ public class Ordered{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column
     private Integer orderNo;
 

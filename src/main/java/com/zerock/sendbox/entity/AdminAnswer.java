@@ -13,7 +13,6 @@ public class AdminAnswer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column
     private Integer anNo;
 

@@ -26,7 +26,7 @@ public class StoreInfo extends BaseEntity {
     private  String stNotice;
 
     @Column
-    private  String stAdress;
+    private  String stAddress;
 
     @Column
     private  String stPhone;
