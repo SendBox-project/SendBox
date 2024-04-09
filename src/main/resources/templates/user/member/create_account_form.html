@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+    <meta charset="UTF-8">
+    <title>User register</title>
+    <link rel="stylesheet" href="../../../static/css/user/create_account_form.css">
+</head>
+<body>
+
+    <!--유저 회원가입-->
+    <div id="register_container">
+        <div class="side_logo"><a th:href="@{유저홈}"><img th:src="@{/img/logo.png}">로고자리</a></div>
+        <h1>일반 회원가입</h1>
+        <div id="register_wrap">
+            <form th:action="@{/회원가입하고 넘어갈 위치}" th:method="post">
+                <div class="form_list">
+                    <div class="form_item"><label for="id">아이디</label>
+                        <input type="text" id="id" name="user_id" placeholder="아이디를 입력하세요" autofocus >
+                    </div>
+                    <div class="form_item"><label for="password">비밀번호</label>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+                    </div>
+                    <div class="form_item"><label for="password_check">비밀번호 확인</label>
+                        <input type="password" id="password_check" name="password_again" placeholder="비밀번호를 다시 입력하세요">
+                    </div>
+                </div>
+                <div class="form_list">
+                    <div class="form_item"><label for="name">이름</label>
+                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+                    </div>
+                    <div class="form_item"><label for="email">이메일</label>
+                        <input type="email" id="email" name="mail" placeholder="이메일을 입력하세요">
+                    </div>
+                    <div class="form_item"><label for="phone">전화번호</label>
+                        <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력하세요">
+                    </div>
+                    <div class="form_item">
+                        <label for="gender">성별</label>
+                        <select name="gender" id="gender">
+                            <option value="M">남자</option>
+                            <option value="W">여자</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="regi_button" type="submit" th:onclick="@{/보낼곳 맵}">Submit</button>
+            </form>
+            <div class="account_links">
+                <a th:href="@{/유저로그인}">로그인 페이지로 이동</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

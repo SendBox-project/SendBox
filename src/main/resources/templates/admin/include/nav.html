@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin navbar</title>
+</head>
+<body>
+<div id="nav_wrap">
+
+<!--    로그인 후-->
+    <div class="menu">
+        <ul>
+            <li><a sec:authorize="isAuthenticated()" id="logout-text" href="/admin/logout">로그아웃</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
