@@ -1,0 +1,19 @@
+#result_container {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#result_container .result {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+
+#result_container .result a {
+    display: inline-block;
+    width: 200px;
+    padding: 10px 0;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
