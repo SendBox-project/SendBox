@@ -4,12 +4,12 @@ function loginForm() {
 
     let form = document.login_form;
 
-    if(form.u_m_id.value === "") {
+    if(form.user_id.value === "") {
         alert("아이디를 입력하세요.");
-        form.u_m_id.focus();
-    } else if(form.u_m_pw.value === "") {
+        form.user_id.focus();
+    } else if(form.password.value === "") {
         alert("비밀번호를 입력하세요.");
-        form.u_m_pw.focus();
+        form.password.focus();
     } else {
         form.submit();
     }
