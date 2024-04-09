@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Home</title>
+</head>
+<body>
+<!--타임리프 레이아웃 헤더 넣고-->
+<!--타임리프 레이아웃 네비 바 넣고-->
+<section>
+    <h1> User Home</h1>
+    <h2> 디자인이랑 헤더푸터 채울예정.........임시 매핑용으로 올려둡니다..</h2>
+    <div id="home_container">
+        <!--    홈 메인부분 전체 콘테이너-->
+        <div class="main_group1">
+            <!--   메인 첫번 째 행 그룹 (이벤트, 공지사항 슬라이더)-->
+            <div class="notice_wrap">
+                 <!-- 슬라이더 통 래핑-->
+                <div class="visual_title">
+                    <span>공지사항</span>
+                </div>
+                <div class="notice_slider">
+                    <div class="slide">
+                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice1"></a>
+                    </div>
+                    <div class="slide">
+                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice2"></a>
+                    </div>
+                    <div class="slide">
+                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice3"></a>
+                    </div>
+                    <div class="slide">
+                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice4"></a>
+                    </div>
+                    <!--   갯수더 늘릴 수도 있음~-->
+                </div>
+            </div>
+        </div>
+        <div class="main_group2">
+            <!--   메인 두번 째 행 그룹 (지역 퀵메뉴 없어질가능성 농후 ^^)-->
+            <div class="quick_wrap">
+                <div class="visual_title">
+                    <span>지역별 퀵메뉴</span>
+                </div>
+                <div class="quick_group">
+                    <div class="quick_menu">
+                        <a th:href="@{지역별 링크}"><img th:src="@{이미지파일}" alt="quick1"></a>
+                    </div>
+                    <div class="quick_menu">
+                        <a th:href="@{지역별 링크}"><img th:src="@{이미지파일}" alt="quick2"></a>
+                    </div>
+                    <div class="quick_menu">
+                        <a th:href="@{지역별 링크}"><img th:src="@{이미지파일}" alt="quick3"></a>
+                    </div>
+                    <div class="quick_menu">
+                        <a th:href="@{지역별 링크}"><img th:src="@{이미지파일}" alt="quick4"></a>
+                    </div>
+                    <div class="quick_menu">
+                        <a th:href="@{지역별 링크}"><img th:src="@{이미지파일}" alt="quick5"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_group3">
+            <!--   메인 세번 째 행 그룹 (홈페이지 사용법 기능업는 이미지)-->
+            <div class="manual_wrap">
+                <div class="visual_title">
+                    <span>홈페이지 사용법</span>
+                </div>
+                <div class="manual_img">
+                    <img th:src="@{이미지파일}" alt="manual">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--푸터 넣고-->
+
+</body>
+</html>
