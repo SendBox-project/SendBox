@@ -17,8 +17,9 @@ public class Board extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boardNo;
 
-    @Column
-    private Integer adminNo;
+    @ManyToOne
+    @JoinColumn(name = "admin_no")
+    private AdminMember adminMember;
 
     @Column
     private String title;
