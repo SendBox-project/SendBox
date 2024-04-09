@@ -1,0 +1,159 @@
+/* gnb 사이트 */
+.gnb {
+    height: 45px;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    /* padding: 15px 0 12px 0; */
+    border-bottom: 1px solid #d1d1d1;
+    font-size: 0.8em;
+}
+.gnb .site {
+    display:inline-block;
+    height: 45px;
+}
+.gnb .site .site_list {
+    height: 45px;
+    display: inline-block;
+}
+.gnb .site_item {
+    display:inline-block;
+    position:relative;
+    text-align:center;
+    color:#7d7d7d;
+    line-height:45px;
+    margin-left:12px;
+    padding-left:12px;
+}
+.gnb .site_item:hover{
+    color:#1a1a1a;
+}
+
+/* gnb 링크 */
+.gnb .link {
+    position:absolute;
+    top:0; right:0;
+    height:45px;
+}
+
+.gnb .link_list {
+    position:relative;
+    display: inline-block;
+    height: 45px;
+}
+
+/* gnb 링크 - 회원 */
+.gnb .user_item {
+    display:inline-block;
+    position:relative;
+    margin-left:12px;
+    line-height: 45px;
+}
+
+/* gnb 링크 - 글자크기 */
+.gnb .ft_change{
+    display:inline-block;
+    margin-top:-1px;
+    margin-right:12px;
+}
+.gnb .ft_change .title{
+    display:inline-block;
+    padding:0 0px 0 10px;
+    margin-left: 12px;
+    height: 21px;
+}
+.gnb .ft_change ul.buttonlist{
+    display: inline-block;
+    vertical-align:middle;
+}
+.gnb .ft_change ul.buttonlist li{
+    float:left;
+    margin-left:3px;
+}
+.gnb .ft_change ul.buttonlist li button{
+    position: relative;
+    display: inline-block;
+    width:25px; height:25px;
+    background:url('../images/fz_icon.png');
+    background-repeat:no-repeat;
+    color:transparent;
+    font-size:3px;
+    border: 1px solid #ccc;
+}
+.gnb .ft_change ul.buttonlist li.plus button{background-position: -5px -5px;}
+.gnb .ft_change ul.buttonlist li.minus button{background-position: -45px -5px;}
+.gnb .ft_change ul.buttonlist li.return button{background-position:-83px -5px;}
+
+
+/* home */
+.home {
+    height: 160px;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #d1d1d1;
+}
+.home .logo {
+    position: relative;
+    display: inline-block;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+.home .logo img {
+    width: 180px;
+    height: 36px;
+}
+
+/* home search */
+.home .search {
+    height: 90px;
+    width: 541px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    /* border: #e47419 1px solid; */
+}
+
+.search .search_form {
+    border: 2px #c85168 solid;
+    border-radius: 10px;
+}
+.search .search_form .search_input{
+    /* border: 1px rgb(255, 120, 120) solid; */
+    border: none;
+    border-radius: 10px;
+    /* background-color: #fff; */
+    padding: 10px;
+    width: 475px;
+    height: 50px;
+}
+.search .search_form .search_button{
+    position: relative;
+    /* display: inline-block; */
+    width:60px; height:50px;
+    background:#c85168;
+    float: right;
+    display: block;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+}
+
+.search .search_list_wrap {
+    width: 541px;
+    height: 22px;
+    margin-top: 10px;
+}
+.search .search_list_wrap .search_list {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+.search .search_item {
+    position: relative;
+    display: inline-block;
+    font-size: 0.8em;
+    margin: 0 15px 0 0;
+    color: #7d7d7d;
+}

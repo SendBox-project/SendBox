@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Header</title>
 </head>
 <body>
+<header id="header">
+    <div id="header_wrap">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="logo">
+            </a>
+        </div>
+
+    <!--    header top bar-->
+        <div class="gnb">
+            <div class="site">
+                <ul class="site_list">
+                    <li class="site_item"><a href="#" target="_blank" title="새창">공지사항</a></li>
+                    <li class="site_item"><a href="#" target="_blank" title="새창">고객센터</a></li>
+                </ul>
+            </div>
+            <div class="link">
+                <ul class="link_list">
+                    <li class="user_item"><a href="login.html">로그인</a></li>
+                    <li class="user_item"><a href="signup.html">회원가입</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--    로그인 후-->
+        <div class="menu">
+            <ul>
+                <li><a sec:authorize="isAuthenticated()" id="logout-text" href="/admin/logout">로그아웃</li>
+            </ul>
+        </div>
+
+
+    <!--    header search-->
+        <div class="search">
+            <form class="search_form">
+                <input class="search_input" type="search" placeholder="검색어를 입력해주세요.">
+                <button class="search_button" type="submit" value="">검색</button>
+            </form>
+            <div class="search_list_wrap">
+                <ul class="search_list">
+                    <li class="search_item"><a href="#">#서울</a></li>
+                    <li class="search_item"><a href="#">#경기</a></li>
+                    <li class="search_item"><a href="#">#개인창고</a></li>
+                    <li class="search_item"><a href="#">#할인</a></li>
+                    <li class="search_item"><a href="#">#카페창고</a></li>
+                </ul>
+            </div>  <!-- search_list_wrap -->
+        </div> <!-- search -->
+
+
+    </div> <!-- header_wrap -->
+</header>
 
 </body>
 </html>
