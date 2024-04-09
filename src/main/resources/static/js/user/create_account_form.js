@@ -5,27 +5,27 @@ function create_account_form() {
 
     let form = document.create_account_form;
 
-    if(form.u_m_id.value === "") {
+    if(form.user_id.value === "") {
         alert("아이디를 입력하세요.");
-        form.u_m_id.focus();
-    } else if(form.u_m_pw.value === "") {
+        form.user_id.focus();
+    } else if(form.password.value === "") {
         alert("비밀번호를 입력하세요.");
-        form.u_m_pw.focus();
-    } else if (form.u_m_pw_again.value === "") {
+        form.password.focus();
+    } else if (form.password_again.value === "") {
         alert("비밀번호 확인을 입력하세요.");
-        form.u_m_pw_again.focus();
-    } else if (form.u_m_name.value === "") {
+        form.password_again.focus();
+    } else if (form.name.value === "") {
         alert("이름을 입력하세요.");
-        form.u_m_name.focus();
-    } else if (form.u_m_mail.value === "") {
+        form.nameame.focus();
+    } else if (form.mail.value === "") {
         alert("이메일을 입력하세요.");
-        form.u_m_mail.focus();
-    } else if (form.u_m_phone.value === "") {
+        form.mail.focus();
+    } else if (form.phone.value === "") {
         alert("전화번호를 입력하세요.");
-        form.u_m_phone.focus();
-    } else if (form.u_m_gender.value === "") {
+        form.phone.focus();
+    } else if (form.gender.value === "") {
         alert("성별을 선택하세요.");
-        form.u_m_gender.focus();
+        form.gender.focus();
     } else {
         form.submit();
     }
