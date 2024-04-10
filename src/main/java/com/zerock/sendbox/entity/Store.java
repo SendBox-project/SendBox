@@ -2,15 +2,17 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class StoreInfo extends BaseEntity {
+@ToString(exclude = "rooms")
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +41,8 @@ public class StoreInfo extends BaseEntity {
 
     @Column
     private  String infoPhoto;
+
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    private List<Room> rooms = new ArrayList<>();;
+
 }

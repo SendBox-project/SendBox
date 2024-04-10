@@ -3,23 +3,27 @@ package com.zerock.sendbox.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @ToString
+public class Payment {
 
-public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer cartNo;
+    private Integer paymentNo;
 
     @Column
-    private Integer userNo;
+    private String type;
 
     @Column
-    private Integer orderNo;
+    private String method;
 
 }

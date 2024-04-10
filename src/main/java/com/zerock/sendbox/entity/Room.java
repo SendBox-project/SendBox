@@ -8,21 +8,31 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "order")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roomNo;
 
-    @Column
-    private Integer storeNo;
+    @OneToOne(mappedBy = "room")
+    private Orders order;
+//    @Column
+//    private Integer storeNo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeNo")
+    private Store store;
 
     @Column
-    private Integer size;
+    private String size;
 
     @Column
     private Integer price;
 
     @Column
     private Integer remain;
+
+
+
+
 }

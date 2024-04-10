@@ -5,14 +5,16 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = "room")
 public class Orders {
 
     @Id
@@ -21,14 +23,35 @@ public class Orders {
     private Integer orderNo;
 
     @Column
-    private Integer roomNo;
+    private Integer userNo;
+
+    @Column
+    private Integer paymentNo;
+
+    @OneToOne
+    @JoinColumn(name = "roomNo")
+    private Room room;
+
+//    @Column
+//    private Integer roomNo;
+
+    @Column
+    private String reservationNum;
+
+    @Column
+    private String reservationStatus;
 
     @Column
     private Integer totalPrice;
 
     @Column
-    private LocalDate orderDate;
+    private Integer totalAmount;
 
     @Column
-    private Integer totalAmount;
+    private LocalDate startDate;
+
+    @Column
+    private LocalDate endDate;
+
+
 }

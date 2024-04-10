@@ -28,4 +28,7 @@ public class Board extends BaseEntity {
 
     @Column(length = 2, columnDefinition = "char(2)")
     private String boardType;
+
+    @Column
+    private Integer cnt;
 }

@@ -2,8 +2,9 @@
 function modifyAccount() {
     console.log("modifyAccount()");
 
-    let form = document.modify_account_form;
+    let form = document.getElementById("modify_account_form");
 
+    console.log("pass : ", form.password.value);
     if (form.password.value === "") {
         alert("비밀번호를 입력해주세요.");
         form.password.focus();

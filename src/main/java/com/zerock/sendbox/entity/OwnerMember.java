@@ -40,12 +40,4 @@ public class OwnerMember extends BaseEntity {
     @Column
     private String brn;
 
-    @Column
-    private String ownerStore;
-
-
-
-
-
-
 }
