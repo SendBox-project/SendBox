@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Footer</title>
+    <link rel="stylesheet" href="../../static/css/include/footer.css">
+    <link rel="stylesheet" href="../../static/css/common/common.css">
 </head>
 <body>
 <footer id="footer">
-    <div class="link">
-        <div class="wrap">
-            <ul class="link_list">
-                <li class="link_item"><a href="#">개인정보처리방침</a></li>
-                <li class="link_item"><a href="#">이용약관</a></li>
-                <li class="link_item"><a href="#">저작권정책</a></li>
-                <li class="link_item"><a href="#">찾아오시는길</a></li>
-            </ul>
+    <div id="footer_wrap">
+        <div class="link">
+                <ul class="link_list">
+                    <li class="link_item"><a th:href="@{/주소}">개인정보처리방침</a></li>
+                    <li class="link_item"><a th:href="@{/주소}">이용약관</a></li>
+                    <li class="link_item"><a th:href="@{/주소}">저작권정책</a></li>
+                    <li class="link_item"><a th:href="@{/주소}">찾아오시는길</a></li>
+                </ul>
         </div>
-    </div>
-    <div class="footer_content">
-        <div class="info">
-            <p>(00000)샌드박스시 샌드구 박스로 999 / 샌드박스 콜센터 : 8282-5353</p>
-            <p>ⓒ SEND-BOX, ALL RIGHTS RESERVED.</p>
+        <div class="footer_content">
+            <div class="sb_info">
+                <p>(00000)샌드박스시 샌드구 박스로 999 / 샌드박스 콜센터 : 5656-5656</p>
+                <p>ⓒ SEND-BOX, ALL RIGHTS RESERVED.</p>
+            </div>
+            <div class="footer_logo">
+                <div class="side_logo"><img alt="logo" src="../../static/img/logo.PNG"></div>
+            </div>
         </div>
-        <div class="footer_logo">
-            <div class="side_logo"><img src="로고이미지"></div>
-        </div>
-    </div>
+    </div><!-- footer_wrap -->
 </footer>
 </body>
 </html>
