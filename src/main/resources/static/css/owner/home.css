@@ -1,5 +1,5 @@
 body {
-    background-image: url('배경이미지');
+    background-image: url('../../image/home_bg.png');
     background-repeat: no-repeat;
     background-position: 0 1px;
 }
@@ -24,8 +24,8 @@ body {
 .main_group1 .banner_wrap{
     width: 100%;
     height: 200px;
-     /*border: 1px solid red;*/
-     display: flex; /* Flexbox를 사용하여 내부 요소들을 가로로 배열합니다. */
+    /*border: 1px solid #c88f1e;*/
+    display: flex; /* Flexbox를 사용하여 내부 요소들을 가로로 배열합니다. */
 }
 .slide {
     flex: 0 0 auto; /* Flex item의 크기를 자동으로 설정합니다. */
@@ -43,11 +43,11 @@ body {
 
 /*2단락*/
 .main_group2 .quick_wrap{
-       width: 100%;
-       height: 250px;
-       /*border: 1px solid red;*/
-       display: flex; /* Flexbox를 사용하여 내부 요소들을 가로로 배열합니다. */
-   }
+    width: 100%;
+    height: 250px;
+    /*border: 1px solid red;*/
+    display: flex; /* Flexbox를 사용하여 내부 요소들을 가로로 배열합니다. */
+}
 
 .quick_menu {
     flex: 0 0 auto; /* Flex item의 크기를 자동으로 설정합니다. */
@@ -70,7 +70,11 @@ body {
     margin-top: 50px;
     position: relative;
 }
-
+.main_group3 .visual_title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 .main_group3 .manual_wrap {
     width: 100%;
     height: 200px;
@@ -84,7 +88,7 @@ body {
     height: auto; /* 이미지의 세로 비율을 유지합니다. */
 }
 .visual_title {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 20px;
 }

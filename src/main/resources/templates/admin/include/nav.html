@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      th:fragment="NavFragment">
 <head>
     <meta charset="UTF-8">
     <title>Admin nav bar</title>
-    <link rel="stylesheet" href="../../../static/css/admin/include/nav.css">
+    <link th:inline="css" th:href="@{/css/admin/include/nav.css}" rel="stylesheet"/>
 
 </head>
 <body>
