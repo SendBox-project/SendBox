@@ -7,38 +7,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Owner Home</title>
+    <link th:inline="css" th:href="@{/css/owner/home.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../static/css/owner/home.css">
+
 </head>
 <body>
-
-<section>
-    <h3> Owner HOME </h3>
+<div id="main">
     <div id="home_container">
-        <!--    홈 메인부분 전체 콘테이너-->
         <div class="main_group1">
             <!--   메인 첫번 째 행 그룹 (이벤트, 공지사항 슬라이더)-->
-            <div class="notice_wrap">
-                <!-- 슬라이더 통 래핑-->
-                <div class="visual_title">
-                    <span>공지사항</span>
+            <div class="visual_title">
+                <span>공지 사항</span>
+            </div>
+            <div class="banner_wrap">
+                <div class="slide">
+                    <a th:href="@{게시글 링크}"><img th:src="@{/image/notice1.PNG}" alt="notice1"></a>
                 </div>
-                <div class="notice_slider">
-                    <div class="slide">
-                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice1"></a>
-                    </div>
-                    <div class="slide">
-                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice2"></a>
-                    </div>
-                    <div class="slide">
-                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice3"></a>
-                    </div>
-                    <div class="slide">
-                        <a th:href="@{게시글 링크}"><img th:src="@{이미지파일}" alt="notice4"></a>
-                    </div>
-                    <!--   갯수더 늘릴 수도 있음~-->
+                <div class="slide">
+                    <a th:href="@{게시글 링크}"><img th:src="@{/image/notice2.PNG}" alt="notice2"></a>
+                </div>
+                <div class="slide">
+                    <a th:href="@{게시글 링크}"><img th:src="@{/image/notice3.PNG}" alt="notice3"></a>
+                </div>
+                <div class="slide">
+                    <a th:href="@{게시글 링크}"><img th:src="@{/image/notice4.PNG}" alt="notice4"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main_group2">
+            <!--   메인 두번 째 행 그룹 (지역 퀵메뉴 없어질가능성 농후 ^^)-->
+            <div class="visual_title">
+                <span>지역별 매장</span>
+            </div>
+            <div class="quick_wrap">
+                <div class="quick_menu">
+                    <a th:href="@{지역별 링크}"><img th:src="@{/image/seoul.PNG}" alt="quick1"></a>
+                </div>
+                <div class="quick_menu">
+                    <a th:href="@{지역별 링크}"><img th:src="@{/image/gangwon.PNG}" alt="quick2"></a>
+                </div>
+                <div class="quick_menu">
+                    <a th:href="@{지역별 링크}"><img th:src="@{/image/busan.PNG}" alt="quick3"></a>
+                </div>
+                <div class="quick_menu">
+                    <a th:href="@{지역별 링크}"><img th:src="@{/image/incheon.PNG}" alt="quick4"></a>
+                </div>
+                <div class="quick_menu">
+                    <a th:href="@{지역별 링크}"><img th:src="@{/image/ulsan.PNG}" alt="quick5"></a>
+                </div>
+                <div class="quick_menu">
+                    <a th:href="@{지역별 링크}"><img th:src="@{/image/ulsan.PNG}" alt="quick5"></a>
+                </div>
+            </div>
+        </div>
+        <div class="main_group3">
+            <!--   메인 세번 째 행 그룹 (홈페이지 사용법 기능은 없는 이미지)-->
+            <div class="visual_title">
+                <span>셀프 스토리지란?</span>
+            </div>
+            <div class="manual_wrap">
+                <div class="manual_img">
+                    <img th:src="@{/image/howtoUser.png}" alt="manual">
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+
 </body>
 </html>
