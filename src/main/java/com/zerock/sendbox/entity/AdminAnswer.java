@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = "board")
 public class AdminAnswer extends BaseEntity {
 
     @Id
@@ -23,7 +23,10 @@ public class AdminAnswer extends BaseEntity {
     private Integer inquaryNo;
 
     @Column
-    private String title;
+    private String replyer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Board board;
 
     @Column
     private String content;

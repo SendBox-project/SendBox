@@ -1,13 +1,56 @@
 package com.zerock.sendbox.service.board;
 
 import com.zerock.sendbox.dto.board.BoardDTO;
-import com.zerock.sendbox.dto.board.BoardWriteRequestDTO;
 import com.zerock.sendbox.dto.board.PageRequestDTO;
 import com.zerock.sendbox.dto.board.PageResultDTO;
+import com.zerock.sendbox.entity.AdminMember;
+import com.zerock.sendbox.entity.Board;
 
 public interface BoardService {
 
-    Integer saveBoard(BoardWriteRequestDTO boardWriteRequestDTO, Integer boardNo);
+    Integer register(BoardDTO dto);
 
-    Integer saveBoard(BoardWriteRequestDTO boardWriteRequestDTO, String mail);
+    BoardDTO get(Integer boardNo);
+
+    PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
+
+    void modify(BoardDTO boardDTO);
+
+    void removeWithReplies(Integer boardNo);
+
+    default Board dtoToEntity(BoardDTO dto) {
+       AdminMember adminMember = AdminMember.builder().mail(dto.getWriterMail()).build();
+
+       Board board = Board.builder()
+               .boardNo(dto.getBoardNo())
+               .adminNo(dto.getAdminNo())
+               .cnt(dto.getCnt())
+               .title(dto.getTitle())
+               .content(dto.getTitle())
+               .thumbnail(dto.getThumbnail())
+               .writer(adminMember)
+               .boardType(dto.getBoardType())
+               .build();
+       return board;
+    }
+
+    default BoardDTO entityToDTO(Board board, AdminMember adminMember, Long replyCount) {
+
+        BoardDTO boardDTO = BoardDTO.builder()
+                .boardNo(board.getBoardNo())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .regDate(board.getRegDate())
+                .modDate(board.getModDate())
+                .writerMail(adminMember.getMail())
+                .writerName(adminMember.getName())
+                .replyCount(replyCount.intValue())
+                .build();
+
+        return boardDTO;
+
+    }
+
+
+
 }

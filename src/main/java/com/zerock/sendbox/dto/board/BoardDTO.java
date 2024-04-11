@@ -16,12 +16,22 @@ public class BoardDTO {
 
     private Integer adminNo;
 
+    private Integer cnt;
+
     private String title;
 
     private String content;
 
-    @Column(length = 2, columnDefinition = "char(2)")
+    private String thumbnail;
+
+    private String writerMail; //작성자의 이메일(id)
+
+    private String writerName; //작성자의 이름
+
+    @Column(length = 3, columnDefinition = "char(3)")
     private String boardType;
+
+    private int replyCount;
 
     private LocalDateTime regDate;
 

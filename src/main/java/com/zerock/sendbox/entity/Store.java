@@ -2,7 +2,6 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 @Entity
 @Getter
@@ -10,7 +9,7 @@ import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StoreInfo extends BaseEntity {
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
