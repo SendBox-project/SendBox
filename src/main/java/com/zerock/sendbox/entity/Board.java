@@ -31,4 +31,7 @@ public class Board extends BaseEntity {
 
     @Column
     private Integer cnt;
+
+    @Column
+    private String thumbnail;
 }

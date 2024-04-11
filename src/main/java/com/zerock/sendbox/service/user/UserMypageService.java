@@ -42,4 +42,9 @@ public class UserMypageService {
     public List<Orders> findAllReservation(Integer userNo, Pageable pageable) {
         return ordersRepository.findAllReservation(userNo);
     }
+
+    //장바구니 리스트 조회
+    public List<Orders> findAllCartList(Integer userNo, Pageable pageable) {
+        return ordersRepository.findAllCartList(userNo);
+    }
 }
