@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin nav bar</title>
+    <link rel="stylesheet" href="../../../static/css/admin/include/nav.css">
+
 </head>
 <body>
 <div id="nav_wrap">
@@ -11,19 +13,19 @@
     <div class="nav_bar">
         <ul class="lnb_list">
             <li class="lnb_item">
-                <a href="#">유저관리</a>
+                <a th:href="@{/#}">유저관리</a>
             </li>
             <li class="lnb_item">
-                <a href="#">오너관리</a>
+                <a th:href="@{/#}">오너관리</a>
             </li>
             <li class="lnb_item">
-                <a href="#">전체 예약 내역</a>
+                <a th:href="@{/#}">전체 예약 내역</a>
             </li>
             <li class="lnb_item">
-                <a href="#">정보 갱신 신청 내역</a>
+                <a th:href="@{/#}">정보 갱신 신청 내역</a>
             </li>
             <li class="lnb_item">
-                <a href="#">매니저 관리</a>
+                <a th:href="@{/#}">매니저 관리</a>
             </li>
         </ul>
     </div>

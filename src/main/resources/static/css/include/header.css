@@ -1,138 +1,95 @@
-/* gnb 사이트 */
-.gnb {
-    height: 45px;
+/* top_bar 사이트 */
+.top_bar {
+    height: 35px;
     display: inline-block;
     position: relative;
     width: 100%;
-    /* padding: 15px 0 12px 0; */
     border-bottom: 1px solid #d1d1d1;
     font-size: 0.8em;
 }
-.gnb .site {
+.top_bar .site {
     display:inline-block;
-    height: 45px;
+    height: 35px;
+    margin-left: 30px;
 }
-.gnb .site .site_list {
-    height: 45px;
-    display: inline-block;
-}
-.gnb .site_item {
+
+.top_bar .site_item {
     display:inline-block;
     position:relative;
     text-align:center;
     color:#7d7d7d;
-    line-height:45px;
+    line-height:35px;
     margin-left:12px;
-    padding-left:12px;
 }
-.gnb .site_item:hover{
-    color:#1a1a1a;
+.top_bar .site_item:hover{
+    color: black;
 }
 
-/* gnb 링크 */
-.gnb .link {
+/* top bar account_link */
+.top_bar .account_link {
+    display: inline-block;
     position:absolute;
     top:0; right:0;
-    height:45px;
+    height: 35px;
 }
 
-.gnb .link_list {
-    position:relative;
-    display: inline-block;
-    height: 45px;
-}
-
-/* gnb 링크 - 회원 */
-.gnb .user_item {
+.top_bar .link_item {
     display:inline-block;
     position:relative;
-    margin-left:12px;
-    line-height: 45px;
+    margin-right:20px;
+    line-height: 35px;
 }
-
-/* gnb 링크 - 글자크기 */
-.gnb .ft_change{
-    display:inline-block;
-    margin-top:-1px;
-    margin-right:12px;
-}
-.gnb .ft_change .title{
-    display:inline-block;
-    padding:0 0px 0 10px;
-    margin-left: 12px;
-    height: 21px;
-}
-.gnb .ft_change ul.buttonlist{
-    display: inline-block;
-    vertical-align:middle;
-}
-.gnb .ft_change ul.buttonlist li{
-    float:left;
-    margin-left:3px;
-}
-.gnb .ft_change ul.buttonlist li button{
-    position: relative;
-    display: inline-block;
-    width:25px; height:25px;
-    background:url('../images/fz_icon.png');
-    background-repeat:no-repeat;
-    color:transparent;
-    font-size:3px;
-    border: 1px solid #ccc;
-}
-.gnb .ft_change ul.buttonlist li.plus button{background-position: -5px -5px;}
-.gnb .ft_change ul.buttonlist li.minus button{background-position: -45px -5px;}
-.gnb .ft_change ul.buttonlist li.return button{background-position:-83px -5px;}
-
 
 /* home */
-.home {
-    height: 160px;
+.header_home {
+    height: 200px;
     width: 100%;
     position: relative;
     border-bottom: 1px solid #d1d1d1;
+    background-color: white;
 }
-.home .logo {
+.header_home .logo {
     position: relative;
     display: inline-block;
-    margin-top: 50px;
-    margin-left: 10px;
+    margin-top: 20px;
+    margin-left: 30px;
 }
-.home .logo img {
-    width: 180px;
-    height: 36px;
+.header_home .logo img {
+    width: 150px;
+    height: 150px;
 }
 
-/* home search */
-.home .search {
-    height: 90px;
-    width: 541px;
+/* header_home search */
+.header_home .header_search {
+    height: 150px;
+    width: 700px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 50px;
     position: absolute;
     top: 0; right: 0; left: 0;
-    /* border: #e47419 1px solid; */
+     /*border: #e47419 1px solid;*/
 }
 
-.search .search_form {
-    border: 2px #c85168 solid;
+.header_search .search_form {
+    border: 2px #f2a304 solid;
     border-radius: 10px;
+    background-color: white;
 }
-.search .search_form .search_input{
-    /* border: 1px rgb(255, 120, 120) solid; */
+.header_search .search_form input[type="search"]{
+    /*border: 1px rgb(255, 120, 120) solid;*/
     border: none;
     border-radius: 10px;
     /* background-color: #fff; */
     padding: 10px;
-    width: 475px;
-    height: 50px;
+    width: 615px;
+    height: 60px;
 }
-.search .search_form .search_button{
+.header_search .search_form .search_button{
     position: relative;
     /* display: inline-block; */
-    width:60px; height:50px;
-    background:#c85168;
+    width:80px; height:60px;
+    background:#f2a304;
     float: right;
     display: block;
     border: none;
@@ -140,17 +97,17 @@
     color: #fff;
 }
 
-.search .search_list_wrap {
+.header_search .search_list_wrap {
     width: 541px;
     height: 22px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
-.search .search_list_wrap .search_list {
+.header_search .search_list_wrap .search_list {
     width: 100%;
     padding: 5px;
     text-align: center;
 }
-.search .search_item {
+.header_search .search_item {
     position: relative;
     display: inline-block;
     font-size: 0.8em;
