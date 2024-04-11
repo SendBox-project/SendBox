@@ -7,7 +7,6 @@ import com.zerock.sendbox.dto.board.PageResultDTO;
 
 public interface BoardService {
 
-
     Integer saveBoard(BoardWriteRequestDTO boardWriteRequestDTO, Integer boardNo);
 
     Integer saveBoard(BoardWriteRequestDTO boardWriteRequestDTO, String mail);
