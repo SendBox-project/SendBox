@@ -16,8 +16,6 @@ public class Room {
 
     @OneToOne(mappedBy = "room")
     private Orders order;
-//    @Column
-//    private Integer storeNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeNo")

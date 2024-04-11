@@ -57,15 +57,15 @@ public class UserMypageController {
         if (result == 1) {
             return "user/home";
         } else {
-            return "user/userMypageForm";
+            return "user/modify_account_form";
         }
     }
 
     //예약 내역 리스트 조회
     @GetMapping("/reservationList")
-    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.ASC)Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC)Pageable pageable) {
         Integer userNo = 1;
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); //page 번호가 0이면 page 뱐수에 0 설정, 그 외에는 페이지 번호에서 1을 뺀 값을 page 변수에 할당
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
 /*        System.out.println("pageable = " + pageable);
         System.out.println("userNo = " + userNo);*/
@@ -85,6 +85,22 @@ public class UserMypageController {
 
         model.addAttribute("reservations", orders);
 
-        return "user/rentalHistory";
+        return "user/member/reservationList";
     }
+
+    //장바구니 리스트 조회
+    @GetMapping("/cartList")
+    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC)Pageable pageable) {
+        Integer userNo = 1;
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
+        List<Orders> cartList = userMypageService.findAllCartList(userNo, pageable);
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), cartList.size());
+
+        List<Orders> pageContent = cartList.subList(start, end);
+
+        return "user/member/cartList";
+    }
+
 }

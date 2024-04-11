@@ -32,9 +32,6 @@ public class Orders {
     @JoinColumn(name = "roomNo")
     private Room room;
 
-//    @Column
-//    private Integer roomNo;
-
     @Column
     private String reservationNum;
 
