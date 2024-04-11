@@ -1,45 +1,62 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      th:fragment="HeaderFragment">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../../static/css/include/header.css">
-    <title>header</title>
+    <link th:inline="css" th:href="@{/css/include/header.css}" rel="stylesheet"/>
+
+
 </head>
+
 <body>
-<header th:fragment="headerFragment">
-<!--    헤더 상단 네비게이션   -->
-    <div class="headerNav">
-        <div class="boardLink">
-            <ul>
-                <li>
-                    <a th:href="@{/board/notice}">공지사항</a>
-                </li>
-                <li>
-                    <a th:href="@{/board/service_center}">고객센터</a>
-            </ul>
-        </div>
-        <div class="accountLink">
-            <ul>
-                <li>
-                    <a th:href="@{/include/login}">로그인</a>
-                </li>
-                <li>
-                    <a th:href="@{/include/create_account}">회원가입</a>
-            </ul>
-        </div>
-    </div>
-<!--    헤더 중단   -->
-    <div class="headerCenter">
-        <div class="logo">
-            <h1>(로고 이미지)</h1>
-            <h2>백그라운드 이미지</h2>
-        </div>
-        <div class="search">
-            <form action="#" method="get">
-                <input type="text" name="search" placeholder="검색어를 입력하세요">
-                <button type="submit">검색</button>
-            </form>
-    </div>
+<header id="header">
+    <div id="header_wrap">
+        <!-- header top bar-->
+        <div class="top_bar">
+            <div class="site">
+                <ul class="site_list">
+                    <li class="site_item"><a th:href="@{/공지사항}" target="_blank">공지사항</a></li>
+                    <li class="site_item"><a th:href="@{/고객센터}" target="_blank">고객센터</a></li>
+                </ul>
+            </div>
+            <div class="account_link">
+                <ul class="link_list">
+                    <li class="link_item"><a th:href="@{/로그인}">로그인</a></li>
+                    <li class="link_item"><a sec:authorize="isAuthenticated()" th:href="@{/홈화면}"> 로그아웃</a></li>
+                    <li class="link_item"><a th:href="@{/회원가입}">회원가입</a></li>
+                </ul>
+            </div>
+        </div> <!-- top_bar -->
+
+        <div class="header_home">
+                <!-- logo -->
+            <div class="logo">
+                <a th:href="@{/user/home}">
+                    <img th:src="@{/image/logo_orange_Removal.png}" alt="logo">
+                </a>
+            </div>
+
+            <!--  home search-->
+            <div class="header_search">
+                <form class="search_form">
+                    <label for="search" class="search_label"></label>
+                    <input type="search" id="search" placeholder="검색어를 입력하세요.">
+                    <button class="search_button" type="submit" value="">검색</button>
+                </form>
+                <div class="search_list_wrap">
+                    <ul class="search_list">
+                        <li class="search_item"><a th:href="@{/none}">#서울</a></li>
+                        <li class="search_item"><a th:href="@{/none}">#경기</a></li>
+                        <li class="search_item"><a th:href="@{/none}">#개인창고</a></li>
+                        <li class="search_item"><a th:href="@{/none}">#할인</a></li>
+                        <li class="search_item"><a th:href="@{/none}">#카페창고</a></li>
+                    </ul>
+                </div>  <!-- search_list_wrap -->
+            </div> <!-- search -->
+        </div> <!-- home -->
+    </div> <!-- header_wrap -->
 </header>
+
 </body>
 </html>
