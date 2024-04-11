@@ -3,15 +3,30 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Admin navbar</title>
+    <title>Admin nav bar</title>
+    <link rel="stylesheet" href="../../../static/css/admin/include/nav.css">
+
 </head>
 <body>
 <div id="nav_wrap">
 
-<!--    로그인 후-->
-    <div class="menu">
-        <ul>
-            <li><a sec:authorize="isAuthenticated()" id="logout-text" href="/admin/logout">로그아웃</li>
+    <div class="nav_bar">
+        <ul class="lnb_list">
+            <li class="lnb_item">
+                <a th:href="@{/#}">유저관리</a>
+            </li>
+            <li class="lnb_item">
+                <a th:href="@{/#}">오너관리</a>
+            </li>
+            <li class="lnb_item">
+                <a th:href="@{/#}">전체 예약 내역</a>
+            </li>
+            <li class="lnb_item">
+                <a th:href="@{/#}">정보 갱신 신청 내역</a>
+            </li>
+            <li class="lnb_item">
+                <a th:href="@{/#}">매니저 관리</a>
+            </li>
         </ul>
     </div>
 </div>
