@@ -49,11 +49,12 @@
 }
 /* home */
 .header_home {
-    height: 250px;
+    height: 350px;
     width: 100%;
     position: relative;
     /*border-bottom: 1px solid #d1d1d1;*/
-    background-color: white;
+    /*background-color: white;*/
+    background-image: url(../../image/header_bg.png);
 }
 .header_home .logo {
     position: relative;
@@ -68,11 +69,9 @@
 
 /* header_home search */
 .header_home .header_search {
-    height: 150px;
+    height: 120px;
     width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
+    margin: 260px auto 0;
     position: absolute;
     top: 0; right: 0; left: 0;
      /*border: #e47419 1px solid;*/
@@ -117,7 +116,7 @@
 .header_search .search_item {
     position: relative;
     display: inline-block;
-    font-size: 0.8em;
-    margin: 0 15px 0 0;
+    font-size: 0.9em;
+    margin: 0 25px 0 0;
     color: #7d7d7d;
 }
