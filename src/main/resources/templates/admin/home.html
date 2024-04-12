@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayout}"
+      layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
     <title>Admin home</title>
 </head>
 <body>
-<!--타임리프 레이아웃 헤더 넣고-->
-<!--타임리프 레이아웃 네비 바 넣고-->
-    <section>
-        <div id="home_container">
-            <h3> ADMIN HOME </h3>
-            <h2> 디자인이랑 헤더푸터 채울예정.........임시 매핑용으로 올려둡니다..</h2>
-        </div>
+    <section th:replace="~{admin/include/nav :: NavFragment}">
+<h3> ADMIN HOME </h3>
     </section>
-<!--푸터 넣고-->
 
 </body>
 </html>

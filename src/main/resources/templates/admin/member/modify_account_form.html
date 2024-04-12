@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayout}"
+      layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
     <title>Admin modify account</title>
-    <link rel="stylesheet" href="../../../static/css/admin/modify_account_form.css">
-<!--    <link rel="stylesheet" th:href="@{/css/admin/modify_account_form.css}"/>-->
-    <script type="text/javascript" src="../../../static/js/admin/modify_account_form.js"></script>
+    <link rel="stylesheet" th:href="@{/css/admin/modify_account_form.css}"/>
+    <script type="text/javascript" th:src="@{/js/admin/modify_account_form.js}"></script>
 </head>
 <body>
+<div th:replace="~{admin/include/nav :: NavFragment}"></div>
     <div id="modify_container">
         <h1>개인정보 수정</h1>
         <div id="modify_wrap">

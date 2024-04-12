@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      th:fragment="FooterFragment">
 <head>
     <meta charset="UTF-8">
-    <!--<link th:href="@{../../static/css/include/footer.css}" rel="stylesheet" type="text/css">-->
-    <link rel="stylesheet" href="../../../static/css/include/footer.css">
-    <title>footer</title>
+    <link th:inline="css" th:href="@{/css/include/footer.css}" rel="stylesheet"/>
+<!--    <link rel="stylesheet" href="../../../static/css/include/footer.css">-->
+
 </head>
-<!-- 푸터 -->
-<footer th:fragment="footerFragment">
+<body>
+<footer id="footer">
     <div id="footer_wrap">
-        <div class="footer_link">
-            <div>
-                <ul>
-                    <li><a th:href="@{/#}">개인정보처리방침</a></li>
-                    <li><a th:href="@{/#}">이용약관</a></li>
-                    <li><a th:href="@{/#}">저작권정책</a></li>
-                    <li><a th:href="@{/#}">찾아오시는길</a></li>
-                    <li><a th:href="@{/#}">배너광장</a></li>
-                </ul>
-            </div>
+        <div class="link">
+            <ul class="link_list">
+                <li class="link_item"><a th:href="@{/주소}">개인정보처리방침</a></li>
+                <li class="link_item"><a th:href="@{/주소}">이용약관</a></li>
+                <li class="link_item"><a th:href="@{/주소}">저작권정책</a></li>
+                <li class="link_item"><a th:href="@{/주소}">찾아오시는길</a></li>
+            </ul>
         </div>
         <div class="footer_content">
-            <div class="office_info">
-                <p>(00000) 경기도 샌드시 박스구 샌드박스로 0000 / SEND-BOX 콜센터 : 8282-5353</p>
+            <div class="sb_info">
+                <p>(00000)샌드박스시 샌드구 박스로 999 / 샌드박스 콜센터 : 5656-5656</p>
                 <p>ⓒ SEND-BOX, ALL RIGHTS RESERVED.</p>
             </div>
             <div class="footer_logo">
-                <h1>(로고 이미지)</h1>
+                <div class="side_logo"><img th:src="@{/image/logo_orange_Removal.png}" alt="logo"></div>
             </div>
         </div>
-    </div>
+    </div><!-- footer_wrap -->
 </footer>
+</body>
 </html>

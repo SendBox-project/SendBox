@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayout}"
+      layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
     <title>User modify account</title>
-<!--    <link rel="stylesheet" href="../../../static/css/user/modify_account_form.css">-->
-        <link rel="stylesheet" th:href="@{/css/user/modify_account_form.css}"/>
+        <link  th:inline="css" rel="stylesheet" th:href="@{/css/user/modify_account_form.css}"/>
         <script type="text/javascript" th:src="@{/js/user/modify_account_form.js}"></script>
-<!--    <script type="text/javascript" src="../../../static/js/user/modify_account_form.js"></script>-->
+        <script type="text/javascript" th:src="@{/js/deleteInfo.js}"></script>
+    <link rel="stylesheet" href="../../../static/css/user/modify_account_form.css">
+
 </head>
+
 <body>
+<div th:replace="~{admin/include/nav :: NavFragment}"></div>
 <div id="modify_container">
     <h1>개인정보 수정</h1>
     <div id="modify_wrap">
@@ -54,9 +61,12 @@
                 </div>
             </div>
             <button class="modify_button" type="button" onclick="modifyAccount()">modify</button>
+            <button class="modify_button" type="reset"> reset </button>
+            <form id="dropAccountForm" action="/deleteInfo" method="GET">
+                <button class="drop_button" type="button" onclick="deleteInfo()">회원 탈퇴</button>
+            </form>
         </form>
     </div>
 </div>
-
 </body>
 </html>

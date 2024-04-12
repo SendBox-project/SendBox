@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayout}"
+      layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
     <title>Owner modify account</title>
-    <link rel="stylesheet" href="../../../static/css/owner/modify_account_form.css">
-<!--        <link rel="stylesheet" th:href="@{/css/owner/modify_account_form.css}"/>-->
-    <script type="text/javascript" src="../../../static/js/owner/modify_account_form.js"></script>
+    <link  th:inline="css" rel="stylesheet" th:href="@{/css/owner/modify_account_form.css}"/>
+    <script th:src="@{/js/owner/modify_account_form.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/js/deleteInfo.js}"></script>"
 </head>
+
 <body>
+<div th:replace="~{admin/include/nav :: NavFragment}"></div>
 <div id="modify_container">
     <h1>개인정보 수정</h1>
     <div id="modify_wrap">
@@ -15,11 +21,11 @@
             <div class="form_list">
                 <div class="form_item">
                     <label for="no"></label>
-                    <input type="hidden" id="no" name="owner_no" th:value="${loginedAdminMemberDTO.owner_no일걸}">
+                    <input type="hidden" id="no" name="owner_no" th:value="${owner.ownerNo}">
                 </div>
                 <div class="form_item">
                     <label for="id">아이디</label>
-                    <input type="text" id="id" name="owner_id" th:value="${loginedAdminMemberDTO.owner_id일걸}" readonly disabled>
+                    <input type="text" id="id" name="owner_id" th:value="${owner.ownerId}" readonly disabled>
                 </div>
                 <div class="form_item">
                     <label for="password">비밀번호</label>
@@ -31,34 +37,36 @@
                 </div>
                 <div class="form_item">
                     <label for="name">이름</label>
-                    <input type="text" id="name" name="name" th:value="${loginedAdminMemberDTO.name일걸}">
+                    <input type="text" id="name" name="name" th:value="${owner.name}">
                 </div>
                 <div class="form_item">
                     <label for="mail">이메일</label>
-                    <input type="email" id="mail" name="mail" th:value="${loginedAdminMemberDTO.mail일걸}">
+                    <input type="email" id="mail" name="mail" th:value="${owner.mail}">
                 </div>
                 <div class="form_item">
                     <label for="phone">전화번호</label>
-                    <input type="tel" id="phone" name="phone" th:value="${loginedAdminMemberDTO.phone일걸}">
+                    <input type="tel" id="phone" name="phone" th:value="${owner.phone}">
                 </div>
                 <div class="form_item">
                     <label for="gender">성별</label>
-                    <input type="text" id="gender" name="gender" th:value="${loginedAdminMemberDTO.gender일걸}" readonly disabled>
+                    <input type="text" id="gender" name="gender" th:value="${owner.gender}" readonly disabled>
                 </div>
                 <div class="form_item">
                     <label for="region">지역</label>
-                    <input type="text" id="region" name="region" th:value="${loginedAdminMemberDTO.part일걸}" readonly disabled>
+                    <input type="text" id="region" name="region" th:value="${owner.region}" readonly disabled>
                 </div>
                 <div class="form_item">
                     <label for="brn">사업자등록번호</label>
-                    <input type="text" id="brn" name="brn" th:value="${loginedAdminMemberDTO.brn일걸}" readonly disabled>
+                    <input type="text" id="brn" name="brn" th:value="${owner.brn}" readonly disabled>
                 </div>
 
             </div>
-            <button class="modify_button" type="submit" th:onclick="@{보낼곳}">modify</button>
+            <button class="modify_button" type="button" onclick="modifyAccount()">modify</button>
+            <button class="modify_button" type="reset"> reset </button>
+            <form id="dropAccountForm" action="/deleteInfo" method="GET">
+                <button class="drop_button" type="button" onclick="deleteInfo()">회원 탈퇴</button>
+            </form>
         </form>
-
-
     </div>
 </div>
 </body>

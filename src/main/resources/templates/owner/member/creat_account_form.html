@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Owner register</title>
-    <link rel="stylesheet" href="../../../static/css/owner/create_account_form.css">
-<!--    <link rel="stylesheet" th:href="@{/css/owner/create_account_form.css}"/>-->
-    <script type="text/javascript" src="../../../static/js/owner/create_account_form.js"></script>
+    <link rel="stylesheet" th:href="@{/css/owner/create_account_form.css}"/>
+    <script type="text/javascript" th:src="@{/js/owner/create_account_form.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
 </head>
 <body>
 
 <!--owner 회원가입-->
 <div id="register_container">
-    <div class="side_logo"><a th:href="@{/오너홈}"><img th:src="@{/image/logo.png}">로고자리</a></div>
+    <div class="side_logo"><a th:href="@{/오너홈}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
     <h1>사업자 회원가입</h1>
     <div id="register_wrap">
         <form th:action="@{/회원가입하고 넘어갈 위치}" th:method="post">

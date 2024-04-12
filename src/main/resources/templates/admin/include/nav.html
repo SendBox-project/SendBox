@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      th:fragment="NavFragment">
 <head>
     <meta charset="UTF-8">
     <title>Admin nav bar</title>
-    <link rel="stylesheet" href="../../../static/css/admin/include/nav.css">
+    <link th:inline="css" th:href="@{/css/include/nav.css}" rel="stylesheet"/>
 
 </head>
 <body>
-<div id="nav_wrap">
-
-    <div class="nav_bar">
-        <ul class="lnb_list">
-            <li class="lnb_item">
-                <a th:href="@{/#}">유저관리</a>
-            </li>
-            <li class="lnb_item">
-                <a th:href="@{/#}">오너관리</a>
-            </li>
-            <li class="lnb_item">
-                <a th:href="@{/#}">전체 예약 내역</a>
-            </li>
-            <li class="lnb_item">
-                <a th:href="@{/#}">정보 갱신 신청 내역</a>
-            </li>
-            <li class="lnb_item">
-                <a th:href="@{/#}">매니저 관리</a>
-            </li>
-        </ul>
+<div id="container">
+    <div id="nav_wrap">
+        <div class="nav_bar">
+            <ul class="lnb_list">
+                <li class="lnb_item">
+                    <a th:href="@{/#}">개인 정보 수정</a>
+                </li>
+                <li class="lnb_item">
+                    <a th:href="@{/#}">유저관리</a>
+                </li>
+                <li class="lnb_item">
+                    <a th:href="@{/#}">오너관리</a>
+                </li>
+                <li class="lnb_item">
+                    <a th:href="@{/#}">전체 예약 내역</a>
+                </li>
+                <li class="lnb_item">
+                    <a th:href="@{/#}">정보 갱신 신청 내역</a>
+                </li>
+                <li class="lnb_item">
+                    <a th:href="@{/#}">매니저 관리</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 </body>

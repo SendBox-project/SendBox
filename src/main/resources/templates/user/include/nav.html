@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>User nav bar</title>
-    <link rel="stylesheet" th:href="@{/css/user/include/nav.css}"/>
+    <link th:inline="css" th:href="@{/css/include/nav.css}" rel="stylesheet"/>
 </head>
 <body>
 <div id="nav_wrap" th:fragment="nav">

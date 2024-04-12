@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>create account ng</title>
-    <link rel="stylesheet" href="../../../static/css/owner/create_account_result.css">
+    <link  th:inline="css" rel="stylesheet" th:href="@{/css/common/account_result.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
+
 </head>
-<body>
+<body id="full_body">
 
 
     <div id="result_container">
-        <div class="side_logo"><a th:href="@{/오너홈}"><img th:src="@{/image/logo.png}">로고자리</a></div>
+        <div class="side_logo"><a th:href="@{/오너홈}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
         <div class="result">
             <h2>회원가입이 실패하였습니다.</h2>
             <a th:href="@{회원가입하고 넘어갈 위치}">다시 시도</a>

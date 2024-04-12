@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>login ng</title>
-    <link rel="stylesheet" type="text/css" href="../../../static/css/owner/login_result.css">
+    <link  th:inline="css" rel="stylesheet" th:href="@{/css/common/account_result.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
 </head>
-<body>
+<body id="full_body">
 
 <div id="result_container">
-    <div class="side_logo"> <a th:href="@{/오너홈}" ><img th:src="@{/image/logo.png}">로고자리</a></div>
     <div class="result">
         <h2>로그인에 실패하였습니다.</h2>
         <a th:href="@{/오너로그인페이지}">다시 로그인</a>

@@ -1,8 +1,10 @@
 /*nav bar*/
 #nav_wrap {
-    background-color: #bedfff;
+    background-color: white;
+    border-top: #d08321 1px solid;
+    border-bottom: #d08321 1px solid;
     height: 60px;
-    width: 100%;
+    margin-top: 20px;
 }
 .nav_bar{
     height: 60px;
@@ -14,6 +16,7 @@
     height: 60px;
     line-height: 60px;
     text-align: left;
+    /*text-align: center;*/
     /*background-color: #1a1a1a;*/
 }
 .nav_bar .lnb_list .lnb_item {
