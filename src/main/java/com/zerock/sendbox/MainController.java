@@ -14,7 +14,7 @@ public class MainController {
     public String selectImageList(Model model) {
         model.addAttribute("title", "");
 
-        return "admin/member/create_account_ng";
+        return "admin/member/account_terms";
     }
 
 }
