@@ -2,6 +2,7 @@ package com.zerock.sendbox.controller.user;
 
 import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.UserMember;
+import com.zerock.sendbox.repository.UserMemberRepository;
 import com.zerock.sendbox.service.user.UserMypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -63,7 +64,7 @@ public class UserMypageController {
 
     //예약 내역 리스트 조회
     @GetMapping("/reservationList")
-    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC)Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); //page 번호가 0이면 page 뱐수에 0 설정, 그 외에는 페이지 번호에서 1을 뺀 값을 page 변수에 할당
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -88,9 +89,15 @@ public class UserMypageController {
         return "user/member/reservationList";
     }
 
+    //빈곽 카트폼 조회
+    @GetMapping("/cartForm")
+    public String cartForm() {
+        return "user/member/cartList";
+    }
+
     //장바구니 리스트 조회
-    @GetMapping("/cartList")
-    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC)Pageable pageable) {
+    @GetMapping("/cartListAjax")
+    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // 화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());//위에 page 변수에 넣은 값을 다시 pageable에 할당
@@ -102,6 +109,20 @@ public class UserMypageController {
         Page<Orders> orders = new PageImpl<>(pageContent, pageable, cartList.size()); // 현재 페이지 항목, pageable, 장바구니에 담긴 개수를 order스에 담는다 !
         model.addAttribute("cartList", orders); // 페이지로 감싼 orders가 아래 프론트로 간다.
 
+        return "user/member/cartListAjax";
+    }
+
+    //장바구니 옵션 수정
+    @PostMapping("/updateCart")
+    public String updateCart(@RequestBody Orders orders, Model model) {
+        orders = userMypageService.save(orders);
+        model.addAttribute("cartInfo", orders);
+        return "redirect:/user/cartForm";
+    }
+    //장바구니 단건 및 전체 삭제
+    @PostMapping("/deleteCart")
+    public String deleteCart(@RequestParam("orderNo[]") List<Integer> orderNo) {
+        Integer orders = userMypageService.deleteCart(orderNo);  // 리스트 타입의 변수를 보내서 인티저 타입으로 리턴!
         return "user/member/cartList";
     }
 
