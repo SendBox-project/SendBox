@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/defaultLayout}"
-      layout:fragment="Content">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>create_account</title>
+    <link rel="stylesheet" href="../../static/css/common/check_position.css">
+    <link rel="stylesheet" href="../../static/css/common/common.css">
+
 </head>
 <body>
-<h1>
-    사업자/ 일반회원 /관리자 선택해주세요
-</h1>
-<ul>
-    <li>
-        <a th:href="@{/owner/create_account_form}">사업자</a>
-    </li>
-    <li>
-        <a th:href="@{/user/create_account_form}">일반회원</a>
-    </li>
-    <li>
-        <a th:href="@{/admin/create_account_form}">관리자</a>
-    </li>
-</ul>
+<div id="ck_container">
+    <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
+    <div> <span> 회원가입 </span></div>
+    <ul>
+        <li>
+            <a th:href="@{/owner/create_account_form}">사업자</a>
+        </li>
+        <li>
+            <a th:href="@{/user/create_account_form}">일반회원</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/create_account_form}">관리자</a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

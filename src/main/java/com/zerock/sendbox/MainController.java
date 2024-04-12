@@ -13,7 +13,7 @@ public class MainController {
     @GetMapping("/home")
     public String selectImageList(Model model) {
         model.addAttribute("title", "");
-        return "user/home";
+        return "admin/member/modify_account_ng";
     }
 
 }
