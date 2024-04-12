@@ -1,9 +1,13 @@
-
+#full_body {
+    background-image: url(../../image/account_bg.png);
+    background-repeat: no-repeat;
+    background-position: 0 1px;
+}
 #result_container {
     width: 1200px;
     height: 600px;
     background-color: #ffe5be;
-    margin: 50px auto;
+    margin: 100px auto;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -32,9 +36,10 @@
     border-top: 1px solid #000000;
     border-bottom: 1px solid #000000;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .side_logo {
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
     /*border: #fc9f27 1px solid;*/
 }
