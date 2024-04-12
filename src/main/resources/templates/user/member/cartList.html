@@ -4,80 +4,19 @@
     <meta charset="UTF-8">
     <title>list</title>
     <link rel="stylesheet" th:href="@{/css/user/list.css}"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!--임포트 -->
+    <script type="text/javascript" th:src="@{/js/user/cartList.js}"></script>
 </head>
 <body>
 <!-- Navigation: 네브바-->
 <div id="nav_wrap" th:replace="/user/include/nav::nav"></div>
 <div class="list_wrap">
-    <table class="board_content" cellspacing="0">
-        <caption>장바구니</caption>
-        <colgroup>
-            <col width="80">
-            <col>
-            <col width="50">
-            <col width="90">
-            <col width="100">
-            <col width="60">
-        </colgroup>
-        <thead>
-        <tr>
-            <th>매장명</th>
-            <th>사용 시작일</th>
-            <th>사용 종료일</th>
-            <th>옵션</th>
-            <th>가격</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cartList: ${cartList}">
-            <td th:text="${cartList.room.store.storeName}"></td>
-            <td th:text="${cartList.startDate}"></td>
-            <td th:text="${cartList.endDate}"></td>
-            <td th:text="${cartList.room.size}"></td>
-            <td th:text="${cartList.room.price}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="buttons_wrap">
-        <tr class="pagination"
-            th:with="start=${(cartList.number div 10)*10 + 1},
-           last=${(start + 9 < cartList.totalPages ? start + 9 : cartList.totalPages)}">
-            <td>
-                <a th:href="@{/user/reservationList(page=1)}" aria-label="First">
-                    <span aria-hidden="true">첫 페이지</span>
-                </a>
-            </td>
-
-            <td th:class="${cartList.first} ? 'disabled'">
-                <a th:href="${cartList.first} ? '#' : @{/user/reservationList(page=${reservations.number})}" aria-label="Previous">
-                    <span aria-hidden="true">&lt;</span>
-                </a>
-            </td>
-
-            <th:block th:if="${last != 0}">
-                <td th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == cartList.number + 1} ? 'active'">
-                    <a th:text="${page}" th:href="@{/user/cartList(page=${page})}"></a>
-                </td>
-            </th:block>
-            <th:block th:if="${last == 0}">
-                <td class="active">
-                    <a th:text="1" th:href="@{/user/cartList(page=1)}"></a>
-                </td>
-            </th:block>
-
-            <td th:class="${cartList.last} ? 'disabled'">
-                <a th:href="${cartList.last} ? '#' : @{/user/cartList(page=${cartList.number + 2})}" aria-label="Next">
-                    <span aria-hidden="true">&gt;</span>
-                </a>
-            </td>
-
-            <td>
-                <a th:href="@{/user/cartList(page=${cartList.totalPages})}" aria-label="Last">
-                    <span aria-hidden="true">마지막 페이지</span>
-                </a>
-            </td>
-        </tr>
-    </div>
+    <form id="form1">
+        <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
+        <!--이 부분을 cartListAjax.html과 연결해서 여기에 해당 파일이 삽입!-->
+        <div id="cartListForm">
+        </div>
+    </form>
 </div>
 </body>
 </html>

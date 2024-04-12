@@ -22,6 +22,7 @@ public class UserMypageService {
     @Autowired
     OrdersRepository ordersRepository;
 
+
     //개인 정보 수정폼
     public UserMember findByUserId(String userId) {
         return userMemberRepository.findByUserId(userId);
@@ -46,5 +47,16 @@ public class UserMypageService {
     //장바구니 리스트 조회
     public List<Orders> findAllCartList(Integer userNo, Pageable pageable) {
         return ordersRepository.findAllCartList(userNo);
+    }
+
+    //장바구니 옵션 수정
+    public Orders save(Orders orders) {
+        return ordersRepository.save(orders);
+    }
+
+    //장바구니 단건 및 전체 삭제
+    @Transactional
+    public Integer deleteCart(List<Integer> orderNo) {
+        return ordersRepository.deleteCart(orderNo);
     }
 }
