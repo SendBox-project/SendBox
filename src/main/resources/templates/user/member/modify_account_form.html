@@ -7,9 +7,12 @@
 <head>
     <meta charset="UTF-8">
     <title>User modify account</title>
-        <link  th:inline="css" rel="stylesheet" th:href="@{/css/user/modify_account_form.css}"/>
+<!--        <link  th:inline="css" rel="stylesheet" th:href="@{/css/user/modify_account_form.css}"/>-->
         <script type="text/javascript" th:src="@{/js/user/modify_account_form.js}"></script>
+        <script type="text/javascript" th:src="@{/js/drop_account.js}"></script>
+    <link rel="stylesheet" href="../../../static/css/user/modify_account_form.css">
 </head>
+
 <body>
 <div th:replace="~{admin/include/nav :: NavFragment}"></div>
 <div id="modify_container">
@@ -60,8 +63,9 @@
         </form>
     </div>
 </div>
-<div class="drop_user">
-    <button class=""
-</div>
+<form action="/deleteInfo" method="GET">
+    <button class="drop_button" type="button" onclick="dropAccount()">회원 탈퇴</button>
+</form>
+
 </body>
 </html>

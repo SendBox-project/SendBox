@@ -8,8 +8,10 @@
     <meta charset="UTF-8">
     <title>Owner modify account</title>
     <link  th:inline="css" rel="stylesheet" th:href="@{/css/owner/modify_account_form.css}"/>
-<script th:src="@{/js/owner/modify_account_form.js}" type="text/javascript"></script>
+    <script th:src="@{/js/owner/modify_account_form.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/js/drop_account.js}"></script>"
 </head>
+
 <body>
 <div th:replace="~{admin/include/nav :: NavFragment}"></div>
 <div id="modify_container">
@@ -61,9 +63,10 @@
             </div>
             <button class="modify_button" type="submit" th:onclick="@{보낼곳}">modify</button>
         </form>
-
-
     </div>
 </div>
+<form action="/deleteInfo" method="GET">
+    <button class="drop_button" type="button" onclick="dropAccount()">회원 탈퇴</button>
+</form>
 </body>
 </html>

@@ -1,7 +1,7 @@
 #modify_container {
     width: 500px;
     height: 800px;
-    border: 1px solid #4e95d9;
+    border: 1px solid #fc9f27;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     margin: 50px auto;
@@ -18,7 +18,7 @@ form {
 }
 
 .form_list {
-    border: 1px solid #4e95d9;
+    border: 1px solid #fc9f27;
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -28,10 +28,21 @@ form {
 }
 
 .modify_button {
-    background-color: #4e95d9;
+    background-color: #fc9f27;
     width: 300px;
     color: white;
     border-radius: 5px;
     border-style: none;
     padding: 10px;
+}
+.drop_button {
+    background-color: #838383;
+    width: 150px;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    padding: 10px;
+    position: absolute;
+    right: 100px;
+    bottom: 200px;
 }
