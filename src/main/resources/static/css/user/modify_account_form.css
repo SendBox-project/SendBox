@@ -34,15 +34,14 @@ form {
     border-radius: 5px;
     border-style: none;
     padding: 10px;
+    margin-top: 10px;
 }
 .drop_button {
     background-color: #838383;
-    width: 150px;
+    width: 300px;
     color: white;
     border-radius: 5px;
     border-style: none;
     padding: 10px;
-    position: absolute;
-    right: 100px;
-    bottom: 200px;
+    margin-top: 10px;
 }

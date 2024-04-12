@@ -1,7 +1,7 @@
 //회원 탈퇴
 
 
-function dropAccount() {
+function deleteInfo() {
     // 확인 창을 표시
     var confirmResult = confirm("정말로 회원 탈퇴하시겠습니까?");
 
@@ -11,7 +11,7 @@ function dropAccount() {
     }
 }
 
-// function dropAccount() {
+// function deleteInfo() {
 //     // 확인 창을 표시
 //     var confirmation = confirm("정말로 회원 탈퇴하시겠습니까?");
 //
