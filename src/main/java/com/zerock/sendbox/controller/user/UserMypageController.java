@@ -16,7 +16,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class UserMypageController {
+public class
+    UserMypageController {
     @Autowired
     UserMypageService userMypageService;
 
