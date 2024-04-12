@@ -36,6 +36,7 @@ public class Board extends BaseEntity {
     @Column(length = 3, columnDefinition = "char(3)")
     private String boardType;
 
+
     public void changeTitle(String title){
         this.title = title;
     }

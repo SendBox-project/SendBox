@@ -8,30 +8,21 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "board")
-public class AdminAnswer extends BaseEntity {
+@ToString(exclude = "inquary")
+public class Reply extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer answerNo;
-
-    @Column
-    private Integer boardNo;
-
-    @Column
-    private Integer inquaryNo;
+    private Integer replyNo;
 
     @Column
     private String replyer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Board board;
-
     @Column
     private String content;
 
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Inquary inquary;
 
 }

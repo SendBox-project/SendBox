@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = "member")
 public class Inquary extends BaseEntity{
 
     @Id
@@ -24,4 +24,7 @@ public class Inquary extends BaseEntity{
 
     @Column
     private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserMember member;
 }

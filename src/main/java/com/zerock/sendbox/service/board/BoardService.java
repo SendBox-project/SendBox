@@ -7,7 +7,6 @@ import com.zerock.sendbox.entity.AdminMember;
 import com.zerock.sendbox.entity.Board;
 
 public interface BoardService {
-
     Integer register(BoardDTO dto);
 
     BoardDTO get(Integer boardNo);
@@ -19,19 +18,19 @@ public interface BoardService {
     void removeWithReplies(Integer boardNo);
 
     default Board dtoToEntity(BoardDTO dto) {
-       AdminMember adminMember = AdminMember.builder().mail(dto.getWriterMail()).build();
+        AdminMember adminMember = AdminMember.builder().mail(dto.getWriterMail()).build();
 
-       Board board = Board.builder()
-               .boardNo(dto.getBoardNo())
-               .adminNo(dto.getAdminNo())
-               .cnt(dto.getCnt())
-               .title(dto.getTitle())
-               .content(dto.getTitle())
-               .thumbnail(dto.getThumbnail())
-               .writer(adminMember)
-               .boardType(dto.getBoardType())
-               .build();
-       return board;
+        Board board = Board.builder()
+                .boardNo(dto.getBoardNo())
+                .adminNo(dto.getAdminNo())
+                .cnt(dto.getCnt())
+                .title(dto.getTitle())
+                .content(dto.getTitle())
+                .thumbnail(dto.getThumbnail())
+                .writer(adminMember)
+                .boardType(dto.getBoardType())
+                .build();
+        return board;
     }
 
     default BoardDTO entityToDTO(Board board, AdminMember adminMember, Long replyCount) {
@@ -50,7 +49,6 @@ public interface BoardService {
         return boardDTO;
 
     }
-
 
 
 }

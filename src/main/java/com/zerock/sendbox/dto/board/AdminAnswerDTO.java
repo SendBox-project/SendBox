@@ -15,7 +15,7 @@ public class AdminAnswerDTO {
 
     private Integer answerNo;
 
-    private Integer adminNo;
+    private Integer boardNo;
 
     private Integer inquaryNo;
 
