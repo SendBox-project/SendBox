@@ -21,7 +21,10 @@
     margin-bottom: 60px;
 }
 
+#result_container .result h2 {
+    margin: 30px 0 30px 0;
 
+}
 #result_container .result a {
     display: inline-block;
     width: 200px;
