@@ -1,18 +1,18 @@
 function showTerm(term) {
-    var popup = document.getElementById('popup' + term);
-    popup.style.display = 'block';
+    let termPopup = document.getElementById('popup' + term);
+    termPopup.style.display = 'block';
 }
 
 function closePopup(popupId) {
     // 팝업 창 닫기
-    var popup = document.getElementById(popupId);
+    let popup = document.getElementById(popupId);
     popup.style.display = 'none';
 }
 
 function toggleAllTerms() {
     // 전체 동의 체크박스가 체크되었을 때 모든 약관에 대해 동의 처리
-    var allAgreeCheckbox = document.querySelector('.all-agree');
-    var termCheckboxes = document.querySelectorAll('.term-agree');
+    let allAgreeCheckbox = document.querySelector('.all-agree');
+    let termCheckboxes = document.querySelectorAll('.term-agree');
 
     termCheckboxes.forEach(function(checkbox) {
         checkbox.checked = allAgreeCheckbox.checked;
@@ -21,8 +21,8 @@ function toggleAllTerms() {
 
 function proceedIfAllAgreed() {
     // 모든 약관에 동의했는지 확인
-    var termCheckboxes = document.querySelectorAll('.term-agree');
-    var allTermsAgreed = true;
+    let termCheckboxes = document.querySelectorAll('.term-agree');
+    let allTermsAgreed = true;
 
     termCheckboxes.forEach(function(checkbox) {
         if (!checkbox.checked) {
@@ -31,7 +31,7 @@ function proceedIfAllAgreed() {
     });
 
     if (allTermsAgreed) {
-        window.location.href = "회원가입 url";
+        window.location.href = "오너회원가입 url";
     } else {
         alert("모든 약관에 동의해야 가입이 가능합니다.");
     }
