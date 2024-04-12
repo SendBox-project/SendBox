@@ -5,59 +5,63 @@
 <head>
     <meta charset="UTF-8">
     <link th:inline="css" th:href="@{/css/include/header.css}" rel="stylesheet"/>
-    <link href="../../../static/css/include/header.css" rel="stylesheet"/>
+<!--    <link href="../../../static/css/include/header.css" rel="stylesheet"/>-->
 
 
 </head>
 
 <body>
-<header id="header">
-    <div id="header_wrap">
-        <!-- header top bar-->
-        <div class="top_bar">
-            <div class="site">
-                <ul class="site_list">
-                    <li class="site_item"><a th:href="@{/공지사항}" target="_blank">공지사항</a></li>
-                    <li class="site_item"><a th:href="@{/고객센터}" target="_blank">고객센터</a></li>
-                </ul>
-            </div>
-            <div class="account_link">
-                <ul class="link_list">
-                    <li class="link_item"><a th:href="@{/로그인}">로그인</a></li>
-                    <li class="link_item"><a sec:authorize="isAuthenticated()" th:href="@{/홈화면}"> 로그아웃</a></li>
-                    <li class="link_item"><a th:href="@{/회원가입}">회원가입</a></li>
-                </ul>
-            </div>
-        </div> <!-- top_bar -->
-
-        <div class="header_home">
+<div id="container">
+    <header id="header">
+        <div id="header_wrap">
+            <!-- header top bar-->
+            <div class="top_bar">
                 <!-- logo -->
-            <div class="logo">
-                <a th:href="@{/user/home}">
-                    <img th:src="@{/image/logo_orange_Removal.png}" alt="logo">
-                </a>
-            </div>
+                <div class="logo">
+                    <a th:href="@{/home}">
+                        <img th:src="@{/image/logo_orange_crop.png}" alt="logo">
+                    </a>
+                </div>
 
-            <!--  home search-->
-            <div class="header_search">
-                <form class="search_form">
-                    <label for="search" class="search_label"></label>
-                    <input type="search" id="search" placeholder="검색어를 입력하세요.">
-                    <button class="search_button" type="submit" value="">검색</button>
-                </form>
-                <div class="search_list_wrap">
-                    <ul class="search_list">
-                        <li class="search_item"><a th:href="@{/none}">#서울</a></li>
-                        <li class="search_item"><a th:href="@{/none}">#경기</a></li>
-                        <li class="search_item"><a th:href="@{/none}">#개인창고</a></li>
-                        <li class="search_item"><a th:href="@{/none}">#할인</a></li>
-                        <li class="search_item"><a th:href="@{/none}">#카페창고</a></li>
+    <!--            <div class="site">-->
+    <!--                <ul class="site_list">-->
+    <!--                    <li class="site_item"><a th:href="@{/공지사항}" target="_blank">공지사항</a></li>-->
+    <!--                    <li class="site_item"><a th:href="@{/고객센터}" target="_blank">고객센터</a></li>-->
+    <!--                </ul>-->
+    <!--            </div>-->
+                <div class="account_link">
+                    <ul class="link_list">
+                        <li class="link_item"><a th:href="@{/공지사항}" target="_blank">공지사항</a></li>
+                        <li class="link_item"><a th:href="@{/고객센터}" target="_blank">고객센터</a></li>
+                        <li class="link_item"><a sec:authorize="isAuthenticated()" th:href="@{/홈화면}"> 로그아웃</a></li>
+                        <li class="link_item"><a th:href="@{/로그인}">로그인</a></li>
+                        <li class="link_item"><a th:href="@{/회원가입}">회원가입</a></li>
                     </ul>
-                </div>  <!-- search_list_wrap -->
-            </div> <!-- search -->
-        </div> <!-- home -->
-    </div> <!-- header_wrap -->
-</header>
+                </div>
+            </div> <!-- top_bar -->
 
+            <div class="header_home">
+
+                <!--  home search-->
+                <div class="header_search">
+                    <form class="search_form">
+                        <label for="search" class="search_label"></label>
+                        <input type="search" id="search" placeholder="검색어를 입력하세요.">
+                        <button class="search_button" type="submit" value="">검색</button>
+                    </form>
+                    <div class="search_list_wrap">
+                        <ul class="search_list">
+                            <li class="search_item"><a th:href="@{/none}">#서울</a></li>
+                            <li class="search_item"><a th:href="@{/none}">#경기</a></li>
+                            <li class="search_item"><a th:href="@{/none}">#개인창고</a></li>
+                            <li class="search_item"><a th:href="@{/none}">#할인</a></li>
+                            <li class="search_item"><a th:href="@{/none}">#카페창고</a></li>
+                        </ul>
+                    </div>  <!-- search_list_wrap -->
+                </div> <!-- search -->
+            </div> <!-- home -->
+        </div> <!-- header_wrap -->
+    </header>
+</div>
 </body>
 </html>

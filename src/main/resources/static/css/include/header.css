@@ -1,6 +1,11 @@
+/*body {*/
+/*    background-image: url(../../image/header2.png);*/
+/*    background-repeat: no-repeat;*/
+/*    background-position: 0 1px;*/
+/*}*/
 /* top_bar 사이트 */
 .top_bar {
-    height: 35px;
+    height: 40px;
     display: inline-block;
     position: relative;
     width: 100%;
@@ -55,6 +60,8 @@
     /*border-bottom: 1px solid #d1d1d1;*/
     /*background-color: white;*/
     background-image: url(../../image/header_bg.png);
+    background-repeat: no-repeat;
+    background-position: 0 1px;
 }
 .header_home .logo {
     position: relative;
@@ -62,9 +69,11 @@
     margin-top: 20px;
     margin-left: 30px;
 }
-.header_home .logo img {
+.logo img {
     width: 150px;
-    height: 150px;
+    height: 30px;
+    margin-left: 40px;
+    margin-top: 5px;
 }
 
 /* header_home search */

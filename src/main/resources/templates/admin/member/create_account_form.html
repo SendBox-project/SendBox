@@ -1,77 +1,79 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/defaultLayout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Admin register</title>
-<!--    <link rel="stylesheet" th:href="@{/css/admin/create_account_form.css}"/>-->
-    <link rel="stylesheet" href="../../../static/css/admin/create_account_form.css">
+    <link rel="stylesheet" th:href="@{/css/admin/create_account_form.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
     <script type="text/javascript" th:src="@{/js/admin/create_account_form.js}"></script>
 </head>
 <body>
 
 <!--회원가입-->
-<div id="register_container">
-    <div class="side_logo"><a th:href="@{어드민홈}"><img th:src="@{/image/logo.png}">로고자리</a></div>
-    <h1>관리자 회원가입</h1>
-    <div id="register_wrap">
-        <form th:action="@{/회원가입하고 넘어갈 위치}" th:method="post">
-            <div class="form_list">
-                <div class="form_item"><label for="id">아이디</label>
-                    <input type="text" id="id" name="admin_id" placeholder="아이디를 입력하세요" autofocus >
-                </div><hr>
-                <div class="form_item"><label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
-                </div><hr>
-                <div class="form_item"><label for="password_check">비밀번호 확인</label>
-                    <input type="password" id="password_check" name="password_again" placeholder="비밀번호를 다시 입력하세요">
+<div id="container">
+    <div id="register_container">
+        <div class="side_logo"><a th:href="@{어드민홈}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
+        <h3>관리자 회원가입</h3>
+        <br>
+        <div id="register_wrap">
+            <form th:action="@{/회원가입하고 넘어갈 위치}" th:method="post">
+                <div class="form_list">
+                    <div class="form_item"><label for="id"></label>
+                        <input type="text" id="id" name="admin_id" placeholder="아이디를 입력하세요" autofocus >
+                    </div><hr>
+                    <div class="form_item"><label for="password"></label>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+                    </div><hr>
+                    <div class="form_item"><label for="password_check"></label>
+                        <input type="password" id="password_check" name="password_again" placeholder="비밀번호를 다시 입력하세요">
+                    </div>
                 </div>
-            </div>
-            <div class="form_list">
-                <div class="form_item"><label for="name">이름</label>
-                    <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
-                </div><hr>
-                <div class="form_item"><label for="email">이메일</label>
-                    <input type="email" id="email" name="mail" placeholder="이메일을 입력하세요">
-                </div><hr>
-                <div class="form_item"><label for="phone">전화번호</label>
-                    <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력하세요">
-                </div><hr>
-                <div class="form_item">
-                    <label for="gender">성별</label>
-                    <select name="gender" id="gender">
-                        <option value="">성별을 선택하세요</option>
-                        <option value="M">남자</option>
-                        <option value="W">여자</option>
-                    </select>
-                </div><hr>
-                <div class="form_item">
-                    <label for="region">담당 지역</label>
-                    <select name="part" id="region">
-                        <option value="02">서울</option>
-                        <option value="031">경기</option>
-                        <option value="032">인천</option>
-                        <option value="053">대구</option>
-                        <option value="051">부산</option>
-                        <option value="052">울산</option>
-                        <option value="062">광주</option>
-                        <option value="033">강원</option>
-                        <option value="043">충북</option>
-                        <option value="041">충남</option>
-                        <option value="054">경북</option>
-                        <option value="055">경남</option>
-                        <option value="063">전북</option>
-                        <option value="061">전남</option>
-                        <option value="064">제주</option>
-                    </select>
+                <div class="form_list">
+                    <div class="form_item"><label for="name"></label>
+                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+                    </div><hr>
+                    <div class="form_item"><label for="email"></label>
+                        <input type="email" id="email" name="mail" placeholder="이메일을 입력하세요">
+                    </div><hr>
+                    <div class="form_item"><label for="phone"></label>
+                        <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력하세요">
+                    </div><hr>
+                    <div class="form_item form_select">
+                        <label for="gender"></label>
+                        <select name="gender" id="gender">
+                            <option value="">성별을 선택하세요</option>
+                            <option value="M">남자</option>
+                            <option value="W">여자</option>
+                        </select>
+                    </div><hr>
+                    <div class="form_item form_select">
+                        <label for="region"></label>
+                        <select name="part" id="region">
+                            <option value="">지역을 선택하세요</option>
+                            <option value="02">서울</option>
+                            <option value="031">경기</option>
+                            <option value="032">인천</option>
+                            <option value="053">대구</option>
+                            <option value="051">부산</option>
+                            <option value="052">울산</option>
+                            <option value="062">광주</option>
+                            <option value="033">강원</option>
+                            <option value="043">충북</option>
+                            <option value="041">충남</option>
+                            <option value="054">경북</option>
+                            <option value="055">경남</option>
+                            <option value="063">전북</option>
+                            <option value="061">전남</option>
+                            <option value="064">제주</option>
+                        </select>
+                    </div>
                 </div>
+                <button class="regi_button" type="submit" th:onclick="@{/보낼곳 맵}">Submit</button>
+            </form>
+            <div class="account_links">
+                <a th:href="@{/어드민로그인}">로그인 페이지로 이동</a>
             </div>
-            <button class="regi_button" type="submit" th:onclick="@{/보낼곳 맵}">Submit</button>
-        </form>
-        <div class="account_links">
-            <a th:href="@{/어드민로그인}">로그인 페이지로 이동</a>
         </div>
     </div>
 </div>
