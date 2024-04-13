@@ -1,6 +1,7 @@
 package com.zerock.sendbox.controller.user;
 
 import com.zerock.sendbox.entity.Orders;
+import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.UserMember;
 import com.zerock.sendbox.repository.UserMemberRepository;
 import com.zerock.sendbox.service.user.UserMypageService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -103,28 +105,53 @@ public class
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // 화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());//위에 page 변수에 넣은 값을 다시 pageable에 할당
         List<Orders> cartList = userMypageService.findAllCartList(userNo, pageable); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
+        System.out.println("cartList = " + cartList);
         int start = (int) pageable.getOffset(); // 장바구니의 첫 행 >> 현재 페이지의 오프셋(시작 인덱스)을 반환 후, 이를 정수로 캐스팅하여 start 변수에 저장합니다.
         int end = Math.min((start + pageable.getPageSize()), cartList.size()); // 장바구니의 마지막 행, 두개 중 최소값을 취함 >> 한 페이지에 장바구니 담긴거의 개수를 표시하려고 하는 거
 
         List<Orders> pageContent = cartList.subList(start, end); // start 인덱스부터 end-1 인덱스까지의 항목을 포함합니다. 따라서 pageContent에는 현재 페이지에 해당하는 항목들이 포함되어 있습니다.(size를 10으로 제한해서 최대 10까지 나옴)
         Page<Orders> orders = new PageImpl<>(pageContent, pageable, cartList.size()); // 현재 페이지 항목, pageable, 장바구니에 담긴 개수를 order스에 담는다 !
+
+        List<Room> roomList = new ArrayList<>();
+        if(cartList.size() == 0){
+            roomList = null;
+        } else {
+            // storeNo를 통해 한 업체가 갖고 있는 room 리스트를 가져옴
+            roomList = userMypageService.findAllRoomList(cartList.get(0).getRoom().getStore().getStoreNo());
+        }
         model.addAttribute("cartList", orders); // 페이지로 감싼 orders가 아래 프론트로 간다.
+        model.addAttribute("roomList", roomList);
 
         return "user/member/cartListAjax";
     }
 
     //장바구니 옵션 수정
     @PostMapping("/updateCart")
-    public String updateCart(@RequestBody Orders orders, Model model) {
-        orders = userMypageService.save(orders);
-        model.addAttribute("cartInfo", orders);
-        return "redirect:/user/cartForm";
+    public String updateCart(@ModelAttribute Orders orders, @ModelAttribute Room room, Model model) {
+        System.out.println("orders = " + orders);
+        System.out.println("room = " + room);
+        Orders updateInfo =  userMypageService.findByOrderNo(orders.getOrderNo());
+        updateInfo.setStartDate(orders.getStartDate());
+        updateInfo.setEndDate(orders.getEndDate());
+        updateInfo.setRoom(room);
+        updateInfo.setTotalAmount(orders.getTotalAmount());
+        updateInfo.setTotalPrice(room.getPrice() * orders.getTotalAmount());
+        Orders result = userMypageService.save(updateInfo);
+        return "redirect:/user/cartListAjax";
     }
-    //장바구니 단건 및 전체 삭제
-    @PostMapping("/deleteCart")
-    public String deleteCart(@RequestParam("orderNo[]") List<Integer> orderNo) {
+    //장바구니 단건 삭제
+    @PostMapping("/deleteCart/{orderNo}") // 중괄호 안에 변수를 @PathVariable로 받는다.
+    public String deleteCart(@PathVariable(value = "orderNo") Integer orderNo) {
         Integer orders = userMypageService.deleteCart(orderNo);  // 리스트 타입의 변수를 보내서 인티저 타입으로 리턴!
-        return "user/member/cartList";
+        return "redirect:/user/cartListAjax";
+    }
+
+    //장바구니 전체 삭제
+    @PostMapping("/deleteAllCart/{userNo}")
+    public String deleteAllCart(@PathVariable(value = "userNo") Integer userNo) {
+        System.out.println("userNo = " + userNo);
+        Integer orders = userMypageService.deleteAllCart(userNo);
+        return "redirect:/user/cartListAjax";
     }
 
 }

@@ -1,8 +1,10 @@
 package com.zerock.sendbox.service.user;
 
 import com.zerock.sendbox.entity.Orders;
+import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.UserMember;
 import com.zerock.sendbox.repository.OrdersRepository;
+import com.zerock.sendbox.repository.RoomRepository;
 import com.zerock.sendbox.repository.UserMemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class UserMypageService {
 
     @Autowired
     OrdersRepository ordersRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 
 
     //개인 정보 수정폼
@@ -54,9 +59,25 @@ public class UserMypageService {
         return ordersRepository.save(orders);
     }
 
-    //장바구니 단건 및 전체 삭제
+    //orderNo에 맞는 장바구니 품목 한 개 가져오기
+    public Orders findByOrderNo(Integer orderNo) {
+        return ordersRepository.findByOrderNo(orderNo);
+    }
+
+    //장바구니 단건 삭제
     @Transactional
-    public Integer deleteCart(List<Integer> orderNo) {
-        return ordersRepository.deleteCart(orderNo);
+    public Integer deleteCart(Integer orderNo) {
+        return ordersRepository.deleteByOrderNo(orderNo);
+    }
+
+
+    // storeNo를 통해 한 업체가 갖고 있는 room 리스트를 가져옴
+    public List<Room> findAllRoomList(Integer storeNo) {
+        return roomRepository.findByStoreStoreNo(storeNo);
+    }
+
+    @Transactional
+    public Integer deleteAllCart(Integer userNo) {
+        return ordersRepository.deleteAllCart(userNo);
     }
 }

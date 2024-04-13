@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +44,6 @@ public class Store extends BaseEntity {
     private  String infoPhoto;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
-    private List<Room> rooms = new ArrayList<>();;
+    private List<Room> rooms = new ArrayList<>();
 
 }

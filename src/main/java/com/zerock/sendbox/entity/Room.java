@@ -3,8 +3,12 @@ package com.zerock.sendbox.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,8 +18,11 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roomNo;
 
-    @OneToOne(mappedBy = "room")
-    private Orders order;
+//    @OneToOne(mappedBy = "room")
+//    private Orders order;
+
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    private List<Orders> orders = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeNo")

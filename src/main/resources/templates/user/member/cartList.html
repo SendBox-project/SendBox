@@ -9,10 +9,11 @@
 </head>
 <body>
 <!-- Navigation: 네브바-->
-<div id="nav_wrap" th:replace="/user/include/nav::nav"></div>
+<div id="nav_wrap" th:replace="/user/include/nav::NavFragment"></div>
 <div class="list_wrap">
     <form id="form1">
         <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
+        <button type = "button" th:onclick="|javascript:deleteAllCart()|">전체 삭제</button>
         <!--이 부분을 cartListAjax.html과 연결해서 여기에 해당 파일이 삽입!-->
         <div id="cartListForm">
         </div>
