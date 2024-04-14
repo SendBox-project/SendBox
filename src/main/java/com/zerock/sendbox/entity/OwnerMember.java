@@ -3,6 +3,7 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -39,5 +40,9 @@ public class OwnerMember extends BaseEntity {
 
     @Column
     private String brn;
+
+    @ColumnDefault("'N'")
+    @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
+    private String deleteYn;
 
 }

@@ -1,6 +1,6 @@
 #modify_container {
     width: 500px;
-    height: 500px;
+    height: 550px;
     border: 1px solid #fc9f27;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
@@ -10,8 +10,15 @@
     font-size: 10pt;
 }
 
-form {
-    margin: 40px auto;
+#modify_account_form {
+    margin: 40px auto 0px auto;
+    width: 350px;
+    list-style-type: none;
+    text-align: left;
+}
+
+#dropAccountForm{
+    margin: 0px auto;
     width: 350px;
     list-style-type: none;
     text-align: left;

@@ -3,6 +3,7 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
@@ -36,5 +37,9 @@ public class UserMember extends BaseEntity {
 
     @Column
     private String phone;
+
+    @ColumnDefault("'N'")
+    @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
+    private String deleteYn;
 
 }

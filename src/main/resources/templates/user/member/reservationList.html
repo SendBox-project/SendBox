@@ -7,81 +7,20 @@
 <head>
     <meta charset="UTF-8">
     <title>list</title>
-    <link th:inline="css" rel="stylesheet" th:href="@{/css/user/list.css}"/>
+    <link rel="stylesheet" th:href="@{/css/user/list.css}"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!--임포트: jquery를 js에서 사용하기 위해서 -->
+    <script type="text/javascript" th:src="@{/js/user/reservationList.js}"></script>
 </head>
 <body>
 <!-- Navigation: 네브바-->
-<div th:replace="~{user/include/nav :: NavFragment}"></div>
-<div class="list_wrap">
-    <table class="board_content" cellspacing="0">
-        <caption>예약 내역</caption>
-        <colgroup>
-            <col width="80">
-            <col>
-            <col width="50">
-            <col width="90">
-            <col width="100">
-            <col width="60">
-        </colgroup>
-        <thead>
-        <tr>
-            <th>매장명</th>
-            <th>예약번호</th>
-            <th>사용 시작일</th>
-            <th>사용 종료일</th>
-            <th>예약 상태</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="order: ${reservations}">
-            <td th:text="${order.room.store.storeName}"></td>
-            <td th:text="${order.reservationNum}"></td>
-            <td th:text="${order.startDate}"></td>
-            <td th:text="${order.endDate}"></td>
-            <td th:text="${order.reservationStatus}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="buttons_wrap">
-        <tr class="pagination"
-            th:with="start=${(reservations.number div 10)*10 + 1},
-           last=${(start + 9 < reservations.totalPages ? start + 9 : reservations.totalPages)}">
-            <td>
-                <a th:href="@{/user/reservationList(page=1)}" aria-label="First">
-                    <span aria-hidden="true">첫 페이지</span>
-                </a>
-            </td>
-
-            <td th:class="${reservations.first} ? 'disabled'">
-                <a th:href="${reservations.first} ? '#' : @{/user/reservationList(page=${reservations.number})}" aria-label="Previous">
-                    <span aria-hidden="true">&lt;</span>
-                </a>
-            </td>
-
-            <th:block th:if="${last != 0}">
-                <td th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == reservations.number + 1} ? 'active'">
-                    <a th:text="${page}" th:href="@{/user/reservationList(page=${page})}"></a>
-                </td>
-            </th:block>
-            <th:block th:if="${last == 0}">
-                <td class="active">
-                    <a th:text="1" th:href="@{/user/reservationList(page=1)}"></a>
-                </td>
-            </th:block>
-
-            <td th:class="${reservations.last} ? 'disabled'">
-                <a th:href="${reservations.last} ? '#' : @{/user/reservationList(page=${reservations.number + 2})}" aria-label="Next">
-                    <span aria-hidden="true">&gt;</span>
-                </a>
-            </td>
-
-            <td>
-                <a th:href="@{/user/reservationList(page=${reservations.totalPages})}" aria-label="Last">
-                    <span aria-hidden="true">마지막 페이지</span>
-                </a>
-            </td>
-        </tr>
-    </div>
+<div th:replace="~{admin/include/nav :: NavFragment}"></div>
+<div id=container>
+    <form id="form1">
+        <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
+        <!--이 부분을 reservationListAjax.html과 연결해서 여기에 해당 파일이 삽입!-->
+        <div id="reservationListForm">
+        </div>
+    </form>
 </div>
 </body>
 </html>

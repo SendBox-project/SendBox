@@ -1,7 +1,7 @@
 //js를 통해 리스트와 아작스를 연결
 $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실행
     console.log("ready!");
-    cartListAjax(1); // 들어가서 1페이지가 보임
+    cartListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
 });
 
 function cartListAjax(page) { // 위에서 보낸 매개변수 1을 받아 준다!

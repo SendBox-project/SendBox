@@ -2,6 +2,7 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -38,5 +39,9 @@ public class AdminMember extends BaseEntity {
 
     @Column(length = 3, columnDefinition = "char(3)")
     private String part;
+
+    @ColumnDefault("'N'")
+    @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
+    private String deleteYn;
 
 }

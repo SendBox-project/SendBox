@@ -5,6 +5,8 @@ import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.UserMember;
 import com.zerock.sendbox.repository.UserMemberRepository;
 import com.zerock.sendbox.service.user.UserMypageService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,56 +56,65 @@ public class
     }
 
     //개인 정보 탈퇴
-    @GetMapping("/deleteInfo")
-    public String deleteUser() {
+    @PostMapping("/deleteInfo")
+    public String deleteUser(@ModelAttribute UserMember userMember,Model model, HttpSession session, HttpServletResponse response) throws IOException {
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        String userId = auth.getName();
         Integer userNo = 1;
-        Integer result = userMypageService.deleteInfo(userNo);
-        System.out.println("result = " + result);
-        if (result == 1) {
+         System.out.println("UserMember = " + userMember);
+            UserMember user = userMypageService.findByUserNo(userNo);
+
+        if (passwordEncoder.matches(userMember.getPassword(), user.getPassword())) {
+            Integer result = userMypageService.deleteInfo(userNo);
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
+            writer.flush();
+            session.invalidate();
             return "user/home";
         } else {
-            return "user/modify_account_form";
+            model.addAttribute("user", user);
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('비밀번호가 틀렸습니다.');</script>");
+            writer.flush();
+            return "user/member/modify_account_form";
         }
+
+    }
+
+    //빈곽 예약 내역 조회
+    @GetMapping("/reservationList")
+    public String reservationForm() {
+        return "user/member/reservationList";
     }
 
     //예약 내역 리스트 조회
-    @GetMapping("/reservationList")
-    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    @GetMapping("/reservationListAjax")
+    public String reservationList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); //page 번호가 0이면 page 뱐수에 0 설정, 그 외에는 페이지 번호에서 1을 뺀 값을 page 변수에 할당
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
-/*        System.out.println("pageable = " + pageable);
-        System.out.println("userNo = " + userNo);*/
         List<Orders> reservationList = userMypageService.findAllReservation(userNo, pageable);
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), reservationList.size());
 
         List<Orders> pageContent = reservationList.subList(start, end);
         Page<Orders> orders = new PageImpl<>(pageContent, pageable, reservationList.size());
-/*        System.out.println("size = " + orders.getSize());
-        System.out.println("sort = " + orders.getSort());
-        System.out.println("elements = " + orders.getTotalElements());
-        System.out.println("totalpages = " + orders.getTotalPages());
-        System.out.println("number = " + orders.getNumber());
-        System.out.println("element = " + orders.getNumberOfElements());
-        System.out.println("pageable = " + orders.getPageable());*/
-
         model.addAttribute("reservations", orders);
 
-        return "user/member/reservationList";
+        return "user/member/reservationListAjax";
     }
 
     //빈곽 카트폼 조회
-    @GetMapping("/cartForm")
+    @GetMapping("/cartList")
     public String cartForm() {
         return "user/member/cartList";
     }
 
     //장바구니 리스트 조회
     @GetMapping("/cartListAjax")
-    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String cartList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // 화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());//위에 page 변수에 넣은 값을 다시 pageable에 할당
@@ -131,11 +145,12 @@ public class
         System.out.println("orders = " + orders);
         System.out.println("room = " + room);
         Orders updateInfo =  userMypageService.findByOrderNo(orders.getOrderNo());
+        Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
         updateInfo.setStartDate(orders.getStartDate());
         updateInfo.setEndDate(orders.getEndDate());
         updateInfo.setRoom(room);
         updateInfo.setTotalAmount(orders.getTotalAmount());
-        updateInfo.setTotalPrice(room.getPrice() * orders.getTotalAmount());
+        updateInfo.setTotalPrice(room.getPrice() * orders.getTotalAmount() * betweenDays);
         Orders result = userMypageService.save(updateInfo);
         return "redirect:/user/cartListAjax";
     }

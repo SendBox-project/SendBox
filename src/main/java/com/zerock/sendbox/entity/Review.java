@@ -2,6 +2,8 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -12,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @ToString
+@EntityListeners(value = { AuditingEntityListener.class })
 public class Review{
 
     @Id
@@ -28,6 +31,7 @@ public class Review{
     @Column
     private String content;
 
-    @Column
+    @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime regDate;
 }
