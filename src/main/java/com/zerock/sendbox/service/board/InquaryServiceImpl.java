@@ -66,4 +66,17 @@ public class InquaryServiceImpl implements InquaryService{
         replyRepository.deleteById(inquaryNo);
     }
 
+    @Transactional
+    @Override
+    public void modify(InquaryDTO inquaryDTO) {
+        Inquary inquary = inquaryRepository.getReferenceById(inquaryDTO.getInquaryNo());
+
+        if(inquary != null) {
+            inquary.changeTitle(inquaryDTO.getTitle());
+            inquary.changeContent(inquaryDTO.getContent());
+
+            inquaryRepository.save(inquary);
+        }
+    }
+
 }

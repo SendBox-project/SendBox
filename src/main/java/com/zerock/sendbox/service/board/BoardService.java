@@ -5,6 +5,7 @@ import com.zerock.sendbox.dto.board.PageRequestDTO;
 import com.zerock.sendbox.dto.board.PageResultDTO;
 import com.zerock.sendbox.entity.AdminMember;
 import com.zerock.sendbox.entity.Board;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface BoardService {
     Integer register(BoardDTO dto);
@@ -13,9 +14,11 @@ public interface BoardService {
 
     PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
 
+    @Transactional
+    void removeWithAdminAnswer(Integer boardNo);
+
     void modify(BoardDTO boardDTO);
 
-    void removeWithReplies(Integer boardNo);
 
     default Board dtoToEntity(BoardDTO dto) {
         AdminMember adminMember = AdminMember.builder().mail(dto.getWriterMail()).build();
@@ -33,7 +36,7 @@ public interface BoardService {
         return board;
     }
 
-    default BoardDTO entityToDTO(Board board, AdminMember adminMember, Long replyCount) {
+    default BoardDTO entityToDTO(Board board, AdminMember adminMember, Long AdminAnswerCount) {
 
         BoardDTO boardDTO = BoardDTO.builder()
                 .boardNo(board.getBoardNo())
@@ -43,7 +46,7 @@ public interface BoardService {
                 .modDate(board.getModDate())
                 .writerMail(adminMember.getMail())
                 .writerName(adminMember.getName())
-                .replyCount(replyCount.intValue())
+                .AdminAnswerCount(AdminAnswerCount.intValue())
                 .build();
 
         return boardDTO;

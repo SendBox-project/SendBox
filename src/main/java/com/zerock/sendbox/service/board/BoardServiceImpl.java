@@ -42,7 +42,7 @@ public class BoardServiceImpl implements BoardService {
 
         Function<Object[], BoardDTO> fn = (en -> entityToDTO((Board)en[0],(AdminMember) en[1],(Long)en[2]));
 
-        Page<Object[]> result = boardRepository.getBoardWithReplyCount(
+        Page<Object[]> result = boardRepository.getBoardWithAdminAnswerCount(
                 pageRequestDTO.getPageable(Sort.by("boardNo").descending())  );
 
 
@@ -61,7 +61,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Transactional
     @Override
-    public void removeWithReplies(Integer boardNo) {
+    public void removeWithAdminAnswer(Integer boardNo) {
         adminAnswerRepository.deleteByBoardNo(boardNo);
 
         boardRepository.deleteById(boardNo);

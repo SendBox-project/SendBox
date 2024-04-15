@@ -52,15 +52,15 @@
 
         <tr th:each="dto : ${result.dtoList}" >
             <th scope="row">
-                <a th:href="@{/board/read(bno = ${dto.boardNo},
+                <a th:href="@{/board/read(boardNo = ${dto.boardNo},
                         page= ${result.page},
                         type=${pageRequestDTO.type} ,
                         keyword = ${pageRequestDTO.keyword})}">
                     [[${dto.boardNo}]]
                 </a>
             </th>
-            <td>[[${dto.title}]] ----------------  [<b th:text="${dto.answerCount}"></b>]</td>
-            <td>[[${dto.writerName}]] <small>[[${dto.writerEmail}]]</small> </td>
+            <td>[[${dto.title}]] ----------------  [<b th:text="${dto.AdminAnswerCount}"></b>]</td>
+            <td>[[${dto.writerName}]] <small>[[${dto.writerMail}]]</small> </td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
         </tr>
 

@@ -35,7 +35,7 @@ public class BoardDTO {
     @Column(length = 3, columnDefinition = "char(3)")
     private String boardType;
 
-    private int replyCount;
+    private int AdminAnswerCount;
 
     private LocalDateTime regDate;
 

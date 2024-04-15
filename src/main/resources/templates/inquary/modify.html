@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 class="mt-4">Inquary Modify Page</h1>
 
+    <form action="inquary/modify" method="post">
 
-<th:block th:fragment="content">
-
-    <h1 class="mt-4">Board Modify Page</h1>
-
-    <form action="/board/modify" method="post">
-
-        <!--페이지 번호  -->
-        <input type="hidden" name="page" th:value="${pageRequestDTO.page}">
-        <input type="hidden" name="type" th:value="${pageRequestDTO.type}" >
-        <input type="hidden" name="keyword" th:value="${pageRequestDTO.keyword}" >
-
+        <input type="hidden" name="page" th:value="${pageRequestDTO2.page}">
+        <input type="hidden" name="type" th:value="${pageRequestDTO2.type}">
+        <input type="hidden" name="keyword" th:value="${pageRequestDTO2.keyword}">
 
         <div class="form-group">
-            <label >BoardNo</label>
-            <input type="text" class="form-control" name="boardNo" th:value="${dto.boardNo}" readonly >
+            <label>InquaryNo</label>
+            <input type="text" class="form-control" name="inquaryNo" th:value="${dto.inquaryNo}" readonly>
         </div>
 
         <div class="form-group">
             <label>Title</label>
-            <input type="text" class="form-control" name="title" th:value="${dto.title}" >
+            <input type="text" class="form-control" name="title" th:value="${dto.title}">
         </div>
+
         <div class="form-group">
             <label >Content</label>
             <textarea class="form-control" rows="5" name="content">[[${dto.content}]]</textarea>
         </div>
         <div class="form-group">
             <label >Writer</label>
-            <input type="text" class="form-control" name="writer" th:value="${dto.writerMail}" readonly>
+            <input type="text" class="form-control" name="member" th:value="${dto.memberMail}" readonly>
         </div>
         <div class="form-group">
             <label >RegDate</label>
@@ -39,7 +39,6 @@
             <label >ModDate</label>
             <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
         </div>
-
     </form>
 
     <button type="button" class="btn btn-primary modifyBtn">Modify</button>
@@ -97,8 +96,5 @@
         })
 
     </script>
-
-
-</th:block>
-
-
+</body>
+</html>

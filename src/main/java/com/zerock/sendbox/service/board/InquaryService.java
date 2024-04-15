@@ -16,6 +16,8 @@ public interface InquaryService {
 
     void removeWithReplies(Integer inquaryNo);
 
+    void modify(InquaryDTO inquaryDTO);
+
     default Inquary dtoToEntity(InquaryDTO dto) {
 
         UserMember userMember = UserMember.builder().mail(dto.getMemberMail()).build();

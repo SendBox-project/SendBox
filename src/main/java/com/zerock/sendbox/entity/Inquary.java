@@ -27,4 +27,13 @@ public class Inquary extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private UserMember member;
+
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    public void changeContent(String content) {
+        this.content = content;
+    }
+
 }

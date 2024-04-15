@@ -49,7 +49,7 @@ public class BoardController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(@ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Integer boardNo, Model model) {
+    public void read(@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, Integer boardNo, Model model) {
         log.info("boardNo: " + boardNo);
 
         BoardDTO boardDTO = boardService.get(boardNo);
@@ -63,7 +63,7 @@ public class BoardController {
     public String remove(Integer boardNo, RedirectAttributes redirectAttributes) {
         log.info("boardNo" + boardNo);
 
-        boardService.removeWithReplies(boardNo);
+        boardService.removeWithAdminAnswer(boardNo);
 
         redirectAttributes.addFlashAttribute("msg", boardNo);
 
@@ -71,15 +71,15 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(BoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, RedirectAttributes redirectAttributes) {
+    public String modify(BoardDTO dto, @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
         log.info("post modify...................");
         log.info("dto" + dto);
 
         boardService.modify(dto);
 
-        redirectAttributes.addAttribute("page",requestDTO.getPage());
-        redirectAttributes.addAttribute("type",requestDTO.getType());
-        redirectAttributes.addAttribute("keyword",requestDTO.getKeyword());
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("type",pageRequestDTO.getType());
+        redirectAttributes.addAttribute("keyword",pageRequestDTO.getKeyword());
 
         redirectAttributes.addAttribute("boardNo",dto.getBoardNo());
 

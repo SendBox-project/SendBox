@@ -32,20 +32,20 @@
     <input type="text" class="form-control" name="modDate" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
 </div>
 
-<a th:href="@{/board/modify(boardNo = ${dto.boardNo}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+<a th:href="@{/board/modify(boardNo = ${dto.boardNo}, page=${pageRequestDTO.page}, type=${pageRequestDTO.type}, keyword =${pageRequestDTO.keyword})}">
     <button type="button" class="btn btn-primary">Modify</button>
 </a>
 
-<a th:href="@{/board/list(page=${requestDTO.page} , type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+<a th:href="@{/board/list(page=${pageRequestDTO.page} , type=${pageRequestDTO.type}, keyword =${pageRequestDTO.keyword})}">
     <button type="button" class="btn btn-info">List</button>
 </a>
 
 <div >
     <div class="mt-4">
-        <h5 ><span class="badge badge-info addReply">Add Reply</span> </h5>
-        <h5 ><span class="badge badge-secondary replyCount"> Reply Count  [[${dto.replyCount}]]</span> </h5>
+        <h5 ><span class="badge badge-info addAdminAnswer">Add AdminAnswer</span> </h5>
+        <h5 ><span class="badge badge-secondary AdminAnswerCount"> AdminAnswer Count  [[${dto.AdminAnswerCount}]]</span> </h5>
     </div>
-    <div class="list-group replyList">
+    <div class="list-group AdminAnswerList">
 
     </div>
 </div>
@@ -64,34 +64,33 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control"  type="text" name="replyText" placeholder="Reply Text...">
+                    <input class="form-control"  type="text" name="AdminAnswerText" placeholder="AdminAnswer Text...">
                 </div>
                 <div class="form-group">
-                    <input class="form-control"  type="text" name="replyer" placeholder="Replyer">
+                    <input class="form-control"  type="text" name="AdminAnswer" placeholder="Replyer">
                     <input type="hidden" name="rno" >
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger replyRemove">Remove</button>
-                <button type="button" class="btn btn-warning replyModify">Modify</button>
-                <button type="button" class="btn btn-primary replySave">Save</button>
-                <button type="button" class="btn btn-outline-secondary replyClose" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger AdminAnswerRemove">Remove</button>
+                <button type="button" class="btn btn-warning AdminAnswerModify">Modify</button>
+                <button type="button" class="btn btn-primary AdminAnswerSave">Save</button>
+                <button type="button" class="btn btn-outline-secondary AdminAnswerClose" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-
 <script th:inline="javascript">
     $(document).ready(function() {
 
-        var bno = [[${dto.bno}]];
+        var boardNo = [[${dto.boardNo}]];
 
-        var listGroup  = $(".answerList");
+        var listGroup  = $(".AdminAnswerList");
 
-        $(".answerCount").click(function(){
+        $(".AdminAnswerCount").click(function(){
 
-            $.getJSON('/answer/board/'+bno, function(arr){
+            $.getJSON('/answer/board/'+boardNo, function(arr){
 
                 console.log(arr);
 
@@ -101,7 +100,7 @@
 
 
         //댓글이 추가될 영역
-        var listGroup  = $(".answerList");
+        var listGroup  = $(".AdminAnswerList");
 
 //날짜 처리를 위한 함수
         function formatTime(str){
@@ -116,20 +115,20 @@
 
 //특정한 게시글의 댓글을 처리하는 함수
         function loadJSONData() {
-            $.getJSON('/answer/board/'+bno, function(arr){
+            $.getJSON('/answer/board/'+boardNo, function(arr){
 
                 console.log(arr);
 
                 var str ="";
 
-                $('.answerCount').html(" Reply Count  " + arr.length);
+                $('.AdminAnswerCount').html(" AdminAnswer Count  " + arr.length);
 
-                $.each(arr, function(idx, answer){
-                    console.log(answer);
-                    str += '    <div class="card-body" data-anserNo="'+answer.anserNo+'"><b>'+answer.anserNo +'</b>';
-                    str += '    <h5 class="card-title">'+answer.text+'</h5>';
-                    str += '    <h6 class="card-subtitle mb-2 text-muted">'+answer.replyer+'</h6>';
-                    str += '    <p class="card-text">'+ formatTime(answer.regDate) +'</p>';
+                $.each(arr, function(idx, adminAnswer){
+                    console.log(adminAnswer);
+                    str += '    <div class="card-body" data-answerNo="'+adminAnswer.answerNo+'"><b>'+adminAnswer.answerNo +'</b>';
+                    str += '    <h5 class="card-title">'+adminAnswer.text+'</h5>';
+                    str += '    <h6 class="card-subtitle mb-2 text-muted">'+adminAnswer.replyer+'</h6>';
+                    str += '    <p class="card-text">'+ formatTime(adminAnswer.regDate) +'</p>';
                     str += '    </div>';
                 })
 
@@ -138,7 +137,7 @@
             });
         }
 
-        $(".answerCount").click(function(){
+        $(".AdminAnswerCount").click(function(){
 
             loadJSONData();
         })//end click
@@ -146,67 +145,67 @@
         //모달 창
         var modal = $('.modal');
 
-        $(".addAnswer").click(function () {
+        $(".addAdminAnswer").click(function () {
 
             modal.modal('show');
 
             //댓글 입력하는 부분 초기화 시키기
-            $('input[name="replyText"]').val('');
+            $('input[name="adminAnswerText"]').val('');
             $('input[name="replyer"]').val('');
 
 
             $(".modal-footer .btn").hide(); //모달 내의 모든 버튼을 안 보이도록
-            $(".answerSave, .answerClose").show(); //필요한 버튼들만 보이도록
+            $(".AdminAnswerSave, .AdminAnswerClose").show(); //필요한 버튼들만 보이도록
 
         });
 
-        $(".answerSave").click(function() {
+        $(".AdminAnswerSave").click(function() {
 
-            var reply = {
-                bno: bno,
-                text: $('input[name="answerText"]').val(),
-                answer: $('input[name="answer"]').val()
+            var adminAnswer = {
+                boardNo: boardNo,
+                text: $('input[name="adminAnswerText"]').val(),
+                replyer: $('input[name="replyer"]').val()
             }
             console.log(reply);
             $.ajax({
                 url: '/answer/',
                 method: 'post',
-                data:  JSON.stringify(reply),
+                data:  JSON.stringify(adminAnswer),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function(data){
                     console.log(data);
 
-                    var newRno = parseInt(data);
+                    var newAdminAnswerNo = parseInt(data);
 
-                    alert(newRno +"번 댓글이 등록되었습니다.")
+                    alert(newAdminAnswerNo +"번 댓글이 등록되었습니다.")
                     modal.modal('hide');
                     loadJSONData();
                 }
             })
         });
 
-        $('.answerList').on("click", ".card-body", function(){
+        $('.AdminAnswerList').on("click", ".card-body", function(){
 
-            var answerNo = $(this).data("answerNo");
+            var adminAnswerNo = $(this).data("adminAnswerNo");
 
-            $("input[name='answerText']").val( $(this).find('.card-title').html());
-            $("input[name='answer']").val( $(this).find('.card-subtitle').html());
-            $("input[name='answerNo']").val(answerNo);
+            $("input[name='adminAnswerText']").val( $(this).find('.card-title').html());
+            $("input[name='replyer']").val( $(this).find('.card-subtitle').html());
+            $("input[name='adminAnswerNo']").val(adminAnswerNo);
 
             $(".modal-footer .btn").hide();
-            $(".answerRemove, .answerModify, .answerClose").show();
+            $(".AdminAnswerRemove, .AdminAnswerModify, .AdminAnswerClose").show();
 
             modal.modal('show');
 
         });
 
-        $(".answerRemove").on("click", function(){
+        $(".AdminAnswerRemove").on("click", function(){
 
-            var answerNo = $("input[name='answerNo']").val(); //모달 창에 보이는 댓글 번호 hidden처리되어 있음
+            var adminAnswerNo = $("input[name='adminAnswerNo']").val(); //모달 창에 보이는 댓글 번호 hidden처리되어 있음
 
             $.ajax({
-                url: '/answer/' + answerNo,
+                url: '/answer/' + adminAnswerNo,
                 method: 'delete',
 
                 success: function(result){
@@ -220,22 +219,22 @@
             })
         });
 
-        $(".answerModify").click(function() {
+        $(".AdminAnswerModify").click(function() {
 
-            var answerNo = $("input[name='answerNo']").val();
+            var adminAnswerNo = $("input[name='adminAnswerNo']").val();
 
-            var answer = {
-                rno: answerNo,
-                bno: answerNo,
-                text: $('input[name="answerText"]').val(),
-                replyer: $('input[name="answer"]').val()
+            var adminAnswer = {
+                adminAnswerNo: adminAnswerNo,
+                boardNo: boardNo,
+                text: $('input[name="adminAnswerText"]').val(),
+                replyer: $('input[name="replyer"]').val()
             }
 
-            console.log(answer);
+            console.log(adminAnswer);
             $.ajax({
-                url: '/answer/' + answerNo,
+                url: '/answer/' + adminAnswerNo,
                 method: 'put',
-                data:  JSON.stringify(answer),
+                data:  JSON.stringify(adminAnswer),
                 contentType: 'application/json; charset=utf-8',
                 success: function(result){
 
@@ -254,6 +253,9 @@
 
     });
 </script>
+
+
+
 
 
 

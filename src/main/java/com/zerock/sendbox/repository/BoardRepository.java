@@ -19,7 +19,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
     Object getBoardWithWriter(@Param("boardNo") Integer boardNo);
 
     @Query("select b, r from Board b left join AdminAnswer  r on r.board = b where b.boardNo =:boardNo")
-    List<Object[]> getBoardWithReply(@Param("boardNo") Integer boardNo);
+    List<Object[]> getBoardWithAdminAnswer(@Param("boardNo") Integer boardNo);
 
     @Query(value ="SELECT b, w, count(r) " +
             " FROM Board b " +
@@ -27,7 +27,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
             " LEFT JOIN AdminAnswer r ON r.board = b " +
             " GROUP BY b",
             countQuery ="SELECT count(b) FROM Board b")
-    Page<Object[]> getBoardWithReplyCount(Pageable pageable);
+    Page<Object[]> getBoardWithAdminAnswerCount(Pageable pageable);
 
     @Query("SELECT b, w, count(r) " +
             " FROM Board b LEFT JOIN b.writer w " +
