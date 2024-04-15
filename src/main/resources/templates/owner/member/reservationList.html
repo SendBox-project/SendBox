@@ -7,19 +7,18 @@
 <head>
     <meta charset="UTF-8">
     <title>list</title>
-    <link rel="stylesheet" th:href="@{/css/user/list.css}"/>
+    <link rel="stylesheet" th:href="@{/css/owner/list.css}"/>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!--임포트: jquery를 js에서 사용하기 위해서 -->
-    <script type="text/javascript" th:src="@{/js/user/cartList.js}"></script>
+    <script type="text/javascript" th:src="@{/js/owner/reservationList.js}"></script>
 </head>
 <body>
 <!-- Navigation: 네브바-->
-<div th:replace="~{user/include/nav :: NavFragment}"></div>
+<div th:replace="~{owner/include/nav :: NavFragment}"></div>
 <div id=container>
     <form id="form1">
         <input type="hidden" id="page" name="page" value="1"> <!--page 값 넘기기-->
-        <button type = "button" th:onclick="|javascript:deleteAllCart()|">전체 삭제</button>
-        <!--이 부분을 cartListAjax.html과 연결해서 여기에 해당 파일이 삽입!-->
-        <div id="cartListForm">
+        <!--이 부분을 reservationListAjax.html과 연결해서 여기에 해당 파일이 삽입!-->
+        <div id="reservationListForm">
         </div>
     </form>
 </div>

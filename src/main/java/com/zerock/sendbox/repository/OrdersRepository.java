@@ -15,14 +15,14 @@ import java.util.List;
 @Repository
 public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
-    //예약 내역 리스트 조회
+    //유저의 예약 내역 리스트 조회
     @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
             "inner join Store s on r.store.storeNo = s.storeNo where o.paymentNo is not null and o.userNo =:userNo")
     List<Orders> findAllReservation(@Param("userNo") Integer userNo);
 
     //장바구니 리스트 조회
     @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
-            "inner join Store s on  r.store.storeNo = s.storeNo where o.paymentNo is null and o.userNo =:userNo")
+            "inner join Store s on r.store.storeNo = s.storeNo where o.paymentNo is null and o.userNo =:userNo")
     List<Orders> findAllCartList(@Param("userNo") Integer userNo);
 
     //orderNo에 맞는 장바구니 품목 한 개 가져오기

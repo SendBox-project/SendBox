@@ -24,20 +24,19 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class
-    UserMypageController {
+public class UserMypageController {
     @Autowired
     UserMypageService userMypageService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    //개인 정보 수정폼
+    //개인 정보 수정폼  >> 단순 화면 조회
     @GetMapping("/mypageForm")
     public String mypageForm(Model model) {
         String userId = "alsrl";
         UserMember userMember = userMypageService.findByUserId(userId); //UserMember 타입으로 결과값을 받는다.
-        model.addAttribute("user", userMember); // userMember를 "user"에 담아서 프론트로 보내준다.(화면에 DTO에 담겨진 데이터를 동적으로 뿌려주려고)
+        model.addAttribute("user", userMember); // userMember를 "user"에 담아서 프론트로 보내준다.(화면에 엔터티에 담겨진 데이터를 동적으로 뿌려주려고)
         System.out.println("userMember: " + userMember);
         return "user/member/modify_account_form";
     }
@@ -57,28 +56,27 @@ public class
 
     //개인 정보 탈퇴
     @PostMapping("/deleteInfo")
-    public String deleteUser(@ModelAttribute UserMember userMember,Model model, HttpSession session, HttpServletResponse response) throws IOException {
+    public String deleteUser(@ModelAttribute UserMember userMember, Model model, HttpSession session, HttpServletResponse response) throws IOException {
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        String userId = auth.getName();
         Integer userNo = 1;
-         System.out.println("UserMember = " + userMember);
-            UserMember user = userMypageService.findByUserNo(userNo);
+        UserMember user = userMypageService.findByUserNo(userNo);
 
-        if (passwordEncoder.matches(userMember.getPassword(), user.getPassword())) {
+        if (passwordEncoder.matches(userMember.getPassword(), user.getPassword())) { // 실제 입력한 비번, DB에 비번 비교
             Integer result = userMypageService.deleteInfo(userNo);
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter writer = response.getWriter();
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
             writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
             writer.flush();
             session.invalidate();
             return "user/home";
         } else {
-            model.addAttribute("user", user);
+            model.addAttribute("user", user); // 비번 틀렸을때 다시 modify_account_form 프론트 화면으로 가야하니까 값을 뿌려준다.
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             writer.println("<script>alert('비밀번호가 틀렸습니다.');</script>");
             writer.flush();
-            return "user/member/modify_account_form";
+            return "user/member/modify_account_form"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
         }
 
     }
@@ -89,11 +87,11 @@ public class
         return "user/member/reservationList";
     }
 
-    //예약 내역 리스트 조회
+    //유저의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
     public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); //page 번호가 0이면 page 뱐수에 0 설정, 그 외에는 페이지 번호에서 1을 뺀 값을 page 변수에 할당
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
         List<Orders> reservationList = userMypageService.findAllReservation(userNo, pageable);
         int start = (int) pageable.getOffset();
@@ -124,7 +122,7 @@ public class
         int end = Math.min((start + pageable.getPageSize()), cartList.size()); // 장바구니의 마지막 행, 두개 중 최소값을 취함 >> 한 페이지에 장바구니 담긴거의 개수를 표시하려고 하는 거
 
         List<Orders> pageContent = cartList.subList(start, end); // start 인덱스부터 end-1 인덱스까지의 항목을 포함합니다. 따라서 pageContent에는 현재 페이지에 해당하는 항목들이 포함되어 있습니다.(size를 10으로 제한해서 최대 10까지 나옴)
-        Page<Orders> orders = new PageImpl<>(pageContent, pageable, cartList.size()); // 현재 페이지 항목, pageable, 장바구니에 담긴 개수를 order스에 담는다 !
+        Page<Orders> orders = new PageImpl<>(pageContent, pageable, cartList.size()); // 현재 페이지 항목, pageable, 장바구니에 담긴 개수를 orders에 담는다 !
 
         List<Room> roomList = new ArrayList<>();
         if(cartList.size() == 0){

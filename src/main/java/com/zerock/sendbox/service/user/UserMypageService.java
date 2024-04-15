@@ -38,13 +38,18 @@ public class UserMypageService {
         return userMemberRepository.save(userMember);
     }
 
+    //개인정보 조회
+    public UserMember findByUserNo(Integer userNo) {
+        return userMemberRepository.findByUserNo(userNo);
+    }
+
     //개인 정보 탈퇴
     @Transactional
     public Integer deleteInfo(Integer userNo) {
        return userMemberRepository.deleteInfo(userNo);
     }
 
-    //예약 내역 리스트 조회
+    //유저의 예약 내역 리스트 조회
     public List<Orders> findAllReservation(Integer userNo, Pageable pageable) {
         return ordersRepository.findAllReservation(userNo);
     }
@@ -82,8 +87,5 @@ public class UserMypageService {
         return ordersRepository.deleteAllCart(userNo);
     }
 
-    //개인정보 조회
-    public UserMember findByUserNo(Integer userNo) {
-        return userMemberRepository.findByUserNo(userNo);
-    }
+
 }

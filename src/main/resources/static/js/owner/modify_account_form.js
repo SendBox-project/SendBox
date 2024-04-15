@@ -2,7 +2,8 @@
 function modifyAccount() {
     console.log("modifyAccount()");
 
-    let form = document.modify_account_form;
+    /* modify_account_form.html form 태그 아이디를 가져옴 */
+    let form = document.getElementById("modify_account_form");
 
     if (form.password.value === "") {
         alert("비밀번호를 입력해주세요.");

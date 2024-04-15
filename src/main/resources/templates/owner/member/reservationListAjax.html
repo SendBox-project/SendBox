@@ -1,32 +1,34 @@
 <!--아작스를 통해 보여줄 화면 -->
 <table class="board_content" cellspacing="0">
-    <caption>예약 내역</caption>
+    <caption>예약 관리</caption>
     <colgroup>
-        <col width="20%">
-        <col width="20%">
-        <col width="20%">
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
         <col width="15%">
         <col width="15%">
         <col width="10%">
     </colgroup>
     <thead>
     <tr>
-        <th>매장명</th>
+        <th>예약자명</th>
         <th>예약 번호</th>
+        <th>이메일</th>
+        <th>전화번호</th>
         <th>사용 시작일</th>
-        <th>사용 종료일</th>
-        <th>예약 상태</th>
-        <th>예약 취소</th>
+        <th>사용 종료알</th>
+        <th>현황</th>
     </tr>
     </thead>
     <tbody>
     <th:block th:if="${reservations.totalElements != 0}">
-        <tr th:each="order: ${reservations}">
-            <td th:text="${order.room.store.storeName}"></td>
-            <td th:text="${order.reservationNum}"></td>
-            <td th:text="${order.startDate}"></td>
-            <td th:text="${order.endDate}"></td>
-            <td th:text="${order.reservationStatus}"></td>
+        <tr th:each="store: ${reservations}">
+            <td th:text="${store.room.store.storeName}"></td>
+            <td th:text="${store.room.orders.reservationNum}"></td>
+            <td th:text="${store.startDate}"></td>
+            <td th:text="${store.endDate}"></td>
+            <td th:text="${store.reservationStatus}"></td>
             <td><button type="button">삭제</button></td>
         </tr>
     </th:block>

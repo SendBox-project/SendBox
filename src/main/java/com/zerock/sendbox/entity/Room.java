@@ -18,9 +18,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roomNo;
 
-//    @OneToOne(mappedBy = "room")
-//    private Orders order;
-
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private List<Orders> orders = new ArrayList<>();
 

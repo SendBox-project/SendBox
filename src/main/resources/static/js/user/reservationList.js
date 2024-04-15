@@ -1,10 +1,12 @@
-//js를 통해 리스트와 아작스를 연결
+//js를 통해 리스트와 아작스를 연결하는 역할을 한다
+
+
 $(document).ready(function () { // 페이지가 로딩되는 순간 바로 실행
     console.log("ready!");
     reservationListAjax(1); // 들어가서 바로 1페이지가 보임, 아래 펑션의 이름
 });
 
-function  reservationListAjax(page) {  // 위에서 보낸 매개변수 1을 받아줌
+function reservationListAjax(page) {  // 위에서 보낸 매개변수 1을 받아줌
     const innerHtml = $("#reservationListForm") //reservationListAjax.html 소스를 붙일 파일 위치 지정
     const f = document.getElementById("form1"); //reservationList의 form1과 연결
     f.page.value = page;
