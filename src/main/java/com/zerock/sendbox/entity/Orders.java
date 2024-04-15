@@ -25,11 +25,12 @@ public class Orders {
     @Column
     private Integer orderNo;
 
-    @Column
-    private Integer userNo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userNo")
+    private UserMember userMember;
 
-    @Column
-    private Integer paymentNo;
+    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY)
+    private Payment payment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roomNo")

@@ -89,11 +89,11 @@ public class UserMypageController {
 
     //유저의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
-    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
-        List<Orders> reservationList = userMypageService.findAllReservation(userNo, pageable);
+        List<Orders> reservationList = userMypageService.findAllReservation(userNo);
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), reservationList.size());
 
@@ -112,11 +112,11 @@ public class UserMypageController {
 
     //장바구니 리스트 조회
     @GetMapping("/cartListAjax")
-    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String cartList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // 화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());//위에 page 변수에 넣은 값을 다시 pageable에 할당
-        List<Orders> cartList = userMypageService.findAllCartList(userNo, pageable); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
+        List<Orders> cartList = userMypageService.findAllCartList(userNo); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
         System.out.println("cartList = " + cartList);
         int start = (int) pageable.getOffset(); // 장바구니의 첫 행 >> 현재 페이지의 오프셋(시작 인덱스)을 반환 후, 이를 정수로 캐스팅하여 start 변수에 저장합니다.
         int end = Math.min((start + pageable.getPageSize()), cartList.size()); // 장바구니의 마지막 행, 두개 중 최소값을 취함 >> 한 페이지에 장바구니 담긴거의 개수를 표시하려고 하는 거
@@ -139,32 +139,75 @@ public class UserMypageController {
 
     //장바구니 옵션 수정
     @PostMapping("/updateCart")
-    public String updateCart(@ModelAttribute Orders orders, @ModelAttribute Room room, Model model) {
+    public String updateCart(@ModelAttribute Orders orders, @ModelAttribute Room room, Model model, HttpServletResponse response) throws IOException {
         System.out.println("orders = " + orders);
         System.out.println("room = " + room);
         Orders updateInfo =  userMypageService.findByOrderNo(orders.getOrderNo());
+        Room roomInfo = userMypageService.findByRoomNo(room.getRoomNo());
         Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
         updateInfo.setStartDate(orders.getStartDate());
         updateInfo.setEndDate(orders.getEndDate());
         updateInfo.setRoom(room);
         updateInfo.setTotalAmount(orders.getTotalAmount());
-        updateInfo.setTotalPrice(room.getPrice() * orders.getTotalAmount() * betweenDays);
+        updateInfo.setTotalPrice(roomInfo.getPrice() * orders.getTotalAmount() * betweenDays);
         Orders result = userMypageService.save(updateInfo);
-        return "redirect:/user/cartListAjax";
+
+        if (result != null) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('수정이 완료 되었습니다.');</script>");
+            writer.flush();
+            return "user/member/cartList";
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('수정에 실패 하였습니다.');</script>");
+            writer.flush();
+            return "user/member/cartList"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
+        }
+
     }
     //장바구니 단건 삭제
     @PostMapping("/deleteCart/{orderNo}") // 중괄호 안에 변수를 @PathVariable로 받는다.
-    public String deleteCart(@PathVariable(value = "orderNo") Integer orderNo) {
+    public String deleteCart(@PathVariable(value = "orderNo") Integer orderNo, HttpServletResponse response) throws IOException {
         Integer orders = userMypageService.deleteCart(orderNo);  // 리스트 타입의 변수를 보내서 인티저 타입으로 리턴!
-        return "redirect:/user/cartListAjax";
+
+        if (orders != 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('삭제 되었습니다.');</script>");
+            writer.flush();
+            return "user/member/cartList";
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('삭제에 실패 하였습니다.');</script>");
+            writer.flush();
+            return "user/member/cartList"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
+        }
+        
     }
 
     //장바구니 전체 삭제
     @PostMapping("/deleteAllCart/{userNo}")
-    public String deleteAllCart(@PathVariable(value = "userNo") Integer userNo) {
+    public String deleteAllCart(@PathVariable(value = "userNo") Integer userNo, HttpServletResponse response) throws IOException {
         System.out.println("userNo = " + userNo);
         Integer orders = userMypageService.deleteAllCart(userNo);
-        return "redirect:/user/cartListAjax";
+
+        if (orders != 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('삭제 되었습니다.');</script>");
+            writer.flush();
+            return "user/member/cartList";
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('삭제에 실패 하였습니다.');</script>");
+            writer.flush();
+            return "user/member/cartList"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
+        }
+
     }
 
 }

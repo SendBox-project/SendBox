@@ -50,12 +50,12 @@ public class UserMypageService {
     }
 
     //유저의 예약 내역 리스트 조회
-    public List<Orders> findAllReservation(Integer userNo, Pageable pageable) {
+    public List<Orders> findAllReservation(Integer userNo) {
         return ordersRepository.findAllReservation(userNo);
     }
 
     //장바구니 리스트 조회
-    public List<Orders> findAllCartList(Integer userNo, Pageable pageable) {
+    public List<Orders> findAllCartList(Integer userNo) {
         return ordersRepository.findAllCartList(userNo);
     }
 
@@ -78,7 +78,7 @@ public class UserMypageService {
 
     // storeNo를 통해 한 업체가 갖고 있는 room 리스트를 가져옴
     public List<Room> findAllRoomList(Integer storeNo) {
-        return roomRepository.findByStoreStoreNo(storeNo);
+        return roomRepository.findByStoreNo(storeNo);
     }
 
     //장바구니 전체 삭제
@@ -87,5 +87,8 @@ public class UserMypageService {
         return ordersRepository.deleteAllCart(userNo);
     }
 
-
+    //roomNo로 룸정보 가져오기
+    public Room findByRoomNo(Integer roomNo) {
+        return roomRepository.findByRoomNo(roomNo);
+    }
 }

@@ -1,5 +1,6 @@
 package com.zerock.sendbox.controller.owner;
 
+import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.OwnerMember;
 import com.zerock.sendbox.entity.Store;
 import com.zerock.sendbox.service.owner.OwnerMypageService;
@@ -92,14 +93,14 @@ public class OwnerMypageController {
         Integer ownerNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 :(pageable.getPageNumber() - 1); //화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page,  pageable.getPageSize(), pageable.getSort()); //위에 page 변수에 넣은 값을 다시 pageable에 할당
-        List<Store> reservationList = ownerMypageService.findAllUserReservation(ownerNo, pageable); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
+        List<Store> reservationList = ownerMypageService.findAllUserReservation(ownerNo); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
         int start = (int)pageable.getOffset(); // 예약리스트의 첫 행 >> 현재 페이지의 오프셋(시작 인덱스)을 반환 후, 이를 정수로 캐스팅하여 start 변수에 저장합니다.
         int end = Math.min((start + pageable.getPageSize()), reservationList.size()); // 예약리스트의 마지막 행, 두개 중 최소값을 취함 >> 한 페이지에 예약리스트에 담긴거의 개수를 표시하려고 하는 거
 
         List<Store> pageContent = reservationList.subList(start, end); // start 인덱스부터 end-1 인덱스까지의 항목을 포함합니다. 따라서 pageContent에는 현재 페이지에 해당하는 항목들이 포함되어 있습니다.(size를 10으로 제한해서 최대 10까지 나옴)
-        Page<Store> store = new PageImpl<>(pageContent, pageable, reservationList.size()); // 현재 페이지 항목, pageable, 예약리스트에 담긴 개수를 orders에 담는다 !
-        model.addAttribute("reservations",store);
-
+        Page<Store> orders = new PageImpl<>(pageContent, pageable, reservationList.size()); // 현재 페이지 항목, pageable, 예약리스트에 담긴 개수를 orders에 담는다 !
+        model.addAttribute("reservations",orders);
+        System.out.println("store.getContent() = " + orders.getContent());
         return "owner/member/reservationListAjax";
 
     }

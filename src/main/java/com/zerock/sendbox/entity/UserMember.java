@@ -15,13 +15,16 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "orders")
 @DynamicUpdate //값이 있는 것만 업데이트
 public class UserMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer userNo;
+
+    @OneToMany(mappedBy = "userMember", fetch = FetchType.LAZY)
+    private List<Orders> orders = new ArrayList<>();
 
     @Column
     private String userId;

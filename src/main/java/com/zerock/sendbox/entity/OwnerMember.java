@@ -12,13 +12,16 @@ import org.hibernate.annotations.DynamicUpdate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "store")
 @DynamicUpdate //값이 있는 것만 업데이트
 public class OwnerMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer ownerNo;
+
+    @OneToOne(mappedBy = "ownerMember", fetch = FetchType.LAZY)
+    private Store store;
 
     @Column
     private String ownerId;

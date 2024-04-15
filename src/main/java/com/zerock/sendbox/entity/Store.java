@@ -2,6 +2,7 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +14,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "rooms")
+@DynamicUpdate
 public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storeNo;
 
-    @Column
-    private Integer ownerNo;
+    @OneToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "ownerNo")
+    private OwnerMember ownerMember;
 
     @Column
     private  String storeName;

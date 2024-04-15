@@ -29,7 +29,7 @@
         <tr th:each="cart : ${cartList}">
             <input type="hidden" id="roomNo" name="roomNo" value="">
             <input type="hidden" id="orderNo" name="orderNo" th:value="${cart.orderNo}">
-            <input type="hidden" id="userNo" name="userNo" th:value="${cart.userNo}">
+            <input type="hidden" id="userNo" name="userNo" th:value="${cart.userMember.userNo}">
             <input type="hidden" id="price" name="price" th:value="${cart.room.price}">
 
             <td th:text="${cart.room.store.storeName}"></td>

@@ -1,7 +1,9 @@
 package com.zerock.sendbox.service.owner;
 
+import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.OwnerMember;
 import com.zerock.sendbox.entity.Store;
+import com.zerock.sendbox.repository.OrdersRepository;
 import com.zerock.sendbox.repository.OwnerMemberRepository;
 import com.zerock.sendbox.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class OwnerMypageService {
     }
 
     //사업자의 예약 내역 리스트 조회
-    public List<Store> findAllUserReservation(Integer ownerNo, Pageable pageable) {
+    public List<Store> findAllUserReservation(Integer ownerNo) {
         return storeRepository.findAllUserReservation(ownerNo);
     }
 }
