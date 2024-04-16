@@ -5,6 +5,7 @@ import com.zerock.sendbox.entity.OwnerMember;
 import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.Store;
 import com.zerock.sendbox.service.owner.OwnerMypageService;
+import com.zerock.sendbox.service.user.UserMypageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ import java.util.List;
 public class OwnerMypageController {
     @Autowired
     OwnerMypageService ownerMypageService;
+
+    @Autowired
+    UserMypageService userMypageService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -110,11 +114,14 @@ public class OwnerMypageController {
     @GetMapping("/storeForm")
     public String storeForm(Model model) {
         Integer ownerNo = 1;
+        // 스토어 정보만
         Store store = ownerMypageService.findByInfoOwnerNo(ownerNo);
-        model.addAttribute("storeInfo", store);
-        return "owner/member/storeForm";
+        // 룸리스트 정보
+        List<Room> roomList = userMypageService.findAllRoomList(store.getStoreNo());
 
-       /* List<Room> roomList = ownerMypageService.findByInfoOwnerNo(store.getStroeNo());*/
+        model.addAttribute("storeInfo", store);
+        model.addAttribute("roomList", roomList);
+        return "owner/member/storeForm";
 
     }
 
