@@ -1,7 +1,6 @@
 package com.zerock.sendbox.service.store;
 
 import com.zerock.sendbox.entity.Store;
-import com.zerock.sendbox.repository.RoomRepository;
 import com.zerock.sendbox.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -14,11 +13,9 @@ public class StoreService {
     @Autowired
     StoreRepository storeRepository;
 
-    @Autowired
-    RoomRepository roomRepository;
-
     // 검색어가 주어졌을 때 검색 결과 조회
     public List<Store> findAllByKeyword(String storeName) {
+
         return storeRepository.findAllByStoreName(storeName);
     }
 
@@ -27,5 +24,4 @@ public class StoreService {
 
         return storeRepository.findAllStores(pageable);
     }
-
 }

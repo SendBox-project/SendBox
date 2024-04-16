@@ -31,9 +31,11 @@ public class StoreController {
             storeList = storeService.findAllByKeyword(storeName);
         }
         else {
+            // 여기서도 List<Object[]> 유형으로 받아야 함
             storeList = storeService.getAllStores(pageable);
         }
-       // 검색 결과를 보여주기 위해 model에 저장
+
+        // 매장 정보와 방 정보를 모두 모델에 저장
         model.addAttribute("storeList", storeList);
 
         return "admin/store/search_store";

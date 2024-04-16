@@ -34,7 +34,7 @@
                         <!-- storeList를 반복하며 각 store 정보 표시 -->
                         <div th:each="store : ${storeList}" class="store_item">
                             <div class="search_thumbnail">
-                                <img th:src="@{store.thumbnail}" alt="썸네일">
+                                <img th:src="@{${store.thumbnail}}" alt="썸네일">
                             </div>
                             <div class="search_info">
                                 <div class="search_infoName">
@@ -43,8 +43,8 @@
 <!--                                <div class="search_infoReview">-->
 <!--                                    <p th:text="${store.storeName}"></p>-->
 <!--                                </div>-->
-                                <div class="search_infoPrice">
-                                    <p th:text="${store.filter}"></p>
+                                <div class="room_info" th:each="room : ${store.rooms}">
+                                    <p th:text="${room.price}"></p>
                                 </div>
                             </div> <!-- search_info -->
                         </div>
