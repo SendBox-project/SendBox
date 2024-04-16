@@ -7,7 +7,6 @@ import com.zerock.sendbox.repository.OrdersRepository;
 import com.zerock.sendbox.repository.OwnerMemberRepository;
 import com.zerock.sendbox.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +18,11 @@ public class OwnerMypageService {
     OwnerMemberRepository ownerMemberRepository;
 
     @Autowired
+    OrdersRepository ordersRepository;
+
+    @Autowired
     StoreRepository storeRepository;
+
 
     //오너 정보 수정폼
     public OwnerMember findByOwnerId(String ownerId) {
@@ -44,7 +47,12 @@ public class OwnerMypageService {
     }
 
     //사업자의 예약 내역 리스트 조회
-    public List<Store> findAllUserReservation(Integer ownerNo) {
-        return storeRepository.findAllUserReservation(ownerNo);
+    public List<Orders> findAllUserReservation(Integer ownerNo) {
+        return ordersRepository.findAllUserReservation(ownerNo);
+    }
+
+    //매장 정보 수정폼 조회
+    public Store findByInfoOwnerNo(Integer ownerNo) {
+        return storeRepository.findByInfoOwnerNo(ownerNo);
     }
 }
