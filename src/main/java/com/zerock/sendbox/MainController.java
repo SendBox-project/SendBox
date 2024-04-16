@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class MainController {
-
+//유리 테스트용입니다
     @GetMapping("/home")
     public String selectImageList(Model model) {
         model.addAttribute("title", "");
 
-        return "admin/member/account_terms";
+        return "admin/home";
     }
 
 }

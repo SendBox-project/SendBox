@@ -9,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class BoardRepositoryTests {
 
     @Autowired
-    private BoardRepository boardRepository;
+    private StoreRepository storeRepository;
 
-    @Test
 
 }
