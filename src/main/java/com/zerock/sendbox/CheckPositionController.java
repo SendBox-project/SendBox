@@ -52,4 +52,19 @@ public class CheckPositionController {
         return "user/member/account_terms";
     }
 
+    //어드민 회원가입
+    @GetMapping ("/adminregister")
+    public String adminRegister() {
+        return "admin/member/create_account_form";
+    }
+    //오너 회원가입
+    @GetMapping ("/ownerregister")
+    public String ownerRegister() {
+        return "owner/member/create_account_form";
+    }
+    //유저 회원가입
+    @GetMapping ("/userregister")
+    public String userRegister() {
+        return "user/member/create_account_form";
+    }
 }
