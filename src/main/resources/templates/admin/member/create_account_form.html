@@ -8,12 +8,12 @@
     <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
     <script type="text/javascript" th:src="@{/js/admin/create_account_form.js}"></script>
 </head>
-<body>
+<body id="full_body">
 
 <!--회원가입-->
 <div id="container">
     <div id="register_container">
-        <div class="side_logo"><a th:href="@{어드민홈}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
+        <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
         <h3>관리자 회원가입</h3>
         <br>
         <div id="register_wrap">
@@ -73,7 +73,7 @@
                 <button class="regi_button" type="submit" th:onclick="create_account_from()">Submit</button>
             </form>
             <div class="account_links">
-                <a th:href="@{/어드민로그인}">로그인 페이지로 이동</a>
+                <a th:href="@{/adminlogin}">로그인 페이지로 이동</a>
             </div>
         </div>
     </div>

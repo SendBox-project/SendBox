@@ -9,13 +9,13 @@
   <script th:src="@{/js/admin/accountTerms.js}" type="text/javascript"></script>
 
 </head>
-<body>
+<body id="full_body">
 <div id="container">
   <div id="terms_container">
     <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
 
     <div id="terms">
-      <h1>약관 동의</h1>
+      <h3>약관 동의</h3>
       <div class="term_list">
         <label><input type="checkbox" class="all-agree" onchange="toggleAllTerms()"> <b>전체 동의</b></label><br><hr>
         <div class="term-checkbox">
@@ -30,7 +30,7 @@
           <label><input type="checkbox" class="term-agree" data-term="term3"></label>
           <button type="button" class="term_button" onclick="showTerm('3')">개인정보 제3자 제공</button>
         </div><hr>
-        <button class="regi_button" onclick="proceedIfAllAgreed()">모두 동의하고 진행하기</button>
+        <button class="regi_button" onclick="proceedIfAllAgreed()" th:href="@{/adminregister}">모두 동의하고 진행하기</button>
       </div>
     </div><!-- terms -->
 
