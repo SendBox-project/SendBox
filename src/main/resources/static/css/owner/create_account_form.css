@@ -18,7 +18,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
 }
+
 .side_logo {
     margin: 20px;
     /*border: #fc9f27 1px solid;*/
