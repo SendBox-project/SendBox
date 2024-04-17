@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "rooms")
+@Table(name = "store")
 @DynamicUpdate
 public class Store extends BaseEntity {
 
@@ -48,5 +49,6 @@ public class Store extends BaseEntity {
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private List<Room> rooms = new ArrayList<>();
+
 
 }
