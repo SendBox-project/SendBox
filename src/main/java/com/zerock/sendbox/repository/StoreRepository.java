@@ -14,7 +14,7 @@ import java.util.List;
 public interface StoreRepository extends JpaRepository<Store, Integer> {
 
   //검색기능
-    @Query("SELECT s FROM Store s JOIN FETCH s.rooms r WHERE s.storeName LIKE %:store_name%")
+    @Query("SELECT s FROM Store s JOIN FETCH s.rooms r WHERE s.storeName LIKE %:storeName%")
     List<Store> findAllByStoreName(@Param("storeName") String storeName);
 
     //검색어가 주어지지 않으면 전체 리스트 조회
