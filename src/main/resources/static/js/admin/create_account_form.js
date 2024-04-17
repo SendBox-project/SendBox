@@ -3,11 +3,11 @@
 function create_account_form() {
  console.log("create_account_from() 호출");
 
- let form = document.create_account_form;
+ let form = document.getElementById("create_account_from");
 
- if(form.admin_id.value === "") {
+ if(form.adminId.value === "") {
   alert("아이디를 입력하세요.");
-  form.admin_id.focus();
+  form.adminId.focus();
  } else if(form.password.value === "") {
     alert("비밀번호를 입력하세요.");
     form.password.focus();
