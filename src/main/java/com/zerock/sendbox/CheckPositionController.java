@@ -13,6 +13,7 @@ public class CheckPositionController {
     public String checkPositionLogin() {
         return "include/check_position_login";
     }
+
     //오너 로그인
     @GetMapping("/ownerlogin")
     public String ownerLogin() {
