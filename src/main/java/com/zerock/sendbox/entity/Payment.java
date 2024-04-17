@@ -23,8 +23,7 @@ public class Payment {
     @Column
     private Integer paymentNo;
 
-    @OneToOne(fetch =  FetchType.LAZY)
-    @JoinColumn(name = "paymentNo")
+    @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY) //pk
     private Orders orders;
 
     @Column

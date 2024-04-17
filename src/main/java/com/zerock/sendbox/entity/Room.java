@@ -35,6 +35,4 @@ public class Room {
     private Integer remain;
 
 
-
-
 }

@@ -13,6 +13,12 @@ import java.util.List;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Integer> {
 
+    //매장 정보 수정폼 조회
+    @Query("select s from Store s  where s.ownerMember.ownerNo =:ownerNo")
+    Store findByInfoOwnerNo(@Param("ownerNo")Integer ownerNo);
+
+    //매장 정보 수정
+    Store findByStoreNo(Integer storeNo);
   //검색기능
     @Query("SELECT s FROM Store s JOIN FETCH s.rooms r WHERE s.storeName LIKE %:storeName%")
     List<Store> findAllByStoreName(@Param("storeName") String storeName);
