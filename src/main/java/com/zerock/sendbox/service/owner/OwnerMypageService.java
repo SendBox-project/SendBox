@@ -2,9 +2,11 @@ package com.zerock.sendbox.service.owner;
 
 import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.OwnerMember;
+import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.Store;
 import com.zerock.sendbox.repository.OrdersRepository;
 import com.zerock.sendbox.repository.OwnerMemberRepository;
+import com.zerock.sendbox.repository.RoomRepository;
 import com.zerock.sendbox.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class OwnerMypageService {
 
     @Autowired
     StoreRepository storeRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 
 
     //오너 정보 수정폼
@@ -54,5 +59,18 @@ public class OwnerMypageService {
     //매장 정보 수정폼 조회
     public Store findByInfoOwnerNo(Integer ownerNo) {
         return storeRepository.findByInfoOwnerNo(ownerNo);
+    }
+
+    //매장 정보 수정
+    public Store findByStoreNo(Integer storeNo) {
+        return storeRepository.findByStoreNo(storeNo);
+    }
+
+    public Store save(Store storeUpdateInfo) {
+        return storeRepository.save(storeUpdateInfo);
+    }
+
+    public List<Room> saveAll(List<Room> roomList) { // 리스트 저장은 saveAll
+        return roomRepository.saveAll(roomList);
     }
 }

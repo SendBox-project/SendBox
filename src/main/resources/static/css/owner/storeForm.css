@@ -1,0 +1,63 @@
+#modify_container {
+    width: 500px;
+    height: 550px;
+    border: 1px solid #fc9f27;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+    font-size: 10pt;
+}
+
+#modify_account_form {
+    margin: 40px auto 0px auto;
+    width: 350px;
+    list-style-type: none;
+    text-align: left;
+}
+
+#dropAccountForm{
+    margin: 0px auto;
+    width: 350px;
+    list-style-type: none;
+    text-align: left;
+}
+
+
+.form_list {
+    height: 350px;
+    border: 1px solid #fc9f27;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 25px;
+}
+.form_item {
+    margin: 5px;
+    padding: 5px;
+}
+
+input[type="number"] {
+    margin: 10px 5px 10px 5px;
+    width: 120px;
+    height: 20px;
+}
+
+.modify_button {
+    background-color: #fc9f27;
+    width: 300px;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    padding: 10px;
+    margin-top: 10px;
+}
+.drop_button {
+    background-color: #838383;
+    width: 300px;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    padding: 10px;
+    margin-top: 10px;
+}

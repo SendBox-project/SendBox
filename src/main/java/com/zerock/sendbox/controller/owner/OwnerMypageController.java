@@ -14,10 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -123,6 +121,37 @@ public class OwnerMypageController {
         model.addAttribute("roomList", roomList);
         return "owner/member/storeForm";
 
+    }
+
+    //매장 정보 수정
+    @PostMapping("/updateStoreInfo")
+    public String updateStoreInfo(@ModelAttribute Store store, @ModelAttribute List<Room> roomList, Model model,
+                                  @RequestParam(value = "notice", required = false) String notice,
+                                  @RequestParam(value = "region", required = false) String region,
+                                  @RequestParam(value = "address", required = false) String address,
+                                  @RequestParam(value = "phone", required = false) String phone,
+                                  @RequestParam(value = "brn", required = false) String brn,
+                                  @RequestParam(value = "thumbnail", required = false) MultipartFile thumbnail,
+                                  @RequestParam(value = "infoPhoto", required = false) MultipartFile infoPhoto) {
+        System.out.println("store = " + store);
+        System.out.println("roomList = " + roomList);
+
+        Store storeUpdateInfo = ownerMypageService.findByStoreNo(store.getStoreNo());
+        storeUpdateInfo.setNotice(store.getNotice());
+        storeUpdateInfo.setRegion(store.getRegion());
+        storeUpdateInfo.setAddress(store.getAddress());
+        storeUpdateInfo.setPhone(store.getPhone());
+        storeUpdateInfo.setBrn(store.getBrn());
+        storeUpdateInfo.setRooms(roomList);
+
+        Store result = ownerMypageService.save(storeUpdateInfo);
+
+        List<Room> roomUpdateInfo = ownerMypageService.saveAll(roomList); // 룸 리스트 정보 저장
+
+        model.addAttribute("storeUpdateInfo", result);
+        model.addAttribute("roomUpdateInfo", roomUpdateInfo);
+
+        return "owner/home";
     }
 
 }

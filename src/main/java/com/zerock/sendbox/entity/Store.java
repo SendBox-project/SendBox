@@ -31,8 +31,14 @@ public class Store extends BaseEntity {
     @Column
     private  String notice;
 
+    @Column(length = 3, columnDefinition = "char(3)")
+    private String region;
+
     @Column
     private  String address;
+
+    @Column
+    private String brn;
 
     @Column
     private  String phone;
