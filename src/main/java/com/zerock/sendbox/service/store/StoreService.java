@@ -15,7 +15,6 @@ public class StoreService {
     @Autowired
     StoreRepository storeRepository;
 
-    //1차코드
     // 검색어가 주어졌을 때 검색 결과 조회
     public List<Store> findAllByKeyword(String storeName) {
 
@@ -29,8 +28,4 @@ public class StoreService {
     }
 
 
-    //3차 코드
-//    public List<Store> findAllByKeyword(@Param("storeNo") Integer storeNo, Pageable pageable) {
-//        return storeRepository.findAllByKeyword(storeNo);
-//    }
 }
