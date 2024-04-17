@@ -45,7 +45,7 @@ public class BoardController {
 
         redirectAttributes.addFlashAttribute("msg", boardNo);
 
-        return "redirect:/board/list";
+        return "board/list";
     }
 
     @GetMapping({"/read", "/modify"})
@@ -67,7 +67,7 @@ public class BoardController {
 
         redirectAttributes.addFlashAttribute("msg", boardNo);
 
-        return "redirect:/board/list";
+        return "board/list";
     }
 
     @PostMapping("/modify")
@@ -83,7 +83,7 @@ public class BoardController {
 
         redirectAttributes.addAttribute("boardNo",dto.getBoardNo());
 
-        return "redirect:/board/read";
+        return "board/read";
     }
 
 }

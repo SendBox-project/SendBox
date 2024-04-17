@@ -1,23 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New Board</title>
+</head>
+<body>
+<h1>Register New Board</h1>
+<form action="/board/register" method="post">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br>
 
-<h1 class="mt-4">Board Register Page</h1>
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content" required></textarea><br>
 
-<form th:action="@{/board/register}" th:method="post">
-    <div class="form-group">
-        <label >Title</label>
-        <input type="text" class="form-control" name="title" placeholder="Enter Title">
-    </div>
-    <div class="form-group">
-        <label >Content</label>
-        <textarea class="form-control" rows="5" name="content"></textarea>
-    </div>
-    <div class="form-group">
-        <label >Writer Email</label>
-        <input type="email" class="form-control" name="writerMail" placeholder="Writer Mail ">
-    </div>
+    <label for="thumbnail">Thumbnail URL:</label><br>
+    <input type="text" id="thumbnail" name="thumbnail"><br>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+<!--    <label for="writerMail">Writer Email:</label><br>-->
+<!--    <input type="email" id="writerMail" name="writerMail" required><br>-->
+
+    <label for="writerName">Writer Name:</label><br>
+    <input type="text" id="writerName" name="writerName" required><br>
+
+    <label for="boardType">Board Type:</label><br>
+    <select id="boardType" name="boardType">
+        <option value="A">Type A</option>
+        <option value="B">Type B</option>
+        <option value="C">Type C</option>
+    </select><br>
+
+    <input type="submit" value="Submit">
 </form>
+</body>
+</html>
 
 

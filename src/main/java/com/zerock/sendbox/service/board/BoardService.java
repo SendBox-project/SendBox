@@ -28,7 +28,7 @@ public interface BoardService {
                 .adminNo(dto.getAdminNo())
                 .cnt(dto.getCnt())
                 .title(dto.getTitle())
-                .content(dto.getTitle())
+                .content(dto.getContent())
                 .thumbnail(dto.getThumbnail())
                 .writer(adminMember)
                 .boardType(dto.getBoardType())
