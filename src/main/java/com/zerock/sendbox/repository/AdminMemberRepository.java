@@ -10,4 +10,5 @@ import java.util.List;
 public interface AdminMemberRepository extends JpaRepository<AdminMember, Integer> {
     AdminMember findByAdminId(String adminId);
 
+    AdminMember findByMail(String mail);
 }
