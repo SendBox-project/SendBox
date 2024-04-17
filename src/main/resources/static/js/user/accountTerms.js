@@ -31,7 +31,7 @@ function proceedIfAllAgreed() {
     });
 
     if (allTermsAgreed) {
-        window.location.href = "유저회원가입 url";
+        window.location.href = "/userregister";
     } else {
         alert("모든 약관에 동의해야 가입이 가능합니다.");
     }

@@ -31,7 +31,7 @@ function proceedIfAllAgreed() {
     });
 
     if (allTermsAgreed) {
-        window.location.href = "어드민회원가입 url";
+        window.location.href = "/adminregister";
     } else {
         alert("모든 약관에 동의해야 가입이 가능합니다.");
     }
