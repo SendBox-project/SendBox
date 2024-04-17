@@ -26,7 +26,7 @@ public class LoginController {
         return "admin/member/login_form";
     }
 
-    @PostMapping("/adminlogin")
+    @PostMapping("/adminloginconfirm")
     public String login(@ModelAttribute LoginDTO loginDTO, RedirectAttributes redirectAttributes) {
         AdminMember adminMember = loginService.authenticate(loginDTO);
 

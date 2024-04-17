@@ -30,7 +30,6 @@ public class CheckPositionController {
         return "admin/member/login_form";
     }
 
-
     //회원가입 할 때 직책을 확인하는 페이지
     @GetMapping("/checkPositionRegister")
     public String checkPositionRegister() {
