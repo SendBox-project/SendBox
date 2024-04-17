@@ -49,8 +49,8 @@ public class OwnerMypageController {
         System.out.println("ownerMember = " + ownerMember);
         //비밀번호 암호화
         ownerMember.setPassword(passwordEncoder.encode(ownerMember.getPassword()));
-        OwnerMember result =  ownerMypageService.updateInfo(ownerMember);
-        if(result != null) {
+        OwnerMember result = ownerMypageService.updateInfo(ownerMember);
+        if (result != null) {
             return "owner/member/modify_account_ok";
         } else {
             return "owner/member/modify_account_ng";
@@ -66,7 +66,7 @@ public class OwnerMypageController {
         Integer ownerNo = 1;
         OwnerMember owner = ownerMypageService.findByOwnerNo(ownerNo);
 
-        if(passwordEncoder.matches(ownerMember.getPassword(), owner.getPassword())) { // 실제 입력한 비번, DB에 비번 비교
+        if (passwordEncoder.matches(ownerMember.getPassword(), owner.getPassword())) { // 실제 입력한 비번, DB에 비번 비교
             Integer result = ownerMypageService.deleteInfo(ownerNo);
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
@@ -93,17 +93,17 @@ public class OwnerMypageController {
 
     //사업자의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
-    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC)Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer ownerNo = 1;
-        int page = (pageable.getPageNumber() == 0) ? 0 :(pageable.getPageNumber() - 1); //화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
-        pageable = PageRequest.of(page,  pageable.getPageSize(), pageable.getSort()); //위에 page 변수에 넣은 값을 다시 pageable에 할당
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); //화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
+        pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort()); //위에 page 변수에 넣은 값을 다시 pageable에 할당
         List<Orders> reservationList = ownerMypageService.findAllUserReservation(ownerNo); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
-        int start = (int)pageable.getOffset(); // 예약리스트의 첫 행 >> 현재 페이지의 오프셋(시작 인덱스)을 반환 후, 이를 정수로 캐스팅하여 start 변수에 저장합니다.
+        int start = (int) pageable.getOffset(); // 예약리스트의 첫 행 >> 현재 페이지의 오프셋(시작 인덱스)을 반환 후, 이를 정수로 캐스팅하여 start 변수에 저장합니다.
         int end = Math.min((start + pageable.getPageSize()), reservationList.size()); // 예약리스트의 마지막 행, 두개 중 최소값을 취함 >> 한 페이지에 예약리스트에 담긴거의 개수를 표시하려고 하는 거
 
         List<Orders> pageContent = reservationList.subList(start, end); // start 인덱스부터 end-1 인덱스까지의 항목을 포함합니다. 따라서 pageContent에는 현재 페이지에 해당하는 항목들이 포함되어 있습니다.(size를 10으로 제한해서 최대 10까지 나옴)
         Page<Orders> orders = new PageImpl<>(pageContent, pageable, reservationList.size()); // 현재 페이지 항목, pageable, 예약리스트에 담긴 개수를 orders에 담는다 !
-        model.addAttribute("reservations",orders);
+        model.addAttribute("reservations", orders);
         return "owner/member/reservationListAjax";
 
     }
@@ -125,33 +125,96 @@ public class OwnerMypageController {
 
     //매장 정보 수정
     @PostMapping("/updateStoreInfo")
-    public String updateStoreInfo(@ModelAttribute Store store, @ModelAttribute List<Room> roomList, Model model,
+    public String updateStoreInfo(Model model, HttpServletResponse response,
+                                  @RequestParam(value = "storeNo", required = false) Integer storeNo,
                                   @RequestParam(value = "notice", required = false) String notice,
                                   @RequestParam(value = "region", required = false) String region,
                                   @RequestParam(value = "address", required = false) String address,
                                   @RequestParam(value = "phone", required = false) String phone,
                                   @RequestParam(value = "brn", required = false) String brn,
                                   @RequestParam(value = "thumbnail", required = false) MultipartFile thumbnail,
-                                  @RequestParam(value = "infoPhoto", required = false) MultipartFile infoPhoto) {
-        System.out.println("store = " + store);
-        System.out.println("roomList = " + roomList);
+                                  @RequestParam(value = "infoPhoto", required = false) MultipartFile infoPhoto,
+                                  @RequestParam(value = "roomNo1", required = false) Integer roomNo1,
+                                  @RequestParam(value = "roomNo2", required = false) Integer roomNo2,
+                                  @RequestParam(value = "roomNo3", required = false) Integer roomNo3,
+                                  @RequestParam(value = "size1", required = false) String size1,
+                                  @RequestParam(value = "size2", required = false) String size2,
+                                  @RequestParam(value = "size3", required = false) String size3,
+                                  @RequestParam(value = "price1", required = false) Integer price1,
+                                  @RequestParam(value = "price2", required = false) Integer price2,
+                                  @RequestParam(value = "price3", required = false) Integer price3,
+                                  @RequestParam(value = "remain1", required = false) Integer remain1,
+                                  @RequestParam(value = "remain2", required = false) Integer remain2,
+                                  @RequestParam(value = "remain3", required = false) Integer remain3) throws IOException {
+        Store storeInfo = ownerMypageService.findByStoreNo(storeNo);
+        Store storeUpdateInfo = storeInfo;
+        storeUpdateInfo.setNotice(notice);
+        storeUpdateInfo.setRegion(region);
+        storeUpdateInfo.setAddress(address);
+        storeUpdateInfo.setPhone(phone);
+        storeUpdateInfo.setBrn(brn);
 
-        Store storeUpdateInfo = ownerMypageService.findByStoreNo(store.getStoreNo());
-        storeUpdateInfo.setNotice(store.getNotice());
-        storeUpdateInfo.setRegion(store.getRegion());
-        storeUpdateInfo.setAddress(store.getAddress());
-        storeUpdateInfo.setPhone(store.getPhone());
-        storeUpdateInfo.setBrn(store.getBrn());
-        storeUpdateInfo.setRooms(roomList);
+        if (!thumbnail.isEmpty()) { // 빈값이 아니면 신규 사진으로 수정
+            // 서비스
+            String thumbnailPath = ownerMypageService.uploadFile(thumbnail);
+            storeUpdateInfo.setThumbnail(thumbnailPath);
+        }
+
+        if (!infoPhoto.isEmpty()) { // 빈값이 아니면 신규 사진으로 수정
+            // 서비스
+            String infoPhotoPath = ownerMypageService.uploadFile(infoPhoto);
+            storeUpdateInfo.setInfoPhoto(infoPhotoPath);
+        }
 
         Store result = ownerMypageService.save(storeUpdateInfo);
 
+        List<Room> roomList = new ArrayList<>();
+
+        Room room1 = new Room();
+        room1.setRoomNo(roomNo1);
+        room1.setSize(size1);
+        room1.setPrice(price1);
+        room1.setRemain(remain1);
+        room1.setStore(storeUpdateInfo);
+
+        Room room2 = new Room();
+        room2.setRoomNo(roomNo2);
+        room2.setSize(size2);
+        room2.setPrice(price2);
+        room2.setRemain(remain2);
+        room2.setStore(storeUpdateInfo);
+
+        Room room3 = new Room();
+        room3.setRoomNo(roomNo3);
+        room3.setSize(size3);
+        room3.setPrice(price3);
+        room3.setRemain(remain3);
+        room3.setStore(storeUpdateInfo);
+
+        roomList.add(room1);
+        roomList.add(room2);
+        roomList.add(room3);
+
         List<Room> roomUpdateInfo = ownerMypageService.saveAll(roomList); // 룸 리스트 정보 저장
 
-        model.addAttribute("storeUpdateInfo", result);
-        model.addAttribute("roomUpdateInfo", roomUpdateInfo);
+        if (result != null && roomUpdateInfo.size() != 0) { // 성공 시 업데이트 정보 보내기
+            model.addAttribute("storeInfo", result);
+            model.addAttribute("roomList", roomUpdateInfo);
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('수정 완료입니다.');</script>");
+            writer.flush();
+            return "owner/member/storeForm";
+        } else {                                          // 실패시 기존 정보 보내기
+            model.addAttribute("storeInfo", storeInfo);
+            model.addAttribute("roomList", roomUpdateInfo);
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('수정 실패입니다.');</script>");
+            writer.flush();
+            return "owner/member/storeForm";
+        }
 
-        return "owner/home";
     }
 
 }

@@ -1,6 +1,6 @@
 #modify_container {
     width: 500px;
-    height: 550px;
+    height: 670px;
     border: 1px solid #fc9f27;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
@@ -26,7 +26,7 @@
 
 
 .form_list {
-    height: 350px;
+    height: 450px;
     border: 1px solid #fc9f27;
     border-radius: 10px;
     margin: 20px;

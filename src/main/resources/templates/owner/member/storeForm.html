@@ -17,7 +17,7 @@
 <div id="modify_container">
     <h1>매장정보 수정</h1>
     <div id="modify_wrap">
-        <form th:action="@{/owner/updateStoreInfo}" th:method="post">
+        <form th:action="@{/owner/updateStoreInfo}" th:method="post" enctype="multipart/form-data">
             <input type="hidden" id="storeNo" name="storeNo" th:value="${storeInfo.storeNo}">
             <div class="form_list">
                 <div class="form_item">
@@ -41,6 +41,14 @@
                     <input type="text" id="brn" name="brn" th:value="${storeInfo.brn}">
                 </div>
                 <div class="form_item">
+                    <label for="thumbnail">대표사진</label>
+                    <input type="file" id="thumbnail" name="thumbnail">
+                </div>
+                <div class="form_item">
+                    <label for="infoPhoto">상세사진</label>
+                    <input type="file" id="infoPhoto" name="infoPhoto">
+                </div>
+                <div class="form_item">
                     <table>
                         <colgroup>
                             <col width="40%">
@@ -56,11 +64,11 @@
                         </thead>
                         <tbody>
                         <tr th:each="room: ${roomList}">
-                            <input type="hidden" id="roomNo" name="roomNo" th:value="${room.roomNo}">
-                            <input type="hidden" id="size" name="size" th:value="${room.size}">
+                            <input type="hidden" th:id="roomNo+${roomStat.index+1}" th:name="roomNo+${roomStat.index+1}" th:value="${room.roomNo}">
+                            <input type="hidden" th:id="size+${roomStat.index+1}" th:name="size+${roomStat.index+1}" th:value="${room.size}">
                             <td th:text="${room.size}"></td>
-                            <td><input id="price" name="price" th:value="${room.price}" type="number"></td>
-                            <td><input id="remain" name="remain" th:value="${room.remain}" type="number"></td>
+                            <td><input th:id="price+${roomStat.index+1}" th:name="price+${roomStat.index+1}" th:value="${room.price}" type="number"></td>
+                            <td><input th:id="remain+${roomStat.index+1}" th:name="remain+${roomStat.index+1}" th:value="${room.remain}" type="number"></td>
                         </tr>
                         </tbody>
                     </table>

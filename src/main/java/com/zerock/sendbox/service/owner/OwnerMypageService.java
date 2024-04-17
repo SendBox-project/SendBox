@@ -11,8 +11,12 @@ import com.zerock.sendbox.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OwnerMypageService {
@@ -61,16 +65,60 @@ public class OwnerMypageService {
         return storeRepository.findByInfoOwnerNo(ownerNo);
     }
 
-    //매장 정보 수정
+    //매장 정보 수정파트 >> 기존 정보 조회
     public Store findByStoreNo(Integer storeNo) {
         return storeRepository.findByStoreNo(storeNo);
     }
 
+    //매장 정보 수정파트 >> 새로운 정보로 수정
     public Store save(Store storeUpdateInfo) {
         return storeRepository.save(storeUpdateInfo);
     }
 
+    // roomList 저장
     public List<Room> saveAll(List<Room> roomList) { // 리스트 저장은 saveAll
         return roomRepository.saveAll(roomList);
+    }
+
+    public String uploadFile(MultipartFile file){
+        boolean result = false;
+
+        //파일저장
+        String fileOriName = file.getOriginalFilename(); //관리자가 업로드한 원본 파일의 이름을 가져옴
+        String fileExtension = fileOriName.substring(fileOriName.lastIndexOf("."), fileOriName.length()); //관리자가 업로드한 원본 파일의 확장자를 가져옴
+        String uploadDir = "C:\\upload\\"; //서버에서 파일이 저장되는 위치
+
+        UUID uuid = UUID.randomUUID();
+        String uniqueName = uuid.toString().replace("-", ""); // 하이픈 제거
+
+        File Folder = new File(uploadDir);
+
+        // 해당 디렉토리가 없다면 디렉토리를 생성.
+        if (!Folder.exists()) {
+            Folder.mkdir();
+        }
+
+        File saveFile = new File(uploadDir + "\\" + uniqueName + fileExtension);
+
+        if(!saveFile.exists()){
+            saveFile.mkdirs();
+        }
+
+        try {
+            file.transferTo(saveFile);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(result) {
+            System.out.println("[UploadFileService] FILE UPLOAD SUCCESS!");
+            return uniqueName + fileExtension;
+
+        } else {
+            System.out.println("[UploadFileService] FILE UPLOAD FAIL!");
+            return null;
+        }
+
     }
 }
