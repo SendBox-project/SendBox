@@ -1,5 +1,6 @@
 package com.zerock.sendbox.repository;
 
+import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Store;
 import feign.Param;
 import org.springframework.data.domain.Pageable;
@@ -12,16 +13,24 @@ import java.util.List;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Integer> {
 
+    //1차코드
     //매장 리스트 조회. 매장 이름에 단어 포함되면 검색 결과에 포함
 //    @Query("SELECT r.price, s.storeName, s.thumbnail FROM Room r INNER JOIN r.store s WHERE s.storeName LIKE %:storeName%")
 //    @Query("SELECT r.price, s.storeName, s.thumbnail FROM Room r INNER JOIN Store s ON s.storeNo = r.store.storeNo WHERE s.storeName LIKE %:storeName%")
 //    List<Store> findAllByStoreName(@Param("storeName") String storeName);
 
+
+    //2차코드
     @Query("SELECT s FROM Store s JOIN FETCH s.rooms r WHERE s.storeName LIKE %:store_name%")
     List<Store> findAllByStoreName(@Param("storeName") String storeName);
+
     //검색어가 주어지지 않으면 전체 리스트 조회
     @Query("select s from Store s")
     List<Store> findAllStores(Pageable pageable);
 
 
+//3차 코드
+//    @Query("SELECT s FROM Store s JOIN FETCH s.rooms r WHERE s.storeNo = :storeNo")
+//
+//    List<Store> findAllByKeyword(@Param("storeNo") Integer storeNo);
 }

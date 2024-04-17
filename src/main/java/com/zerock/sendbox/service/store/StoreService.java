@@ -1,9 +1,11 @@
 package com.zerock.sendbox.service.store;
 
+import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Store;
 import com.zerock.sendbox.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,7 @@ public class StoreService {
     @Autowired
     StoreRepository storeRepository;
 
+    //1차코드
     // 검색어가 주어졌을 때 검색 결과 조회
     public List<Store> findAllByKeyword(String storeName) {
 
@@ -24,4 +27,10 @@ public class StoreService {
 
         return storeRepository.findAllStores(pageable);
     }
+
+
+    //3차 코드
+//    public List<Store> findAllByKeyword(@Param("storeNo") Integer storeNo, Pageable pageable) {
+//        return storeRepository.findAllByKeyword(storeNo);
+//    }
 }
