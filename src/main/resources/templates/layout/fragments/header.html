@@ -19,11 +19,10 @@
             <div class="top_bar">
                 <!-- logo -->
                 <div class="logo">
-                    <a th:href="@{/home}">
+                    <a th:href="@{/home}"> <!-- 메인 홈으로 이동 -->
                         <img th:src="@{/image/logo_orange_crop.png}" alt="logo">
                     </a>
                 </div>
-
     <!--            <div class="site">-->
     <!--                <ul class="site_list">-->
     <!--                    <li class="site_item"><a th:href="@{/공지사항}" target="_blank">공지사항</a></li>-->
@@ -34,9 +33,9 @@
                     <ul class="link_list">
                         <li class="link_item"><a th:href="@{/공지사항}" target="_blank">공지사항</a></li>
                         <li class="link_item"><a th:href="@{/고객센터}" target="_blank">고객센터</a></li>
-                        <li class="link_item"><a sec:authorize="isAuthenticated()" th:href="@{/홈화면}"> 로그아웃</a></li>
-                        <li class="link_item"><a th:href="@{/로그인}">로그인</a></li>
-                        <li class="link_item"><a th:href="@{/회원가입}">회원가입</a></li>
+                        <li class="link_item"><a sec:authorize="isAuthenticated()" th:href="@{/home}"> 로그아웃</a></li>
+                        <li class="link_item"><a th:href="@{include/check_position_login.html}">로그인</a></li>
+                        <li class="link_item"><a th:href="@{include/check_position_create_account.html}">회원가입</a></li>
                     </ul>
                 </div>
             </div> <!-- top_bar -->
