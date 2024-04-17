@@ -19,14 +19,14 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/login_form")
+    @GetMapping("/adminlogin")
     public String login() {
         log.info("login.........");
 
         return "admin/member/login_form";
     }
 
-    @PostMapping("/login_form")
+    @PostMapping("/adminlogin")
     public String login(@ModelAttribute LoginDTO loginDTO, RedirectAttributes redirectAttributes) {
         AdminMember adminMember = loginService.authenticate(loginDTO);
 
@@ -39,7 +39,7 @@ public class LoginController {
         } else {
             // 로그인 실패 시
             redirectAttributes.addFlashAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            return "admin/member/create_account_form";
+            return "admin/member/login_ng";
         }
 
     }
@@ -55,6 +55,8 @@ public class LoginController {
         return "admin/member/login_form";
     }
 
+
+    //패스워드 재설정
     @GetMapping("/reset_password_form")
     public String resetPassword() {
         return "admin/member/reset_password_form";
