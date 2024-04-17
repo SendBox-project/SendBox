@@ -15,16 +15,16 @@
         <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
         <h3>일반 회원가입</h3>
         <div id="register_wrap">
-            <form th:action="@{/회원가입하고 넘어갈 위치}" th:method="post">
+            <form th:action="@{/회원가입기능매핑}" th:method="post">
                 <div class="form_list">
                     <div class="form_item"><label for="id"></label>
-                        <input type="text" id="id" name="user_id" placeholder="아이디를 입력하세요" autofocus >
+                        <input type="text" id="id" name="userId" placeholder="아이디를 입력하세요" autofocus >
                     </div>
                     <div class="form_item"><label for="password"></label>
                         <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
                     </div>
                     <div class="form_item"><label for="password_check"> </label>
-                        <input type="password" id="password_check" name="password_again" placeholder="비밀번호를 다시 입력하세요">
+                        <input type="password" id="password_check" name="passwordAgain" placeholder="비밀번호를 다시 입력하세요">
                     </div>
                 </div>
                 <div class="form_list">
@@ -45,7 +45,7 @@
                         </select>
                     </div>
                 </div>
-                <button class="regi_button" type="submit" th:onclick="@{/보낼곳 맵}">Submit</button>
+                <button class="regi_button" type="submit">Submit</button>
             </form>
             <div class="account_links">
                 <a th:href="@{/userlogin}">로그인 페이지로 이동</a>

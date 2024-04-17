@@ -15,16 +15,16 @@
     <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
     <h3>사업자 회원가입</h3>
     <div id="register_wrap">
-        <form th:action="@{/회원가입하고 넘어갈 위치}" th:method="post">
+        <form th:action="@{/회원가입 기능 매핑}" th:method="post">
             <div class="form_list">
                 <div class="form_item"><label for="id"></label>
-                    <input type="text" id="id" name="owner_id" placeholder="아이디를 입력하세요" autofocus >
+                    <input type="text" id="id" name="ownerId" placeholder="아이디를 입력하세요" autofocus >
                 </div>
                 <div class="form_item"><label for="password"></label>
                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
                 </div>
                 <div class="form_item"><label for="password_check"></label>
-                    <input type="password" id="password_check" name="password_again" placeholder="비밀번호를 다시 입력하세요">
+                    <input type="password" id="password_check" name="passwordAgain" placeholder="비밀번호를 다시 입력하세요">
                 </div>
             </div>
             <div class="form_list">

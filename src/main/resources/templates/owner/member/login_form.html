@@ -8,16 +8,17 @@
     <script type="text/javascript" th:src="@{/js/owner/login_form.js}"></script>
     <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
 </head>
+
 <body>
 <div id="login_container">
     <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a> </div>
     <h3> 오너 로그인</h3>
     <div id="login_wrap">
-        <form th:action="@{/로그인하고 넘어갈 위치}" th:method="post">
+        <form th:action="@{/로그인기능 매핑}" th:method="post">
             <div class="form_list">
                 <div class="form_item">
                     <label for="id"></label>
-                    <input type="text" id="id" name="owner_id" placeholder="아이디를 입력하세요" autofocus>
+                    <input type="text" id="id" name="ownerId" placeholder="아이디를 입력하세요" autofocus>
                 </div>
                 <hr>
                 <div class="form_item">
@@ -25,7 +26,7 @@
                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
                 </div>
             </div>
-            <button class="login_button" type="submit" th:onclick="@{/보낼곳 맵}">Submit</button>
+            <button class="login_button" type="submit">Submit</button>
         </form>
         <div class="account_links">
             <a th:href="@{/오너 아이디 찾기}">아이디 찾기</a>
