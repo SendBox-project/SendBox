@@ -13,9 +13,10 @@
         <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"> </a> </div>
         <h3> 어드민 로그인</h3>
         <div id="login_wrap">
-            <form th:action="@{/로그인하고 넘어갈 위치}" th:method="post">
+            <form th:action="@{/admin/login_form}" th:method="post">
                 <div class="form_list">
                     <div class="form_item">
+
                         <label for="id"></label>
                         <input type="text" id="id" name="admin_id" placeholder="아이디를 입력하세요" autofocus>
                     </div>

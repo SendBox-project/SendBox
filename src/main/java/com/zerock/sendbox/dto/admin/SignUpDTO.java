@@ -1,52 +1,42 @@
-package com.zerock.sendbox.entity;
+package com.zerock.sendbox.dto.admin;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicUpdate;
 
-@Entity
-@Getter
-@Setter
+import java.time.LocalDateTime;
+
+@Data
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@DynamicUpdate
-public class AdminMember extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+public class SignUpDTO {
+
     private Integer adminNo;
 
-    @Column
-    private String adminId;
-
-    @Column
     private Integer approval;
 
-    @Setter
-    @Column
+    private String adminId;
+
     private String password;
 
-    @Column
     private String name;
 
-    @Column(length = 1, columnDefinition = "char(1)")
     private String gender;
 
-    @Column
     private String mail;
 
-    @Column
     private String phone;
 
     @Column(length = 3, columnDefinition = "char(3)")
     private String part;
 
+    private LocalDateTime regDate;
+
+    private LocalDateTime modDate;
+
     @ColumnDefault("'N'")
     @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
     private String deleteYn;
-
-
 }

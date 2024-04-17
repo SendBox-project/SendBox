@@ -17,10 +17,11 @@
         <h3>관리자 회원가입</h3>
         <br>
         <div id="register_wrap">
-            <form th:action="@{/회원가입하고 넘어갈 위치}" th:method="post">
+            <form th:action="@{/admin/create_account_form}" th:method="post" id="create_account_from">
+                <input type="hidden" id="deleteYn" name = "deleteYn" th:value="N">
                 <div class="form_list">
                     <div class="form_item"><label for="id"></label>
-                        <input type="text" id="id" name="admin_id" placeholder="아이디를 입력하세요" autofocus >
+                        <input type="text" id="id" name="adminId" placeholder="아이디를 입력하세요" autofocus >
                     </div><hr>
                     <div class="form_item"><label for="password"></label>
                         <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
@@ -69,7 +70,7 @@
                         </select>
                     </div>
                 </div>
-                <button class="regi_button" type="submit" th:onclick="@{/보낼곳 맵}">Submit</button>
+                <button class="regi_button" type="submit" th:onclick="create_account_from()">Submit</button>
             </form>
             <div class="account_links">
                 <a th:href="@{/adminlogin}">로그인 페이지로 이동</a>
