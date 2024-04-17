@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+      th:fragment="NavFragment">
 <head>
     <meta charset="UTF-8">
     <title>Owner nav bar</title>
@@ -9,17 +9,16 @@
 <body>
 <div id="container">
     <div id="nav_wrap">
-
         <div class="nav_bar">
             <ul class="lnb_list">
                 <li class="lnb_item">
-                    <a th:href="@{/#}">개인정보 수정</a>
+                    <a th:href="@{/owner/mypageForm}">개인정보 수정</a>
                 </li>
                 <li class="lnb_item">
-                    <a th:href="@{/#}">예약 관리</a>
+                    <a th:href="@{/owner/reservationList}">예약 관리</a>
                 </li>
                 <li class="lnb_item">
-                    <a th:href="@{/#}">전체 예약 내역</a>
+                    <a th:href="@{/owner/}">매장 정보 관리</a>
                 </li>
             </ul>
         </div>

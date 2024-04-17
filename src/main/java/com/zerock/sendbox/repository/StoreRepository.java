@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Integer> {
 
+  //검색기능
     //1차코드
     //매장 리스트 조회. 매장 이름에 단어 포함되면 검색 결과에 포함
 //    @Query("SELECT r.price, s.storeName, s.thumbnail FROM Room r INNER JOIN r.store s WHERE s.storeName LIKE %:storeName%")
@@ -28,9 +29,10 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
     @Query("select s from Store s")
     List<Store> findAllStores(Pageable pageable);
 
-
-//3차 코드
-//    @Query("SELECT s FROM Store s JOIN FETCH s.rooms r WHERE s.storeNo = :storeNo")
-//
-//    List<Store> findAllByKeyword(@Param("storeNo") Integer storeNo);
+  
+    //사업자의 예약 내역 리스트 조회
+    @Query("select s,r,o,u from Store s inner join  Room r on s.storeNo = r.store.storeNo " +
+            "inner join Orders o on r.roomNo = o.room.roomNo " +
+            "inner join UserMember u on o.userMember.userNo = u.userNo where o.reservationStatus != '예약대기' and r.store.ownerMember.ownerNo =:ownerNo")
+    List<Store> findAllUserReservation(@Param("ownerNo") Integer ownerNo);
 }

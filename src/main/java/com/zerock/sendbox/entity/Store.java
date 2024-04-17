@@ -2,25 +2,29 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "rooms")
 @Table(name = "store")
+@DynamicUpdate
 public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storeNo;
 
-    @Column
-    private Integer ownerNo;
+    @OneToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "ownerNo")
+    private OwnerMember ownerMember;
 
     @Column
     private  String storeName;
@@ -44,7 +48,7 @@ public class Store extends BaseEntity {
     private  String infoPhoto;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
-    private List<Room> rooms = new ArrayList<>();;
+    private List<Room> rooms = new ArrayList<>();
 
 
 }

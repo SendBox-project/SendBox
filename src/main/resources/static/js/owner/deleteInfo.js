@@ -2,12 +2,24 @@
 
 
 function deleteInfo() {
-    // 확인 창을 표시
-    var confirmResult = confirm("정말로 회원 탈퇴하시겠습니까?");
-
-    if (confirmResult) {
-        // 확인을 선택한 경우, 회원 탈퇴를 위한 form을 자동으로 제출
-        document.getElementById("dropAccountForm").submit();
+    let form = document.getElementById('modify_account_form');
+    let form2 = document.getElementById("dropAccountForm");
+    form2.password.value = form.password.value;
+    if (form.password.value === "") {
+        alert("비밀번호를 입력해주세요.");
+        form.password.focus();
+    } else if (form.password_again.value === "") {
+        alert("비밀번호를 다시 입력해주세요.");
+        form.password_again.focus();
+    } else if (form.password.value !== form.password_again.value) {
+        alert("비밀번호가 일치하지 않습니다.");
+        form.password_again.focus();
+    } else {
+        var confirmResult = confirm("정말로 회원 탈퇴하시겠습니까?");
+        if (confirmResult) {
+            // 확인을 선택한 경우, 회원 탈퇴를 위한 form2를 자동으로 제출
+            form2.submit();
+        }
     }
 }
 

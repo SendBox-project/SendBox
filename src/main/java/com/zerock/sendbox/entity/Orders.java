@@ -2,6 +2,7 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
+@DynamicUpdate //값이 있는 것만 업데이트
 @ToString(exclude = "room")
 public class Orders {
 
@@ -22,13 +25,14 @@ public class Orders {
     @Column
     private Integer orderNo;
 
-    @Column
-    private Integer userNo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userNo")
+    private UserMember userMember;
 
-    @Column
-    private Integer paymentNo;
+    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY)
+    private Payment payment;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roomNo")
     private Room room;
 
