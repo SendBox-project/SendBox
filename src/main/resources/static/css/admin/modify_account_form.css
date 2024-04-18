@@ -1,6 +1,6 @@
 #modify_container {
     width: 500px;
-    height: 800px;
+    height: 550px;
     border: 1px solid #4e95d9;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
@@ -14,13 +14,14 @@ form {
     margin: 40px auto;
     width: 350px;
     list-style-type: none;
-    text-align: left;
+
 }
 
 .form_list {
     border: 1px solid #4e95d9;
     border-radius: 10px;
     margin-bottom: 10px;
+    text-align: left;
 }
 .form_item {
     margin: 5px;
@@ -34,4 +35,15 @@ form {
     border-radius: 5px;
     border-style: none;
     padding: 10px;
+    margin-top: 10px;
+}
+
+.drop_button {
+    background-color: #838383;
+    width: 300px;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    padding: 10px;
+    margin-top: 10px;
 }

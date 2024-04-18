@@ -18,7 +18,7 @@
 <div id="modify_container">
     <h1>개인정보 수정</h1>
     <div id="modify_wrap">
-        <form th:action="@{/owner/updateStoreInfo}" th:method="post" id="modify_account_form">
+        <form th:action="@{/owner/updateInfo}" th:method="post" id="modify_account_form">
             <!--readonly 혹은 disabled 있으면 백엔드로 데이터가 안 넘어가져서 히든으로 넘기기-->
             <input type="hidden" id="no" name="ownerNo" th:value="${owner.ownerNo}">
             <input type="hidden"  id="ownerId" name="ownerId" th:value="${owner.ownerId}">
@@ -57,7 +57,7 @@
             <button class="modify_button" type="button" onclick="modifyAccount()">modify</button>
             <button class="modify_button" type="reset"> reset </button>
         </form>
-        <form id="dropAccountForm" th:action="@{/owner/deleteInfo}" method="POST">
+        <form id="dropAccountForm" th:action="@{/owner/deleteInfo}" th:method="POST">
             <input type="hidden"  id="password2" name="password" value="">
             <button class="drop_button" type="button" onclick="deleteInfo()">회원 탈퇴</button>
         </form>
