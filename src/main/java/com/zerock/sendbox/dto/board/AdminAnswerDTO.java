@@ -17,8 +17,6 @@ public class AdminAnswerDTO {
 
     private Integer boardNo;
 
-    private Integer inquaryNo;
-
     private String replyer;
 
     private String content;

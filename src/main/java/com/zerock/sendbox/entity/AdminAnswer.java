@@ -20,9 +20,6 @@ public class AdminAnswer extends BaseEntity {
     private Integer boardNo;
 
     @Column
-    private Integer inquaryNo;
-
-    @Column
     private String replyer;
 
     @ManyToOne(fetch = FetchType.LAZY)
