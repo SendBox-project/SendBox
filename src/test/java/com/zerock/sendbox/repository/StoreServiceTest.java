@@ -35,14 +35,14 @@ class StoreServiceTest {
         stores.add(new Store(101,1,"test 1","notice","address","phone","filter","thumbnail","infoPhoto"));
         stores.add(new Store(105, 1, "test 2", "notice", "address", "phone", "filter", "thumbnail", "infoPhoto"));
 
-        when(storeRepository.findAllByStoreName(keyword)).thenReturn(stores);
+        when(storeRepository.findAllByStoreNameContaining(keyword)).thenReturn(stores);
 
         // 검색 결과
         List<Store> result = storeService.findAllByKeyword(keyword);
 
         // 결과
         assertEquals(stores.size(), result.size());
-        verify(storeRepository, times(1)).findAllByStoreName(keyword);
+        verify(storeRepository, times(1)).findAllByStoreNameContaining(keyword);
 
         //출력
         for (Store store : result) {
