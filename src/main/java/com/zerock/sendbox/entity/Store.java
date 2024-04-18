@@ -3,6 +3,7 @@ package com.zerock.sendbox.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @ToString(exclude = "rooms")
 @Table(name = "store")
 @DynamicUpdate
-public class Store extends BaseEntity {
+public class StoreInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
