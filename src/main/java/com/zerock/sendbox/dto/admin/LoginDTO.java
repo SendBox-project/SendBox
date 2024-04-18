@@ -11,4 +11,6 @@ public class LoginDTO {
     private String adminId;
 
     private String password;
+
+    private String Mail;
 }

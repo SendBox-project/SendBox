@@ -27,7 +27,6 @@ public class AdminMember extends BaseEntity {
     @Column
     private Integer approval;
 
-    @Setter
     @Column
     private String password;
 
