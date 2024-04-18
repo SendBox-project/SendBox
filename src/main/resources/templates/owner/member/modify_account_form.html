@@ -23,8 +23,6 @@
             <input type="hidden" id="no" name="ownerNo" th:value="${owner.ownerNo}">
             <input type="hidden"  id="ownerId" name="ownerId" th:value="${owner.ownerId}">
             <input type="hidden"  id="gender" name="gender" th:value="${owner.gender}">
-            <input type="hidden"  id="region" name="region" th:value="${owner.region}">
-            <input type="hidden"  id="brn" name="brn" th:value="${owner.brn}">
             <input type="hidden"  id="deleteYn" name="deleteYn" th:value="N">
             <div class="form_list">
                 <div class="form_item">
@@ -55,15 +53,6 @@
                     <label for="gender">성별</label>
                     <input type="text" id="ownerGender" name="gender" th:value="${owner.gender}" readonly disabled>
                 </div>
-                <div class="form_item">
-                    <label for="region">지역</label>
-                    <input type="text" id="ownerRegion" name="region" th:value="${owner.region}" readonly disabled>
-                </div>
-                <div class="form_item">
-                    <label for="brn">사업자등록번호</label>
-                    <input type="text" id="ownerBrn" name="brn" th:value="${owner.brn}" readonly disabled>
-                </div>
-
             </div>
             <button class="modify_button" type="button" onclick="modifyAccount()">modify</button>
             <button class="modify_button" type="reset"> reset </button>

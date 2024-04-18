@@ -89,7 +89,7 @@ public class UserMypageController {
 
     //유저의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
-    public String reservationList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
@@ -112,7 +112,7 @@ public class UserMypageController {
 
     //장바구니 리스트 조회
     @GetMapping("/cartListAjax")
-    public String cartList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Integer userNo = 1;
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // 화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());//위에 page 변수에 넣은 값을 다시 pageable에 할당

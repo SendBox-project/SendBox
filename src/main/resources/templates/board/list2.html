@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Board List</title>
+</head>
+<body>
+<h1>Board List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Board No</th>
+        <th>Title</th>
+        <th>Writer</th>
+        <th>thumbnail</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board : ${result.content}">
+        <td th:text="${board.boardNo}"></td>
+        <td th:text="${board.title}"></td>
+        <td th:text="${board.writerMail}"></td>
+        <!-- Add more columns as needed -->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
