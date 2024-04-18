@@ -6,10 +6,13 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "rooms")
+@Table(name = "store")
+@DynamicUpdate
 public class Store extends BaseEntity {
 
     @Id
