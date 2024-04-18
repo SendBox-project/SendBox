@@ -1,6 +1,5 @@
 package com.zerock.sendbox.repository;
 
-import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Store;
 import feign.Param;
 import org.springframework.data.domain.Pageable;
@@ -22,8 +21,7 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
   //검색기능
     /*@Query("SELECT s FROM Store s JOIN FETCH s.rooms r WHERE r.storeName LIKE '%:storeName%'")*/
    /* @Query("SELECT s,r FROM Store s inner join Room r on  s.storeNo = r.store.storeNo WHERE s.storeName LIKE concat ('%', :storeName, '%')")*/
-    @Query("SELECT s FROM Store s WHERE s.storeName LIKE %:storeName%")
-    List<Store> findAllByStoreName(@Param("storeName") String storeName);
+    List<Store> findAllByStoreNameContaining(@Param("storeName") String storeName);
 
     //검색어가 주어지지 않으면 전체 리스트 조회
     @Query("select s from Store s")
