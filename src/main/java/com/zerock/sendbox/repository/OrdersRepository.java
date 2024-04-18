@@ -19,12 +19,12 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     //유저의 예약 내역 리스트 조회
     @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
             "inner join Store s on r.store.storeNo = s.storeNo " +
-            "where o.reservationStatus != '예약대기' and o.userMember.userNo =:userNo")
+            "where o.payment.paymentNo is not null and o.userMember.userNo =:userNo")
     List<Orders> findAllReservation(@Param("userNo") Integer userNo);
 
     //장바구니 리스트 조회
     @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
-            "inner join Store s on r.store.storeNo = s.storeNo where o.reservationStatus = '예약대기' and o.userMember.userNo =:userNo")
+            "inner join Store s on r.store.storeNo = s.storeNo where o.payment.paymentNo is null and o.userMember.userNo =:userNo")
     List<Orders> findAllCartList(@Param("userNo") Integer userNo);
 
     //orderNo에 맞는 장바구니 품목 한 개 가져오기
@@ -37,6 +37,11 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     @Modifying // delete 쿼리 사용 시 필요함 그래야 인식 가능?
     @Query("delete from Orders o where o.payment.paymentNo is null and o.userMember.userNo =:userNo")
     Integer deleteAllCart(@Param("userNo") Integer userNo);
+
+    //사업자의 예약 내역 리스트 조회
+    @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
+            "inner join Store s on r.store.storeNo = s.storeNo where o.payment.paymentNo is not null and s.ownerMember.ownerNo =:ownerNo ")
+    List<Orders> findAllUserReservation(@Param("ownerNo") Integer ownerNo);
 
 
 

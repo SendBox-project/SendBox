@@ -3,7 +3,7 @@ package com.zerock.sendbox.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +17,14 @@ import java.util.List;
 @ToString(exclude = "rooms")
 @Table(name = "store")
 @DynamicUpdate
-public class StoreInfo extends BaseEntity {
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storeNo;
 
+
+    private Integer ownerNo;
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "ownerNo")
     private OwnerMember ownerMember;
@@ -33,8 +35,15 @@ public class StoreInfo extends BaseEntity {
     @Column
     private  String notice;
 
+
+    @Column(length = 3, columnDefinition = "char(3)")
+    private String region;
+
     @Column
     private  String address;
+
+    @Column
+    private String brn;
 
     @Column
     private  String phone;
@@ -50,6 +59,5 @@ public class StoreInfo extends BaseEntity {
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private List<Room> rooms = new ArrayList<>();
-
 
 }

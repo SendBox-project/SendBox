@@ -29,7 +29,8 @@ public class Orders {
     @JoinColumn(name = "userNo")
     private UserMember userMember;
 
-    @OneToOne(mappedBy = "orders", fetch = FetchType.LAZY)
+    @OneToOne(fetch =  FetchType.LAZY) //fk
+    @JoinColumn(name = "paymentNo")
     private Payment payment;
 
     @ManyToOne(fetch = FetchType.LAZY)

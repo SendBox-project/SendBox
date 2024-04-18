@@ -5,10 +5,9 @@
         <col width="10%">
         <col width="10%">
         <col width="15%">
-        <col width="10%">
-        <col width="10%">
-        <col width="10%">
-        <col width="10%">
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
         <col width="10%">
         <col width="10%">
     </colgroup>
@@ -21,26 +20,21 @@
         <th>사용 시작일</th>
         <th>사용 종료알</th>
         <th>현황</th>
-        <th>승인</th>
         <th>거절</th>
     </tr>
     </thead>
     <tbody>
     <th:block th:if="${reservations.totalElements != 0}">
-        <tr th:each="store: ${reservations}">
-            <th:block th:each="room: ${store.rooms}">
-                <th:block th:each="order: ${room.orders}">
-                    <td th:text="${order.userMember.name}"></td>
-                    <td th:text="${order.reservationNum}"></td>
-                    <td th:text="${order.userMember.mail}"></td>
-                    <td th:text="${order.userMember.phone}"></td>
-                    <td th:text="${order.startDate}"></td>
-                    <td th:text="${order.endDate}"></td>
-                    <td th:text="${order.reservationStatus}"></td>
-                    <td><button type="button">승인</button></td>
+        <tr th:each="reservation: ${reservations}">
+                    <td th:text="${reservation.userMember.name}"></td>
+                    <td th:text="${reservation.reservationNum}"></td>
+                    <td th:text="${reservation.userMember.mail}"></td>
+                    <td th:text="${reservation.userMember.phone}"></td>
+                    <td th:text="${reservation.startDate}"></td>
+                    <td th:text="${reservation.endDate}"></td>
+                    <td th:text="${reservation.reservationStatus}"></td>
                     <td><button type="button">거절</button></td>
-                </th:block>
-            </th:block>
+        </tr>
     </th:block>
     <th:block th:if="${reservations.totalElements == 0}">
         <tr style="text-align: center">

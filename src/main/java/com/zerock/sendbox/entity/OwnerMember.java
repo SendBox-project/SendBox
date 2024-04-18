@@ -41,12 +41,6 @@ public class OwnerMember extends BaseEntity {
     @Column
     private String phone;
 
-    @Column(length = 3, columnDefinition = "char(3)")
-    private String region;
-
-    @Column
-    private String brn;
-
     @ColumnDefault("'N'")
     @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
     private String deleteYn;
