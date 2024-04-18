@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class Store extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storeNo;
 
+
+    private Integer ownerNo;
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "ownerNo")
     private OwnerMember ownerMember;
@@ -31,6 +34,7 @@ public class Store extends BaseEntity {
 
     @Column
     private  String notice;
+
 
     @Column(length = 3, columnDefinition = "char(3)")
     private String region;
@@ -55,6 +59,5 @@ public class Store extends BaseEntity {
 
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private List<Room> rooms = new ArrayList<>();
-
 
 }
