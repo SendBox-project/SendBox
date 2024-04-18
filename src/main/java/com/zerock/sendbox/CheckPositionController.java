@@ -40,6 +40,7 @@ public class CheckPositionController {
     //어드민 회원가입 약관
     @GetMapping("/adminterms")
     public String adminterms() {
+
         return "admin/member/account_terms";
     }
     //오너 회원가입 약관

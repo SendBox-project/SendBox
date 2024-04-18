@@ -24,7 +24,6 @@ public class Store extends BaseEntity {
     private Integer storeNo;
 
 
-    private Integer ownerNo;
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "ownerNo")
     private OwnerMember ownerMember;

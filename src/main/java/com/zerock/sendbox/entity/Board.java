@@ -2,6 +2,7 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Builder
@@ -29,6 +30,7 @@ public class Board extends BaseEntity {
 
     @Column
     private String thumbnail;
+//    이미지 파일 등록용임 썸네일 아님!
 
     @ManyToOne (fetch = FetchType.LAZY)
     private AdminMember writer;
@@ -44,11 +46,5 @@ public class Board extends BaseEntity {
     public void changeContent(String content){
         this.content = content;
     }
-
-    @Column
-    private Integer cnt;
-
-    @Column
-    private String thumbnail;
 
 }
