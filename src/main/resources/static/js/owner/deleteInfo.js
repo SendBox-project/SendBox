@@ -8,14 +8,17 @@ function deleteInfo() {
     if (form.password.value === "") {
         alert("비밀번호를 입력해주세요.");
         form.password.focus();
+        return false;
     } else if (form.password_again.value === "") {
         alert("비밀번호를 다시 입력해주세요.");
         form.password_again.focus();
+        return false;
     } else if (form.password.value !== form.password_again.value) {
         alert("비밀번호가 일치하지 않습니다.");
         form.password_again.focus();
+        return false;
     } else {
-        var confirmResult = confirm("정말로 회원 탈퇴하시겠습니까?");
+        let confirmResult = confirm("정말로 회원 탈퇴하시겠습니까?");
         if (confirmResult) {
             // 확인을 선택한 경우, 회원 탈퇴를 위한 form2를 자동으로 제출
             form2.submit();
