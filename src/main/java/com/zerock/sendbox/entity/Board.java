@@ -44,4 +44,11 @@ public class Board extends BaseEntity {
     public void changeContent(String content){
         this.content = content;
     }
+
+    @Column
+    private Integer cnt;
+
+    @Column
+    private String thumbnail;
+
 }

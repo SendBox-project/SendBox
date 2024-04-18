@@ -1,0 +1,100 @@
+
+<!--아작스를 통해 보여줄 화면 -->
+<table class="board_content" cellspacing="0">
+    <caption>장바구니</caption>
+    <colgroup>
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
+        <col width="10%">
+        <col width="15%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>매장명</th>
+        <th>사용 시작일</th>
+        <th>사용 종료일</th>
+        <th>사이즈</th>
+        <th>수량</th>
+        <th>가격</th>
+        <th>수정</th>
+        <th>삭제</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:if="${cartList.totalElements != 0}">
+        <tr th:each="cart : ${cartList}">
+            <input type="hidden" id="roomNo" name="roomNo" value="">
+            <input type="hidden" id="orderNo" name="orderNo" th:value="${cart.orderNo}">
+            <input type="hidden" id="userNo" name="userNo" th:value="${cart.userMember.userNo}">
+            <input type="hidden" id="price" name="price" th:value="${cart.room.price}">
+
+            <td th:text="${cart.room.store.storeName}"></td>
+            <td><input id="startDate" name="startDate" th:value="${cart.startDate}" type="date"></td>
+            <td><input id="endDate" name="endDate" th:value="${cart.endDate}" type="date"></td>
+            <td>
+                <select id = "sizeType">
+                    <th:block th:each="room : ${roomList}">
+                        <option th:value="${room.roomNo}" th:text="${room.size}" th:selected="${cart.room.size} == ${room.size}"></option>
+                    </th:block>
+                </select>
+            </td>
+            <td><input id="totalAmount" name="totalAmount" th:value="${cart.totalAmount}" type="number"></td>
+            <td th:text="${cart.totalPrice}"></td>
+            <td><button type="button" th:onclick="|javascript:updateCart()|">수정</button></td>
+            <td><button type="button" th:onclick="|javascript:deleteCart()|">삭제</button></td>
+        </tr>
+    </th:block>
+    <th:block th:if="${cartList.totalElements == 0}">
+        <tr style="text-align: center">
+            <td colspan="8">장바구니 내역이 없습니다.</td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+<div class="buttons_wrap">
+    <tr class="pagination"
+        th:with="start=${(cartList.number div 10)*10 + 1},
+           last=${(start + 9 < cartList.totalPages ? start + 9 : cartList.totalPages)}">
+        <td>
+            <a th:onclick="|javascript:cartListAjax(1)|" aria-label="First"> <!--onclick은 비동기식이라서 ajax 거쳐서 감, cartListAjax는 js안에 펑션 이름이랑 매칭-->
+                <span aria-hidden="true">첫 페이지</span>
+            </a>
+        </td>
+
+        <td th:class="${cartList.first} ? 'disabled'">
+            <a th:onclick="${cartList.first} ? '' : 'javascript:cartListAjax('+${cartList.number}+')'"
+               aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </td>
+
+        <th:block th:if="${last != 0}">
+            <td th:each="page: ${#numbers.sequence(start, last)}"
+                th:class="${page == cartList.number + 1} ? 'active'">
+                <a th:text="${page}" th:onclick="|javascript:cartListAjax(${page})|"></a>
+            </td>
+        </th:block>
+        <th:block th:if="${last == 0}">
+            <td class="active">
+                <a th:text="1" th:onclick="|javascript:cartListAjax(1)|"></a>
+            </td>
+        </th:block>
+
+        <td th:class="${cartList.last} ? 'disabled'">
+            <a th:onclick="${cartList.last} ? '' : 'javascript:cartListAjax('+${cartList.number+2}+')'" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </td>
+
+        <td>
+            <a th:onclick="|javascript:cartListAjax(${cartList.totalPages})|" aria-label="Last">
+                <span aria-hidden="true">마지막 페이지</span>
+            </a>
+        </td>
+    </tr>
+</div>

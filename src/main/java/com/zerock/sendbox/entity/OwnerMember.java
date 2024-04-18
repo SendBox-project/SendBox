@@ -3,18 +3,25 @@ package com.zerock.sendbox.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "store")
+@DynamicUpdate //값이 있는 것만 업데이트
 public class OwnerMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer ownerNo;
+
+    @OneToOne(mappedBy = "ownerMember", fetch = FetchType.LAZY)
+    private Store store;
 
     @Column
     private String ownerId;
@@ -34,18 +41,8 @@ public class OwnerMember extends BaseEntity {
     @Column
     private String phone;
 
-    @Column(length = 3, columnDefinition = "char(3)")
-    private String region;
-
-    @Column
-    private String brn;
-
-    @Column
-    private String ownerStore;
-
-
-
-
-
+    @ColumnDefault("'N'")
+    @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
+    private String deleteYn;
 
 }

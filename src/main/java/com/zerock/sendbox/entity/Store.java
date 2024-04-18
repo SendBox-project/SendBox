@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -19,8 +23,11 @@ public class Store extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storeNo;
 
-    @Column
+
     private Integer ownerNo;
+    @OneToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "ownerNo")
+    private OwnerMember ownerMember;
 
     @Column
     private  String storeName;
@@ -28,8 +35,15 @@ public class Store extends BaseEntity {
     @Column
     private  String notice;
 
+
+    @Column(length = 3, columnDefinition = "char(3)")
+    private String region;
+
     @Column
     private  String address;
+
+    @Column
+    private String brn;
 
     @Column
     private  String phone;
@@ -42,4 +56,8 @@ public class Store extends BaseEntity {
 
     @Column
     private  String infoPhoto;
+
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    private List<Room> rooms = new ArrayList<>();
+
 }
