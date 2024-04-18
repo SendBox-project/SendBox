@@ -8,7 +8,11 @@ import java.util.List;
 
 @Repository
 public interface AdminMemberRepository extends JpaRepository<AdminMember, Integer> {
-    AdminMember findByAdminId(String adminId);
+
+
+    AdminMember findByAdminIdAndMail(String adminId, String mail);
 
     AdminMember findByMail(String mail);
+
+    AdminMember findByAdminId(String adminId);
 }
