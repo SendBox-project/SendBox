@@ -16,13 +16,14 @@ public class Reply extends BaseEntity{
     @Column
     private Integer replyNo;
 
-    @Column
+    @Column(nullable = false)
     private String replyer;
 
-    @Column
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquaryNo",nullable = false)
     private Inquary inquary;
 
 }

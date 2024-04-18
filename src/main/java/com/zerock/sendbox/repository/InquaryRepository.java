@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface InquaryRepository extends JpaRepository<Inquary, Integer>{
 
-    @Query("select b, w from Inquary b left  join b.member w where b.inquaryNo =:inquaryNo")
+    @Query("select b, w from Inquary b left  join b.userMember w where b.inquaryNo =:inquaryNo")
     Object getInquaryWithMember(@Param("inquaryNo") Integer inquaryNo);
 
     @Query("select b, r from Inquary b left join Reply r on r.inquary = b where b.inquaryNo =:inquaryNo")
@@ -22,14 +22,14 @@ public interface InquaryRepository extends JpaRepository<Inquary, Integer>{
 
     @Query(value = "select b, w, count(r) " +
             " from Inquary b " +
-            " left join b.member w " +
+            " left join b.userMember w " +
             " left join Reply r on r.inquary = b " +
             " group by b ",
             countQuery = "select count(b) from Inquary b")
     Page<Object[]> getInquaryWithReplyCount(Pageable pageable);
 
     @Query("select b, w, count(r) " +
-            " from Inquary b left join b.member w " +
+            " from Inquary b left join b.userMember w " +
             " left outer join Reply r on r.inquary = b" +
             " where b.inquaryNo =:inquaryNo")
     Object getInquaryByInquaryNo(@Param("inquaryNo") Integer inquaryNo);

@@ -3,6 +3,9 @@ package com.zerock.sendbox.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -13,20 +16,21 @@ public class Inquary extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(nullable = false)
     private Integer inquaryNo;
 
-    @Column
-    private Integer userNo;
+    @OneToMany(mappedBy = "inquary", fetch = FetchType.LAZY)
+    private List<Reply> replies = new ArrayList<>();
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserMember member;
+    @JoinColumn(name="userNo", nullable = false)
+    private UserMember userMember;
 
     public void changeTitle(String title) {
         this.title = title;

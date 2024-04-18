@@ -4,38 +4,43 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "writer")
+@ToString(exclude = "adminMember")
 public class Board extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Integer boardNo;
 
-    @Column
-    private Integer adminNo;
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+    private List<AdminAnswer> adminAnswers = new ArrayList<>();
 
-    @Column
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="adminNo", nullable = false)
+    private AdminMember adminMember;
+
+    @Column(nullable = false)
     private Integer cnt;
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String content;
 
-    @Column
+    @Column(nullable = false)
     private String thumbnail;
 //    이미지 파일 등록용임 썸네일 아님!
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    private AdminMember writer;
-
-    @Column(length = 3, columnDefinition = "char(3)")
+    @Column(length = 3, columnDefinition = "char(3)", nullable = false)
     private String boardType;
 
 

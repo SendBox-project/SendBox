@@ -6,6 +6,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +22,9 @@ public class AdminMember extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer adminNo;
+
+    @OneToMany(mappedBy = "adminMember",fetch = FetchType.LAZY)
+    private List<Board> boardList = new ArrayList<>();
 
     @Column
     private String adminId;

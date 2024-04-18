@@ -26,6 +26,9 @@ public class UserMember extends BaseEntity {
     @OneToMany(mappedBy = "userMember", fetch = FetchType.LAZY)
     private List<Orders> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "userMember", fetch = FetchType.LAZY)
+    private List<Inquary> inquaries = new ArrayList<>();
+
     @Column
     private String userId;
 
