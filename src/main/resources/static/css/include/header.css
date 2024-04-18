@@ -12,27 +12,28 @@
     border-bottom: 1px solid #d1d1d1;
     font-size: 0.8em;
 }
-.top_bar .site {
-    display:inline-block;
-    height: 35px;
-    margin-left: 30px;
-}
+/*.top_bar .site {*/
+/*    display:inline-block;*/
+/*    height: 35px;*/
+/*    margin-left: 30px;*/
+/*}*/
 
-.top_bar .site_item {
-    display:inline-block;
-    position:relative;
-    text-align:center;
-    color:#7d7d7d;
-    line-height:35px;
-    margin-left:12px;
-}
-.top_bar .site_list {
-    margin: 0;
-    padding: 0;
-}
-.top_bar .site_item:hover{
-    color: black;
-}
+/*.top_bar .site_item {*/
+/*    display:inline-block;*/
+/*    position:relative;*/
+/*    text-align:center;*/
+/*    color:#7d7d7d;*/
+/*    line-height:35px;*/
+/*    margin-left:12px;*/
+/*}*/
+/*.top_bar .site_list {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+/*.top_bar .site_item:hover{*/
+/*    color: black;*/
+/*}*/
+
 
 /* top bar account_link */
 .top_bar .account_link {
@@ -40,6 +41,9 @@
     position:absolute;
     top:0; right:0;
     height: 35px;
+    width: 500px;
+    /*border: 1px solid #b60f0f;*/
+    text-align: right;
 }
 
 .top_bar .link_item {

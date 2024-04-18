@@ -15,7 +15,7 @@
     <div id="modify_container">
         <h1>개인정보 수정</h1>
         <div id="modify_wrap">
-            <form th:action="@{/정보수정되는 페이지}" th:method="post">
+            <form th:action="@{/정보수정되는 페이지}" th:method="post" id="modifyAccount" onsubmit="return modifyAccount()">
                 <div class="form_list">
                     <div class="form_item">
                         <label for="no"></label>
