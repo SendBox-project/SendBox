@@ -17,7 +17,7 @@
         <h3>관리자 회원가입</h3>
         <br>
         <div id="register_wrap">
-            <form th:action="@{/admin/create_account_form}" th:method="post" id="create_account_from">
+            <form th:action="@{/admin/create_account_form}" th:method="post" id="create_account_from" onsubmit="return create_account_form()">
                 <input type="hidden" id="deleteYn" name = "deleteYn" th:value="N">
                 <div class="form_list">
                     <div class="form_item"><label for="id"></label>

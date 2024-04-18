@@ -13,7 +13,7 @@
     <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"> </a> </div>
     <h3> 어드민 로그인</h3>
     <div id="login_wrap">
-        <form th:action="@{/admin/adminloginconfirm}" th:method="post">
+        <form th:action="@{/admin/adminloginconfirm}" th:method="post" id="login_form" onsubmit="return login_form()">
             <div class="form_list">
                 <div class="form_item">
 

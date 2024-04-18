@@ -15,7 +15,7 @@
     <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
     <h3>사업자 회원가입</h3>
     <div id="register_wrap">
-        <form th:action="@{/회원가입 기능 매핑}" th:method="post">
+        <form th:action="@{/회원가입 기능 매핑}" th:method="post" id="create_account_from" onsubmit="return create_account_form()">
             <div class="form_list">
                 <div class="form_item"><label for="id"></label>
                     <input type="text" id="id" name="ownerId" placeholder="아이디를 입력하세요" autofocus >

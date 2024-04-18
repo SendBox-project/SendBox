@@ -39,6 +39,15 @@ function getSearchList() {
                 let storeItem = document.createElement("div");
                 storeItem.classList.add("store_item");
 
+                // 상세 페이지로 넘어가는 링크
+                let detailLink = document.createElement("a");
+                detailLink.classList.add("goto_detail");
+                detailLink.href = "/store/detail?id=" + store.storeName; //상세 페이지 URL을 지정
+                // detailLink.textContent = "상세 보기";
+                // 링크를 썸네일 영역에 추가
+                thumbnailDiv.appendChild(detailLink);
+
+                //썸네일 생성
                 let thumbnailDiv = document.createElement("div");
                 thumbnailDiv.classList.add("search_thumbnail");
                 let thumbnailImg = document.createElement("img");
@@ -46,6 +55,7 @@ function getSearchList() {
                 thumbnailImg.alt = "썸네일";
                 thumbnailDiv.appendChild(thumbnailImg);
 
+                //매장정보 생성
                 let infoDiv = document.createElement("div");
                 infoDiv.classList.add("search_info");
                 let infoNameDiv = document.createElement("div");
@@ -65,9 +75,11 @@ function getSearchList() {
                     infoDiv.appendChild(roomInfoDiv);
                 });
 
+                //썸네일과 매장정보를 storeItem에 추가
                 storeItem.appendChild(thumbnailDiv);
                 storeItem.appendChild(infoDiv);
 
+                //검색 결과 목록에 storeItem 추가
                 searchResults.appendChild(storeItem);
             });
             // 페이지 번호 증가

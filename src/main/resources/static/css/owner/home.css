@@ -1,5 +1,5 @@
 body {
-    background-image: url('../../image/home_bg.png');
+    background-image: url('../../image/bgbg2.png');
     background-repeat: no-repeat;
     background-position: 0 1px;
 }
@@ -60,7 +60,14 @@ body {
     height: auto; /* 이미지의 세로 비율을 유지합니다. */
     margin-left: 50px; /* 이미지 사이의 간격을 조정합니다. */
 }
-
+.quick_menu span {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 50px;
+}
 /*3단락*/
 .main_group3 {
     width: 100%;

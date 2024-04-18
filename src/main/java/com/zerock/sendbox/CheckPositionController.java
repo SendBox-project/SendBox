@@ -27,6 +27,7 @@ public class CheckPositionController {
     //어드민 로그인
     @GetMapping("/adminlogin")
     public String adminLogin() {
+
         return "admin/member/login_form";
     }
 
@@ -40,6 +41,7 @@ public class CheckPositionController {
     //어드민 회원가입 약관
     @GetMapping("/adminterms")
     public String adminterms() {
+
         return "admin/member/account_terms";
     }
     //오너 회원가입 약관
@@ -68,5 +70,6 @@ public class CheckPositionController {
     public String userRegister() {
         return "user/member/create_account_form";
     }
+
 }
 
