@@ -28,7 +28,7 @@ public class OwnerLoginController {
         return "/owner/member/login_form";
     }
 
-    @PostMapping("/ownerlginconfirm")
+    @PostMapping("/ownerloginconfirm")
     public String login(@ModelAttribute OwnerLoginDTO ownerLoginDTO, RedirectAttributes redirectAttributes,
                         HttpServletRequest request, HttpServletResponse response) {
         OwnerMember ownerMember = ownerLoginService.authenticate(ownerLoginDTO);

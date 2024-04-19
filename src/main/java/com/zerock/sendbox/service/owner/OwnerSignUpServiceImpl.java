@@ -36,7 +36,7 @@ public class OwnerSignUpServiceImpl implements OwnerSignUpService {
 
     @Override
     public OwnerSignUpDTO entityToDTO(OwnerMember ownerMember) {
-        OwnerSignUpDTO signUpDTO = OwnerSignUpDTO.builder()
+        OwnerSignUpDTO ownerSignUpDTO = OwnerSignUpDTO.builder()
                 .ownerNo(ownerMember.getOwnerNo())
                 .ownerId(ownerMember.getOwnerId())
                 .password(ownerMember.getPassword())
@@ -48,7 +48,7 @@ public class OwnerSignUpServiceImpl implements OwnerSignUpService {
                 .regDate(ownerMember.getRegDate())
                 .modDate(ownerMember.getModDate())
                 .build();
-        return signUpDTO;
+        return ownerSignUpDTO;
     }
 
     @Override
