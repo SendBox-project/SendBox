@@ -21,7 +21,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/list")
+    @GetMapping("/noticeList")
     public void list(PageRequestDTO pageRequestDTO, Model model) {
 
         log.info("list................" + pageRequestDTO);

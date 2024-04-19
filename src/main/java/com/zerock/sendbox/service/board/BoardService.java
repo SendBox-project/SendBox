@@ -8,6 +8,9 @@ import com.zerock.sendbox.entity.Board;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface BoardService {
+
+
+
     Integer register(BoardDTO dto);
 
     BoardDTO get(Integer boardNo);

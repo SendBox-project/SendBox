@@ -15,6 +15,9 @@ import java.util.List;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Integer>{
 
+    @Query("SELECT b FROM Board b JOIN FETCH b.writer WHERE b.adminNo = :adminNo")
+    List<Board> findByAdminNoWithWriter(Integer adminNo);
+
     @Query("select b, w from Board b left join b.writer w where b.boardNo =:boardNo")
     Object getBoardWithWriter(@Param("boardNo") Integer boardNo);
 
