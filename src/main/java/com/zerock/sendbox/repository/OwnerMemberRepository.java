@@ -13,6 +13,7 @@ public interface OwnerMemberRepository extends JpaRepository<OwnerMember, Intege
 
     //오너 정보 수정폼
     OwnerMember findByOwnerId(String ownerId);
+    OwnerMember findByOwnerIdAndMail(String ownerId, String mail);
 
     //오너 정보 조회
     OwnerMember findByOwnerNo(Integer ownerNo);
@@ -21,6 +22,10 @@ public interface OwnerMemberRepository extends JpaRepository<OwnerMember, Intege
     @Modifying // @쿼리 어노테이션(jpql쿼리, native쿼리)을 통해서 작성된 insert, update, delete 쿼리에서 사용됨!
     @Query("update OwnerMember set deleteYn = 'Y' where ownerNo =:ownerNo")
     Integer deleteInfo(@Param("ownerNo") Integer ownerNo);   // @Param을 통해 ownerNo를 보내서 쿼리 실행 후 리턴!
+
+    OwnerMember findByMail(String mail);
+
+
 
     //매장 정보 수정폼 조회
     
