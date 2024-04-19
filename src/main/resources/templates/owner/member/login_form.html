@@ -14,7 +14,7 @@
     <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a> </div>
     <h3> 오너 로그인</h3>
     <div id="login_wrap">
-        <form th:action="@{/로그인기능 매핑}" th:method="post" id="login_form" onsubmit="return login_form()">
+        <form th:action="@{/owner/ownerloginconfirm}" th:method="post" id="login_form" onsubmit="return login_form()">
             <div class="form_list">
                 <div class="form_item">
                     <label for="id"></label>
@@ -29,8 +29,8 @@
             <button class="login_button" type="submit">Submit</button>
         </form>
         <div class="account_links">
-            <a th:href="@{/오너 아이디 찾기}">아이디 찾기</a>
-            <a th:href="@{/오너 비밀번호 찾기}">비밀번호 찾기</a>
+            <a th:href="@{/owner/forgot_id}">아이디 찾기</a>
+            <a th:href="@{/owner/reset_password_form}">비밀번호 찾기</a>
             <a th:href="@{/ownerterms}">회원가입</a>
         </div>
     </div>
