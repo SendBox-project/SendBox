@@ -28,12 +28,12 @@ public interface BoardService {
 
         Board board = Board.builder()
                 .boardNo(dto.getBoardNo())
-                .adminNo(dto.getAdminNo())
+                .adminMember(adminMember)
                 .cnt(dto.getCnt())
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .thumbnail(dto.getThumbnail())
-                .writer(adminMember)
+//                .writer(adminMember)
                 .boardType(dto.getBoardType())
                 .build();
         return board;

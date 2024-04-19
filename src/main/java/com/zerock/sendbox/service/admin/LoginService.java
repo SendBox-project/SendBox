@@ -9,5 +9,9 @@ public interface LoginService {
 
     void sendPasswordResetMail(String mail);
 
+    AdminMember findByMail(String mail);
 
+    AdminMember findByAdminIdAndMail(String adminId, String mail);
+
+    boolean sendMail(String to, String subject, String body);
 }

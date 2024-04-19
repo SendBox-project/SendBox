@@ -57,6 +57,16 @@ public class LoginServiceImpl implements LoginService{
         }
     }
 
+    @Override
+    public AdminMember findByMail(String mail) {
+        return adminMemberRepository.findByMail(mail);
+    }
+
+    @Override
+    public AdminMember findByAdminIdAndMail(String adminId, String mail) {
+        return adminMemberRepository.findByAdminIdAndMail(adminId, mail);
+    }
+
     private String generateTemporaryPassword() {
         // 보다 안전한 임시 비밀번호 생성 로직
         SecureRandom random = new SecureRandom();
@@ -66,7 +76,7 @@ public class LoginServiceImpl implements LoginService{
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 
-    private boolean sendMail(String to, String subject, String body) {
+    public boolean sendMail(String to, String subject, String body) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(to);

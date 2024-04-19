@@ -3,6 +3,7 @@ package com.zerock.sendbox.controller.store;
 import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Store;
 import com.zerock.sendbox.service.store.StoreService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/store")
+@Slf4j
 public class StoreController {
 
     @Autowired
@@ -23,7 +25,7 @@ public class StoreController {
 
     //검색 결과
     @GetMapping("/searchList")
-    public String searchList(@RequestParam(value = ":storeName", required = false) String storeName,
+    public String searchList(@RequestParam(value = "storeName", required = false, defaultValue="") String storeName,
                              @PageableDefault(size = 20) Pageable pageable, Model model) {
         List<Store> storeList;
         // 검색어가 있으면 검색 결과를 보여주고 없으면 전체 리스트를 보여줌
@@ -36,6 +38,8 @@ public class StoreController {
 
         // 매장 정보와 방 정보를 모두 모델에 저장
         model.addAttribute("storeList", storeList);
+
+        log.info("storeList: " + storeList);
 
         return "admin/store/search_store";
     }

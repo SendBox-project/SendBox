@@ -2,20 +2,17 @@
 function modifyAccount() {
     console.log("modifyAccount()");
 
-    let form = document.getElementById("modifyAccount");
+    let form = document.getElementById("modify_account_form");
 
     if (form.password.value === "") {
         alert("비밀번호를 입력해주세요.");
         form.password.focus();
-        return false;
-    } else if (form.password_again.value === "") {
+    } else if (form.passwordAgain.value === "") {
         alert("비밀번호를 다시 입력해주세요.");
-        form.password_again.focus();
-        return false;
-    } else if (form.password.value !== form.password_again.value) {
+        form.passwordAgain.focus();
+    } else if (form.password.value !== form.passwordAgain.value) {
         alert("비밀번호가 일치하지 않습니다.");
-        form.password_again.focus();
-        return false;
+        form.passwordAgain.focus();
     } else if (form.name.value === "") {
         alert("이름을 입력해주세요.");
         form.name.focus();

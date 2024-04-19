@@ -23,11 +23,10 @@ public interface InquaryService {
         UserMember userMember = UserMember.builder().mail(dto.getMemberMail()).build();
 
         Inquary inquary = Inquary.builder()
-                .userNo(dto.getUserNo())
+                .userMember(userMember)
                 .inquaryNo(dto.getInquaryNo())
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .member(userMember)
                 .build();
         return inquary;
     }
@@ -35,7 +34,7 @@ public interface InquaryService {
     default InquaryDTO entityToDTO(Inquary inquary, UserMember userMember, Long replyCount) {
 
         InquaryDTO inquaryDTO = InquaryDTO.builder()
-                .userNo(inquary.getUserNo())
+                .userNo(inquary.getUserMember().getUserNo())
                 .inquaryNo(inquary.getInquaryNo())
                 .title(inquary.getTitle())
                 .content(inquary.getContent())

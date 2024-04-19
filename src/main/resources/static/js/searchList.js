@@ -27,7 +27,7 @@ function getSearchList() {
     let storeName = document.getElementById("search").value;
 
     // 검색어를 이용하여 서버에 GET 요청을 보냄
-    fetch(`/store/searchList?storeName=${storeName}&page=${page}`)
+    fetch(`/store/searchList?storeName=${storeName}`)
         .then(response => response.json()) // 응답을 JSON으로 변환
         .then(data => {
             // 검색 결과를 처리하여 HTML로 표시
@@ -44,8 +44,8 @@ function getSearchList() {
                 detailLink.classList.add("goto_detail");
                 detailLink.href = "/store/detail?id=" + store.storeName; //상세 페이지 URL을 지정
                 // detailLink.textContent = "상세 보기";
-                // 링크를 썸네일 영역에 추가
-                thumbnailDiv.appendChild(detailLink);
+                //썸네일을 링크 영역에 추가
+                detailLink.appendChild(thumbnailDiv);
 
                 //썸네일 생성
                 let thumbnailDiv = document.createElement("div");

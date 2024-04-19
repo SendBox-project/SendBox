@@ -45,7 +45,7 @@ public class OwnerMypageController {
 
     //오너 정보 수정
     @PostMapping("/updateInfo")
-    public String updateOwner(@ModelAttribute OwnerMember ownerMember) { // 프론트에서 "오너 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
+    public String updateInfo(@ModelAttribute OwnerMember ownerMember) { // 프론트에서 "오너 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
         System.out.println("ownerMember = " + ownerMember);
         //비밀번호 암호화
         ownerMember.setPassword(passwordEncoder.encode(ownerMember.getPassword()));
@@ -60,7 +60,7 @@ public class OwnerMypageController {
 
     //오너 정보 탈퇴
     @PostMapping("/deleteInfo")
-    public String deleteOwner(@ModelAttribute OwnerMember ownerMember, Model model, HttpSession session, HttpServletResponse response) throws IOException {
+    public String deleteInfo(@ModelAttribute OwnerMember ownerMember, Model model, HttpSession session, HttpServletResponse response) throws IOException {
         // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         // String userId = auth.getName();
         Integer ownerNo = 1;
