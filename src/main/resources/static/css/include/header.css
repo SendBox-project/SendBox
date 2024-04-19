@@ -95,7 +95,7 @@
     border-radius: 10px;
     background-color: white;
 }
-.header_search .search_form input[type="text"]{
+.header_search .search_form input[type="search"]{
     /*border: 1px rgb(255, 120, 120) solid;*/
     border: none;
     border-radius: 10px;
