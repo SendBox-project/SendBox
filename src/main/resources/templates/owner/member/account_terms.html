@@ -30,7 +30,7 @@
           <label><input type="checkbox" class="term-agree" data-term="term3"></label>
           <button type="button" class="term_button" onclick="showTerm('3')">개인정보 제3자 제공</button>
         </div><hr>
-        <button class="regi_button" onclick="proceedIfAllAgreed()">모두 동의하고 진행하기</button>
+        <button class="regi_button" onclick="proceedIfAllAgreed()" th:href="@{/ownerregister}">모두 동의하고 진행하기</button>
       </div>
     </div><!-- terms -->
 
@@ -145,6 +145,6 @@
     </div>
   </div> <!-- terms_container -->
 </div> <!-- container -->
-<script th:src="@{/js/admin/accountTerms.js}" type="text/javascript"></script>
+<script th:src="@{/js/owner/accountTerms.js}" type="text/javascript"></script>
 </body>
 </html>

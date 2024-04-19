@@ -22,4 +22,7 @@ public interface UserMemberRepository extends JpaRepository<UserMember, Integer>
     Integer deleteInfo(@Param("userNo") Integer userNo); // @Param을 통해 ownerNo를 보내서 쿼리 실행 후 리턴!
 
 
+    UserMember findByMail(String mail);
+
+    UserMember findByUserIdAndMail(String userId, String mail);
 }
