@@ -23,10 +23,10 @@ public class InquaryRepositoryTests {
 
             Inquary inquary = Inquary.builder()
                     .inquaryNo(i)
-                    .userNo(i)
+//                    .userNo(i)
                     .title("Title...." + i)
                     .content("Content...." + i)
-                    .member(userMember)
+//                    .member(userMember)
                     .build();
 
             inquaryRepository.save(inquary);

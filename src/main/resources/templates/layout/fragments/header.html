@@ -48,8 +48,8 @@
                 <div class="header_search">
                     <form class="search_form" th:action="@{/store/searchList}" method="get" onsubmit="getSearchList()">
                         <label for="search" class="search_label"></label>
-                        <input type="search" id="search" placeholder="검색어를 입력하세요.">
-                        <button class="search_button" type="submit">검색</button>
+                        <input type="text" id="search" placeholder="검색어를 입력하세요.">
+                        <input type="submit" class="search_button" value="검색" />
                     </form>
                     <div class="search_list_wrap">
                         <ul class="search_list">

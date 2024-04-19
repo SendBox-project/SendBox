@@ -36,7 +36,7 @@ public class BoardRepositoryTest {
 
             // 저장된 AdminMember의 adminNo를 사용하여 Board 생성
             Board board = Board.builder()
-                    .adminNo(adminMember.getAdminNo()) // AdminMember의 adminNo 설정
+//                    .adminNo(adminMember.getAdminNo()) // AdminMember의 adminNo 설정
                     .thumbnail("a")
                     .boardType("1")
                     .cnt(i)
