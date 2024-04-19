@@ -28,5 +28,6 @@ public interface AdminMemberRepository extends JpaRepository<AdminMember, Intege
 
     AdminMember findByMail(String mail);
 
-
+    //모든 매니저 리스트 조회
+    List<AdminMember> findAllByDeleteYn(String deleteYn);
 }
