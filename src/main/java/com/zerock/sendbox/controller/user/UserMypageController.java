@@ -137,6 +137,18 @@ public class UserMypageController {
         return "user/member/cartListAjax";
     }
 
+    //장바구니 단건 수정폼 조회
+    @GetMapping("/cartInfoForm/{orderNo}")
+    public String cartInfoForm(@PathVariable Integer orderNo, Model model) {
+        Orders order = userMypageService.findByOrderNo(orderNo);
+        List<Room> roomList = userMypageService.findAllRoomList(order.getRoom().getStore().getStoreNo());
+
+        model.addAttribute("cart", order);
+        model.addAttribute("roomList", roomList);
+        return "user/member/cartListUpdateForm";
+    }
+
+
     //장바구니 옵션 수정
     @PostMapping("/updateCart")
     public String updateCart(@ModelAttribute Orders orders, @ModelAttribute Room room, Model model, HttpServletResponse response) throws IOException {

@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OwnerMemberRepository extends JpaRepository<OwnerMember, Integer> {
 
@@ -23,6 +25,9 @@ public interface OwnerMemberRepository extends JpaRepository<OwnerMember, Intege
     @Query("update OwnerMember set deleteYn = 'Y' where ownerNo =:ownerNo")
     Integer deleteInfo(@Param("ownerNo") Integer ownerNo);   // @Param을 통해 ownerNo를 보내서 쿼리 실행 후 리턴!
 
+    //admin의 모든 오너 리스트 조회
+
+    List<OwnerMember> findAllByDeleteYn(String deleteYn);
     OwnerMember findByMail(String mail);
 
 

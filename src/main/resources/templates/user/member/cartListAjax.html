@@ -27,24 +27,13 @@
     <tbody>
     <th:block th:if="${cartList.totalElements != 0}">
         <tr th:each="cart : ${cartList}">
-            <input type="hidden" id="roomNo" name="roomNo" value="">
-            <input type="hidden" id="orderNo" name="orderNo" th:value="${cart.orderNo}">
-            <input type="hidden" id="userNo" name="userNo" th:value="${cart.userMember.userNo}">
-            <input type="hidden" id="price" name="price" th:value="${cart.room.price}">
-
             <td th:text="${cart.room.store.storeName}"></td>
-            <td><input id="startDate" name="startDate" th:value="${cart.startDate}" type="date"></td>
-            <td><input id="endDate" name="endDate" th:value="${cart.endDate}" type="date"></td>
-            <td>
-                <select id = "sizeType">
-                    <th:block th:each="room : ${roomList}">
-                        <option th:value="${room.roomNo}" th:text="${room.size}" th:selected="${cart.room.size} == ${room.size}"></option>
-                    </th:block>
-                </select>
-            </td>
-            <td><input id="totalAmount" name="totalAmount" th:value="${cart.totalAmount}" type="number"></td>
+            <td th:text="${cart.startDate}"></td>
+            <td th:text="${cart.endDate}"></td>
+            <td th:text="${cart.room.size}"> </td>
+            <td th:text="${cart.totalAmount}"></td>
             <td th:text="${cart.totalPrice}"></td>
-            <td><button type="button" th:onclick="|javascript:updateCart()|">수정</button></td>
+            <td><button type="button" th:onclick="|location.href='@{/user/cartInfoForm/{orderNo}(orderNo=${cart.orderNo})}'|">수정</button></td>
             <td><button type="button" th:onclick="|javascript:deleteCart()|">삭제</button></td>
         </tr>
     </th:block>

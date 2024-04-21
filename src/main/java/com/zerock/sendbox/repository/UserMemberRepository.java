@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserMemberRepository extends JpaRepository<UserMember, Integer> {
 
@@ -20,6 +22,9 @@ public interface UserMemberRepository extends JpaRepository<UserMember, Integer>
     @Modifying // @쿼리 어노테이션(jpql쿼리, native쿼리)을 통해서 작성된 insert, update, delete 쿼리에서 사용됨!
     @Query("update UserMember set deleteYn = 'Y' where userNo =:userNo")
     Integer deleteInfo(@Param("userNo") Integer userNo); // @Param을 통해 ownerNo를 보내서 쿼리 실행 후 리턴!
+
+    //admin의 모든 유저 리스트 조회
+    List<UserMember> findAllByDeleteYn(String deleteYn);
 
 
     UserMember findByMail(String mail);
