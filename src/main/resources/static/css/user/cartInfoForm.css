@@ -1,7 +1,7 @@
 #modify_container {
     width: 500px;
-    height: 550px;
-    border: 1px solid #4e95d9;
+    height: 500px;
+    border: 1px solid #fc9f27;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     margin: 50px auto;
@@ -10,25 +10,24 @@
     font-size: 10pt;
 }
 
-#modify_account_form {
+#form1 {
     margin: 40px auto 0px auto;
     width: 350px;
     list-style-type: none;
-    /*text-align: left;*/
+    text-align: left;
 }
 
 #dropAccountForm{
     margin: 0px auto;
     width: 350px;
     list-style-type: none;
-    /*text-align: left;*/
+    text-align: left;
 }
 
 .form_list {
-    border: 1px solid #4e95d9;
+    border: 1px solid #fc9f27;
     border-radius: 10px;
     margin-bottom: 10px;
-    text-align: left;
 }
 .form_item {
     margin: 5px;
@@ -36,7 +35,7 @@
 }
 
 .modify_button {
-    background-color: #4e95d9;
+    background-color: #fc9f27;
     width: 300px;
     color: white;
     border-radius: 5px;
@@ -44,7 +43,6 @@
     padding: 10px;
     margin-top: 10px;
 }
-
 .drop_button {
     background-color: #838383;
     width: 300px;

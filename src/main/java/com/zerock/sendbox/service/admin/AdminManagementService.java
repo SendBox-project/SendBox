@@ -8,11 +8,12 @@ import com.zerock.sendbox.repository.OwnerMemberRepository;
 import com.zerock.sendbox.repository.UserMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class AdminManageMentService {
+public class AdminManagementService {
     @Autowired
     UserMemberRepository userMemberRepository;
 
@@ -36,5 +37,11 @@ public class AdminManageMentService {
     //모든 매니저 리스트 조회
     public List<AdminMember> findManager(String deleteYn) {
         return adminMemberRepository.findAllByDeleteYn(deleteYn);
+    }
+
+    //매니저 승인
+    @Transactional
+    public Integer saveGrant(Integer adminNo) {
+        return adminMemberRepository.saveGrant(adminNo);
     }
 }

@@ -29,7 +29,8 @@ public class AdminMypageController {
     // 개인 정보 수정폼 >> 단순 화면 조회
     @GetMapping("/mypageForm")
     public String mypageForm(Model model) {
-        String adminId = "messi";
+        String adminId = "alsrlalsrl97";
+        /*String adminId = "messi";*/
         AdminMember adminMember = adminMypageService.findByAdminId(adminId);
         model.addAttribute("admin", adminMember);
         return "admin/member/modify_account_form";
