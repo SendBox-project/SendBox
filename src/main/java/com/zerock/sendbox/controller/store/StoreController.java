@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,10 +48,15 @@ public class StoreController {
         //콘솔창에 입력한 검색어를 검색한 결과 출력
         log.info("storeService.findAllByKeyword(storeName): " + storeService.findAllByKeyword(storeName));
 
-
-
         return "admin/store/search_store";
     }
 
+    //퀵메뉴
+    @GetMapping("/{region}")
+    public String getStoresByRegion(@RequestParam("region") String region, Model model) {
+        List<Store> storeList = storeService.getStoresByRegion(region);
+        model.addAttribute("storeList", storeList);
+        return "admin/store/search_store";
+    }
 
 }

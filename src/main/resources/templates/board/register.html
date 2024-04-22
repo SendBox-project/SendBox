@@ -6,33 +6,46 @@
       layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>새로운 게시물 등록</title>
+    <link th:inline="css" th:href="@{/css/board/noticeRegister.css}" rel="stylesheet"/>
+
 </head>
 <body>
-<h1>새로운 게시물 등록</h1>
-<form action="/board/register" method="post">
-    <label for="title">제목:</label><br>
-    <input type="text" id="title" name="title" required><br>
-
-    <label for="content">내용:</label><br>
-    <textarea id="content" name="content" required></textarea><br>
-
-    <label for="thumbnail">썸네일 URL:</label><br>
-    <input type="text" id="thumbnail" name="thumbnail"><br>
-
-    <label for="writerName">작성자 이름:</label><br>
-    <input type="text" id="writerName" name="writerName" required><br>
-
-    <label for="boardType">게시판 유형:</label><br>
-    <select id="boardType" name="boardType">
-        <option value="A">유형 A</option>
-        <option value="B">유형 B</option>
-        <option value="C">유형 C</option>
-    </select><br>
-
-    <input type="submit" value="제출">
-</form>
+<div id="container board_container">
+    <div class="form_wrap">
+        <h1 class="board_title">새로운 게시물 등록</h1>
+        <form action="/board/register" method="post" class="board_content">
+            <table>
+                <tr>
+                    <td><label for="title">제목 <span class="requiredDot">*</span></label></td>
+                    <td><input type="text" id="title" name="title" required placeholder="제목을 입력해주세요"></td>
+                </tr>
+                <tr>
+                    <td><label for="content">내용 <span class="requiredDot">*</span></label></td>
+                    <td><textarea id="content" name="content" required placeholder="내용을 입력해주세요"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="thumbnail">썸네일 URL</label></td>
+                    <td><input type="text" id="thumbnail" name="thumbnail" placeholder="첨부파일"></td>
+                </tr>
+                <tr>
+                    <td><label for="writerName">작성자 이름 <span class="requiredDot">*</span></label></td>
+                    <td><input type="text" id="writerName" name="writerName" required placeholder="작성자 이름을 입력해주세요"></td>
+                </tr>
+                <tr>
+                    <td><label for="boardType">게시판 유형 <span class="requiredDot">*</span></label></td>
+                    <td>
+                        <select id="boardType" name="boardType" required>
+                            <option value="A">유형 A</option>
+                            <option value="B">유형 B</option>
+                            <option value="C">유형 C</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <input class="regi_button" type="submit" value="게시글 등록">
+        </form>
+    </div>
+</div>
 </body>
 </html>
 
