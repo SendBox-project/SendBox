@@ -1,12 +1,15 @@
 package com.zerock.sendbox.controller.owner;
 
 import com.zerock.sendbox.dto.owner.OwnerSignUpDTO;
+import com.zerock.sendbox.entity.OwnerMember;
 import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.Store;
+import com.zerock.sendbox.service.owner.OwnerMypageService;
 import com.zerock.sendbox.service.owner.OwnerSignUpService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +30,8 @@ import java.util.List;
 @Log4j2
 public class OwnerSignUpController {
 
+    private final OwnerMypageService ownerMypageService;
+
     private final OwnerSignUpService ownerSignUpService;
 
     @GetMapping("/create_account_form")
@@ -37,77 +42,96 @@ public class OwnerSignUpController {
     }
 
     @PostMapping("/create_account_form")
-    public String createOwnerMember(OwnerSignUpDTO signUpDTO, RedirectAttributes redirectAttributes) {
-        if(ownerSignUpService.isIdDuplicated(signUpDTO.getOwnerId())) {
+    public String createOwnerMember(OwnerSignUpDTO signUpDTO, RedirectAttributes redirectAttributes, Model model) {
+        if (ownerSignUpService.isIdDuplicated(signUpDTO.getOwnerId())) {
             redirectAttributes.addFlashAttribute("message", "이미 사용 중인 아이디입니다.");
             return "/owner/member/create_account_form";
         }
 
-        ownerSignUpService.join(signUpDTO);
+        Integer ownerNo = ownerSignUpService.join(signUpDTO);
+        model.addAttribute("ownerNo", ownerNo);
         redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
-        return "owner/member/login_form";
-    }
-
-    //업체 등록 폼 조회
-    @GetMapping("/storeRegisterForm")
-    public String storeRegisterForm() {
         return "owner/member/storeRegisterForm";
     }
 
+
+//    //업체 등록 폼 조회
+//    @GetMapping("/storeRegisterForm")
+//    public String storeRegisterForm() {
+//        return "owner/member/storeRegisterForm";
+//    }
+
     //업체 등록하기
-    /*@PostMapping("/updateStoreInfo")
-    public String updateStoreInfo(Model model, HttpServletResponse response,
-                                  @RequestParam(value = "storeNo", required = false) Integer storeNo,
-                                  @RequestParam(value = "notice", required = false) String notice,
-                                  @RequestParam(value = "region", required = false) String region,
-                                  @RequestParam(value = "address", required = false) String address,
-                                  @RequestParam(value = "phone", required = false) String phone,
-                                  @RequestParam(value = "brn", required = false) String brn,
-                                  @RequestParam(value = "thumbnail", required = false) MultipartFile thumbnail,
-                                  @RequestParam(value = "infoPhoto", required = false) MultipartFile infoPhoto,
-                                  @RequestParam(value = "roomNo1", required = false) Integer roomNo1,
-                                  @RequestParam(value = "roomNo2", required = false) Integer roomNo2,
-                                  @RequestParam(value = "roomNo3", required = false) Integer roomNo3,
-                                  @RequestParam(value = "size1", required = false) String size1,
-                                  @RequestParam(value = "size2", required = false) String size2,
-                                  @RequestParam(value = "size3", required = false) String size3,
-                                  @RequestParam(value = "price1", required = false) Integer price1,
-                                  @RequestParam(value = "price2", required = false) Integer price2,
-                                  @RequestParam(value = "price3", required = false) Integer price3,
-                                  @RequestParam(value = "remain1", required = false) Integer remain1,
-                                  @RequestParam(value = "remain2", required = false) Integer remain2,
-                                  @RequestParam(value = "remain3", required = false) Integer remain3) throws IOException {
+    @PostMapping("/storeInfo")
+    public String storeInfo(Model model, HttpServletResponse response,
+                                  @RequestParam(value = "ownerNo") Integer ownerNo,
+                                  @RequestParam(value = "storeName") String storeName,
+                                  @RequestParam(value = "notice") String notice,
+                                  @RequestParam(value = "region") String region,
+                                  @RequestParam(value = "address") String address,
+                                  @RequestParam(value = "brn") String brn,
+                                  @RequestParam(value = "phone") String phone,
+                                  @RequestParam(value = "thumbnail") MultipartFile thumbnail,
+                                  @RequestParam(value = "infoPhoto") MultipartFile infoPhoto,
+                                  @RequestParam(value = "filter") String filter,
+                                  @RequestParam(value = "size1") String size1,
+                                  @RequestParam(value = "size2") String size2,
+                                  @RequestParam(value = "size3") String size3,
+                                  @RequestParam(value = "price1") Integer price1,
+                                  @RequestParam(value = "price2") Integer price2,
+                                  @RequestParam(value = "price3") Integer price3,
+                                  @RequestParam(value = "remain1") Integer remain1,
+                                  @RequestParam(value = "remain2") Integer remain2,
+                                  @RequestParam(value = "remain3") Integer remain3) throws IOException {
+        OwnerMember ownerMember = new OwnerMember();
+        ownerMember.setOwnerNo(ownerNo);
+
         Store storeInfo = new Store();
+        storeInfo.setStoreName(storeName);
         storeInfo.setNotice(notice);
         storeInfo.setRegion(region);
         storeInfo.setAddress(address);
-        storeInfo.setPhone(phone);
         storeInfo.setBrn(brn);
+        storeInfo.setPhone(phone);
+        storeInfo.setFilter(filter);
+        storeInfo.setOwnerMember(ownerMember);
 
-        if (!thumbnail.isEmpty()) { // 빈값이 아니면 신규 사진으로 수정
-            // 서비스
-            String thumbnailPath = storeInfo.uploadFile(thumbnail);
-            storeInfo.setThumbnail(thumbnailPath);
-        }
 
-        if (!infoPhoto.isEmpty()) { // 빈값이 아니면 신규 사진으로 수정
-            // 서비스
-            String infoPhotoPath = storeInfo.uploadFile(infoPhoto);
-            storeInfo.setInfoPhoto(infoPhotoPath);
-        }
+        // 서비스
+        String thumbnailPath = ownerMypageService.uploadFile(thumbnail);
+        storeInfo.setThumbnail(thumbnailPath);
+
+        // 서비스
+        String infoPhotoPath = ownerMypageService.uploadFile(infoPhoto);
+        storeInfo.setInfoPhoto(infoPhotoPath);
+
 
         Store result = ownerMypageService.save(storeInfo);
 
         List<Room> roomList = new ArrayList<>();
 
-        Room room = new Room();
-        room.setRoomNo(roomNo);
-        room.setSize(size);
-        room.setPrice(price);
-        room.setRemain(remain);
-        room.setStore(storeInfo);
+        Room room1 = new Room();
+        room1.setSize(size1);
+        room1.setPrice(price1);
+        room1.setRemain(remain1);
+        room1.setStore(result);
 
-        roomList.add(room);
+        Room room2 = new Room();
+        room2.setSize(size2);
+        room2.setPrice(price2);
+        room2.setRemain(remain2);
+        room2.setStore(result);
+
+        Room room3 = new Room();
+        room3.setSize(size3);
+        room3.setPrice(price3);
+        room3.setRemain(remain3);
+        room3.setStore(result);
+
+        roomList.add(room1);
+        roomList.add(room2);
+        roomList.add(room3);
+
 
         List<Room> roomUpdateInfo = ownerMypageService.saveAll(roomList); // 룸 리스트 정보 저장
 
@@ -116,18 +140,18 @@ public class OwnerSignUpController {
             model.addAttribute("roomList", roomUpdateInfo);
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
-            writer.println("<script>alert('수정 완료입니다.');</script>");
+            writer.println("<script>alert('회원가입에 성공하였습니다.');</script>");
             writer.flush();
-            return "owner/member/storeForm";
+            return "owner/member/login_form";
         } else {                                          // 실패시 기존 정보 보내기
             model.addAttribute("storeInfo", storeInfo);
             model.addAttribute("roomList", roomUpdateInfo);
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
-            writer.println("<script>alert('수정 실패입니다.');</script>");
+            writer.println("<script>alert('회원가입에 실패하였습니다.');</script>");
             writer.flush();
-            return "owner/member/storeForm";
+            return "owner/member/storeRegisterForm";
         }
 
-    }*/
+    }
 }
