@@ -71,5 +71,11 @@ public class CheckPositionController {
         return "user/member/create_account_form";
     }
 
+
+    //개인정보 처리방침
+    @GetMapping("/privacyterms")
+    public String privacyTerms() {
+        return "include/privacy_terms";
+    }
 }
 
