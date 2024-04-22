@@ -1,39 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayout}"
+      layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+<link rel="stylesheet" href="../../static/css/board/inquaryList.css">
 </head>
 <body>
-    <h1 class="mt-4">Board List Page
+<div class="side_bar">
+    <div class="visual_title"><span>고객센터</span></div>
+    <ul>
+        <div class="side_list">
+            <li class="side_item"><a th:href="@{/noticeList}">공지사항</a></li>
+            <!--            <li class="side_item"><a th:href="@{/이벤트}">이벤트</a></li>-->
+            <li class="side_item"><a th:href="@{/1:1문의}">1:1문의</a></li>
+        </div>
+    </ul>
+</div>
+
+<div class="list_wrap">
+    <h1 class="board_title"> 1:1 문의 </h1>
         <span>
             <a th:href="@{/inquary/register}">
                 <button type="button" class="btn btn-outline-primary"> REGISTER</button>
             </a>
         </span>
-    </h1>
 
-    <table class="table-striped">
+    <table class="board_content" cellspacing="0">
+        <caption>게시판 리스트</caption>
+        <colgroup>
+            <col width="80">
+            <col>
+            <col width="90">
+            <col width="100">
+        </colgroup>
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Member</th>
-            <th scope="col">Regdate</th>
+            <th scope="col">번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">작성일</th>
         </tr>
         </thead>
-        <tbody>
 
+        <tbody>
         <tr th:each="dto : ${result.dtoList}">
-            <th scope="row">
+            <td scope="row">
                 <a th:href="@{/inquary/read(inquaryNo = ${dto.inquaryNo},
                         page= ${result.page},
                         type=${pageRequestDTO2.type},
                         keyword = ${pageRequestDTO2.keyword})}">
                     [[${dto.inquaryNo]]
                 </a>
-            </th>
-            <td>[[${dto.title}]] --------------- [<b th:text="${dto.replyCount}"></b>] </td>
+            </td>
+            <td>[[${dto.title}]] [<b th:text="${dto.replyCount}"></b>] </td>
             <td>[[${dto.memberName}]] <small>[[${dto.memberMail}]]</small></td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
         </tr>
@@ -41,13 +63,11 @@
     </table>
 
     <ul class="pagination h-100 justify-content-center align-items-center">
-
         <li class="page-item " th:if="${result.prev}">
             <a class="page-link" th:href="@{/inquary/list(page= ${result.start -1},
                         type=${pageRequestDTO2.type} ,
                         keyword = ${pageRequestDTO2.keyword} ) }" tabindex="-1">Previous</a>
         </li>
-
         <li class=" 'page-item ' + ${result.page == page?'active': '' }"
             th:each="page: ${result.pageList}">
             <a class="page-link" th:href="@{/inquary/list(page = ${page},
@@ -56,12 +76,12 @@
                 [[${page}]]
             </a>
         </li>
-
         <li class="page-item" th:if="${result.next}">
             <a class="page-link" th:href="@{/inquary/list(page= ${result.end + 1} ,
                         type=${pageRequestDTO2.type} ,
                         keyword = ${pageRequestDTO2.keyword} )}">Next</a>
         </li>
     </ul>
+</div>
 </body>
 </html>

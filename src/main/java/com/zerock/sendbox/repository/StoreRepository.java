@@ -32,6 +32,9 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
             "inner join UserMember u on o.userMember.userNo = u.userNo where o.reservationStatus != '예약대기' and r.store.ownerMember.ownerNo =:ownerNo")
     List<Store> findAllUserReservation(@Param("ownerNo") Integer ownerNo);
 
+    //퀵메뉴
+    List<Store> findByRegion(String region);
+
     // admin의 모든 업체 리스트 조회
     @Query("select s,o from Store s inner join OwnerMember o on s.ownerMember.ownerNo = o.ownerNo where o.deleteYn = 'N'")
     List<Store> findStore();

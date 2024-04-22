@@ -2,6 +2,8 @@
 package com.zerock.sendbox.config;
 
 
+import com.nimbusds.oauth2.sdk.Role;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +28,7 @@ public class SecurityConfig {
                                 "/checkPositionRegister","/adminlogin","/userlogin",
                                 "/ownerlogin","adminregister","/userregister",
                                 "/ownerregister","/adminterms","/userterms","/ownerterms").permitAll()
+                        .requestMatchers("/api/**").hasRole("ROLE_userId")
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) ->
@@ -35,7 +38,7 @@ public class SecurityConfig {
                 )
                 .logout((logout) ->
                         logout
-                                .logoutSuccessUrl("/userlogin")
+                                .logoutSuccessUrl("/logout")
                                 .invalidateHttpSession(true)
                 )
                 .sessionManagement((sessionManagement) ->
@@ -49,27 +52,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }
-
-   /* @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        return http
-                .formLogin(AbstractHttpConfigurer::disable)
-
-                .httpBasic(AbstractHttpConfigurer::disable)
-
-                .cors(AbstractHttpConfigurer::disable)
-
-                .csrf(AbstractHttpConfigurer::disable)
-
-                .sessionManagement(configurer -> configurer
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-                .authorizeHttpRequests(requests -> requests
-                        .anyRequest().permitAll())
-                .build();
-    }*/
-
     // 비밀번호 암호화
     @Bean
     public PasswordEncoder passwordEncoder() {

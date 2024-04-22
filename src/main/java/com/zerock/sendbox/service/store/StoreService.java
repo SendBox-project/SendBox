@@ -26,4 +26,9 @@ public class StoreService {
     }
 
 
+    //퀵메뉴
+    public List<Store> getStoresByRegion(String region) {
+        return storeRepository.findByRegion(region);
+    }
+
 }

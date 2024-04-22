@@ -13,7 +13,7 @@
         <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a> </div>
         <h3> 유저 로그인</h3>
         <div id="login_wrap">
-            <form th:action="@{/로그인하고 넘어갈 위치}" th:method="post" id="login_form" onsubmit="return login_form()">
+            <form th:action="@{/user/userloginconfirm}" th:method="post" id="login_form" onsubmit="return login_form()">
                 <div class="form_list">
                     <div class="form_item">
                         <label for="id"></label>
@@ -28,8 +28,8 @@
                 <button class="login_button" type="submit" th:onclick="@{/보낼곳 맵}">Submit</button>
             </form>
             <div class="account_links">
-                <a th:href="@{/유저 아이디 찾기}">아이디 찾기</a>
-                <a th:href="@{/유저 비밀번호 찾기}">비밀번호 찾기</a>
+                <a th:href="@{/user/forgot_id}">아이디 찾기</a>
+                <a th:href="@{/user/reset_password_form}">비밀번호 찾기</a>
                 <a th:href="@{/userterms}">회원가입</a>
             </div>
         </div>
