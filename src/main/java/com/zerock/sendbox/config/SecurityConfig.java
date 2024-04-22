@@ -18,6 +18,40 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("/home","/css/**","/js/**",
+                                "/image/**","/store/searchList","/admin/**",
+                                "/user/**", "/owner/**","/checkPositionLogin",
+                                "/checkPositionRegister","/adminlogin","/userlogin",
+                                "/ownerlogin","adminregister","/userregister",
+                                "/ownerregister","/adminterms","/userterms","/ownerterms").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin((formLogin) ->
+                        formLogin
+                                .loginPage("/home")
+                                .defaultSuccessUrl("/home")
+                )
+                .logout((logout) ->
+                        logout
+                                .logoutSuccessUrl("/userlogin")
+                                .invalidateHttpSession(true)
+                )
+                .sessionManagement((sessionManagement) ->
+                        sessionManagement
+                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                                .sessionFixation().migrateSession()
+                                .invalidSessionUrl("/login")
+                                .sessionAuthenticationErrorUrl("/login?error=session")
+                                .maximumSessions(1).expiredUrl("/login?expired")
+                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .build();
+    }
+
+   /* @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         return http
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -34,7 +68,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .anyRequest().permitAll())
                 .build();
-    }
+    }*/
 
     // 비밀번호 암호화
     @Bean

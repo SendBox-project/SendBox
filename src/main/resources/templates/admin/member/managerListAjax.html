@@ -74,7 +74,7 @@
         </th:block>
 
         <td th:class="${adminMember.last} ? 'disabled'">
-            <a th:onclick="${adminMember.last} ? '' : 'javascript:ownerListAjax('+${adminMember.number+2}+')'"
+            <a th:onclick="${adminMember.last} ? '' : 'javascript:adminListAjax('+${adminMember.number+2}+')'"
                aria-label="Next">
                 <span aria-hidden="true">&gt;</span>
             </a>
