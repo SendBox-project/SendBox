@@ -2,6 +2,7 @@
 package com.zerock.sendbox.config;
 
 
+import com.nimbusds.oauth2.sdk.Role;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,17 +22,23 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/home","/css/**","/js/**","/image/**","/store/searchList","/admin/**", "/user/**", "/owner/**","/checkPositionLogin","/checkPositionRegister").permitAll()
+                        .requestMatchers("/home","/css/**","/js/**",
+                                "/image/**","/store/searchList","/admin/**",
+                                "/user/**", "/owner/**","/checkPositionLogin",
+                                "/checkPositionRegister","/adminlogin","/userlogin",
+                                "/ownerlogin","adminregister","/userregister",
+                                "/ownerregister","/adminterms","/userterms","/ownerterms").permitAll()
+                        .requestMatchers("/api/**").hasRole("ROLE_userId")
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) ->
                         formLogin
                                 .loginPage("/home")
-                                .defaultSuccessUrl("/articles")
+                                .defaultSuccessUrl("/home")
                 )
                 .logout((logout) ->
                         logout
-                                .logoutSuccessUrl("/admin/create_account_form")
+                                .logoutSuccessUrl("/logout")
                                 .invalidateHttpSession(true)
                 )
                 .sessionManagement((sessionManagement) ->
