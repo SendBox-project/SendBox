@@ -31,8 +31,8 @@
     <!--            </div>-->
                 <div class="account_link">
                     <ul class="link_list">
-                        <li class="link_item"><a th:href="@{/noticeList}" target="_blank">공지사항</a></li>
-                        <li class="link_item"><a th:href="@{/고객센터}" target="_blank">고객센터</a></li>
+                        <li class="link_item"><a th:href="@{/board/noticelist}" target="_blank">공지사항</a></li>
+                        <li class="link_item"><a th:href="@{/inquary/list}" target="_blank">고객센터</a></li>
                         <li class="link_item"><a th:href="@{/home}"> 로그아웃</a></li>
                         <li class="link_item"><a th:href="@{/mypage}">마이페이지</a></li>
                         <li class="link_item"><a th:href="@{/checkPositionLogin}" >로그인</a></li>
@@ -53,11 +53,11 @@
                     </form>
                     <div class="search_list_wrap">
                         <ul class="search_list">
-                            <li class="search_item"><a th:href="@{/none}">#서울</a></li>
-                            <li class="search_item"><a th:href="@{/none}">#경기</a></li>
-                            <li class="search_item"><a th:href="@{/none}">#개인창고</a></li>
-                            <li class="search_item"><a th:href="@{/none}">#할인</a></li>
-                            <li class="search_item"><a th:href="@{/none}">#카페창고</a></li>
+                            <li class="search_item"><a th:href="@{http://localhost:8080/store/searchList?storeName=%EC%84%9C%EC%9A%B8}">#서울</a></li>
+                            <li class="search_item"><a th:href="@{http://localhost:8080/store/searchList?storeName=%EA%B2%BD%EA%B8%B0}">#경기</a></li>
+                            <li class="search_item"><a th:href="@{http://localhost:8080/store/searchList?storeName=%EA%B0%9C%EC%9D%B8%EC%B0%BD%EA%B3%A0}">#개인창고</a></li>
+                            <li class="search_item"><a th:href="@{http://localhost:8080/store/searchList?storeName=%ED%95%A0%EC%9D%B8}">#할인</a></li>
+                            <li class="search_item"><a th:href="@{http://localhost:8080/store/searchList?storeName=%EC%B9%B4%ED%8E%98%EC%B0%BD%EA%B3%A0}">#카페창고</a></li>
                         </ul>
                     </div>  <!-- search_list_wrap -->
                 </div> <!-- search -->
