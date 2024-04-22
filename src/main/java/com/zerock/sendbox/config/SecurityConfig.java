@@ -28,7 +28,7 @@ public class SecurityConfig {
                                 "/checkPositionRegister","/adminlogin","/userlogin",
                                 "/ownerlogin","adminregister","/userregister",
                                 "/ownerregister","/adminterms","/userterms","/ownerterms").permitAll()
-                        .requestMatchers("/api/**").hasRole("ROLE_userId")
+//                        .requestMatchers("/api/**").hasRole("ROLE_userId")
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) ->
