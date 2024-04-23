@@ -34,6 +34,7 @@
                     <div id="search_result">
                         <!-- storeList를 반복하며 각 store 정보 표시 -->
                         <div th:each="store : ${storeList}" class="store_item">
+                            <a th:href="@{'/store/detail/' + ${store.storeName}}" class="store_link">
                                 <div class="search_thumbnail">
                                     <img th:src="@{${store.thumbnail}}" alt="썸네일">
                                 </div>
@@ -48,6 +49,7 @@
                                         <p th:text="${room.price}"></p>
                                     </div>
                                 </div> <!-- search_info -->
+                            </a> <!-- store_link -->
                         </div>
                     </div> <!-- store_item -->
                 </div>
