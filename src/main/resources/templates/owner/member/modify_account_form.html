@@ -10,7 +10,7 @@
     <link  th:inline="css" rel="stylesheet" th:href="@{/css/owner/modify_account_form.css}"/>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!--임포트: jquery를 js에서 사용하기 위해서 -->
     <script type="text/javascript" th:src="@{/js/owner/modify_account_form.js}"></script>
-    <script type="text/javascript" th:src="@{/js/owner/deleteInfo.js}"></script>"
+    <script type="text/javascript" th:src="@{/js/owner/deleteInfo.js}"></script>
 </head>
 
 <body>
@@ -26,31 +26,31 @@
             <input type="hidden"  id="deleteYn" name="deleteYn" th:value="N">
             <div class="form_list">
                 <div class="form_item">
-                    <label for="id">아이디</label>
+                    <label for="id">아&ensp;이&ensp;디&emsp;&emsp;&ensp;</label>
                     <input type="text" id="id" name="ownerId" th:value="${owner.ownerId}" readonly disabled>
                 </div>
                 <div class="form_item">
-                    <label for="password">비밀번호</label>
+                    <label for="password">비밀번호&emsp;&emsp;&ensp;</label>
                     <input type="password" id="password" name="password" placeholder="비밀번호입력">
                 </div>
                 <div class="form_item">
-                    <label for="password_check">비밀번호 확인</label>
+                    <label for="password_check">비밀번호확인&ensp;</label>
                     <input type="password" id="password_check" name="password_again" placeholder="비밀번호 재입력">
                 </div>
                 <div class="form_item">
-                    <label for="name">이름</label>
+                    <label for="name">이&emsp;&emsp;름&emsp;&emsp;&ensp;</label>
                     <input type="text" id="name" name="name" th:value="${owner.name}">
                 </div>
                 <div class="form_item">
-                    <label for="mail">이메일</label>
+                    <label for="mail">이&ensp;메&ensp;일&emsp;&emsp;&ensp;</label>
                     <input type="email" id="mail" name="mail" th:value="${owner.mail}">
                 </div>
                 <div class="form_item">
-                    <label for="phone">전화번호</label>
+                    <label for="phone">전화번호&emsp;&emsp;&ensp;</label>
                     <input type="tel" id="phone" name="phone" th:value="${owner.phone}">
                 </div>
                 <div class="form_item">
-                    <label for="gender">성별</label>
+                    <label for="gender">성&emsp;&emsp;별&emsp;&emsp;&ensp;</label>
                     <input type="text" id="ownerGender" name="gender" th:value="${owner.gender}" readonly disabled>
                 </div>
             </div>

@@ -52,7 +52,7 @@ public class UserLoginController {
 
     @GetMapping("/reset_password_form")
     public String resetPassword() {
-        return "user/memeber/reset_password_form";
+        return "user/member/reset_password_form";
     }
 
     @PostMapping("/reset_password_form")
