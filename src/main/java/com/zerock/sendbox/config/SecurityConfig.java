@@ -23,12 +23,14 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/home","/css/**","/js/**",
-                                "/image/**","/store/searchList","/admin/**",
+                                "/image/**","/store/searchList","/admin/**","/board/**",
                                 "/user/**", "/owner/**","/checkPositionLogin",
                                 "/checkPositionRegister","/adminlogin","/userlogin",
                                 "/ownerlogin","adminregister","/userregister",
-                                "/ownerregister","/adminterms","/userterms","/ownerterms").permitAll()
-                        .requestMatchers("/api/**").hasRole("ROLE_userId")
+                       // .requestMatchers("/api/**").hasRole("ROLE_userId")
+                                "/ownerregister","/adminterms","/userterms","/ownerterms",
+                                "/privacyterms","policyterms","/copyrightterms","/reviewterms").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) ->
