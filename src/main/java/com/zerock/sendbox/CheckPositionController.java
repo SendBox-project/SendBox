@@ -15,21 +15,21 @@ public class CheckPositionController {
     }
 
     //오너 로그인
-    @GetMapping("/ownerlogin")
-    public String ownerLogin() {
-        return "owner/member/login_form";
-    }
-    //유저 로그인
-    @GetMapping("/userlogin")
-    public String userLogin() {
-        return "user/member/login_form";
-    }
-    //어드민 로그인
-    @GetMapping("/adminlogin")
-    public String adminLogin() {
-
-        return "admin/member/login_form";
-    }
+//    @GetMapping("/ownerlogin")
+//    public String ownerLogin() {
+//        return "owner/member/login_form";
+//    }
+//    //유저 로그인
+//    @GetMapping("/userlogin")
+//    public String userLogin() {
+//        return "user/member/login_form";
+//    }
+//    //어드민 로그인
+//    @GetMapping("/adminlogin")
+//    public String adminLogin() {
+//
+//        return "admin/member/login_form";
+//    }
 
 
     //회원가입 할 때 직책을 확인하는 페이지
@@ -39,37 +39,37 @@ public class CheckPositionController {
     }
 
     //어드민 회원가입 약관
-    @GetMapping("/adminterms")
+    @GetMapping("/admin/terms")
     public String adminterms() {
 
         return "admin/member/account_terms";
     }
     //오너 회원가입 약관
-    @GetMapping("/ownerterms")
+    @GetMapping("/owner/terms")
     public String ownerTerms() {
         return "owner/member/account_terms";
     }
     //유저 회원가입 약관
-    @GetMapping("/userterms")
+    @GetMapping("/user/terms")
     public String userTerms() {
         return "user/member/account_terms";
     }
 
-    //어드민 회원가입
-    @GetMapping ("/adminregister")
-    public String adminRegister() {
-        return "admin/member/create_account_form";
-    }
-    //오너 회원가입
-    @GetMapping ("/ownerregister")
-    public String ownerRegister() {
-        return "owner/member/create_account_form";
-    }
-    //유저 회원가입
-    @GetMapping ("/userregister")
-    public String userRegister() {
-        return "user/member/create_account_form";
-    }
+//    //어드민 회원가입
+//    @GetMapping ("/adminregister")
+//    public String adminRegister() {
+//        return "admin/member/create_account_form";
+//    }
+//    //오너 회원가입
+//    @GetMapping ("/ownerregister")
+//    public String ownerRegister() {
+//        return "owner/member/create_account_form";
+//    }
+//    //유저 회원가입
+//    @GetMapping ("/userregister")
+//    public String userRegister() {
+//        return "user/member/create_account_form";
+//    }
 
 
     //개인정보 처리방침

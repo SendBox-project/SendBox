@@ -1,6 +1,7 @@
 package com.zerock.sendbox.controller.owner;
 
 import com.zerock.sendbox.dto.owner.OwnerSignUpDTO;
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.entity.OwnerMember;
 import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.Store;
@@ -42,16 +43,16 @@ public class OwnerSignUpController {
     }
 
     @PostMapping("/create_account_form")
-    public String createOwnerMember(OwnerSignUpDTO signUpDTO, RedirectAttributes redirectAttributes, Model model) {
+    public String createOwnerMember(OwnerSignUpDTO signUpDTO, MemberRole memberRole, RedirectAttributes redirectAttributes, Model model) {
         if (ownerSignUpService.isIdDuplicated(signUpDTO.getOwnerId())) {
             redirectAttributes.addFlashAttribute("message", "이미 사용 중인 아이디입니다.");
             return "/owner/member/create_account_form";
         }
 
-        Integer ownerNo = ownerSignUpService.join(signUpDTO);
+        Integer ownerNo = ownerSignUpService.join(signUpDTO, memberRole);
         model.addAttribute("ownerNo", ownerNo);
         redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
-        return "owner/member/storeRegisterForm";
+        return "owner/member/login_form";
     }
 
 

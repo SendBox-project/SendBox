@@ -1,6 +1,7 @@
 package com.zerock.sendbox.controller.user;
 
 import com.zerock.sendbox.dto.user.UserSignUpDTO;
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.service.user.UserSignUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,12 +27,12 @@ public class UserSignUpController {
     }
 
     @PostMapping("create_account_form")
-    public String createUserMember(UserSignUpDTO userSignUpDTO, RedirectAttributes redirectAttributes) {
+    public String createUserMember(UserSignUpDTO userSignUpDTO, MemberRole memberRole, RedirectAttributes redirectAttributes) {
         if(userSignUpService.isIdDuplicated(userSignUpDTO.getUserId())) {
             redirectAttributes.addFlashAttribute("message", "이미 사용 중인 아이디입니다.");
             return "/user/member/create_account_form";
         }
-        userSignUpService.join(userSignUpDTO);
+        userSignUpService.join(userSignUpDTO, memberRole);
         redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
         return "user/member/login_form";
     }

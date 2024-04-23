@@ -2,6 +2,7 @@ package com.zerock.sendbox.service.admin;
 
 import com.zerock.sendbox.dto.admin.SignUpDTO;
 import com.zerock.sendbox.entity.AdminMember;
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.repository.AdminMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,12 @@ public class SignUpServiceImpl implements SignUpService{
     PasswordEncoder passwordEncoder;
 
     @Override
-    public Integer join(SignUpDTO signUpDTO) {
+    public Integer join(SignUpDTO signUpDTO, MemberRole memberRole) {
 
 
         AdminMember adminMember = AdminMember.builder()
                 .adminNo(signUpDTO.getAdminNo())
+                .memberRole(memberRole)
                 .approval(1)
                 .adminId(signUpDTO.getAdminId())
                 .password(passwordEncoder.encode(signUpDTO.getPassword()))

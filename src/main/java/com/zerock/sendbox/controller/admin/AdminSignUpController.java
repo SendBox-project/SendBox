@@ -1,6 +1,7 @@
 package com.zerock.sendbox.controller.admin;
 
 import com.zerock.sendbox.dto.admin.SignUpDTO;
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.service.admin.SignUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 @Log4j2
-public class SignUpController {
+public class AdminSignUpController {
 
     private final SignUpService signUpService;
 
@@ -26,13 +27,15 @@ public class SignUpController {
     }
 
     @PostMapping("/create_account_form")
-    public String createAdminMember(SignUpDTO signUpDTO, RedirectAttributes redirectAttributes) {
+    public String createAdminMember(SignUpDTO signUpDTO, MemberRole memberRole, RedirectAttributes redirectAttributes) {
         if(signUpService.isIdDuplicated(signUpDTO.getAdminId())) {
             redirectAttributes.addFlashAttribute("message", "이미 사용 중인 아이디입니다.");
             return "admin/member/create_account_form";
         }
-
-        signUpService.join(signUpDTO);
+        Integer roleId = memberRole.getRoleId();
+        roleId = signUpDTO.getAdminId().equals("superAdmin") ? 1 : roleId;
+        memberRole.setRoleId(roleId);
+        signUpService.join(signUpDTO, memberRole);
         redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
         return "admin/member/login_form";
     }

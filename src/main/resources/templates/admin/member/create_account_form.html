@@ -13,12 +13,13 @@
 <!--회원가입-->
 <div id="container">
     <div id="register_container">
-        <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
+        <div class="side_logo"><a th:href="@{/admin/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
         <h3>관리자 회원가입</h3>
         <br>
         <div id="register_wrap">
-            <form th:action="@{/admin/create_account_form}" th:method="post" id="create_account_from" onsubmit="return create_account_form()">
-                <input type="hidden" id="deleteYn" name = "deleteYn" th:value="N">
+            <form th:action="@{/admin/create_account_form}" th:method="post" id="create_account_from">
+                <input type="hidden" id="roleId" name="roleId" value="2">
+                <input type="hidden" id="deleteYn" name = "deleteYn" value="N">
                 <div class="form_list">
                     <div class="form_item"><label for="id"></label>
                         <input type="text" id="id" name="adminId" placeholder="아이디를 입력하세요" autofocus >
@@ -70,7 +71,7 @@
                         </select>
                     </div>
                 </div>
-                <button class="regi_button" type="submit">Submit</button>
+                <button class="regi_button" type="submit" onclick="create_account_form()">Submit</button>
             </form>
             <div class="account_links">
                 <a th:href="@{/adminlogin}">로그인 페이지로 이동</a>

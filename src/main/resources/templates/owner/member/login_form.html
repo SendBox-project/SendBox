@@ -11,10 +11,10 @@
 
 <body id="full_body">
 <div id="login_container">
-    <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a> </div>
+    <div class="side_logo"><a th:href="@{/owner/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a> </div>
     <h3> 오너 로그인</h3>
     <div id="login_wrap">
-        <form th:action="@{/owner/ownerloginconfirm}" th:method="post" id="login_form" onsubmit="return login_form()">
+        <form th:action="@{/owner/loginProc}" th:method="post" id="login_form">
             <div class="form_list">
                 <div class="form_item">
                     <label for="id"></label>
@@ -26,12 +26,12 @@
                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
                 </div>
             </div>
-            <button class="login_button" type="submit">로그인</button>
+            <button class="login_button" type="submit" onclick="ownerLoginForm()">로그인</button>
         </form>
         <div class="account_links">
             <a th:href="@{/owner/forgot_id}">아이디 찾기</a>
             <a th:href="@{/owner/reset_password_form}">비밀번호 찾기</a>
-            <a th:href="@{/ownerterms}">회원가입</a>
+            <a th:href="@{/owner/terms}">회원가입</a>
         </div>
     </div>
 </div>

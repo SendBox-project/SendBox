@@ -1,6 +1,6 @@
 
 
-function login_form() {
+function adminLoginForm() {
     console.log("loginForm() 호출");
 
     let form = document.getElementById("login_form");
