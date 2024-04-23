@@ -1,9 +1,6 @@
 
 package com.zerock.sendbox.config;
 
-
-import com.nimbusds.oauth2.sdk.Role;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,14 +19,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/home","/css/**","/js/**",
-                                "/image/**","/store/searchList","/admin/**",
-                                "/user/**", "/owner/**","/checkPositionLogin",
-                                "/checkPositionRegister","/adminlogin","/userlogin",
-                                "/ownerlogin","adminregister","/userregister",
-                                "/ownerregister","/adminterms","/userterms","/ownerterms",
-                                "/privacyterms","policyterms","/copyrightterms","/reviewterms").permitAll()
-//                        .requestMatchers("/api/**").hasRole("ROLE_userId")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/owner/**").hasRole("OWNER")
+                        .requestMatchers("/**","/owner/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) ->
@@ -46,13 +39,15 @@ public class SecurityConfig {
                         sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                                 .sessionFixation().migrateSession()
-                                .invalidSessionUrl("/login")
+                                .invalidSessionUrl("/home")
                                 .sessionAuthenticationErrorUrl("/login?error=session")
                                 .maximumSessions(1).expiredUrl("/login?expired")
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
+
     }
+
     // 비밀번호 암호화
     @Bean
     public PasswordEncoder passwordEncoder() {

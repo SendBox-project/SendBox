@@ -12,53 +12,45 @@ import java.util.stream.IntStream;
 @Data
 public class PageResultDTO<DTO, EN> {
 
-    //DTO리스트
     private List<DTO> dtoList;
-
-    //총 페이지 번호
     private int totalPage;
+    private int currentPage;
+    private int pageSize;
+    private int startPage;
+    private int endPage;
+    private boolean hasPrevious;
+    private boolean hasNext;
+    private List<Integer> pageNumbers;
 
-    //현재 페이지 번호
-    private int page;
-    //목록 사이즈
-    private int size;
-
-    //시작 페이지 번호, 끝 페이지 번호
-    private int start, end;
-
-    //이전, 다음
-    private boolean prev, next;
-
-    //페이지 번호  목록
-    private List<Integer> pageList;
-
-    public PageResultDTO(Page<EN> result, Function<EN,DTO> fn ){
-
-        dtoList = result.stream().map(fn).collect(Collectors.toList());
-
-        totalPage = result.getTotalPages();
-
-        makePageList(result.getPageable());
+    public PageResultDTO(Page<EN> result, Function<EN, DTO> converter) {
+        this.dtoList = result.stream().map(converter).collect(Collectors.toList());
+        this.totalPage = result.getTotalPages();
+        Pageable pageable = result.getPageable();
+        this.currentPage = pageable.getPageNumber() + 1;
+        this.pageSize = pageable.getPageSize();
+        calculatePageNumbers();
     }
 
+    private void calculatePageNumbers() {
+        int totalPages = getTotalPage();
+        int currentPage = getCurrentPage();
+        int pageSize = getPageSize();
 
-    private void makePageList(Pageable pageable){
+        if (totalPages <= 10) {
+            startPage = 1;
+            endPage = totalPages;
+        } else {
+            int halfPages = 10 / 2;
+            int pageOffset = Math.max(currentPage - halfPages, 1);
+            startPage = pageOffset;
+            endPage = Math.min(pageOffset + 10 - 1, totalPages);
+        }
 
-        this.page = pageable.getPageNumber() + 1; // 0부터 시작하므로 1을 추가
-        this.size = pageable.getPageSize();
+        hasPrevious = currentPage > 1;
+        hasNext = currentPage < totalPages;
 
-        //temp end page
-        int tempEnd = (int)(Math.ceil(page/10.0)) * 10;
-
-        start = tempEnd - 9;
-
-        prev = start > 1;
-
-        end = totalPage > tempEnd ? tempEnd: totalPage;
-
-        next = totalPage > tempEnd;
-
-        pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
-
+        pageNumbers = IntStream.rangeClosed(startPage, endPage)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

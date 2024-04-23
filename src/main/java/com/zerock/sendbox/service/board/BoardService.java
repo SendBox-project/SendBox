@@ -29,7 +29,7 @@ public interface BoardService {
         Board board = Board.builder()
                 .boardNo(dto.getBoardNo())
                 .adminMember(adminMember)
-                .cnt(dto.getCnt())
+
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .thumbnail(dto.getThumbnail())

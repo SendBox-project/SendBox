@@ -28,9 +28,6 @@ public class Board extends BaseEntity {
     private AdminMember adminMember;
 
     @Column(nullable = false)
-    private Integer cnt;
-
-    @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
