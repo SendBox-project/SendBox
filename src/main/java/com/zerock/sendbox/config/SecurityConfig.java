@@ -27,8 +27,10 @@ public class SecurityConfig {
                                 "/user/**", "/owner/**","/checkPositionLogin",
                                 "/checkPositionRegister","/adminlogin","/userlogin",
                                 "/ownerlogin","adminregister","/userregister",
-                                "/ownerregister","/adminterms","/userterms","/ownerterms").permitAll()
                        // .requestMatchers("/api/**").hasRole("ROLE_userId")
+                                "/ownerregister","/adminterms","/userterms","/ownerterms",
+                                "/privacyterms","policyterms","/copyrightterms","/reviewterms").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) ->

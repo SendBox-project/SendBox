@@ -71,5 +71,26 @@ public class CheckPositionController {
         return "user/member/create_account_form";
     }
 
+
+    //개인정보 처리방침
+    @GetMapping("/privacyterms")
+    public String privacyTerms() {
+        return "include/privacy_terms";
+    }
+    //이용약관
+    @GetMapping("/policyterms")
+    public String policyTerms() {
+        return "include/policy_terms";
+    }
+    //저작권정책
+    @GetMapping("/copyrightterms")
+    public String copyRightTerms() {
+        return "include/copyright_terms";
+    }
+    //리뷰운영정책
+    @GetMapping("/reviewterms")
+    public String reviewTerms() {
+        return "include/review_terms";
+    }
 }
 
