@@ -14,7 +14,7 @@
     <div class="visual_title"><span>고객센터</span></div>
     <ul>
         <div class="side_list">
-            <li class="side_item"><a th:href="@{/noticeList}">공지사항</a></li>
+            <li class="side_item"><a th:href="@{/board/noticeList}">공지사항</a></li>
 <!--            <li class="side_item"><a th:href="@{/이벤트}">이벤트</a></li>-->
             <li class="side_item"><a th:href="@{/1:1문의}">1:1문의</a></li>
         </div>
@@ -46,12 +46,13 @@
         <tbody>
         <tr>
             <td class="content_num" th:text="${board.boardNo}"></td>
-            <td class="title" th:text="${board.title}">
-                <a  th:href="@{'/board/read/' + ${board.boardNo}}"></a>
+            <td class="title">
+                <a th:href="@{'/board/read/' + ${board.boardNo}}" th:text="${board.title}"></a>
             </td>
+
             <td class="file"></td>
-            <td class="name" th:text="${board.admin.Name}"></td>
-            <td class="date" th:text="${board.regDate}"></td>
+            <td class="name" th:text="${board.admin.name}"></td>
+            <td class="date" th:text="${board.regDate} ?: ''"></td>
             <td class="hit" th:text="${board.cnt}"></td>
             <!-- Add more columns as needed -->
         </tr>

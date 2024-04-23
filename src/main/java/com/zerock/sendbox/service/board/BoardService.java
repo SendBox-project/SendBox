@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface BoardService {
 
-
-
     Integer register(BoardDTO dto);
 
     BoardDTO get(Integer boardNo);
+
+    BoardDTO entityToDTO(Board board, AdminMember adminMember, Long AdminAnswerCount);
 
     PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
 
@@ -23,38 +23,7 @@ public interface BoardService {
     void modify(BoardDTO boardDTO);
 
 
-    default Board dtoToEntity(BoardDTO dto) {
-        AdminMember adminMember = AdminMember.builder().mail(dto.getWriterMail()).build();
 
-        Board board = Board.builder()
-                .boardNo(dto.getBoardNo())
-                .adminMember(adminMember)
-                .cnt(dto.getCnt())
-                .title(dto.getTitle())
-                .content(dto.getContent())
-                .thumbnail(dto.getThumbnail())
-//                .writer(adminMember)
-                .boardType(dto.getBoardType())
-                .build();
-        return board;
-    }
-
-    default BoardDTO entityToDTO(Board board, AdminMember adminMember, Long AdminAnswerCount) {
-
-        BoardDTO boardDTO = BoardDTO.builder()
-                .boardNo(board.getBoardNo())
-                .title(board.getTitle())
-                .content(board.getContent())
-                .regDate(board.getRegDate())
-                .modDate(board.getModDate())
-                .writerMail(adminMember.getMail())
-                .writerName(adminMember.getName())
-                .AdminAnswerCount(AdminAnswerCount.intValue())
-                .build();
-
-        return boardDTO;
-
-    }
 
 
 }
