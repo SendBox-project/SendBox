@@ -28,11 +28,33 @@ public class BoardServiceImpl implements BoardService {
 
         log.info(dto);
 
-        Board board = dtoToEntity(dto);
+        AdminMember adminMember = AdminMember.builder().adminNo(dto.getAdminNo()).build();
+        Board board = Board.builder()
+                .boardNo(dto.getBoardNo())
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .thumbnail(dto.getThumbnail())
+                .boardType(dto.getBoardType())
+                .adminMember(adminMember)
+                .build();
+        return boardRepository.save(board).getBoardNo();
+    }
 
-        boardRepository.save(board);
+    @Override
+    public BoardDTO entityToDTO(Board board, AdminMember adminMember, Long AdminAnswerCount) {
 
-        return board.getBoardNo();
+        BoardDTO boardDTO = BoardDTO.builder()
+                .boardNo(board.getBoardNo())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .regDate(board.getRegDate())
+                .modDate(board.getModDate())
+                .writerName(adminMember.getName())
+                .AdminAnswerCount(AdminAnswerCount.intValue())
+                .build();
+
+        return boardDTO;
+
     }
 
     @Override
