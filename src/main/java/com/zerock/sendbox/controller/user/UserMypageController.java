@@ -43,6 +43,7 @@ public class UserMypageController {
 
     //개인 정보 수정
     @PostMapping("/updateInfo")
+
     public String updateInfo(@ModelAttribute UserMember userMember) { // 프론트에서 "개인 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
         //비밀번호 암호화
         userMember.setPassword(passwordEncoder.encode(userMember.getPassword()));
