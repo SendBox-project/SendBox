@@ -14,7 +14,7 @@ public class CheckPositionController {
         return "include/check_position_login";
     }
 
-    //오너 로그인
+//    //오너 로그인
 //    @GetMapping("/ownerlogin")
 //    public String ownerLogin() {
 //        return "owner/member/login_form";
@@ -39,18 +39,18 @@ public class CheckPositionController {
     }
 
     //어드민 회원가입 약관
-    @GetMapping("/admin/terms")
+    @GetMapping("/adminterms")
     public String adminterms() {
 
         return "admin/member/account_terms";
     }
     //오너 회원가입 약관
-    @GetMapping("/owner/terms")
+    @GetMapping("/ownerterms")
     public String ownerTerms() {
         return "owner/member/account_terms";
     }
     //유저 회원가입 약관
-    @GetMapping("/user/terms")
+    @GetMapping("/userterms")
     public String userTerms() {
         return "user/member/account_terms";
     }
