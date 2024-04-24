@@ -23,6 +23,10 @@ public class AdminMember extends BaseEntity {
     @Column
     private Integer adminNo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roleId")
+    private MemberRole memberRole;
+
     @OneToMany(mappedBy = "adminMember",fetch = FetchType.LAZY)
     private List<Board> boardList = new ArrayList<>();
 

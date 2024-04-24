@@ -1,6 +1,7 @@
 package com.zerock.sendbox.service.owner;
 
 import com.zerock.sendbox.dto.owner.OwnerSignUpDTO;
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.entity.OwnerMember;
 import com.zerock.sendbox.repository.OwnerMemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,11 @@ public class OwnerSignUpServiceImpl implements OwnerSignUpService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public Integer join(OwnerSignUpDTO ownerSignUpDTO) {
+    public Integer join(OwnerSignUpDTO ownerSignUpDTO, MemberRole memberRole) {
 
         OwnerMember ownerMember = OwnerMember.builder()
                 .ownerNo(ownerSignUpDTO.getOwnerNo())
+                .memberRole(memberRole)
                 .ownerId(ownerSignUpDTO.getOwnerId())
                 .password(passwordEncoder.encode(ownerSignUpDTO.getPassword()))
                 .name(ownerSignUpDTO.getName())

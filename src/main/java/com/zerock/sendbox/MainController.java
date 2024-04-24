@@ -9,12 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class MainController {
-//유리 테스트용입니다
-    @GetMapping("/home")
-    public String selectImageList(Model model) {
+    //유저홈으로 이동
+    @GetMapping("/user/home")
+    public String mainHome(Model model) {
         model.addAttribute("title", "");
 
         return "user/home";
     }
+
+    //오너홈으로 이동
+    @GetMapping("/owner/home")
+    public String ownerHome(Model model) {
+        model.addAttribute("title", "");
+
+        return "owner/home";
+    }
+
+    //어드민홈으로 이동
+    @GetMapping("/admin/home")
+    public String adminHome(Model model) {
+        model.addAttribute("title", "");
+
+        return "admin/home";
+    }
+
 
 }

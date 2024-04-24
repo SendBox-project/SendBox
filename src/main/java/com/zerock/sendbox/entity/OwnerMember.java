@@ -20,6 +20,10 @@ public class OwnerMember extends BaseEntity {
     @Column
     private Integer ownerNo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roleId")
+    private MemberRole memberRole;
+
     @OneToOne(mappedBy = "ownerMember", fetch = FetchType.LAZY)
     private Store store;
 

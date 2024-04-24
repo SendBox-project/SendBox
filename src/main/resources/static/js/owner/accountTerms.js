@@ -31,7 +31,7 @@ function proceedIfAllAgreed() {
     });
 
     if (allTermsAgreed) {
-        window.location.href = "/ownerregister";
+        window.location.href = "/owner/create_account_form";
     } else {
         alert("모든 약관에 동의해야 가입이 가능합니다.");
     }

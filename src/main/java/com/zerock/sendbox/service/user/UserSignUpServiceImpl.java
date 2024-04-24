@@ -1,6 +1,7 @@
 package com.zerock.sendbox.service.user;
 
 import com.zerock.sendbox.dto.user.UserSignUpDTO;
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.entity.UserMember;
 import com.zerock.sendbox.repository.UserMemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,11 @@ public class UserSignUpServiceImpl implements UserSignUpService{
     PasswordEncoder passwordEncoder;
 
     @Override
-    public Integer join(UserSignUpDTO userSignUpDTO) {
+    public Integer join(UserSignUpDTO userSignUpDTO, MemberRole memberRole) {
 
         UserMember userMember = UserMember.builder()
                 .userNo(userSignUpDTO.getUserNo())
+                .memberRole(memberRole)
                 .userId(userSignUpDTO.getUserId())
                 .password(passwordEncoder.encode(userSignUpDTO.getPassword()))
                 .name(userSignUpDTO.getName())

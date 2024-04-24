@@ -3,13 +3,14 @@ package com.zerock.sendbox.controller.user;
 import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.UserMember;
-import com.zerock.sendbox.repository.UserMemberRepository;
 import com.zerock.sendbox.service.user.UserMypageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,15 +35,18 @@ public class UserMypageController {
     //개인 정보 수정폼  >> 단순 화면 조회
     @GetMapping("/mypageForm")
     public String mypageForm(Model model) {
-        String userId = "alsrl";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String userId = auth.getName();
+
         UserMember userMember = userMypageService.findByUserId(userId); //UserMember 타입으로 결과값을 받는다.
         model.addAttribute("user", userMember); // userMember를 "user"에 담아서 프론트로 보내준다.(화면에 엔터티에 담겨진 데이터를 동적으로 뿌려주려고)
-        System.out.println("userMember: " + userMember);
+
         return "user/member/modify_account_form";
     }
 
     //개인 정보 수정
     @PostMapping("/updateInfo")
+
     public String updateInfo(@ModelAttribute UserMember userMember) { // 프론트에서 "개인 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
         //비밀번호 암호화
         userMember.setPassword(passwordEncoder.encode(userMember.getPassword()));
@@ -57,13 +61,12 @@ public class UserMypageController {
     //개인 정보 탈퇴
     @PostMapping("/deleteInfo")
     public String deleteInfo(@ModelAttribute UserMember userMember, Model model, HttpSession session, HttpServletResponse response) throws IOException {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String userId = auth.getName();
-        Integer userNo = 1;
-        UserMember user = userMypageService.findByUserNo(userNo);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String userId = auth.getName();
+        UserMember user = userMypageService.findByUserId(userId);
 
         if (passwordEncoder.matches(userMember.getPassword(), user.getPassword())) { // 실제 입력한 비번, DB에 비번 비교
-            Integer result = userMypageService.deleteInfo(userNo);
+            Integer result = userMypageService.deleteInfo(user.getUserNo());
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
             writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
@@ -90,10 +93,12 @@ public class UserMypageController {
     //유저의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
     public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
-        Integer userNo = 1;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String userId = auth.getName();
+        UserMember user = userMypageService.findByUserId(userId);
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
-        List<Orders> reservationList = userMypageService.findAllReservation(userNo);
+        List<Orders> reservationList = userMypageService.findAllReservation(user.getUserNo());
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), reservationList.size());
 
@@ -113,11 +118,13 @@ public class UserMypageController {
     //장바구니 리스트 조회
     @GetMapping("/cartListAjax")
     public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
-        Integer userNo = 1;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String userId = auth.getName();
+        UserMember user = userMypageService.findByUserId(userId);
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // 화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());//위에 page 변수에 넣은 값을 다시 pageable에 할당
-        List<Orders> cartList = userMypageService.findAllCartList(userNo); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
-        System.out.println("cartList = " + cartList);
+        List<Orders> cartList = userMypageService.findAllCartList(user.getUserNo()); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
+
         int start = (int) pageable.getOffset(); // 장바구니의 첫 행 >> 현재 페이지의 오프셋(시작 인덱스)을 반환 후, 이를 정수로 캐스팅하여 start 변수에 저장합니다.
         int end = Math.min((start + pageable.getPageSize()), cartList.size()); // 장바구니의 마지막 행, 두개 중 최소값을 취함 >> 한 페이지에 장바구니 담긴거의 개수를 표시하려고 하는 거
 
@@ -152,8 +159,7 @@ public class UserMypageController {
     //장바구니 옵션 수정
     @PostMapping("/updateCart")
     public String updateCart(@ModelAttribute Orders orders, @ModelAttribute Room room, Model model, HttpServletResponse response) throws IOException {
-        System.out.println("orders = " + orders);
-        System.out.println("room = " + room);
+
         Orders updateInfo =  userMypageService.findByOrderNo(orders.getOrderNo());
         Room roomInfo = userMypageService.findByRoomNo(room.getRoomNo());
         Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
@@ -203,7 +209,6 @@ public class UserMypageController {
     //장바구니 전체 삭제
     @PostMapping("/deleteAllCart/{userNo}")
     public String deleteAllCart(@PathVariable(value = "userNo") Integer userNo, HttpServletResponse response) throws IOException {
-        System.out.println("userNo = " + userNo);
         Integer orders = userMypageService.deleteAllCart(userNo);
 
         if (orders != 0) {

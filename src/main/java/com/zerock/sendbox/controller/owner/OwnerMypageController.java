@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +39,9 @@ public class OwnerMypageController {
     //오너 정보 수정폼 >> 빈곽
     @GetMapping("/mypageForm")
     public String mypageForm(Model model) {
-        String ownerId = "tkddk";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String ownerId = auth.getName();
+
         OwnerMember ownerMember = ownerMypageService.findByOwnerId(ownerId); //OwnerMember 타입으로 결과값을 받는다.
         model.addAttribute("owner", ownerMember);
         return "owner/member/modify_account_form";
@@ -46,7 +50,6 @@ public class OwnerMypageController {
     //오너 정보 수정
     @PostMapping("/updateInfo")
     public String updateInfo(@ModelAttribute OwnerMember ownerMember) { // 프론트에서 "오너 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
-        System.out.println("ownerMember = " + ownerMember);
         //비밀번호 암호화
         ownerMember.setPassword(passwordEncoder.encode(ownerMember.getPassword()));
         OwnerMember result = ownerMypageService.updateInfo(ownerMember);
@@ -61,13 +64,13 @@ public class OwnerMypageController {
     //오너 정보 탈퇴
     @PostMapping("/deleteInfo")
     public String deleteInfo(@ModelAttribute OwnerMember ownerMember, Model model, HttpSession session, HttpServletResponse response) throws IOException {
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String userId = auth.getName();
-        Integer ownerNo = 1;
-        OwnerMember owner = ownerMypageService.findByOwnerNo(ownerNo);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String ownerId = auth.getName();
+
+        OwnerMember owner = ownerMypageService.findByOwnerId(ownerId);
 
         if (passwordEncoder.matches(ownerMember.getPassword(), owner.getPassword())) { // 실제 입력한 비번, DB에 비번 비교
-            Integer result = ownerMypageService.deleteInfo(ownerNo);
+            Integer result = ownerMypageService.deleteInfo(owner.getOwnerNo());
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
             writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
@@ -94,10 +97,12 @@ public class OwnerMypageController {
     //사업자의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
     public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
-        Integer ownerNo = 1;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String ownerId = auth.getName();
+        OwnerMember owner = ownerMypageService.findByOwnerId(ownerId);
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); //화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort()); //위에 page 변수에 넣은 값을 다시 pageable에 할당
-        List<Orders> reservationList = ownerMypageService.findAllUserReservation(ownerNo); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
+        List<Orders> reservationList = ownerMypageService.findAllUserReservation(owner.getOwnerNo()); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
         int start = (int) pageable.getOffset(); // 예약리스트의 첫 행 >> 현재 페이지의 오프셋(시작 인덱스)을 반환 후, 이를 정수로 캐스팅하여 start 변수에 저장합니다.
         int end = Math.min((start + pageable.getPageSize()), reservationList.size()); // 예약리스트의 마지막 행, 두개 중 최소값을 취함 >> 한 페이지에 예약리스트에 담긴거의 개수를 표시하려고 하는 거
 
@@ -111,9 +116,11 @@ public class OwnerMypageController {
     //매장 정보 수정폼 조회
     @GetMapping("/storeForm")
     public String storeForm(Model model) {
-        Integer ownerNo = 1;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String ownerId = auth.getName();
+        OwnerMember owner = ownerMypageService.findByOwnerId(ownerId);
         // 스토어 정보만
-        Store store = ownerMypageService.findByInfoOwnerNo(ownerNo);
+        Store store = ownerMypageService.findByInfoOwnerNo(owner.getOwnerNo());
         // 룸리스트 정보
         List<Room> roomList = userMypageService.findAllRoomList(store.getStoreNo());
 

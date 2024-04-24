@@ -23,7 +23,7 @@ public class Board extends BaseEntity {
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<AdminAnswer> adminAnswers = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="adminNo", nullable = false)
     private AdminMember adminMember;
 

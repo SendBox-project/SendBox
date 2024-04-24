@@ -1,6 +1,6 @@
 #modify_container {
     width: 500px;
-    height: 550px;
+    height: 600px;
     border: 1px solid #fc9f27;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
@@ -42,6 +42,7 @@
     border-style: none;
     padding: 10px;
     margin-top: 10px;
+    margin-left: 30px;
 }
 .drop_button {
     background-color: #838383;
@@ -51,4 +52,14 @@
     border-style: none;
     padding: 10px;
     margin-top: 10px;
+    margin-left: 30px;
+}
+.form_list input {
+    border: 1px solid #dadada;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 10px;
+    width: 200px;
+    height: 40px;
+    margin-left: 10px;
 }

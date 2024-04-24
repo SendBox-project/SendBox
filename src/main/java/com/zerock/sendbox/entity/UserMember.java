@@ -23,6 +23,10 @@ public class UserMember extends BaseEntity {
     @Column
     private Integer userNo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roleId")
+    private MemberRole memberRole;
+
     @OneToMany(mappedBy = "userMember", fetch = FetchType.LAZY)
     private List<Orders> orders = new ArrayList<>();
 

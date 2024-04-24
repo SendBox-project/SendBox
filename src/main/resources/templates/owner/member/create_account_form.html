@@ -8,15 +8,16 @@
     <script type="text/javascript" th:src="@{/js/owner/create_account_form.js}"></script>
     <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
 </head>
-<body>
+<body id="full_body">
 
 <!--owner 회원가입-->
 <div id="register_container">
-    <div class="side_logo"><a th:href="@{/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
+    <div class="side_logo"><a th:href="@{/owner/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
     <h3>사업자 회원가입</h3>
     <div id="register_wrap">
-        <form th:action="@{/owner/create_account_form}" th:method="post" id="create_account_from" onsubmit="return create_account_form()">
-            <input type="hidden" id="deleteYn" name = "deleteYn" th:value="N">
+        <form th:action="@{/owner/create_account_form}" th:method="post" id="create_account_from">
+            <input type="hidden" id="roleId" name="roleId" value="4">
+            <input type="hidden" id="deleteYn" name = "deleteYn" value="N">
             <div class="form_list">
                 <div class="form_item"><label for="id"></label>
                     <input type="text" id="id" name="ownerId" placeholder="아이디를 입력하세요" autofocus >
@@ -45,35 +46,11 @@
                         <option value="W">여자</option>
                     </select>
                 </div>
-                <div class="form_item">
-                    <label for="region"></label>
-                    <select name="region" id="region">
-                        <option value="02">서울</option>
-                        <option value="031">경기</option>
-                        <option value="032">인천</option>
-                        <option value="053">대구</option>
-                        <option value="051">부산</option>
-                        <option value="052">울산</option>
-                        <option value="062">광주</option>
-                        <option value="033">강원</option>
-                        <option value="043">충북</option>
-                        <option value="041">충남</option>
-                        <option value="054">경북</option>
-                        <option value="055">경남</option>
-                        <option value="063">전북</option>
-                        <option value="061">전남</option>
-                        <option value="064">제주</option>
-                    </select>
-                    <div class="form_item">
-                        <label for="business_number"></label>
-                        <input type="text" id="business_number" name="brn" placeholder="사업자등록번호를 입력하세요">
-                    </div>
-                </div>
             </div>
-            <button class="regi_button" type="submit">Submit</button>
+            <button class="regi_button" type="submit" onclick="create_account_form()">Submit</button>
         </form>
         <div class="account_links">
-            <a th:href="@{/ownerlogin}">로그인 페이지로 이동</a>
+            <a th:href="@{/owner/login}">로그인 페이지로 이동</a>
         </div>
     </div>
 </div>

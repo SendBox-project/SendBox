@@ -6,6 +6,8 @@ import com.zerock.sendbox.service.admin.AdminMypageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +31,9 @@ public class AdminMypageController {
     // 개인 정보 수정폼 >> 단순 화면 조회
     @GetMapping("/mypageForm")
     public String mypageForm(Model model) {
-        String adminId = "alsrlalsrl97";
-        /*String adminId = "messi";*/
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String adminId = auth.getName();
+
         AdminMember adminMember = adminMypageService.findByAdminId(adminId);
         model.addAttribute("admin", adminMember);
         return "admin/member/modify_account_form";
@@ -52,14 +55,13 @@ public class AdminMypageController {
     //개인 정보 탈퇴
     @PostMapping("/deleteInfo")
     public String deleteInfo(@ModelAttribute AdminMember adminMember, Model model, HttpSession session, HttpServletResponse response) throws IOException {
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String userId = auth.getName();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String adminId = auth.getName();
 
-        Integer adminNo = 1;
-        AdminMember admin = adminMypageService.findByAdminNo(adminNo);
+        AdminMember admin = adminMypageService.findByAdminId(adminId);
 
         if(passwordEncoder.matches(adminMember.getPassword(), admin.getPassword())) {
-            Integer result = adminMypageService.deleteInfo(adminNo);
+            Integer result = adminMypageService.deleteInfo(admin.getAdminNo());
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
             writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
