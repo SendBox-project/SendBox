@@ -25,8 +25,12 @@ public class MemberRole {
     @Column(nullable = false)
     private  String name;
 
-
     @OneToMany(mappedBy = "memberRole", fetch = FetchType.LAZY)
     private List<UserMember> userMembers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "memberRole", fetch = FetchType.LAZY)
+    private List<OwnerMember> ownerMembers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberRole", fetch = FetchType.LAZY)
+    private List<AdminMember> adminMembers = new ArrayList<>();
 }

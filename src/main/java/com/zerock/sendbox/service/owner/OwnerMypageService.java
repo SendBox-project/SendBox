@@ -121,4 +121,8 @@ public class OwnerMypageService {
         }
 
     }
+
+    public OwnerMember ownerSave(OwnerMember byOwnerNo) {
+        return ownerMemberRepository.save(byOwnerNo);
+    }
 }

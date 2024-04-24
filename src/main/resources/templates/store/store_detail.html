@@ -27,7 +27,7 @@
             </div> <!-- detail_row1 -->
             <div class="detail_row2">
                 <div class="order_tap">
-                    <form th:action="@{/컨트롤러매핑}" th:method="post" id="order_form">
+                    <form th:action="@{/}" th:method="post" id="order_form">
                         <div class="form_list">
                             <div class="form_item">
                                 <label for="startDate">시작날짜</label>
@@ -49,8 +49,8 @@
                                <span>총 가격</span>
                             </div>
                         </div><hr>
-                        <button class="detail_button" type="submit" th:onclick="@{/결제하기}">결제하기</button>
-                        <button class="detail_button" type="submit" th:onclick="@{/장바구니}">장바구니</button>
+                        <button class="detail_button" type="submit" onclick="">결제하기</button>
+                        <button class="detail_button" type="submit" onclick="">장바구니</button>
                     </form>
                 </div>
             </div> <!-- detail_row2 -->
