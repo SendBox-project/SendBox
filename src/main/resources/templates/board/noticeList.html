@@ -46,12 +46,11 @@
         <tbody>
         <tr>
             <td class="content_num" th:text="${board.boardNo}"></td>
-            <td class="title">
-                <a th:href="@{'/board/read/' + ${board.boardNo}}" th:text="${board.title}"></a>
+            <td class="title" th:text="${board.title}">
+                <a  th:href="@{'/board/read/' + ${board.boardNo}}"></a>
             </td>
-
             <td class="file"></td>
-            <td class="name" th:text="${board.admin.name}"></td>
+            <td class="name" th:text="${board.admin.Name}"></td>
             <td class="date" th:text="${board.regDate} ?: ''"></td>
             <td class="hit" th:text="${board.cnt}"></td>
             <!-- Add more columns as needed -->
