@@ -45,7 +45,7 @@ public class SecurityConfig {
                             (authorizeHttpRequests) ->
                                     authorizeHttpRequests
                                             .requestMatchers("/user/create_account_form",
-                                                    "/user/login",
+                                                    "/user/login","/",
                                                     "/user/terms", "/user/forgot_id", "/user/reset_password_form",
                                                     "/store/**", "/answer/**", "/board/**", "/inquary/**", "/replies/**",
                                                     "/checkPositionLogin", "/checkPositionRegister", "/css/**", "/js/**", "/image/**").permitAll()
@@ -60,8 +60,7 @@ public class SecurityConfig {
                                     .loginProcessingUrl("/user/loginProc")
                                     .usernameParameter("userId")
                                     .passwordParameter("password")
-                                    .defaultSuccessUrl("/", true)
-//                                    .failureUrl("user/login?error=true&exception=아이디 또는 비밀번호가 틀렸습니다.")
+                                    .defaultSuccessUrl("/", true) // 로그인 성공시 타는 경로
                                     .failureHandler(customFailureHandler) // 로그인 실패 핸들러
                                     .permitAll()
                     );
@@ -84,11 +83,11 @@ public class SecurityConfig {
             auth.jdbcAuthentication()
                     .dataSource(dataSource)
                     .passwordEncoder(passwordEncoder())
-                    // 인증처리
+                    // 인증처리 >> 아이디/ 비번이 맞으면 꺼내옴
                     .usersByUsernameQuery("select user_id, password, true "
                             + "from user_member "
                             + "where user_id = ? and delete_yn = 'N'")
-                    // 권한처리
+                    // 권한처리 >> 그에 맞는 role을 가져옴
                     .authoritiesByUsernameQuery("select m.user_id, r.name "
                             + "from user_member m inner join member_role r on m.role_id = r.role_id "
                             + "where m.user_id = ?");
@@ -128,7 +127,7 @@ public class SecurityConfig {
                                     .loginProcessingUrl("/owner/loginProc")
                                     .usernameParameter("ownerId")
                                     .passwordParameter("password")
-                                    .defaultSuccessUrl("/owner/home", true)
+                                    .defaultSuccessUrl("/owner/home", true) // 로그인 성공시 타는 경로
                                     .failureHandler(customFailureHandler) // 로그인 실패 핸들러
                                     .permitAll()
                     );

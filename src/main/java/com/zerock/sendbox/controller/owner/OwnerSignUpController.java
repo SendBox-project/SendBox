@@ -55,13 +55,6 @@ public class OwnerSignUpController {
         return "owner/member/storeRegisterForm";
     }
 
-
-//    //업체 등록 폼 조회
-//    @GetMapping("/storeRegisterForm")
-//    public String storeRegisterForm() {
-//        return "owner/member/storeRegisterForm";
-//    }
-
     //업체 등록하기
     @PostMapping("/storeInfo")
     public String storeInfo(Model model, HttpServletResponse response,
