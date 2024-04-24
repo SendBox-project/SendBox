@@ -15,13 +15,14 @@
         <div class="detail_col1">
             <div class="detail_row1">
                 <div class="store_name">
-                    <h1 th:text="${store.storeName}">가게이름</h1>
+                    <h1 th:text="@{${store.storeName}}">가게이름</h1>
                 </div>
                 <div class="thumbnail">
                     <img th:src="@{${store.thumbnail}}" alt="썸네일">
                 </div>
                 <div class="review">
-                    <p th:each="review : ${store.review}" th:text="${review.content}">리뷰입니다</p>
+                    <p>리뷰</p>
+<!--                    <p th:each="review : ${store.review}" th:text="${review.content}">리뷰입니다</p>-->
                 </div>
             </div> <!-- detail_row1 -->
             <div class="detail_row2">
@@ -62,7 +63,9 @@
     <div class="detail_col3">
         <div class="detail_info">
             <div class="detail_notice">
+                <h2>가게 공지</h2>
                 <p th:text="${store.notice}">가게공지</p>
+                <p th:text="${store.phone}">전화번호</p>
             </div>
             <div class="detail_address">
                 <p th:text="${store.address}">주소</p>
@@ -70,5 +73,10 @@
         </div> <!-- detail_info -->
     </div> <!-- detail_col3 -->
 </div> <!-- container -->
+<!--debug output-->
+<div th:utext="${#httpServletRequest.getAttribute('javax.servlet.error.exception')}"></div>
+<p>${store.notice}</p>
+<p>${store.phone}</p>
+<p>${store.address}</p>
 </body>
 </html>

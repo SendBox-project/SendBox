@@ -33,7 +33,7 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
     List<Store> findAllUserReservation(@Param("ownerNo") Integer ownerNo);
 
     //상세페이지
-    Store findByStoreName(String storeName);
+//    Store findByStoreNo(Integer storeNo);
 
 //    //퀵메뉴
 //    List<Store> findByRegion(String region);
