@@ -26,8 +26,8 @@ public class StoreService {
     }
 
     //상세페이지
-    public Store getStoreDetail(String storeName) {
-        return storeRepository.findByStoreName(storeName);
+    public Store getStoreDetail(Integer storeNo) {
+        return storeRepository.findByStoreNo(storeNo);
     }
 
 //    //퀵메뉴
