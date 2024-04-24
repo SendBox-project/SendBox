@@ -1,6 +1,5 @@
 package com.zerock.sendbox.controller.store;
 
-import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Store;
 import com.zerock.sendbox.service.store.StoreService;
 import lombok.extern.slf4j.Slf4j;
@@ -48,15 +47,24 @@ public class StoreController {
         //콘솔창에 입력한 검색어를 검색한 결과 출력
         log.info("storeService.findAllByKeyword(storeName): " + storeService.findAllByKeyword(storeName));
 
-        return "admin/store/search_store";
+        return "store/search_store";
     }
 
-    //퀵메뉴
-    @GetMapping("/{region}")
-    public String getStoresByRegion(@RequestParam("region") String region, Model model) {
-        List<Store> storeList = storeService.getStoresByRegion(region);
-        model.addAttribute("storeList", storeList);
-        return "admin/store/search_store";
+    //상세페이지
+    @GetMapping("/detail/{storeName}")
+    public String getStoreDetail(@PathVariable("storeName") String storeName, Model model) {
+        Store store = storeService.getStoreDetail(storeName);
+        model.addAttribute("store", store);
+        return "store/store_detail";
+
     }
+
+//    //퀵메뉴
+//    @GetMapping("/{region}")
+//    public String getStoresByRegion(@RequestParam("region") String region, Model model) {
+//        List<Store> storeList = storeService.getStoresByRegion(region);
+//        model.addAttribute("storeList", storeList);
+//        return "admin/store/search_store";
+//    }
 
 }
