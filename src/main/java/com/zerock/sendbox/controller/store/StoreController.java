@@ -41,12 +41,12 @@ public class StoreController {
         // 매장 정보와 방 정보를 모두 모델에 저장
         model.addAttribute("storeList", storeList);
 
-        //콘솔창에 스토어 리스트 정보 출력
+       /* //콘솔창에 스토어 리스트 정보 출력
         log.info("storeList: " + storeList);
         //콘솔창에 입력한 검색어 출력
         log.info("storeName: " + storeName);
         //콘솔창에 입력한 검색어를 검색한 결과 출력
-        log.info("storeService.findAllByKeyword(storeName): " + storeService.findAllByKeyword(storeName));
+        log.info("storeService.findAllByKeyword(storeName): " + storeService.findAllByKeyword(storeName));*/
 
         return "admin/store/search_store";
     }

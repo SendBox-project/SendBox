@@ -40,27 +40,27 @@ public class UserLoginController {
 //        return "/user/member/login_form";
 //    }
 
-//    @PostMapping("/userloginconfirm")
-//    public String login(@ModelAttribute UserLoginDTO userLoginDTO, RedirectAttributes redirectAttributes,
-//                        HttpServletRequest request, HttpServletResponse response) {
-//        UserMember userMember = userLoginService.authenticate(userLoginDTO);
-//
-//        if (userMember != null) {
-//            HttpSession session = request.getSession();
-//            session.setAttribute("userId", userMember.getUserId());
-//
-//            String userIdCookieValue = userMember.getUserId().replaceAll("\\s+", "_");
-//            Cookie cookie = new Cookie("userId", userIdCookieValue);
-//            cookie.setMaxAge(60 * 60 * 24);
-//            response.addCookie(cookie);
-//
-//            log.info("Login success for user: {}", userMember.getUserId());
-//            return "user/home";
-//        } else {
-//            redirectAttributes.addFlashAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
-//            return "user/member/login_ng";
-//        }
-//    }
+    @PostMapping("/userloginconfirm")
+    public String login(@ModelAttribute UserLoginDTO userLoginDTO, RedirectAttributes redirectAttributes,
+                        HttpServletRequest request, HttpServletResponse response) {
+        UserMember userMember = userLoginService.authenticate(userLoginDTO);
+
+        if (userMember != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("userId", userMember.getUserId());
+
+            String userIdCookieValue = userMember.getUserId().replaceAll("\\s+", "_");
+            Cookie cookie = new Cookie("userId", userIdCookieValue);
+            cookie.setMaxAge(60 * 60 * 24);
+            response.addCookie(cookie);
+
+            log.info("Login success for user: {}", userMember.getUserId());
+            return "user/home";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
+            return "user/member/login_ng";
+        }
+    }
 
     @GetMapping("/reset_password_form")
     public String resetPassword() {

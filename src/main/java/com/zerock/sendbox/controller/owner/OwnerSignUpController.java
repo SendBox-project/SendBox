@@ -52,7 +52,7 @@ public class OwnerSignUpController {
         Integer ownerNo = ownerSignUpService.join(signUpDTO, memberRole);
         model.addAttribute("ownerNo", ownerNo);
         redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
-        return "owner/member/login_form";
+        return "owner/member/storeRegisterForm";
     }
 
 
