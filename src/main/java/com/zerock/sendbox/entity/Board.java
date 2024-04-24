@@ -49,4 +49,6 @@ public class Board extends BaseEntity {
         this.content = content;
     }
 
+    public void setAdminMember(AdminMember adminMember) {
+    }
 }

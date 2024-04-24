@@ -43,10 +43,12 @@ public class BoardController {
 
         log.info("boardNo: " + boardNo);
 
-        redirectAttributes.addFlashAttribute("msg", boardNo);
 
-        return "board/noticeList";
+        redirectAttributes.addFlashAttribute("msg", "게시물이 성공적으로 등록되었습니다. 게시물 번호: " + boardNo);
+
+        return "redirect:/board/noticeList";
     }
+
 
     @GetMapping({"/read", "/modify"})
     public void read(@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, Integer boardNo, Model model) {

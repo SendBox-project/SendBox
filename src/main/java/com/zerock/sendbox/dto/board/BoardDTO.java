@@ -15,9 +15,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BoardDTO {
 
+    @Getter
+    @Setter
     private Integer boardNo;
 
-
+    @Getter
+    @Setter
     private Integer adminNo;
 
     private Integer cnt;
@@ -40,4 +43,5 @@ public class BoardDTO {
     private LocalDateTime regDate;
 
     private LocalDateTime modDate;
+
 }
