@@ -35,6 +35,7 @@
                         <!-- storeList를 반복하며 각 store 정보 표시 -->
                         <div th:each="store : ${storeList}" class="store_item">
                             <a th:href="@{'/store/detail/' + ${store.storeName}}" class="store_link">
+                                <input type="hidden" id="storeNo" name="storeNo" th:value="${store.storeNo}">
                                 <div class="search_thumbnail">
                                     <img th:src="@{${store.thumbnail}}" alt="썸네일">
                                 </div>
