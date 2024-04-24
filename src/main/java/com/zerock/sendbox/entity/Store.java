@@ -59,4 +59,7 @@ public class Store extends BaseEntity {
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private List<Room> rooms = new ArrayList<>();
 
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    private List<Review> reviews = new ArrayList<>();
+
 }

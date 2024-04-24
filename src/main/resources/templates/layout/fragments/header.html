@@ -17,19 +17,19 @@
         <div id="header_wrap">
             <!-- header top bar-->
             <form id="logout" name="logout" th:action="@{/logout}" method="post">
-                <div class="top_bar" sec:authorize="hasRole('USER')">
+                <div class="top_bar" sec:authorize="hasRole('USER') || hasRole('ANONYMOUS')">
                     <!-- logo -->
                     <div class="logo">
-                        <a th:href="@{/home}"> <!-- 메인 홈으로 이동 -->
+                        <a th:href="@{/}"> <!-- 메인 홈으로 이동 -->
                             <img th:src="@{/image/logo_orange_crop.png}" alt="logo">
                         </a>
                     </div>
                     <div class="account_link">
                         <ul class="link_list">
-                            <li class="link_item" sec:authorize="isAuthenticated()"><a th:href="@{/board/noticeList}"
-                                                                                   target="_blank">공지사항</a></li>
-                            <li class="link_item" sec:authorize="isAuthenticated()"><a th:href="@{/inquary/list}"
-                                                                                   target="_blank">고객센터</a></li>
+                            <li class="link_item"><a th:href="@{/board/noticeList}"
+                                                     target="_blank">공지사항</a></li>
+                            <li class="link_item"><a th:href="@{/inquary/list}"
+                                                     target="_blank">고객센터</a></li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a onclick="document.getElementById('logout').submit();"> 로그아웃</a>
                             </li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a th:href="@{/user/mypageForm}">마이페이지</a>
@@ -44,7 +44,7 @@
                 </div> <!-- top_bar -->
             </form>
             <form id="logout" name="logout" th:action="@{/logout}" method="post">
-                <div class="top_bar" sec:authorize="hasRole('ADMIN')">
+                <div class="top_bar" sec:authorize="hasRole('ADMIN') || hasRole('SUPERADMIN')">
                     <!-- logo -->
                     <div class="logo">
                         <a th:href="@{/home}"> <!-- 메인 홈으로 이동 -->
@@ -53,10 +53,10 @@
                     </div>
                     <div class="account_link">
                         <ul class="link_list">
-                            <li class="link_item" sec:authorize="isAuthenticated()"><a th:href="@{/board/noticeList}"
-                                                                                   target="_blank">공지사항</a></li>
-                            <li class="link_item" sec:authorize="isAuthenticated()"><a th:href="@{/inquary/list}"
-                                                                                   target="_blank">고객센터</a></li>
+                            <li class="link_item"><a th:href="@{/board/noticeList}"
+                                                     target="_blank">공지사항</a></li>
+                            <li class="link_item"><a th:href="@{/inquary/list}"
+                                                     target="_blank">고객센터</a></li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a onclick="document.getElementById('logout').submit();"> 로그아웃</a>
                             </li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a

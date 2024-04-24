@@ -11,7 +11,7 @@
 
 <body id="full_body">
 <div id="login_container">
-    <div class="side_logo"><a th:href="@{/owner/home}"><img th:src="@{/image/logo_orange_Removal.png}"></a> </div>
+    <div class="side_logo"><a th:href="@{/}"><img th:src="@{/image/logo_orange_Removal.png}"></a> </div>
     <h3> 오너 로그인</h3>
     <div id="login_wrap">
         <form th:action="@{/owner/loginProc}" th:method="post" id="login_form">
@@ -24,6 +24,10 @@
                 <div class="form_item">
                     <label for="password"></label>
                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+                </div>
+            </div>
+            <div th:if="${error != null}" >
+                <div th:text="${exception}" style="color: red; text-align: center; margin-bottom: 10px">
                 </div>
             </div>
             <button class="login_button" type="submit" onclick="ownerLoginForm()">로그인</button>
