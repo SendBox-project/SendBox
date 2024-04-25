@@ -47,6 +47,10 @@ public class OwnerMember extends BaseEntity {
 
     @ColumnDefault("'N'")
     @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
+    private String approvalYn;
+
+    @ColumnDefault("'N'")
+    @Column(length = 1,  columnDefinition = "char(1)", nullable = false)
     private String deleteYn;
 
 }

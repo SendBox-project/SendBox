@@ -40,15 +40,16 @@ public class SecurityConfig {
         public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {
             // 권한에 따라 허용하는 url 설정
             http.csrf(AbstractHttpConfigurer::disable);
-            http.securityMatcher("/user/**","/","/logout","","/store/**", "/answer/**", "/board/**", "/inquary/**", "/replies/**")
+            http.securityMatcher("/user/**", "/", "/logout", "", "/store/**", "/answer/**", "/board/**", "/inquary/**", "/replies/**")
                     .authorizeHttpRequests(
                             (authorizeHttpRequests) ->
                                     authorizeHttpRequests
                                             .requestMatchers("/user/create_account_form",
-                                                    "/user/login","/",
+                                                    "/user/login", "/",
                                                     "/user/terms", "/user/forgot_id", "/user/reset_password_form",
                                                     "/store/**", "/answer/**", "/board/**", "/inquary/**", "/replies/**",
                                                     "/checkPositionLogin", "/checkPositionRegister", "/css/**", "/js/**", "/image/**").permitAll()
+                                            .requestMatchers("/user/**").hasRole("USER")
                                             .anyRequest().authenticated()
                     );
 
@@ -116,6 +117,7 @@ public class SecurityConfig {
                                     authorizeHttpRequests
                                             .requestMatchers("/owner/create_account_form", "/owner/storeInfo", "/owner/login",
                                                     "/owner/terms", "/owner/forgot_id", "/owner/reset_password_form").permitAll()
+                                            .requestMatchers("/owner/**").hasRole("OWNER")
                                             .anyRequest().authenticated()
                     );
 
@@ -153,7 +155,7 @@ public class SecurityConfig {
                     // 인증처리
                     .usersByUsernameQuery("select owner_id, password, true "
                             + "from owner_member "
-                            + "where owner_id = ? and delete_yn = 'N'")
+                            + "where owner_id = ? and delete_yn = 'N' and approval_yn = 'Y'")
                     // 권한처리
                     .authoritiesByUsernameQuery("select m.owner_id, r.name "
                             + "from owner_member m inner join member_role r on m.role_id = r.role_id "
@@ -179,8 +181,9 @@ public class SecurityConfig {
                     .authorizeHttpRequests(
                             (authorizeHttpRequests) ->
                                     authorizeHttpRequests
-                                            .requestMatchers("/admin/create_account_form","/admin/login",
+                                            .requestMatchers("/admin/create_account_form", "/admin/login",
                                                     "/admin/terms", "/admin/forgot_id", "/admin/reset_password_form").permitAll()
+                                            .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN")
                                             .anyRequest().authenticated()
                     );
 
@@ -218,7 +221,7 @@ public class SecurityConfig {
                     // 인증처리
                     .usersByUsernameQuery("select admin_id, password, true "
                             + "from admin_member "
-                            + "where admin_id = ? and delete_yn = 'N'")
+                            + "where admin_id = ? and delete_yn = 'N' and approval = 1")
                     // 권한처리
                     .authoritiesByUsernameQuery("select m.admin_id, r.name "
                             + "from admin_member m inner join member_role r on m.role_id = r.role_id "

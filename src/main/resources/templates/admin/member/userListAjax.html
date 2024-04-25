@@ -23,7 +23,6 @@
     <th:block th:if="${userMember.totalElements != 0}">
         <tr th:each="user: ${userMember}">
             <input type="hidden" id="userNo" name="userNo" th:value="${user.userNo}">
-            <input type="hidden" id="deleteYn" name="deleteYn" th:value="${user.deleteYn}">
             <td th:text="${user.userId}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.gender}"></td>

@@ -76,7 +76,7 @@ public class AdminManagementController {
 
     //admin의 모든 오너 리스트 조회
     @GetMapping("/ownerListAjax")
-    public String ownerListAjax(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String ownerListAjax(Model model, @PageableDefault(size = 10, sort = "regDate", direction = Sort.Direction.DESC) Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
         List<OwnerMember> ownerList = adminManagementService.findByDeleteYn("N");
@@ -94,7 +94,7 @@ public class AdminManagementController {
     //admin의 오너 단건 삭제
     @PostMapping("/deleteOwner/{ownerNo}")
     public String deleteOwner(@PathVariable(value = "ownerNo") Integer ownerNo, HttpServletResponse response) throws IOException {
-        Integer ownerMember = adminManagementService.findByDeleteYn(ownerNo);
+        Integer ownerMember = adminManagementService.deleteOwner(ownerNo);
 
         if (ownerMember != 0) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
@@ -121,7 +121,7 @@ public class AdminManagementController {
 
     //모든 매니저 리스트 조회
     @GetMapping("/managerListAjax")
-    public String managerListAjax(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String managerListAjax(Model model, @PageableDefault(size = 10, sort = "regDate", direction = Sort.Direction.DESC) Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
         List<AdminMember> adminList = adminManagementService.findManager("N");
@@ -153,6 +153,26 @@ public class AdminManagementController {
             writer.println("<script>alert('승인에 실패 하였습니다.');</script>");
             writer.flush();
             return "admin/member/managerList";
+        }
+    }
+
+    //오너 승인
+    @GetMapping("/ownerGrant/{ownerNo}")
+    public String ownerGrant(@PathVariable Integer ownerNo,HttpServletResponse response) throws IOException {
+        Integer ownerMember = adminManagementService.saveApproval(ownerNo);
+
+        if (ownerMember > 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('승인이 완료 되었습니다.');</script>");
+            writer.flush();
+            return "admin/member/ownerList";
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('승인에 실패 하였습니다.');</script>");
+            writer.flush();
+            return "admin/member/ownerList";
         }
     }
 

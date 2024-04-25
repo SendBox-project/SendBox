@@ -35,6 +35,8 @@ public class AdminSignUpController {
         Integer roleId = memberRole.getRoleId();
         roleId = signUpDTO.getAdminId().equals("superAdmin") ? 1 : roleId;
         memberRole.setRoleId(roleId);
+        int approval = signUpDTO.getAdminId().equals("superAdmin") ? 1 : 0;
+        signUpDTO.setApproval(approval);
         signUpService.join(signUpDTO, memberRole);
         redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
         return "admin/member/login_form";
