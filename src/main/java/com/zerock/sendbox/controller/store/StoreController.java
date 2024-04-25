@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,29 +29,48 @@ public class StoreController {
     public String searchList(@RequestParam(value = "storeName", required = false, defaultValue="") String storeName,
                              @PageableDefault(size = 20) Pageable pageable, Model model) {
 
+
         List<Store> storeList;
 
-        // 검색어가 있으면 검색 결과를 보여주고 없으면 전체 리스트를 보여줌
+
+        // 검색어가 있으면 검색 결과를 보여주고 공백일시 전체 리스트를 보여줌
         if (storeName != null && !storeName.isEmpty()) {
             storeList = storeService.findAllByKeyword(storeName);
         } else {
             storeList = storeService.getAllStores(pageable);
         }
 
+        // 각 매장의 썸네일 이미지 경로를 모델에 추가
+        List<String> thumbnailUrls = new ArrayList<>();
+        for (Store store : storeList) {
+            thumbnailUrls.add(store.getThumbnail()); // 썸네일 이미지 경로 추가
+        }
+        model.addAttribute("thumbnailUrls", thumbnailUrls);
+
+//    // 각 매장의 썸네일 이미지 경로를 모델에 추가
+//        List<String> thumbnailUrls = new ArrayList<>();
+//        for (Store store : storeList) {
+//            thumbnailUrls.add(store.getThumbnail()); // 썸네일 이미지 경로 추가
+//        }
+//        model.addAttribute("thumbnailUrls", thumbnailUrls);
+
         // 매장 정보와 방 정보를 모두 모델에 저장
         model.addAttribute("storeList", storeList);
-
         return "store/search_store";
     }
+
+
 
     //상세페이지
     @GetMapping("/detail/{storeNo}")
     public String getStoreDetail(@PathVariable("storeNo") Integer storeNo, Model model) {
         Store store = storeService.getStoreDetail(storeNo);
+
+        model.addAttribute("thumbnailUrl", store.getThumbnail()); // 썸네일 이미지 경로 추가
+        model.addAttribute("infoPhotoUrl", store.getInfoPhoto()); // 정보 이미지 경로 추가
         model.addAttribute("store", store);
         return "store/store_detail";
     }
-
 
 //    //퀵메뉴
 //    @GetMapping("/{region}")
