@@ -27,6 +27,8 @@
     <tbody>
     <th:block th:if="${cartList.totalElements != 0}">
         <tr th:each="cart : ${cartList}">
+            <input type="hidden" id="orderNo" name="orderNo" th:value="${cart.orderNo}">
+            <input type="hidden" id="userNo" name="userNo" th:value="${cart.userMember.userNo}">
             <td th:text="${cart.room.store.storeName}"></td>
             <td th:text="${cart.startDate}"></td>
             <td th:text="${cart.endDate}"></td>

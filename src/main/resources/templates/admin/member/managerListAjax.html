@@ -31,7 +31,7 @@
             <td th:text="${admin.phone}"></td>
             <td th:text="${admin.part}"></td>
             <td>
-                <button th:if="${admin.approval == 0}" type="button" th:onclick="|location.href='@{/admin/managerGrant/{adminNo}(adminNo=${admin.adminNo})}'|">미승인</button>
+                <button th:if="${admin.approval == 0}" type="button" th:onclick="|location.href='@{/admin/managerGrant/{adminNo}(adminNo=${admin.adminNo})}'|">승인</button>
                 <button th:if="${admin.approval == 1}" type="button" disabled>승인 완료</button>
             </td>
         </tr>

@@ -27,7 +27,7 @@ public class SignUpServiceImpl implements SignUpService{
         AdminMember adminMember = AdminMember.builder()
                 .adminNo(signUpDTO.getAdminNo())
                 .memberRole(memberRole)
-                .approval(1)
+                .approval(signUpDTO.getApproval())
                 .adminId(signUpDTO.getAdminId())
                 .password(passwordEncoder.encode(signUpDTO.getPassword()))
                 .name(signUpDTO.getName())

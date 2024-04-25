@@ -31,3 +31,29 @@ function ownerListAjax(page) {  // 위에서 보낸 매개변수 1을 받아줌
     })
 
 }
+
+//오너 단건 삭제 기능
+function deleteOwner() {
+    const innerHtml = $("#ownerListForm")
+    const ownerNo = document.getElementById('ownerNo').value;
+
+    console.log(ownerNo)
+    $.ajax({
+        url: "/admin/deleteOwner/" + ownerNo, //백엔드 경로
+        type: 'POST',
+        cache: false,
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data)
+
+            setTimeout(function () {
+
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+
+}
