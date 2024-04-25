@@ -26,6 +26,11 @@ public interface UserMemberRepository extends JpaRepository<UserMember, Integer>
     //admin의 모든 유저 리스트 조회
     List<UserMember> findAllByDeleteYn(String deleteYn);
 
+    //admin의 유저 단건 삭제
+    @Modifying // @쿼리 어노테이션(jpql쿼리, native쿼리)을 통해서 작성된 insert, update, delete 쿼리에서 사용됨!
+    @Query("update UserMember set deleteYn = 'Y' where userNo =:userNo")
+    Integer findByDeleteYn(Integer userNo);
+
 
     UserMember findByMail(String mail);
 

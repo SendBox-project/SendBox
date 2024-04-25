@@ -35,4 +35,6 @@ public interface AdminMemberRepository extends JpaRepository<AdminMember, Intege
     @Modifying //@쿼리 어노테이션(jpql쿼리, native쿼리)을 통해서 작성된 insert, update, delete 쿼리에서 사용됨!
     @Query("update AdminMember set approval = 1 where adminNo =:adminNo")
     Integer saveGrant(@Param("adminNo")Integer adminNo);
+
+
 }

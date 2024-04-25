@@ -44,4 +44,10 @@ public class AdminManagementService {
     public Integer saveGrant(Integer adminNo) {
         return adminMemberRepository.saveGrant(adminNo);
     }
+
+    //admin의 유저 단건 삭제
+    @Transactional
+    public Integer findByDeleteYn(Integer userNo) {
+        return userMemberRepository.findByDeleteYn(userNo);
+    }
 }
