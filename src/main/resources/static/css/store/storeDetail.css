@@ -1,0 +1,133 @@
+.store_container {
+    flex-direction: row;
+    /*display: flex;  !* 가로 정렬 *!*/
+    justify-content: space-between; /* 각 요소 사이의 간격을 최대화하여 가로로 정렬 */
+    margin-top: 60px;
+    height: auto;
+    min-height: 1000px;
+    width: 1400px;
+}
+
+.detail_col1 {
+    width: 100%;
+    background-color: lightpink;
+    height: 550px;
+    display: flex;
+    padding: 10px;
+}
+
+.detail_row1 {
+    width: 1000px;
+    margin: 20px 20px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+.detail_row1 .thumbnail {
+    width: 1000px;
+    height: 230px;
+    background-color: tan;
+
+}
+.detail_row1 .review {
+    width: 1000px;
+    height: 150px;
+    background-color: green;
+}
+
+/*오더창*/
+.detail_row2 {
+    width: 300px;
+    margin: 20px 20px;
+    padding: 10px;
+    background-color: #ffe2e2;
+}
+
+.detail_row2 .order_tap {
+    height: 450px;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #505050;
+    justify-content: center;
+    align-items: center;
+
+}
+/*상세정보*/
+.detail_col2 {
+    width: 100%;
+    background-color: lightblue;
+    padding: 10px;
+    height: 700px;
+}
+
+/*.detail_img{*/
+/*    border-radius: 15px;*/
+/*}*/
+
+/*.detail_img img {*/
+/*    border-radius: 15px;*/
+/*}*/
+
+.detail_col3 {
+    width: 100%;
+    background-color: lightgreen;
+    padding: 10px;
+    height: 250px;
+}
+
+.detail_col3 .detail_info {
+    display: flex;
+    background-color: #bb8dc2;
+}
+.detail_notice {
+    width: 1000px;
+    height: 200px;
+    background-color: #ffffff;
+    margin: 10px 20px;
+    padding: 10px;
+}
+
+.detail_address {
+    width: 300px;
+    height: 200px;
+    background-color: #ad3838;
+    margin: 10px 20px;
+    padding: 10px;
+}
+
+form hr {
+    /* background: #a2c4f3; */
+    background-color: #fc9f27;
+    height: 1px;
+    border: 0;
+}
+
+.form_list input {
+    border: none;
+    background-color: #fff;
+    padding: 10px;
+    width: 200px;
+    height: 40px;
+}
+
+.form_list select {
+    border: none;
+    padding: 10px;
+    width: 200px;
+    height: 40px;
+}
+
+.form_item {
+    margin: 5px;
+    padding: 5px;
+}
+
+.detail_button {
+    background-color: #fc9f27;
+    width: 200px;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}

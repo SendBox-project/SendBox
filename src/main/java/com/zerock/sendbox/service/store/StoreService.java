@@ -25,10 +25,14 @@ public class StoreService {
         return storeRepository.findAllStores(pageable);
     }
 
-
-    //퀵메뉴
-    public List<Store> getStoresByRegion(String region) {
-        return storeRepository.findByRegion(region);
+    //상세페이지
+    public Store getStoreDetail(Integer storeNo) {
+        return storeRepository.findByStoreNo(storeNo);
     }
+
+//    //퀵메뉴
+//    public List<Store> getStoresByRegion(String region) {
+//        return storeRepository.findByRegion(region);
+//    }
 
 }

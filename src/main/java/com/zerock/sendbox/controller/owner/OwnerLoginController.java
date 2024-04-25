@@ -32,57 +32,6 @@ public class OwnerLoginController {
         return "/owner/member/login_form";
     }
 
-//    @GetMapping("/ownerlogin")
-//    public String login() {
-//        log.info("login.........");
-//
-//        return "/owner/member/login_form";
-//    }
-
-//    @PostMapping("/ownerloginconfirm")
-//    public String login(@ModelAttribute OwnerLoginDTO ownerLoginDTO, RedirectAttributes redirectAttributes,
-//                        HttpServletRequest request, HttpServletResponse response) {
-//        OwnerMember ownerMember = ownerLoginService.authenticate(ownerLoginDTO);
-//
-//        if (ownerMember != null) {
-//            HttpSession session = request.getSession();
-//            session.setAttribute("ownerId", ownerMember.getOwnerId());
-//
-//            String ownerIdCookieValue = ownerMember.getOwnerId().replaceAll("\\s+", "_");
-//            Cookie cookie = new Cookie("ownerId", ownerIdCookieValue);
-//            cookie.setMaxAge(60 * 60 * 24);
-//            response.addCookie(cookie);
-//
-//            log.info("Login success for owner: {}", ownerMember.getOwnerId());
-//            return "owner/home";
-//        } else {
-//            redirectAttributes.addFlashAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
-//            return "owner/member/login_ng";
-//        }
-//    }
-
-//    @GetMapping("/logout")
-//    public String logout(HttpServletRequest request, HttpServletResponse response) {
-//        log.info("Logout success");
-//
-//        HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            session.invalidate();
-//        }
-//
-//        Cookie[] cookies = request.getCookies();
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if ("ownerId".equals(cookie.getName())) {
-//                    cookie.setMaxAge(0);
-//                    response.addCookie(cookie);
-//                    break;
-//                }
-//            }
-//        }
-//        return "owner/member/login_form";
-//    }
-
     @GetMapping("/reset_password_form")
     public String resetPassword() {
         return "owner/member/reset_password_form";

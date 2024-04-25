@@ -15,15 +15,23 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BoardDTO {
 
+    @Getter
+    @Setter
     private Integer boardNo;
 
+    @Getter
+    @Setter
     private Integer adminNo;
+
+    private Integer cnt;
 
     private String title;
 
     private String content;
 
     private String thumbnail;
+
+    private String writerMail; //작성자의 이메일(id)
 
     private String writerName; //작성자의 이름
 
@@ -35,4 +43,5 @@ public class BoardDTO {
     private LocalDateTime regDate;
 
     private LocalDateTime modDate;
+
 }

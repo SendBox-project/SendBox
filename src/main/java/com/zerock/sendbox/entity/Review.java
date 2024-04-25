@@ -22,11 +22,12 @@ public class Review{
     @Column
     private Integer reviewNo;
 
-    @Column
-    private Integer userNo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeNo")
+    private Store store;
 
     @Column
-    private Integer storeNo;
+    private Integer userNo;
 
     @Column
     private String content;

@@ -1,6 +1,6 @@
 #full_body {
     background-image: url(../../image/account_bg.png);
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;*/
     background-position: 0 1px;
 }
 #register_container {
