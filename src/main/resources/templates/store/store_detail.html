@@ -18,7 +18,7 @@
     <div class="detail_col1">
         <div class="detail_row1">
             <div class="thumbnail">
-                <img th:src="@{'/upload/'+${thumbnailUrl}}" alt="썸네일">
+                <img th:src="@{'/upload/'+${store.thumbnail}}" alt="썸네일">
             </div>
             <div class="review">
 <!--                    <p th:each="review : ${store.review}" th:text="${review.content}">리뷰입니다</p>-->
@@ -60,7 +60,7 @@
             <p>상세페이지</p>
         </div>
         <div class="detail_img">
-            <img th:src="@{'/upload/'+${infoPhotoUrl}}" alt="상세이미지">
+            <img th:src="@{'/upload/'+${store.infoPhoto}}" alt="상세이미지">
         </div>
     </div> <!-- detail_col2 --> <hr>
     <div class="detail_col3">

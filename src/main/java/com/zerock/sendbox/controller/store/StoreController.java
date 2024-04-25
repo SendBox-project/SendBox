@@ -42,9 +42,6 @@ public class StoreController {
     @GetMapping("/detail/{storeNo}")
     public String getStoreDetail(@PathVariable("storeNo") Integer storeNo, Model model) {
         Store store = storeService.getStoreDetail(storeNo);
-
-        model.addAttribute("thumbnailUrl", store.getThumbnail()); // 썸네일 이미지 경로 추가
-        model.addAttribute("infoPhotoUrl", store.getInfoPhoto()); // 정보 이미지 경로 추가
         model.addAttribute("store", store);
         return "store/store_detail";
     }
