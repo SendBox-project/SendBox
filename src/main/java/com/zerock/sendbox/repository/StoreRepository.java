@@ -15,8 +15,9 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
     @Query("select s from Store s  where s.ownerMember.ownerNo =:ownerNo")
     Store findByInfoOwnerNo(@Param("ownerNo")Integer ownerNo);
 
-    //매장 정보 수정
+    //매장 정보 수정 & 상세페이지
     Store findByStoreNo(Integer storeNo);
+//    Store findByStoreName(String storeName);
 
   //검색기능
     List<Store> findAllByStoreNameContaining(@Param("storeName") String storeName);
@@ -41,4 +42,5 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
     // admin의 모든 업체 리스트 조회
     @Query("select s,o from Store s inner join OwnerMember o on s.ownerMember.ownerNo = o.ownerNo where o.deleteYn = 'N'")
     List<Store> findStore();
+
 }

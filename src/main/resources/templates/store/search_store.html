@@ -15,7 +15,6 @@
         <div class="row1">
             <div class="side_bar">
                 <div class="keyword_filter">
-                    <p>필터 들어감</p>
 <!--                    필터 들어갑니다. || 키워드 -->
                 </div>
                 <div class="range_filter">
@@ -37,7 +36,7 @@
                             <a th:href="@{'/store/detail/' + ${store.storeNo}}" class="store_link">
                                 <input type="hidden" id="storeNo" name="storeNo" th:value="${store.storeNo}">
                                 <div class="search_thumbnail">
-                                    <img th:src="@{${store.thumbnail}}" alt="썸네일">
+                                    <img th:src="@{'/upload/'+${thumbnailUrl}}" alt="썸네일" class="search_thumbnail">
                                 </div>
                                 <div class="search_info">
                                     <div class="search_infoName">
@@ -46,7 +45,7 @@
     <!--                                <div class="search_infoReview">-->
     <!--                                    <p th:text="${store.storeName}"></p>-->
     <!--                                </div>-->
-                                    <div class="room_info" th:each="room : ${store.rooms}">
+                                    <div class="room_info" th:each="room : ${store.rooms}" th:if="${room.size == 's'}">
                                         <p th:text="${room.price}"></p>
                                     </div>
                                 </div> <!-- search_info -->

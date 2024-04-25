@@ -8,9 +8,15 @@
     width: 1400px;
 }
 
+.store_container .store_name {
+    font-size: 3.0em;
+    font-weight: bold;
+    margin: 60px 30px 0 30px;
+    background-color: #fff5da;
+}
 .detail_col1 {
     width: 100%;
-    background-color: lightpink;
+    /*background-color: lightpink;*/
     height: 550px;
     display: flex;
     padding: 10px;
@@ -26,7 +32,11 @@
     width: 1000px;
     height: 230px;
     background-color: tan;
-
+    margin-bottom: 15px;
+    overflow: hidden; /* 이미지를 넘치지 않도록 설정 */
+}
+.detail_row1 .thumbnail img {
+    width: 100%;
 }
 .detail_row1 .review {
     width: 1000px;
@@ -39,14 +49,14 @@
     width: 300px;
     margin: 20px 20px;
     padding: 10px;
-    background-color: #ffe2e2;
+    /*background-color: #ffe2e2;*/
 }
 
 .detail_row2 .order_tap {
     height: 450px;
     border-radius: 15px;
     padding: 20px;
-    background-color: #505050;
+    background-color: #e1e1e1;
     justify-content: center;
     align-items: center;
 
@@ -54,43 +64,41 @@
 /*상세정보*/
 .detail_col2 {
     width: 100%;
-    background-color: lightblue;
-    padding: 10px;
-    height: 700px;
 }
 
-/*.detail_img{*/
-/*    border-radius: 15px;*/
-/*}*/
-
-/*.detail_img img {*/
-/*    border-radius: 15px;*/
-/*}*/
-
+.detail_col2 .detail_img {
+    /*overflow: hidden; !* 이미지를 넘치지 않도록 설정 *!*/
+    display: flex; /* flexbox 사용 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+.detail_col2 .detail_img img {
+    width: auto; /* 이미지의 너비를 자동으로 조정하여 비율 유지 */
+    max-width: 100%; /* 최대 너비 지정 */
+    height: auto; /* 높이도 자동으로 조정 */
+}
 .detail_col3 {
     width: 100%;
-    background-color: lightgreen;
     padding: 10px;
     height: 250px;
 }
 
 .detail_col3 .detail_info {
     display: flex;
-    background-color: #bb8dc2;
 }
 .detail_notice {
     width: 1000px;
     height: 200px;
-    background-color: #ffffff;
-    margin: 10px 20px;
+    /*background-color: #ffffff;*/
+    margin: 20px 20px;
     padding: 10px;
 }
 
 .detail_address {
     width: 300px;
     height: 200px;
-    background-color: #ad3838;
-    margin: 10px 20px;
+    background-color: #f1e3bd;
+    margin: 20px 20px;
     padding: 10px;
 }
 
@@ -128,6 +136,5 @@ form hr {
     border-radius: 5px;
     border-style: none;
     padding: 10px;
-    margin-bottom: 10px;
-    margin-left: 20px;
+    margin: 20px 0 0 20px;
 }

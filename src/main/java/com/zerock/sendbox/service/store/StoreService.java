@@ -29,6 +29,9 @@ public class StoreService {
     public Store getStoreDetail(Integer storeNo) {
         return storeRepository.findByStoreNo(storeNo);
     }
+   public List<Store> getStoreThumbnail(String storeName) {
+        return storeRepository.findAllByStoreNameContaining(storeName);
+   }
 
 //    //퀵메뉴
 //    public List<Store> getStoresByRegion(String region) {
