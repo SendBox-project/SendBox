@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
     //유저홈으로 이동
-    @GetMapping("/user/home")
+    @GetMapping("/")
     public String mainHome(Model model) {
         model.addAttribute("title", "");
 

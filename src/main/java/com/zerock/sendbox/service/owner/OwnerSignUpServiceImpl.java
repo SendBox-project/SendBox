@@ -30,7 +30,7 @@ public class OwnerSignUpServiceImpl implements OwnerSignUpService {
                 .gender(ownerSignUpDTO.getGender())
                 .mail(ownerSignUpDTO.getMail())
                 .phone(ownerSignUpDTO.getPhone())
-                .deleteYn("N")
+                .deleteYn("Y")
                 .build();
         return ownerMemberRepository.save(ownerMember).getOwnerNo();
     }

@@ -52,15 +52,8 @@ public class OwnerSignUpController {
         Integer ownerNo = ownerSignUpService.join(signUpDTO, memberRole);
         model.addAttribute("ownerNo", ownerNo);
         redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
-        return "owner/member/login_form";
+        return "owner/member/storeRegisterForm";
     }
-
-
-//    //업체 등록 폼 조회
-//    @GetMapping("/storeRegisterForm")
-//    public String storeRegisterForm() {
-//        return "owner/member/storeRegisterForm";
-//    }
 
     //업체 등록하기
     @PostMapping("/storeInfo")
@@ -108,6 +101,10 @@ public class OwnerSignUpController {
 
 
         Store result = ownerMypageService.save(storeInfo);
+        // 업체정보 등록이 완료되면 탈퇴여부를 N으로 바꿔서 로그인이 가능하게 처리
+        OwnerMember byOwnerNo = ownerMypageService.findByOwnerNo(ownerNo);
+        byOwnerNo.setDeleteYn("N");
+        OwnerMember result2 =  ownerMypageService.ownerSave(byOwnerNo);
 
         List<Room> roomList = new ArrayList<>();
 

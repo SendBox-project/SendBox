@@ -22,62 +22,15 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/adminlogin")
-    public String login() {
-        log.info("login.........");
+
+    @GetMapping("/login")
+    public String loginPage(@RequestParam(value = "error", required = false) String error,
+                            @RequestParam(value = "exception", required = false) String exception, Model model) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
 
         return "admin/member/login_form";
     }
-
-    @PostMapping("/adminloginconfirm")
-    public String login(@ModelAttribute LoginDTO loginDTO, RedirectAttributes redirectAttributes,
-                        HttpServletRequest request, HttpServletResponse response) {
-        AdminMember adminMember = loginService.authenticate(loginDTO);
-
-        if (adminMember != null) {
-            // 로그인 성공 시 세션 및 쿠키 설정
-            HttpSession session = request.getSession();
-            session.setAttribute("adminId", adminMember.getAdminId());
-
-            // 쿠키 생성 및 설정
-            String adminIdCookieValue = adminMember.getAdminId().replaceAll("\\s+", "_"); // 공백 대체
-            Cookie cookie = new Cookie("adminId", adminIdCookieValue);
-            cookie.setMaxAge(60 * 60 * 24); // 쿠키 유효기간 설정 (예: 24시간)
-            response.addCookie(cookie);
-
-            log.info("Login success for admin: {}", adminMember.getAdminId());
-            return "admin/home";
-        } else {
-            redirectAttributes.addFlashAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            return "admin/member/login_ng";
-        }
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        log.info("Logout success");
-
-        // 세션 비우기
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-
-        // 쿠키 삭제
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("adminId".equals(cookie.getName())) {
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
-                    break;
-                }
-            }
-        }
-
-        return "admin/member/login_form";
-    }
-
 
     //패스워드 재설정
     @GetMapping("/reset_password_form")
