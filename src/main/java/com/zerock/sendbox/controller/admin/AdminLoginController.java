@@ -1,15 +1,11 @@
 package com.zerock.sendbox.controller.admin;
 
-import com.zerock.sendbox.dto.admin.LoginDTO;
 import com.zerock.sendbox.entity.AdminMember;
 import com.zerock.sendbox.service.admin.LoginService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -18,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 @Log4j2
-public class LoginController {
+public class AdminLoginController {
 
     private final LoginService loginService;
 
