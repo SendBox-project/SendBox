@@ -13,16 +13,10 @@ public class StoreService {
     @Autowired
     StoreRepository storeRepository;
 
-    // 검색어가 주어졌을 때 검색 결과 조회
+    // 검색 결과 조회
     public List<Store> findAllByKeyword(String storeName) {
 
         return storeRepository.findAllByStoreNameContaining(storeName);
-    }
-
-    // 검색어가 없을 때 전체 매장 리스트 조회
-    public List<Store> getAllStores(Pageable pageable) {
-
-        return storeRepository.findAllStores(pageable);
     }
 
     //상세페이지

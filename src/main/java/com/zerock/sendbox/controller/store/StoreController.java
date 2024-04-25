@@ -29,31 +29,8 @@ public class StoreController {
     public String searchList(@RequestParam(value = "storeName", required = false, defaultValue="") String storeName,
                              @PageableDefault(size = 20) Pageable pageable, Model model) {
 
-
-        List<Store> storeList;
-
-
-        // 검색어가 있으면 검색 결과를 보여주고 공백일시 전체 리스트를 보여줌
-        if (storeName != null && !storeName.isEmpty()) {
-            storeList = storeService.findAllByKeyword(storeName);
-        } else {
-            storeList = storeService.getAllStores(pageable);
-        }
-
-        // 각 매장의 썸네일 이미지 경로를 모델에 추가
-        List<String> thumbnailUrls = new ArrayList<>();
-        for (Store store : storeList) {
-            thumbnailUrls.add(store.getThumbnail()); // 썸네일 이미지 경로 추가
-        }
-        model.addAttribute("thumbnailUrls", thumbnailUrls);
-
-//    // 각 매장의 썸네일 이미지 경로를 모델에 추가
-//        List<String> thumbnailUrls = new ArrayList<>();
-//        for (Store store : storeList) {
-//            thumbnailUrls.add(store.getThumbnail()); // 썸네일 이미지 경로 추가
-//        }
-//        model.addAttribute("thumbnailUrls", thumbnailUrls);
-
+        // 검색어가 비어있던 안비어있던 알아서 조회 됨
+        List<Store> storeList = storeService.findAllByKeyword(storeName);
         // 매장 정보와 방 정보를 모두 모델에 저장
         model.addAttribute("storeList", storeList);
         return "store/search_store";

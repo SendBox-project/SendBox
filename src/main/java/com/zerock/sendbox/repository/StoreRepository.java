@@ -20,13 +20,10 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
 //    Store findByStoreName(String storeName);
 
   //검색기능
+    @Query("select s from Store s where s.storeName like concat('%', :storeName ,'%') and s.ownerMember.deleteYn = 'N' and s.ownerMember.approvalYn ='Y'")
     List<Store> findAllByStoreNameContaining(@Param("storeName") String storeName);
 
-    //검색어가 주어지지 않으면 전체 리스트 조회
-    @Query("select s from Store s")
-    List<Store> findAllStores(Pageable pageable);
 
-  
     //사업자의 예약 내역 리스트 조회
     @Query("select s,r,o,u from Store s inner join Room r on s.storeNo = r.store.storeNo " +
             "inner join Orders o on r.roomNo = o.room.roomNo " +
