@@ -96,12 +96,18 @@
 
 .detail_address {
     width: 300px;
-    height: 200px;
-    background-color: #f1e3bd;
+    height: 260px;
+    background-color: white;
+    border: 1px solid black;
     margin: 20px 20px;
     padding: 10px;
 }
 
+.detail_address iframe{
+    width : 250px;
+    height: 200px;
+    border: 0;
+}
 form hr {
     /* background: #a2c4f3; */
     background-color: #fc9f27;
