@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import javax.sql.DataSource;
 
@@ -38,8 +37,8 @@ public class SecurityConfig {
         @Bean
         @Order(0)
         public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {
-            // 권한에 따라 허용하는 url 설정
             http.csrf(AbstractHttpConfigurer::disable);
+            // 권한에 따라 허용하는 url 설정
             http.securityMatcher("/user/**", "/", "/logout", "", "/store/**", "/answer/**", "/board/**", "/inquary/**", "/replies/**")
                     .authorizeHttpRequests(
                             (authorizeHttpRequests) ->
@@ -75,6 +74,15 @@ public class SecurityConfig {
                                     .permitAll()
                     );
 
+            // 접근 거부 핸들러 설정 - 403 에러 대신 유저 로그인 페이지로 리다이렉트
+            http.exceptionHandling((exceptionHandling) ->
+                    exceptionHandling.accessDeniedHandler((request, response, accessDeniedException) -> {
+                        // 세션을 비워주고 로그인 페이지로 리다이렉트
+                        request.getSession().invalidate();
+                        response.sendRedirect("/user/login");
+                    })
+            );
+
             return http.build();
         }
 
@@ -107,10 +115,8 @@ public class SecurityConfig {
         @Bean
         @Order(1)
         public SecurityFilterChain filterChain2(HttpSecurity http) throws Exception {
-            // 권한에 따라 허용하는 url 설정
-            // /login, /signup 페이지는 모두 허용, 다른 페이지는 인증된 사용자만 허용
             http.csrf(AbstractHttpConfigurer::disable);
-
+            // 권한에 따라 허용하는 url 설정
             http.securityMatcher("/owner/**")
                     .authorizeHttpRequests(
                             (authorizeHttpRequests) ->
@@ -142,6 +148,15 @@ public class SecurityConfig {
                                     .invalidateHttpSession(true).deleteCookies("JSESSIONID")
                                     .permitAll()
                     );
+
+            // 접근 거부 핸들러 설정 - 403 에러 대신 오너 로그인 페이지로 리다이렉트
+            http.exceptionHandling((exceptionHandling) ->
+                    exceptionHandling.accessDeniedHandler((request, response, accessDeniedException) -> {
+                        // 세션을 비워주고 로그인 페이지로 리다이렉트
+                        request.getSession().invalidate();
+                        response.sendRedirect("/owner/login");
+                    })
+            );
 
             return http.build();
         }
@@ -175,8 +190,8 @@ public class SecurityConfig {
         @Bean
         @Order(2)
         public SecurityFilterChain filterChain3(HttpSecurity http) throws Exception {
-            // 권한에 따라 허용하는 url 설정
             http.csrf(AbstractHttpConfigurer::disable);
+            // 권한에 따라 허용하는 url 설정
             http.securityMatcher("/admin/**")
                     .authorizeHttpRequests(
                             (authorizeHttpRequests) ->
@@ -208,6 +223,15 @@ public class SecurityConfig {
                                     .invalidateHttpSession(true).deleteCookies("JSESSIONID")
                                     .permitAll()
                     );
+
+            // 접근 거부 핸들러 설정 - 403 에러 대신 어드민 로그인 페이지로 리다이렉트
+            http.exceptionHandling((exceptionHandling) ->
+                    exceptionHandling.accessDeniedHandler((request, response, accessDeniedException) -> {
+                        // 세션을 비워주고 로그인 페이지로 리다이렉트
+                        request.getSession().invalidate();
+                        response.sendRedirect("/admin/login");
+                    })
+            );
 
             return http.build();
         }

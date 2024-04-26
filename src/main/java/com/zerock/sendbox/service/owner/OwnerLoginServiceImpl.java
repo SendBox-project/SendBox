@@ -42,7 +42,11 @@ public class OwnerLoginServiceImpl implements OwnerLoginService{
 
         if (mailSent) {
             OwnerMember ownerMember = ownerMemberRepository.findByMail(mail);
-            ownerMemberRepository.save(ownerMember);
+            if (ownerMember != null) {
+                // 임시 비밀번호를 암호화하여 저장
+                ownerMember.setPassword(passwordEncoder.encode(temporaryPassword));
+                ownerMemberRepository.save(ownerMember);
+            }
         } else {
             // 이메일 전송 실패 처리
             // 예: 로깅 또는 사용자에게 메시지 전송

@@ -1,5 +1,6 @@
 package com.zerock.sendbox.controller.user;
 
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Room;
 import com.zerock.sendbox.entity.UserMember;
@@ -47,9 +48,10 @@ public class UserMypageController {
     //개인 정보 수정
     @PostMapping("/updateInfo")
 
-    public String updateInfo(@ModelAttribute UserMember userMember) { // 프론트에서 "개인 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
+    public String updateInfo(@ModelAttribute UserMember userMember, @ModelAttribute MemberRole memberRole) { // 프론트에서 "개인 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
         //비밀번호 암호화
         userMember.setPassword(passwordEncoder.encode(userMember.getPassword()));
+        userMember.setMemberRole(memberRole);
         UserMember result = userMypageService.updateInfo(userMember);
         if (result != null) {
             return "user/member/modify_account_ok";
@@ -67,12 +69,8 @@ public class UserMypageController {
 
         if (passwordEncoder.matches(userMember.getPassword(), user.getPassword())) { // 실제 입력한 비번, DB에 비번 비교
             Integer result = userMypageService.deleteInfo(user.getUserNo());
-            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
-            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
-            writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
-            writer.flush();
             session.invalidate();
-            return "user/home";
+            return "redirect:/";
         } else {
             model.addAttribute("user", user); // 비번 틀렸을때 다시 modify_account_form 프론트 화면으로 가야하니까 값을 뿌려준다.
             response.setContentType("text/html; charset=UTF-8");
@@ -92,7 +90,7 @@ public class UserMypageController {
 
     //유저의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
-    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
         String userId = auth.getName();
         UserMember user = userMypageService.findByUserId(userId);
@@ -117,7 +115,7 @@ public class UserMypageController {
 
     //장바구니 리스트 조회
     @GetMapping("/cartListAjax")
-    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String cartList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
         String userId = auth.getName();
         UserMember user = userMypageService.findByUserId(userId);
