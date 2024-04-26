@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString(exclude = "adminMember")
 public class Board extends BaseEntity {
 
@@ -50,5 +51,10 @@ public class Board extends BaseEntity {
     }
 
     public void setAdminMember(AdminMember adminMember) {
+        this.adminMember = adminMember;
+        if (adminMember != null && !adminMember.getBoardList().contains(this)) {
+            adminMember.getBoardList().add(this);
+        }
     }
+
 }
