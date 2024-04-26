@@ -87,7 +87,7 @@
     display: flex;
 }
 .detail_notice {
-    width: 1000px;
+    width: 900px;
     height: 200px;
     /*background-color: #ffffff;*/
     margin: 20px 20px;
@@ -103,11 +103,7 @@
     padding: 10px;
 }
 
-.detail_address iframe{
-    width : 250px;
-    height: 200px;
-    border: 0;
-}
+
 form hr {
     /* background: #a2c4f3; */
     background-color: #fc9f27;
