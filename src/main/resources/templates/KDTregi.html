@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/common/common.css">
+    <link rel="stylesheet" href="../static/css/KDTregi.css">
+    <script type="text/javascript" th:src="@{/js/admin/create_account_form.js}"></script>
+</head>
+<body id="full_body">
+
+<!--회원가입-->
+<div id="container">
+    <div id="register_container">
+        <div class="side_logo"><a href="@{/}"><img src="/로고">로고</a></div>
+        <h3>회원가입</h3>
+        <br>
+        <div id="register_wrap">
+            <form action="@{/}" id="create_account_from">
+                <input type="hidden" id="roleId" name="roleId" value="2">
+                <input type="hidden" id="deleteYn" name = "deleteYn" value="N">
+                <div class="form_list">
+                    <div class="form_item"><label for="id"></label>
+                        <input type="text" id="id" name="adminId" placeholder="아이디를 입력하세요" autofocus >
+                    </div><hr>
+                    <div class="form_item"><label for="password"></label>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+                    </div><hr>
+                    <div class="form_item"><label for="password_check"></label>
+                        <input type="password" id="password_check" name="password_again" placeholder="비밀번호를 다시 입력하세요">
+                    </div>
+                </div>
+                <div class="form_list">
+                    <div class="form_item"><label for="name"></label>
+                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+                    </div><hr>
+                    <div class="form_item"><label for="email"></label>
+                        <input type="email" id="email" name="mail" placeholder="이메일을 입력하세요">
+                    </div><hr>
+                    <div class="form_item"><label for="phone"></label>
+                        <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력하세요">
+                    </div><hr>
+                    <div class="form_item form_select">
+                        <label for="gender"></label>
+                        <select name="gender" id="gender">
+                            <option value="">성별을 선택하세요</option>
+                            <option value="M">남자</option>
+                            <option value="W">여자</option>
+                        </select>
+                    </div><hr>
+                    <div class="form_item form_select">
+                        <label for="region"></label>
+                        <select name="part" id="region">
+                            <option value="">부서를 선택하세요</option>
+                            <option value="">개발</option>
+                            <option value="">자재</option>
+                            <option value="">관리</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="regi_button" type="submit">Submit</button>
+            </form>
+            <div class="account_links">
+                <a href="@{/}">로그인 페이지로 이동</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
