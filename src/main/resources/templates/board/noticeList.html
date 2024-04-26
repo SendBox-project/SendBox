@@ -32,35 +32,32 @@
             <col width="90">
             <col width="100">
             <col width="60">
-            <col width="*"> <!-- 추가된 열 -->
-            <col width="*"> <!-- 추가된 열 -->
+            <col width="*">
+            <col width="*">
         </colgroup>
         <thead>
         <tr>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
-            <th scope="col">첨부</th>
-            <th scope="col">작성자</th>
-            <th scope="col">작성일</th>
-            <th scope="col">조회수</th>
-            <th scope="col">설명</th> <!-- 추가된 열 -->
-            <th scope="col">게시판 종류</th> <!-- 추가된 열 -->
+            <th scope="col">설명</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="board : ${boardList}">
-            <td class="content_num" th:text="${board.boardNo}"></td>
-            <td class="title">
-                <a th:href="@{'/board/read/' + ${board.boardNo}}" th:text="${board.title}"></a>
-            </td>
-            <td class="file"></td>
-            <td class="name" th:text="${board.adminMember.name}"></td>
-            <td class="date" th:text="${board.regDate}"></td>
-            <td class="hit" th:text="${board.cnt}"></td>
-            <td class="description" th:text="${board.content}"></td>
-            <td class="board_type" th:text="${board.boardType}"></td>
-        </tr>
+            <tr th:each="dto : ${result.dtoList}">
+                <th scope="row">
+                    <a th:href="@{/board/read(boardNo=${dto.boardNo},
+                page=${result.page},
+                type=${pageRequestDTO.type},
+                keyword=${pageRequestDTO.keyword})}">
+                        [[${dto.boardNo}]]
+                    </a>
+                </th>
+                <td>[[${dto.title}]] ----------------  [<b th:text="${dto.AdminAnswerCount}"></b>]</td>
+                <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+            </tr>
+
         </tbody>
+
     </table>
     <div class="buttons_wrap">
         <button type="button" class="list_buttons"><a href="#"> << </a></button>

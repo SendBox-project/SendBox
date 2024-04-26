@@ -19,31 +19,20 @@ public class BoardRepositoryTest {
 
     @Test
     public void insertBoard() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
-            // AdminMember 생성 및 저장
-            AdminMember adminMember = AdminMember.builder()
-                    .adminId("admin" + i) // admin_id 값을 설정
-                    .approval(i)
-                    .gender("0")
-                    .part("abc")
-                    .phone("11111111")
-                    .adminNo(i)
-                    .name("user" + i)
-                    .password("1234")
-                    .mail("user" + i + "@aaa.com")
-                    .build();
+
+        IntStream.range(0, 10).forEach(i -> {
+            AdminMember adminMember = AdminMember.builder().name("admin" + i).build();
             adminMemberRepository.save(adminMember);
 
-            // 저장된 AdminMember의 adminNo를 사용하여 Board 생성
             Board board = Board.builder()
-//                    .adminNo(adminMember.getAdminNo()) // AdminMember의 adminNo 설정
-                    .thumbnail("a")
+                    .title("title" + i)
+                    .content("Content.." + i)
+                    .boardNo(i)
                     .boardType("1")
-                    .cnt(i)
-                    .title("Title..." + i)
-                    .content("Content...." + i)
+                    .thumbnail("tumbnail" + i)
                     .build();
             boardRepository.save(board);
         });
+
     }
 }

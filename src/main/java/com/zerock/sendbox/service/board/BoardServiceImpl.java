@@ -13,7 +13,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.function.Function;
 
@@ -67,14 +66,12 @@ public class BoardServiceImpl implements BoardService {
         return entityToDTO((Board) arr[0], (AdminMember) arr[1], (Long) arr[2]);
     }
 
-    @Transactional
     @Override
     public void removeWithAdminAnswer(Integer boardNo) {
         adminAnswerRepository.deleteByBoardNo(boardNo);
         boardRepository.deleteById(boardNo);
     }
 
-    @Transactional
     @Override
     public void modify(BoardDTO boardDTO) {
         Board board = boardRepository.findById(boardDTO.getBoardNo())
@@ -86,25 +83,51 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.save(board);
     }
 
-    private Board dtoToEntity(BoardDTO dto) {
-        return Board.builder()
+//    private Board dtoToEntity(BoardDTO dto) {
+//        return Board.builder()
+//                .title(dto.getTitle())
+//                .content(dto.getContent())
+//                .thumbnail(dto.getThumbnail())
+//                .boardType(dto.getBoardType())
+//                .build();
+//    }
+
+    @Override
+    public Board dtoToEntity(BoardDTO dto) {
+
+        Board board = Board.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .thumbnail(dto.getThumbnail())
                 .boardType(dto.getBoardType())
                 .build();
+        return board;
     }
 
-    private BoardDTO entityToDTO(Board board, AdminMember adminMember, Long AdminAnswerCount) {
-        return BoardDTO.builder()
+//    private BoardDTO entityToDTO(Board board, AdminMember adminMember, Long AdminAnswerCount) {
+//        return BoardDTO.builder()
+//                .boardNo(board.getBoardNo())
+//                .title(board.getTitle())
+//                .content(board.getContent())
+//                .regDate(board.getRegDate())
+//                .modDate(board.getModDate())
+//                .writerMail(adminMember.getMail())
+//                .writerName(adminMember.getName())
+//                .AdminAnswerCount(AdminAnswerCount.intValue())
+//                .build();
+//    }
+
+    @Override
+    public BoardDTO entityToDTO(Board board, AdminMember adminMember, Long AdminAnswerCount) {
+        BoardDTO boardDTO = BoardDTO.builder()
                 .boardNo(board.getBoardNo())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
-                .writerMail(adminMember.getMail())
                 .writerName(adminMember.getName())
                 .AdminAnswerCount(AdminAnswerCount.intValue())
                 .build();
+        return boardDTO;
     }
 }
