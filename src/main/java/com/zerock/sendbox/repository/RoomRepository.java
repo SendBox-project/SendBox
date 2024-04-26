@@ -21,4 +21,9 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
 
     Room findByRoomNoAndStore_StoreNo(Integer roomNo, Integer storeNo);
+
+    //장바구니 담기위해 가격 조회
+    @Query("select r.price from Room r where r.store.storeNo =:storeNo and r.size =:roomSize")
+    int findPriceByStoreAndRoomSize(@Param("storeNo") int storeNo, @Param("roomSize") String roomSize);
+
 }
