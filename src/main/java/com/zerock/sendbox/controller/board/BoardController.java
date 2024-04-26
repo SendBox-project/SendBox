@@ -52,42 +52,32 @@ public class BoardController {
         return "board/noticeList";
     }
 
-    @GetMapping({"/read", "/modify"})
-    public void read(@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, Integer boardNo, Model model) {
-        log.info("boardNo: " + boardNo);
-
-        BoardDTO boardDTO = boardService.get(boardNo);
-
-        log.info(boardDTO);
-
+    @GetMapping("/modify")
+    public String modifyForm(Integer boardNo, PageRequestDTO pageRequestDTO, Model model) {
+        log.info("modify get... boardNo: " + boardNo);
+        BoardDTO boardDTO = boardService.get(boardNo); // boardNo를 사용하여 해당 게시물 정보를 가져옴
         model.addAttribute("dto", boardDTO);
+        model.addAttribute("boardNo", boardNo);
+        model.addAttribute("pageRequestDTO", pageRequestDTO); // 페이지 요청 DTO를 모델에 추가
+        return "board/modify"; // 수정 폼 페이지로 이동
+    }
+
+    @PostMapping("/modify")
+    public String modify(BoardDTO dto, RedirectAttributes redirectAttributes) {
+        log.info("modify post... boardNo: " + dto.getBoardNo());
+        boardService.modify(dto); // 게시물 수정
+        redirectAttributes.addFlashAttribute("msg", "수정되었습니다."); // 수정 완료 메시지를 리다이렉트 속성에 추가
+        return "redirect:/board/read?boardNo=" + dto.getBoardNo(); // 수정 후 게시물 상세 페이지로 리다이렉트
     }
 
     @PostMapping("/remove")
     public String remove(Integer boardNo, RedirectAttributes redirectAttributes) {
-        log.info("boardNo" + boardNo);
-
-        boardService.removeWithAdminAnswer(boardNo);
-
-        redirectAttributes.addFlashAttribute("msg", boardNo);
-
-        return "board/noticeList";
+        log.info("remove... boardNo: " + boardNo);
+        boardService.removeWithAdminAnswer(boardNo); // 관리자 답변과 함께 게시물 삭제
+        redirectAttributes.addFlashAttribute("msg", "삭제되었습니다."); // 삭제 완료 메시지를 리다이렉트 속성에 추가
+        return "redirect:/board/noticeList"; // 삭제 후 게시물 목록 페이지로 리다이렉트
     }
 
-    @PostMapping("/modify")
-    public String modify(BoardDTO dto, @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
-        log.info("post modify...................");
-        log.info("dto" + dto);
 
-        boardService.modify(dto);
-
-        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
-        redirectAttributes.addAttribute("type",pageRequestDTO.getType());
-        redirectAttributes.addAttribute("keyword",pageRequestDTO.getKeyword());
-
-        redirectAttributes.addAttribute("boardNo",dto.getBoardNo());
-
-        return "board/read";
-    }
 
 }
