@@ -31,6 +31,26 @@ function cartListAjax(page) { // 위에서 보낸 매개변수 1을 받아 준�
 
 }
 
+//장바구니 결제
+function payment() {
+    $.ajax({
+        url: "/user/payment", //백엔드 경로
+        type: 'GET',
+        cache: false,
+        data: $('#form1').serialize(),
+        async: false,
+        success: function (data) {   //성공시에 pc창에 카카오페이지 창 띄우기
+            location.href = data.next_redirect_pc_url;
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+        }
+    })
+
+}
+
+
 //장바구니 옵션 수정 기능 
 function updateCart() { /*cartList.html에 form태그와 연결*/
     const f = document.getElementById("form1"); //cartList.html의 form1과 ㅇ녀결

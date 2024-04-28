@@ -3,11 +3,12 @@
 <table class="board_content" cellspacing="0">
     <caption>장바구니</caption>
     <colgroup>
-        <col width="15%">
+        <col width="10%">
         <col width="15%">
         <col width="15%">
         <col width="10%">
-        <col width="15%">
+        <col width="10%">
+        <col width="10%">
         <col width="10%">
         <col width="10%">
         <col width="10%">
@@ -21,6 +22,7 @@
         <th>수량</th>
         <th>가격</th>
         <th>수정</th>
+        <th>결제</th>
         <th>삭제</th>
     </tr>
     </thead>
@@ -36,6 +38,7 @@
             <td th:text="${cart.totalAmount}"></td>
             <td th:text="${cart.totalPrice}"></td>
             <td><button type="button" th:onclick="|location.href='@{/user/cartInfoForm/{orderNo}(orderNo=${cart.orderNo})}'|">수정</button></td>
+            <td><button type="button" th:onclick="|location.href='@{/user/paymentInfoForm/{orderNo}(orderNo=${cart.orderNo})}'|">결제</button></td>
             <td><button type="button" th:onclick="|javascript:deleteCart()|">삭제</button></td>
         </tr>
     </th:block>

@@ -22,12 +22,22 @@
     <tbody>
     <th:block th:if="${reservations.totalElements != 0}">
         <tr th:each="order: ${reservations}">
+            <input type="hidden" id="orderNo" name="orderNo" th:value="${order.orderNo}">
             <td th:text="${order.room.store.storeName}"></td>
             <td th:text="${order.reservationNum}"></td>
             <td th:text="${order.startDate}"></td>
             <td th:text="${order.endDate}"></td>
             <td th:text="${order.reservationStatus}"></td>
-            <td><button type="button">취소</button></td>
+            <th:block th:if="${order.reservationStatus == '결제완료'}">
+                <td>
+                    <button type="button" th:onclick="|javascript:paymentCancel()|">취소</button>
+                </td>
+            </th:block>
+            <th:block th:if="${order.reservationStatus == '결제취소'}">
+                <td>
+                    <button type="button" disabled>취소</button>
+                </td>
+            </th:block>
         </tr>
     </th:block>
     <th:block th:if="${reservations.totalElements == 0}">

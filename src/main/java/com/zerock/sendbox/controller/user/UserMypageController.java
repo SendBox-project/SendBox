@@ -90,7 +90,7 @@ public class UserMypageController {
 
     //유저의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
-    public String reservationList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
         String userId = auth.getName();
         UserMember user = userMypageService.findByUserId(userId);
@@ -115,7 +115,7 @@ public class UserMypageController {
 
     //장바구니 리스트 조회
     @GetMapping("/cartListAjax")
-    public String cartList(Model model, @PageableDefault(size = 1, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
         String userId = auth.getName();
         UserMember user = userMypageService.findByUserId(userId);
