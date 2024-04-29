@@ -17,6 +17,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
     @Query("select b, w from Board b left join b.adminMember w where b.boardNo =:boardNo")
     Object getBoardWithWriter(@Param("boardNo") Integer boardNo);
 
+
     @Query("select b, r from Board b left join AdminAnswer  r on r.board = b where b.boardNo =:boardNo")
     List<Object[]> getBoardWithAdminAnswer(@Param("boardNo") Integer boardNo);
 

@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/defaultLayout}"
-      layout:fragment="Content">
+layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -12,68 +12,66 @@
 
 <form action="/board/modify" method="post">
 
-    <!-- 페이지 번호 -->
+    <!-- 페이지 번호와 검색 조건을 전달하기 위한 hidden input -->
     <input type="hidden" name="page" th:value="${pageRequestDTO.page}">
-    <input type="hidden" name="type" th:value="${pageRequestDTO.type}" >
-    <input type="hidden" name="keyword" th:value="${pageRequestDTO.keyword}" >
+    <input type="hidden" name="type" th:value="${pageRequestDTO.type}">
+    <input type="hidden" name="keyword" th:value="${pageRequestDTO.keyword}">
 
+    <!-- 게시글 번호 -->
     <div class="form-group">
         <label for="boardNo">게시글 번호</label>
-        <input type="text" class="form-control" id="boardNo" name="boardNo" th:value="${dto.boardNo}" readonly >
+        <input type="text" class="form-control" id="boardNo" name="boardNo" th:value="${dto.boardNo}" readonly>
     </div>
 
+    <!-- 제목 -->
     <div class="form-group">
         <label for="title">제목</label>
-        <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" >
+        <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}">
     </div>
 
+    <!-- 내용 -->
     <div class="form-group">
         <label for="content">내용</label>
         <textarea class="form-control" rows="5" id="content" name="content" th:text="${dto.content}"></textarea>
     </div>
 
+    <!-- 작성자 -->
     <div class="form-group">
         <label for="writer">작성자</label>
-        <input type="text" class="form-control" id="writer" name="writer" th:value="${dto.writerMail}" readonly>
+        <input type="text" class="form-control" id="writer" name="writer" th:value="${dto.writerName}" readonly>
     </div>
 
+    <!-- 작성일자 -->
     <div class="form-group">
         <label for="regDate">작성일자</label>
         <input type="text" class="form-control" id="regDate" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
     </div>
 
+    <!-- 수정일자 -->
     <div class="form-group">
         <label for="modDate">수정일자</label>
         <input type="text" class="form-control" id="modDate" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
     </div>
 
-    <button type="button" class="btn btn-primary modifyBtn">수정하기</button>
+    <!-- 수정, 목록, 삭제 버튼 -->
+    <button type="submit" class="btn btn-primary">수정하기</button>
     <button type="button" class="btn btn-info listBtn">목록</button>
     <button type="button" class="btn btn-danger removeBtn">삭제</button>
 
 </form>
 
+<!-- JavaScript 부분 -->
 <script th:inline="javascript">
     var actionForm = $("form");
 
-    $(".removeBtn").click(function(){
+    $(".removeBtn").click(function () {
         actionForm
             .attr("action", "/board/remove")
             .attr("method", "post");
         actionForm.submit();
     });
 
-    $(".modifyBtn").click(function() {
-        if (!confirm("수정하시겠습니까?")) {
-            return ;
-        }
-        actionForm
-            .attr("action", "/board/modify")
-            .attr("method", "post")
-            .submit();
-    });
-
-    $(".listBtn").click(function() {
+    $(".listBtn").click(function () {
         var page = $("input[name='page']");
         var type = $("input[name='type']");
         var keyword = $("input[name='keyword']");
@@ -91,4 +89,3 @@
 </script>
 </body>
 </html>
-
