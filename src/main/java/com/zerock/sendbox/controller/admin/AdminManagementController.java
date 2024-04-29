@@ -33,7 +33,7 @@ public class AdminManagementController {
 
     //admin의 모든 유저 리스트 조회
     @GetMapping("/userListAjax")
-    public String userListAjax(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String userListAjax(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.ASC) Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // 화면상에선 1부터 시작하지만 자바는 0부터 시작해서 1-1= 0이고 이게 실제 페이지론 1 페이지
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort()); //위에 page 변수에 넣은 값을 다시 pageable에 할당
         List<UserMember> userList = adminManagementService.findAllByDeleteYn("N"); // 매개변수를 보내고 리턴값을 받고 이 리턴값을 왼쪽에 저장
@@ -76,7 +76,7 @@ public class AdminManagementController {
 
     //admin의 모든 오너 리스트 조회
     @GetMapping("/ownerListAjax")
-    public String ownerListAjax(Model model, @PageableDefault(size = 10, sort = "regDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String ownerListAjax(Model model, @PageableDefault(size = 10, sort = "regDate", direction = Sort.Direction.ASC) Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
         List<OwnerMember> ownerList = adminManagementService.findByDeleteYn("N");
@@ -121,7 +121,7 @@ public class AdminManagementController {
 
     //모든 매니저 리스트 조회
     @GetMapping("/managerListAjax")
-    public String managerListAjax(Model model, @PageableDefault(size = 10, sort = "regDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String managerListAjax(Model model, @PageableDefault(size = 10, sort = "regDate", direction = Sort.Direction.ASC) Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, pageable.getPageSize(), pageable.getSort());
         List<AdminMember> adminList = adminManagementService.findManager("N");

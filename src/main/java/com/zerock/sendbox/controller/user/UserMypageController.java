@@ -1,6 +1,7 @@
 package com.zerock.sendbox.controller.user;
 
 import com.zerock.sendbox.entity.*;
+import com.zerock.sendbox.service.store.StoreService;
 import com.zerock.sendbox.service.user.UserMypageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +32,9 @@ public class UserMypageController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    StoreService storeService;
 
     //개인 정보 수정폼  >> 단순 화면 조회
     @GetMapping("/mypageForm")
@@ -87,7 +93,7 @@ public class UserMypageController {
 
     //유저의 예약 내역 리스트 조회
     @GetMapping("/reservationListAjax")
-    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String reservationList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.ASC) Pageable pageable) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
         String userId = auth.getName();
         UserMember user = userMypageService.findByUserId(userId);
@@ -112,7 +118,7 @@ public class UserMypageController {
 
     //장바구니 리스트 조회
     @GetMapping("/cartListAjax")
-    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String cartList(Model model, @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.ASC) Pageable pageable) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
         String userId = auth.getName();
         UserMember user = userMypageService.findByUserId(userId);
@@ -158,6 +164,7 @@ public class UserMypageController {
         Orders updateInfo =  userMypageService.findByOrderNo(orders.getOrderNo());
         Room roomInfo = userMypageService.findByRoomNo(room.getRoomNo());
         Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
+        // 기존 값들을 새로운 값으로 넣기위해 강제로 저장
         updateInfo.setStartDate(orders.getStartDate());
         updateInfo.setEndDate(orders.getEndDate());
         updateInfo.setRoom(room);
@@ -224,25 +231,37 @@ public class UserMypageController {
 
     //장바구니 담기
     @PostMapping("/addCart")
-    public String addCart(@ModelAttribute Orders orders, @ModelAttribute Room room, @ModelAttribute Store store, HttpServletResponse response) throws IOException {
-        Orders cartOrderInfo = userMypageService.saveOrders(orders);
+    public String addCart(@ModelAttribute Orders orders, @ModelAttribute Room room,@ModelAttribute Store store, Model model, HttpServletResponse response) throws IOException {
         Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
-        cartOrderInfo.setStartDate(orders.getStartDate());
-        cartOrderInfo.setEndDate(orders.getEndDate());
-        cartOrderInfo.setRoom(room);
-        cartOrderInfo.setTotalPrice(orders.getTotalPrice());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String userId = auth.getName();
+        UserMember user = userMypageService.findByUserId(userId);
+        Room roomInfo = userMypageService.findByRoomNo(room.getRoomNo());
+        String parsedLocalDateTimeNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+
+        // 화면상에 없는 값들을 DB에 넣기 위해 강제로 저장
+        orders.setUserMember(user);
+        orders.setRoom(room);
+        orders.setReservationNum(parsedLocalDateTimeNow);
+        orders.setReservationStatus("예약대기");
+        orders.setTotalPrice(roomInfo.getPrice() * orders.getTotalAmount() * betweenDays);
+        Orders cartOrderInfo = userMypageService.saveOrders(orders);
 
         if (cartOrderInfo != null) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
             PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
             writer.println("<script>alert('장바구니 담기가 완료되었습니다.');</script>");
             writer.flush();
+            Store storeDetail = storeService.getStoreDetail(store.getStoreNo());
+            model.addAttribute("store", storeDetail);
             return "store/store_detail";
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             writer.println("<script>alert('장바구니 담기에 실패 하였습니다.');</script>");
             writer.flush();
+            Store storeDetail = storeService.getStoreDetail(store.getStoreNo());
+            model.addAttribute("store", storeDetail);
             return "store/store_detail"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
         }
 

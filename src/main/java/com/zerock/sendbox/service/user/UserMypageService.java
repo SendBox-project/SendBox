@@ -93,6 +93,7 @@ public class UserMypageService {
     }
 
     //장바구니 담기
+    @Transactional
     public Orders saveOrders(Orders orders) {
         return ordersRepository.save(orders);
     }

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -45,14 +47,30 @@ public class PaymentController {
     //결제 요청
     @GetMapping("/payment")
     @ResponseBody                //cartList 혹은 상세페이지에서 결제 버튼 클릭 시 폼 안에 데이터를 받기 위해
-    public PaymentResDto payment(@ModelAttribute Orders orders, @ModelAttribute UserMember userMember, @ModelAttribute Room room, @ModelAttribute Store store) {
+    public PaymentResDto payment(@ModelAttribute Orders orders, @ModelAttribute Room room, @ModelAttribute Store store) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userId = auth.getName();
+        UserMember user = userMypageService.findByUserId(userId);
         // 룸 금액 계산
         Room roomInfo = userMypageService.findByRoomNo(room.getRoomNo());
         Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
 
+        // 바로 결제하기 누르면 orders 저장
+        if(orders.getOrderNo() == null){
+            String parsedLocalDateTimeNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+
+            // 화면상에 없는 값들을 DB에 넣기 위해 강제로 저장
+            orders.setUserMember(user);
+            orders.setRoom(room);
+            orders.setReservationNum(parsedLocalDateTimeNow);
+            orders.setReservationStatus("예약대기");
+            orders.setTotalPrice(roomInfo.getPrice() * orders.getTotalAmount() * betweenDays);
+            orders = userMypageService.saveOrders(orders);
+        }
+
         PaymentReqDto paymentReqDto = new PaymentReqDto();
         paymentReqDto.setPartner_order_id(orders.getReservationNum());
-        paymentReqDto.setPartner_user_id(userMember.getUserId());
+        paymentReqDto.setPartner_user_id(user.getUserId());
         paymentReqDto.setItem_name(store.getStoreName());
         paymentReqDto.setQuantity(orders.getTotalAmount());
         paymentReqDto.setTotal_amount(roomInfo.getPrice() * orders.getTotalAmount() * betweenDays);
@@ -130,7 +148,8 @@ public class PaymentController {
 
     //결제 취소 api
     @PostMapping("/paymentCancel/{orderNo}")
-    public String paymentCancel(@PathVariable Integer orderNo , HttpServletResponse response) throws IOException {
+    public String paymentCancel(@PathVariable(value = "orderNo") Integer orderNo , HttpServletResponse response) throws IOException {
+        System.out.println("orderNo = " + orderNo);
         Integer result = paymentService.paymentCancel(orderNo);
         if (result != 0) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
