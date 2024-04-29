@@ -2,6 +2,7 @@ package com.zerock.sendbox.controller.store;
 
 import com.zerock.sendbox.entity.Store;
 import com.zerock.sendbox.service.store.StoreService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -45,6 +47,8 @@ public class StoreController {
         model.addAttribute("store", store);
         return "store/store_detail";
     }
+
+
 
 //    //퀵메뉴
 //    @GetMapping("/{region}")

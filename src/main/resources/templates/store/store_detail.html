@@ -26,7 +26,7 @@
         </div> <!-- detail_row1 -->
         <div class="detail_row2">
             <div class="order_tap">
-                <form th:action="@{/?}" th:method="post" id="order_form">
+                <form th:action="@{/store/addToCart}" th:method="post" id="order_form">
                     <div class="form_list">
                         <div class="form_item">
                             <label for="startDate">시작날짜</label>
@@ -51,7 +51,7 @@
                     <button class="detail_button" type="submit" onclick="">결제하기</button>
                     <button class="detail_button" type="submit" onclick="">장바구니</button>
                 </form>
-            </div>
+            </div> <!-- order_tap -->
 
         </div> <!-- detail_row2 -->
     </div> <!-- detail_col1 --><hr>
@@ -71,8 +71,8 @@
                 <span>전화번호 : </span> <p th:text="${store.phone}">전화번호</p>
             </div>
             <div class="detail_address">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.853894005759!2d127.02962611516321!3d37.49791553900647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ab98b97e57%3A0xf42a01c1fef1a158!2z6rK067Cx7ISc7Jq47Y%2Bc!5e0!3m2!1sko!2skr!4v1683955200000!5m2!1sko!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <p th:text="${store.address}">주소</p>
+                <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.853894005759!2d127.02962611516321!3d37.49791553900647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ab98b97e57%3A0xf42a01c1fef1a158!2z6rK067Cx7ISc7Jq47Y%2Bc!5e0!3m2!1sko!2skr!4v1683955200000!5m2!1sko!2skr" width="280px" height="160px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                    <p th:text="${store.address}">주소</p>
             </div>
         </div> <!-- detail_info -->
     </div> <!-- detail_col3 -->
