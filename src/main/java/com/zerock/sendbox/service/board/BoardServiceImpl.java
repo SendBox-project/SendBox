@@ -114,9 +114,9 @@ public class BoardServiceImpl implements BoardService {
                 .content(board.getContent())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
-                .writerName(adminMember.getName())
+                .writerName(adminMember != null ? adminMember.getName() : null)
                 .AdminAnswerCount(AdminAnswerCount != null ? AdminAnswerCount.intValue() : 0)
-                .adminNo(adminMember.getAdminNo())
+                .adminNo(adminMember != null ? adminMember.getAdminNo() : null)
                 .boardType(board.getBoardType())
                 .thumbnail(board.getThumbnail())
                 .build();
