@@ -21,6 +21,7 @@
             <form th:action="@{/admin/updateInfo}" th:method="post" id="modify_account_form">
                 <input type="hidden" id="adminNo" name="adminNo" th:value="${admin.adminNo}">
                 <input type="hidden" id="approval" name="approval" th:value="${admin.approval}">
+                <input type="hidden" id="roleId" name="roleId" th:value="${admin.memberRole.roleId}">
                 <input type="hidden"  id="adminId" name="adminId" th:value="${admin.adminId}">
                 <input type="hidden"  id="deleteYn" name="deleteYn" th:value="N">
                 <input type="hidden"  id="gender" name="gender" th:value="${admin.gender}">

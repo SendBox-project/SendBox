@@ -27,9 +27,19 @@ public class Payment {
     private Orders orders;
 
     @Column
+    private String tId;
+
+    @Column
     private String type;
 
     @Column
     private String method;
+
+    @Column
+    private String issuerCorp;
+
+    @Column
+    private LocalDateTime approvedAt;
+
 
 }

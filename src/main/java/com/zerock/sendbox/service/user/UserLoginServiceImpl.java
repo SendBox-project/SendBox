@@ -42,7 +42,10 @@ public class UserLoginServiceImpl implements UserLoginService{
 
         if(mailSent) {
             UserMember userMember = userMemberRepository.findByMail(mail);
-            userMemberRepository.save(userMember);
+            if (userMember != null) {
+                userMember.setPassword(passwordEncoder.encode(temporaryPassword));
+                userMemberRepository.save(userMember);
+            }
         } else {
             // 이메일 전송 실패 처리
             // 예: 로깅 또는 사용자에게 메시지 전송

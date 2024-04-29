@@ -2,6 +2,7 @@ package com.zerock.sendbox.controller.admin;
 
 
 import com.zerock.sendbox.entity.AdminMember;
+import com.zerock.sendbox.entity.MemberRole;
 import com.zerock.sendbox.service.admin.AdminMypageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -41,9 +42,10 @@ public class AdminMypageController {
 
     // 개인 정보 수정
     @PostMapping("/updateInfo")
-    public String updateAdmin(@ModelAttribute AdminMember adminMember) { // 프론트에서 "개인 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
+    public String updateAdmin(@ModelAttribute AdminMember adminMember, @ModelAttribute MemberRole memberRole) { // 프론트에서 "개인 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
         //비밀번호 암호화
         adminMember.setPassword(passwordEncoder.encode(adminMember.getPassword()));
+        adminMember.setMemberRole(memberRole);
         AdminMember result = adminMypageService.updateInfo(adminMember);
         if(result != null) {
             return "admin/member/modify_account_ok";
@@ -62,12 +64,8 @@ public class AdminMypageController {
 
         if(passwordEncoder.matches(adminMember.getPassword(), admin.getPassword())) {
             Integer result = adminMypageService.deleteInfo(admin.getAdminNo());
-            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
-            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
-            writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
-            writer.flush();
             session.invalidate();
-            return "admin/home";
+            return "redirect:/admin/home";
         } else {
             model.addAttribute("admin", admin); // 비번 틀렸을때 다시 modify_account_form 프론트 화면으로 가야하니까 값을 뿌려준다.
             response.setContentType("text/html; charset=UTF-8");

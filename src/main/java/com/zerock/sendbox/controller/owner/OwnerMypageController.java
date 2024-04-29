@@ -1,9 +1,6 @@
 package com.zerock.sendbox.controller.owner;
 
-import com.zerock.sendbox.entity.Orders;
-import com.zerock.sendbox.entity.OwnerMember;
-import com.zerock.sendbox.entity.Room;
-import com.zerock.sendbox.entity.Store;
+import com.zerock.sendbox.entity.*;
 import com.zerock.sendbox.service.owner.OwnerMypageService;
 import com.zerock.sendbox.service.user.UserMypageService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,9 +46,10 @@ public class OwnerMypageController {
 
     //오너 정보 수정
     @PostMapping("/updateInfo")
-    public String updateInfo(@ModelAttribute OwnerMember ownerMember) { // 프론트에서 "오너 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
+    public String updateInfo(@ModelAttribute OwnerMember ownerMember, @ModelAttribute MemberRole memberRole) { // 프론트에서 "오너 정보 수정 완료" 버튼을 누르면 그 값을 @ModelAttribute로 받으면 된다.
         //비밀번호 암호화
         ownerMember.setPassword(passwordEncoder.encode(ownerMember.getPassword()));
+        ownerMember.setMemberRole(memberRole);
         OwnerMember result = ownerMypageService.updateInfo(ownerMember);
         if (result != null) {
             return "owner/member/modify_account_ok";
@@ -71,12 +69,8 @@ public class OwnerMypageController {
 
         if (passwordEncoder.matches(ownerMember.getPassword(), owner.getPassword())) { // 실제 입력한 비번, DB에 비번 비교
             Integer result = ownerMypageService.deleteInfo(owner.getOwnerNo());
-            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
-            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
-            writer.println("<script>alert('탈퇴가 완료되었습니다.');</script>");
-            writer.flush();
             session.invalidate();
-            return "owner/home";
+            return "redirect:/owner/home";
         } else {
             model.addAttribute("owner", owner); // 비번 틀렸을때 다시 modify_account_form 프론트 화면으로 가야하니까 값을 뿌려준다.
             response.setContentType("text/html; charset=UTF-8");
