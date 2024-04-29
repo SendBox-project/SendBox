@@ -1,9 +1,6 @@
 package com.zerock.sendbox.controller.user;
 
-import com.zerock.sendbox.entity.MemberRole;
-import com.zerock.sendbox.entity.Orders;
-import com.zerock.sendbox.entity.Room;
-import com.zerock.sendbox.entity.UserMember;
+import com.zerock.sendbox.entity.*;
 import com.zerock.sendbox.service.user.UserMypageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -221,6 +218,32 @@ public class UserMypageController {
             writer.println("<script>alert('삭제에 실패 하였습니다.');</script>");
             writer.flush();
             return "user/member/cartList"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
+        }
+
+    }
+
+    //장바구니 담기
+    @PostMapping("/addCart")
+    public String addCart(@ModelAttribute Orders orders, @ModelAttribute Room room, @ModelAttribute Store store, HttpServletResponse response) throws IOException {
+        Orders cartOrderInfo = userMypageService.saveOrders(orders);
+        Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
+        cartOrderInfo.setStartDate(orders.getStartDate());
+        cartOrderInfo.setEndDate(orders.getEndDate());
+        cartOrderInfo.setRoom(room);
+        cartOrderInfo.setTotalPrice(orders.getTotalPrice());
+
+        if (cartOrderInfo != null) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('장바구니 담기가 완료되었습니다.');</script>");
+            writer.flush();
+            return "store/store_detail";
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('장바구니 담기에 실패 하였습니다.');</script>");
+            writer.flush();
+            return "store/store_detail"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
         }
 
     }

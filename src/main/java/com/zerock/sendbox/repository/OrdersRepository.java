@@ -61,4 +61,5 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     @Modifying
     @Query("update Orders o set o.reservationStatus ='결제취소' where o.orderNo =:orderNo")
     Integer paymentCancel(@Param("orderNo") Integer orderNo);
+
 }

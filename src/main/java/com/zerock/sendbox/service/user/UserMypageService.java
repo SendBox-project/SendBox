@@ -91,4 +91,11 @@ public class UserMypageService {
     public Room findByRoomNo(Integer roomNo) {
         return roomRepository.findByRoomNo(roomNo);
     }
+
+    //장바구니 담기
+    public Orders saveOrders(Orders orders) {
+        return ordersRepository.save(orders);
+    }
+
+
 }
