@@ -21,7 +21,7 @@ public class Board extends BaseEntity {
     @Column
     private Integer boardNo;
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AdminAnswer> adminAnswers = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -51,10 +51,11 @@ public class Board extends BaseEntity {
     }
 
     public void setAdminMember(AdminMember adminMember) {
-        this.adminMember = adminMember;
-        if (adminMember != null && !adminMember.getBoardList().contains(this)) {
+        if (adminMember != null) {
+            this.adminMember = adminMember;
             adminMember.getBoardList().add(this);
         }
     }
+
 
 }
