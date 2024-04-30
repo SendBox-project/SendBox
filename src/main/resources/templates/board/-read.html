@@ -7,77 +7,85 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../static/css/board/read.css">
-    <link th:inline="css" th:href="@{/css/board/read.css}" rel="stylesheet"/>
+    <!--    &lt;!&ndash; 부트스트랩 CSS 파일 &ndash;&gt;-->
+    <!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <!--    &lt;!&ndash; jQuery와 부트스트랩 JavaScript 파일 &ndash;&gt;-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
 </head>
-
-
 <body id="board_container">
     <div class="read_wrap">
-        <table class="board_content" cellspacing="0">
-            <colgroup>
-                <col width="20">
-                <col width="20">
-                <col width="40">
-                <col width="200">
-                <col width="40">
-                <col width="70">
-                <col width="40">
-                <col width="70">
-            </colgroup>
-            <tr>
-                <th>No.</th>
-                <td th:text="${dto.boardNo}" class="read_td">5</td>
-                <th>제목</th>
-                <td th:text="${dto.title}" class="read_td">제목</td>
-                <th>작성자</th>
-                <td th:text="${dto.writerName}" class="read_td">555</td>
-                <th>작성일</th>
-                <td th:text="${#temporals.format(dto.regDate, 'yyyy/MM/dd')}" class="read_td">2024/04/28</td>
-            </tr>
-            <tr>
-                <td colspan="8" class="read_td read_content">[[${dto.content}]]</td>
-            </tr>
-        </table>
+        <p th:text="${dto.title}" class="visual_title">제목</p>
+        <hr>
 
-        <a th:href="@{/board/modify(boardNo=${dto.boardNo}, page=${pageRequestDTO.page}, type=${pageRequestDTO.type})}">
-            <button type="button" class="option_button">수정</button>
+        <div class="form-group">
+            <label>게시글번호</label>
+            <input type="text" class="form-control" name="boardNo" th:value="${dto.boardNo}" readonly >
+        </div>
+
+        <!--<div class="form-group">-->
+        <!--    <label>Title</label>-->
+        <!--    <input type="text" class="form-control" name="title" th:value="${dto.title}" readonly>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label>작성자</label>
+            <input type="text" class="form-control" name="writer" th:value="${dto.writerName}" readonly>
+        </div>
+        <div class="form-group">
+            <label>작성일</label>
+            <input type="text" class="form-control" name="regDate" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+        <div class="form-group">
+            <label></label>
+            <textarea class="form-control" rows="5" name="content" readonly>[[${dto.content}]]</textarea>
+        </div>
+
+
+        <a th:href="@{/board/modify(boardNo=${dto.boardNo}, page=${pageRequestDTO.page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">
+            <button type="button" class="option_button">Modify</button>
         </a>
-        <a th:href="@{/board/list(page=${pageRequestDTO.page}, type=${pageRequestDTO.type})}">
-            <button type="button" class="option_button">목록</button>
+
+        <a th:href="@{/board/list(page=${pageRequestDTO.page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">
+            <button type="button" class="option_button">List</button>
         </a>
     </div>
-<div class="reply_wrap">
-    <div>
-        <p class="addAdminAnswer">어드민 답변</p>
-        <p class="AdminAnswerCount">댓글 수 [[${dto.adminAnswerCount}]]</p>
+
+    <div class="mt-4">
+        <h5><span class="badge badge-info addAdminAnswer">Add AdminAnswer</span></h5>
+        <h5><span class="badge badge-secondary AdminAnswerCount">AdminAnswer Count [[${dto.adminAnswerCount}]]</span></h5>
     </div>
-    <div class="list-group AdminAnswerList">댓글 리스트</div>
+    <div class="list-group AdminAnswerList"></div>
     <div class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="reply_close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" >x</span>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input class="form-control"  type="text" name="adminAnswerText" placeholder="답변을 입력하세요">
+                        <input class="form-control"  type="text" name="adminAnswerText" placeholder="adminAnswerText ...">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control"  type="text" name="replyer" placeholder="Replyer">
                         <input type="hidden" name="answerNo" >
                     </div>
-<!--                    <div class="form-group">-->
-<!--                        <input class="form-control"  type="text" name="replyer" placeholder="Replyer">-->
-<!--                    </div>-->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="reply_button" id="AdminAnswerSave">등록</button>
-                    <button type="button" class="reply_button" id="replyClose" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-danger" id="AdminAnswerRemove">Remove</button>
+                    <button type="button" class="btn btn-warning" id="AdminAnswerModify">Modify</button>
+                    <button type="button" class="btn btn-primary" id="AdminAnswerSave">Save</button>
+                    <button type="button" class="btn btn-outline-secondary" id="replyClose" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 </body>
 
 
