@@ -20,21 +20,18 @@ public interface ReplyService {
         Inquary inquary = Inquary.builder().inquaryNo(replyDTO.getReplyNo()).build();
 
         Reply reply = Reply.builder()
-                .replyNo(replyDTO.getReplyNo())
                 .content(replyDTO.getContent())
                 .replyer(replyDTO.getReplyer())
-                .inquary(inquary)
                 .build();
         return reply;
     }
 
     default ReplyDTO entityToDTO(Reply reply) {
         ReplyDTO dto = ReplyDTO.builder()
-                .replyNo(reply.getReplyNo())
+
                 .content(reply.getContent())
                 .replyer(reply.getReplyer())
-                .regDate(reply.getRegDate())
-                .modDate(reply.getModDate())
+
                 .build();
         return dto;
     }
