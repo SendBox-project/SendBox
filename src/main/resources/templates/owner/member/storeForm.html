@@ -7,9 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <title>User modify account</title>
-    <link th:inline="css" rel="stylesheet" th:href="@{/css/owner/storeForm.css}"/>
+    <link th:inline="css" rel="stylesheet" th:href="@{/css/owner/storeForm.css}">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script> <!--임포트: jquery를 js에서 사용하기 위해서 -->
     <!--<script type="text/javascript" th:src="@{/js/owner/deleteInfo.js}"></script>-->
+
 </head>
 
 <body>
@@ -21,19 +22,19 @@
             <input type="hidden" id="storeNo" name="storeNo" th:value="${storeInfo.storeNo}">
             <div class="form_list">
                 <div class="form_item">
-                    <label for="notice">공지사항</label>
+                    <label for="notice">공지사항 &emsp;&emsp;&ensp;</label>
                     <input type="text" id="notice" name="notice" th:value="${storeInfo.notice}">
                 </div>
                 <div class="form_item">
-                    <label for="region">지역</label>
+                    <label for="region">지&emsp;&emsp;역 &emsp;&emsp;&ensp;</label>
                     <input type="text" id="region" name="region" th:value="${storeInfo.region}">
                 </div>
                 <div class="form_item">
-                    <label for="address">매장 주소</label>
+                    <label for="address">매장주소 &emsp;&emsp;&ensp;</label>
                     <input type="text" id="address" name="address" th:value="${storeInfo.address}">
                 </div>
                 <div class="form_item">
-                    <label for="phone">매장 전화번호</label>
+                    <label for="phone">매장전화번호 &ensp;</label>
                     <input type="text" id="phone" name="phone" th:value="${storeInfo.phone}">
                 </div>
                 <div class="form_item">
@@ -41,14 +42,14 @@
                     <input type="text" id="brn" name="brn" th:value="${storeInfo.brn}">
                 </div>
                 <div class="form_item">
-                    <label for="thumbnail">대표사진</label>
-                    <input type="file" id="thumbnail" name="thumbnail">
+                    <label for="thumbnail">대표사진&emsp;&emsp;&ensp;</label>
+                    <input type="file" accept=".jpg,.png" id="thumbnail" name="thumbnail">
                 </div>
                 <div class="form_item">
-                    <label for="infoPhoto">상세사진</label>
-                    <input type="file" id="infoPhoto" name="infoPhoto">
+                    <label for="infoPhoto">상세사진&emsp;&emsp;&ensp;</label>
+                    <input type="file" accept=".jpg,.png" id="infoPhoto" name="infoPhoto">
                 </div>
-                <div class="form_item">
+                <div class="form_item price_from">
                     <table>
                         <colgroup>
                             <col width="40%">

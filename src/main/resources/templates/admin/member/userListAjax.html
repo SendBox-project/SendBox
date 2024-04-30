@@ -28,7 +28,7 @@
             <td th:text="${user.gender}"></td>
             <td th:text="${user.mail}"></td>
             <td th:text="${user.phone}"></td>
-            <td><button type="button" th:onclick="|javascript:deleteUser()|">삭제</button></td>
+            <td><button type="button" th:onclick="|javascript:deleteUser()|" class="option_button">삭제</button></td>
         </tr>
     </th:block>
     <th:block th:if="${userMember.totalElements == 0}">
