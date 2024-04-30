@@ -31,11 +31,11 @@
             <td th:text="${owner.mail}"></td>
             <td th:text="${owner.phone}"></td>
             <td>
-                <button type="button" th:onclick="|javascript:deleteOwner()|">삭제</button>
+                <button type="button" th:onclick="|javascript:deleteOwner()|" class="option_button">삭제</button>
             </td>
             <td>
-                <button th:if="${owner.approvalYn == 'N'}" type="button" th:onclick="|location.href='@{/admin/ownerGrant/{ownerNo}(ownerNo=${owner.ownerNo})}'|">승인</button>
-                <button th:if="${owner.approvalYn == 'Y'}" type="button" disabled>승인 완료</button>
+                <button th:if="${owner.approvalYn == 'N'}" type="button" th:onclick="|location.href='@{/admin/ownerGrant/{ownerNo}(ownerNo=${owner.ownerNo})}'|" class="option_button">승인</button>
+                <button th:if="${owner.approvalYn == 'Y'}" type="button" disabled class="option_button2">승인 완료</button>
             </td>
         </tr>
     </th:block>

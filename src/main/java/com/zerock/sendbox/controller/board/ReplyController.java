@@ -21,34 +21,27 @@ public class ReplyController {
     @GetMapping(value = "/inquary/{inquaryNo}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ReplyDTO>> getListByInquary(@PathVariable("inquaryNo") Integer inquaryNo) {
         log.info("inquaryNo: " + inquaryNo);
-
         return new ResponseEntity<>(replyService.getList(inquaryNo), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Integer> register(@RequestBody ReplyDTO replyDTO) {
         log.info(replyDTO);
-
         Integer replyNo = replyService.register(replyDTO);
-
         return new ResponseEntity<>(replyNo, HttpStatus.OK);
     }
 
     @DeleteMapping("/{replyNo}")
     public ResponseEntity<String> remove(@PathVariable("replyNo") Integer replyNo) {
         log.info("RNO: " + replyNo);
-
         replyService.remove(replyNo);
-
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
-    @PutMapping("/{rno}")
-    public ResponseEntity<String> modify(@RequestBody ReplyDTO replyDTO) {
+    @PutMapping(value = "/{replyNo}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> modify(@PathVariable("replyNo") Integer replyNo, @RequestBody ReplyDTO replyDTO) {
         log.info(replyDTO);
-
         replyService.modify(replyDTO);
-
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

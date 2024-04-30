@@ -14,9 +14,13 @@ import java.time.LocalDateTime;
 public class ReplyDTO {
     private Integer replyNo;
 
+    private Integer inquaryNo;
+
     private String replyer;
 
     private String content;
 
     private LocalDateTime regDate, modDate;
+
+
 }

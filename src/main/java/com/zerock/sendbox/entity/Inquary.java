@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString(exclude = "member")
 public class Inquary extends BaseEntity{
 
@@ -19,7 +20,7 @@ public class Inquary extends BaseEntity{
     @Column(nullable = false)
     private Integer inquaryNo;
 
-    @OneToMany(mappedBy = "inquary", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "inquary", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reply> replies = new ArrayList<>();
 
     @Column(nullable = false)

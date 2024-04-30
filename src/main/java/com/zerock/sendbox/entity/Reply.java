@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString(exclude = "inquary")
 public class Reply extends BaseEntity{
 
@@ -25,5 +26,7 @@ public class Reply extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "inquaryNo",nullable = false)
     private Inquary inquary;
+
+
 
 }
