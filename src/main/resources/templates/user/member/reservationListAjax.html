@@ -30,7 +30,7 @@
             <td th:text="${order.reservationStatus}"></td>
             <th:block th:if="${order.reservationStatus == '결제완료'}">
                 <td>
-                    <button type="button" th:onclick="|javascript:paymentCancel()|">취소</button>
+                    <button type="button" th:onclick="|javascript:paymentCancel(${order.orderNo})|">취소</button>
                 </td>
             </th:block>
             <th:block th:if="${order.reservationStatus == '결제취소'}">

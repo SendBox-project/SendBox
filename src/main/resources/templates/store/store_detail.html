@@ -35,35 +35,40 @@
                     <div class="form_list">
                         <div class="form_item">
                             <label for="startDate">시작날짜</label>
-                            <input type="date" id="startDate" name="startDate">
+                            <input type="date" id="startDate" name="startDate" onchange="updateTotalPrice()">
                         </div>
                         <div class="form_item">
                             <label for="endDate">종료날짜</label>
-                            <input type="date" id="endDate" name="endDate">
+                            <input type="date" id="endDate" name="endDate" onchange="updateTotalPrice()">
                         </div>
                         <div class="form_item">
                             <label for="sizeType">사이즈</label>
-                            <select id = "sizeType">
+                            <select id="sizeType" onchange="updateTotalPrice()">
                                 <th:block th:each="room : ${store.rooms}">
-                                    <option th:value="${room.roomNo}" th:text="${room.size}" th:selected="${room.size}" readonly></option>
+                                    <option th:value="${room.roomNo}" th:text="${room.size}" th:selected="${room.size}"
+                                            readonly></option>
                                 </th:block>
                             </select>
-                        </div><hr>
+                        </div>
+                        <hr>
                         <div class="form_item">
-                            <span>총 가격</span>
+                            <label for="totalPrice">총가격</label>
+                            <input type="number" id="totalPrice" name="totalPrice" readonly>
                         </div>
                         <div class="form_item">
                             <label for="totalAmount">개수</label>
                             <input type="number" id="totalAmount" name="totalAmount">
                         </div>
-                    </div><hr>
-                    <button class="detail_button" type="submit" onclick="addCart()">장바구니 담기</button>
+                    </div>
+                    <hr>
+                    <button class="detail_button" type="button" onclick="addCart()">장바구니 담기</button>
                     <button class="detail_button" type="button" onclick="paymentGo()">결제하기</button>
                 </form>
             </div> <!-- order_tap -->
-
         </div> <!-- detail_row2 -->
-    </div> <!-- detail_col1 --><hr>
+    </div> <!-- detail_col1 -->
+    <hr>
+
     <div class="detail_col2">
         <div class="visual_title">
             <h2>상세페이지</h2>
@@ -71,20 +76,27 @@
         <div class="detail_img">
             <img th:src="@{'/upload/'+${store.infoPhoto}}" alt="상세이미지">
         </div>
-    </div> <!-- detail_col2 --> <hr>
+    </div> <!-- detail_col2 -->
+    <hr>
     <div class="detail_col3">
         <div class="detail_info">
             <div class="detail_notice">
                 <h2>가게 공지</h2>
                 <p th:text="${store.notice}">가게공지</p><br><br>
-                <span>전화번호 : </span> <p th:text="${store.phone}">전화번호</p>
+                <span>전화번호 : </span>
+                <p th:text="${store.phone}">전화번호</p>
             </div>
             <div class="detail_address">
-                <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.853894005759!2d127.02962611516321!3d37.49791553900647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ab98b97e57%3A0xf42a01c1fef1a158!2z6rK067Cx7ISc7Jq47Y%2Bc!5e0!3m2!1sko!2skr!4v1683955200000!5m2!1sko!2skr" width="280px" height="160px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.853894005759!2d127.02962611516321!3d37.49791553900647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ab98b97e57%3A0xf42a01c1fef1a158!2z6rK067Cx7ISc7Jq47Y%2Bc!5e0!3m2!1sko!2skr!4v1683955200000!5m2!1sko!2skr"
+                            width="280px" height="160px" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
                 <p th:text="${store.address}">주소</p>
             </div>
         </div> <!-- detail_info -->
     </div> <!-- detail_col3 -->
+
 </div> <!-- container -->
 </body>
 </html>

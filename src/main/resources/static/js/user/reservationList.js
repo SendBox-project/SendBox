@@ -33,9 +33,9 @@ function reservationListAjax(page) {  // 위에서 보낸 매개변수 1을 받�
 }
 
 //예약취소
-function paymentCancel() {
+function paymentCancel(orderNo) {
     const innerHtml = $("#reservationListForm") //reservationListAjax.html 소스를 붙일 파일 위치 지정
-    const orderNo = document.getElementById('orderNo').value; //id가 orderNo인 실제 값을 가져옴
+    //const orderNo = document.getElementById('orderNo').value; //id가 orderNo인 실제 값을 가져옴
 
     console.log(orderNo)
     $.ajax({
