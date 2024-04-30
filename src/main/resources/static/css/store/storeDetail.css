@@ -32,7 +32,7 @@
 /*썸네일*/
 .detail_row1 .thumbnail {
     width: 1000px;
-    height: 230px;
+    height: 380px;
     background-color: tan;
     margin-bottom: 15px;
     overflow: hidden; /* 이미지를 넘치지 않도록 설정 */
@@ -42,11 +42,11 @@
 }
 
 /*리뷰창*/
-.detail_row1 .review {
-    width: 1000px;
-    height: 150px;
-    background-color: #b6ffb6;
-}
+/*.detail_row1 .review {*/
+/*    width: 1000px;*/
+/*    height: 150px;*/
+/*    background-color: #b6ffb6;*/
+/*}*/
 
 /*오더창*/
 .detail_row2 {
@@ -73,6 +73,9 @@
 
 .detail_col2 .visual_title {
     text-align: center;
+    font-size: 2.5em;
+    margin: 40px auto;
+    font-weight: bold;
 }
 /*.detail_col2 .visual_title h2 {*/
 /*    margin: 20px 0;*/
@@ -103,6 +106,10 @@
     /*background-color: #ffffff;*/
     margin: 20px 20px;
     padding: 10px;
+}
+
+.detail_notice h2 {
+    margin: 20px auto;
 }
 
 .detail_address {

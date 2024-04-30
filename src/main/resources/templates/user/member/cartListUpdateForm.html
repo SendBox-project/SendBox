@@ -28,23 +28,23 @@
             <input type="hidden" id="reservationNum" name="reservationNum" th:value="${cart.reservationNum}">
             <div class="form_list">
                 <div class="form_item">
-                    <label for="storeName">매장명</label>
+                    <label for="storeName">매&ensp;장&ensp;명&emsp;&emsp;&emsp;&ensp;</label>
                     <input type="text" id="storeName2" name="storeName2" th:value="${cart.room.store.storeName}" readonly disabled>
                 </div>
                 <div class="form_item">
-                    <label for="storeName">주문번호</label>
+                    <label for="storeName">주문번호&emsp;&emsp;&emsp;&ensp;</label>
                     <input type="text" id="reservationNum2" name="reservationNum2" th:value="${cart.reservationNum}" readonly disabled>
                 </div>
                 <div class="form_item">
-                    <label for="startDate">사용 시작일</label>
+                    <label for="startDate">사용&ensp;시작일&emsp;&emsp;</label>
                     <input id="startDate" name="startDate" th:value="${cart.startDate}" type="date">
                 </div>
                 <div class="form_item">
-                    <label for="endDate">사용 종료일</label>
+                    <label for="endDate">사용&ensp;종료일&emsp;&emsp;</label>
                     <input id="endDate" name="endDate" th:value="${cart.endDate}" type="date">
                 </div>
                 <div class="form_item">
-                    <label for="sizeType">사이즈</label>
+                    <label for="sizeType">사&ensp;이&ensp;즈&emsp;&emsp;&emsp;&ensp;</label>
                     <select id = "sizeType">
                         <th:block th:each="room : ${roomList}">
                             <option th:value="${room.roomNo}" th:text="${room.size}" th:selected="${cart.room.size} == ${room.size}" readonly></option>
@@ -52,11 +52,11 @@
                     </select>
                 </div>
                 <div class="form_item">
-                    <label for="totalAmount">수량</label>
+                    <label for="totalAmount">수&emsp;&emsp;량&emsp;&emsp;&emsp;&ensp;</label>
                     <input id="totalAmount" name="totalAmount" th:value="${cart.totalAmount}" type="number">
                 </div>
                 <div class="form_item">
-                    <label for="totalPrice">가격</label>
+                    <label for="totalPrice">가&emsp;&emsp;격&emsp;&emsp;&emsp;&ensp;</label>
                     <input id="totalPrice" name="totalPrice" th:value="${cart.totalPrice}" type="text" readonly disabled>
                 </div>
             </div>
