@@ -14,39 +14,34 @@
     <div class="form_wrap">
         <h1 class="board_title">새로운 게시물 등록</h1>
         <form action="/board/register" method="post" class="board_content">
-            <table>
-                <tr>
-                    <td><label for="adminNo">관리자 번호 <span class="requiredDot">*</span></label></td>
-                    <td><input type="text" id="adminNo" name="adminNo" required placeholder="관리자 번호를 입력해주세요"></td>
-                </tr>
-
-                <tr>
-                    <td><label for="title">제목 <span class="requiredDot">*</span></label></td>
-                    <td><input type="text" id="title" name="title" required placeholder="제목을 입력해주세요"></td>
-                </tr>
-                <tr>
-                    <td><label for="content">내용 <span class="requiredDot">*</span></label></td>
-                    <td><textarea id="content" name="content" required placeholder="내용을 입력해주세요"></textarea></td>
-                </tr>
-                <tr>
-                    <td><label for="thumbnail">썸네일 URL</label></td>
-                    <td><input type="text" id="thumbnail" name="thumbnail" placeholder="첨부파일"></td>
-                </tr>
-                <tr>
-                    <td><label for="writerName">작성자 이름 <span class="requiredDot">*</span></label></td>
-                    <td><input type="text" id="writerName" name="writerName" required placeholder="작성자 이름을 입력해주세요"></td>
-                </tr>
-                <tr>
-                    <td><label for="boardType">게시판 유형 <span class="requiredDot">*</span></label></td>
-                    <td>
-                        <select id="boardType" name="boardType" required>
-                            <option value="A">유형 A</option>
-                            <option value="B">유형 B</option>
-                            <option value="C">유형 C</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+            <div>
+                <label for="adminNo">관리자번호&ensp; <span class="requiredDot">*</span></label>
+                <input type="text" id="adminNo" name="adminNo" required placeholder="관리자 번호를 입력해주세요">
+            </div>
+            <div>
+                <label for="title">제&emsp;&emsp;&ensp; 목&ensp;&ensp;<span class="requiredDot">*</span></label>
+                <input type="text" id="title" name="title" required placeholder="제목을 입력해주세요">
+            </div><hr>
+            <div>
+                <label for="content">내&emsp;&emsp;&ensp; 용&ensp;&ensp;<span class="requiredDot">*</span></label>
+                <textarea id="content" name="content" required placeholder="내용을 입력해주세요"></textarea>
+            </div>
+            <div>
+                <label for="thumbnail">첨 부 파 일 &ensp;&ensp;</label>
+                <input type="text" id="thumbnail" name="thumbnail" placeholder="첨부파일">
+            </div>
+            <div>
+                <label for="writerName">작&emsp;성&emsp;자&ensp; <span class="requiredDot">*</span></label>
+                <input type="text" id="writerName" name="writerName" required placeholder="작성자 이름을 입력해주세요">
+            </div>
+            <div>
+                <label for="boardType">게시판유형 &ensp;<span class="requiredDot">*</span></label>
+                    <select id="boardType" name="boardType" required>
+                        <option value="A">유형 A</option>
+                        <option value="B">유형 B</option>
+                        <option value="C">유형 C</option>
+                    </select>
+            </div>
             <input class="regi_button" type="submit" value="게시글 등록">
         </form>
     </div>

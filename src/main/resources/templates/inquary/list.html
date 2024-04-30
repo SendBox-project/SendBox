@@ -6,61 +6,61 @@
       layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
-<link rel="stylesheet" href="../../static/css/board/inquaryList.css">
+    <link rel="stylesheet" href="../../static/css/board/list.css">
+    <link th:inline="css" th:href="@{/css/board/list.css}" rel="stylesheet"/>
 </head>
-<body>
+
+<body id="list_container">
 <div class="side_bar">
     <div class="visual_title"><span>고객센터</span></div>
     <ul>
         <div class="side_list">
-            <li class="side_item"><a th:href="@{/list}">공지사항</a></li>
-            <!--            <li class="side_item"><a th:href="@{/이벤트}">이벤트</a></li>-->
-            <li class="side_item"><a th:href="@{/1:1문의}">1:1문의</a></li>
+            <li class="side_item"><a th:href="@{/board/noticeList}">공지사항</a></li>
+            <li class="side_item"><a th:href="@{/inquary/list}">1:1문의</a></li>
         </div>
     </ul>
 </div>
 
 <div class="list_wrap">
     <h1 class="board_title"> 1:1 문의 </h1>
-        <span>
-            <a th:href="@{/inquary/register}">
-                <button type="button" class="btn btn-outline-primary"> REGISTER</button>
-            </a>
-        </span>
-
     <table class="board_content" cellspacing="0">
         <caption>게시판 리스트</caption>
         <colgroup>
-            <col width="80">
-            <col>
-            <col width="90">
-            <col width="100">
+            <col width="30">
+            <col width="200">
+            <col width="50">
+            <col width="50">
         </colgroup>
         <thead>
         <tr>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
+            <th scope="col">작성자</th>
             <th scope="col">작성일</th>
         </tr>
         </thead>
-
         <tbody>
         <tr th:each="dto : ${result.dtoList}">
             <td scope="row">
-                <a th:href="@{/inquary/read(inquaryNo = ${dto.inquaryNo},
+                    [[${dto.inquaryNo}]]
+            </td>
+            <td  class="list_title"><a th:href="@{/inquary/read(inquaryNo = ${dto.inquaryNo},
                         page= ${result.page},
                         type=${pageRequestDTO2.type},
-                        keyword = ${pageRequestDTO2.keyword})}">
-                    [[${dto.inquaryNo}]]
-                </a>
-            </td>
-            <td>[[${dto.title}]] ----------------- [<b th:text="${dto.replyCount}"></b>] </td>
+                        keyword = ${pageRequestDTO2.keyword})}">[[${dto.title}]] [<b th:text="${dto.replyCount}"></b>] </a></td>
+            <td><p th:text="${dto.memberName}"></p></td>
             <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
         </tr>
         </tbody>
     </table>
+    <span>
+        <a th:href="@{/inquary/register}">
+            <button type="button" class="option_button">글작성</button>
+        </a>
+    </span>
 
-    <ul class="pagination h-100 justify-content-center align-items-center">
+
+    <ul class="pagination buttons_wrap">
         <li class="page-item " th:if="${result.prev}">
             <a class="page-link" th:href="@{/inquary/list(page= ${result.start -1},
                         type=${pageRequestDTO2.type} ,

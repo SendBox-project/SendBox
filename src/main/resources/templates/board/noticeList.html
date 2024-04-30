@@ -7,16 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../static/css/board/list.css">
-    <!--    <link th:inline="css" th:href="@{/css/board/list.css}" rel="stylesheet"/>-->
+        <link th:inline="css" th:href="@{/css/board/list.css}" rel="stylesheet"/>
 </head>
-<body>
+<body id="list_container">
 <div class="side_bar">
     <div class="visual_title"><span>고객센터</span></div>
     <ul>
         <div class="side_list">
-            <li class="side_item"><a th:href="@{/noticeList}">공지사항</a></li>
-            <!--            <li class="side_item"><a th:href="@{/이벤트}">이벤트</a></li>-->
-            <li class="side_item"><a th:href="@{/1:1문의}">1:1문의</a></li>
+            <li class="side_item"><a th:href="@{/board/noticeList}">공지사항</a></li>
+            <li class="side_item"><a th:href="@{/inquary/list}">1:1문의</a></li>
         </div>
     </ul>
 </div>
@@ -24,49 +23,45 @@
 <div class="list_wrap">
     <h1 class="board_title">공지사항</h1>
     <table class="board_content" cellspacing="0">
-        <caption>게시판 리스트</caption>
         <colgroup>
-            <col width="80">
-            <col>
+            <col width="30">
+            <col width="200">
             <col width="50">
-            <col width="90">
-            <col width="100">
-            <col width="60">
-            <col width="*">
-            <col width="*">
+            <col width="50">
         </colgroup>
         <thead>
         <tr>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
+            <th scope="col">작성자</th>
             <th scope="col">작성일</th>
         </tr>
         </thead>
         <tbody>
             <tr th:each="dto : ${result.dtoList}">
-                <th scope="row">
-                    <a th:href="@{/board/read(boardNo=${dto.boardNo},
+                <td scope="row"> [[${dto.boardNo}]] </td>
+                <td class="list_title"><a th:href="@{/board/read(boardNo=${dto.boardNo},
                 page=${result.page},
                 type=${pageRequestDTO.type},
                 keyword=${pageRequestDTO.keyword})}">
-                        [[${dto.boardNo}]]
-                    </a>
-                </th>
-                <td>[[${dto.title}]] ----------------  [<b th:text="${dto.AdminAnswerCount}"></b>]</td>
+                    [[${dto.title}]] [<b th:text="${dto.AdminAnswerCount}"></b>] </a></td>
+                <td><p th:text="${dto.writerName}"></p></td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
             </tr>
-
         </tbody>
-
     </table>
-    <ul class="pagination h-100 justify-content-center align-items-center">
+    <span>
+        <a th:href="@{/board/register}">
+            <button type="button" class="option_button">글작성</button>
+        </a>
+    </span>
 
+    <ul class="pagination buttons_wrap">
         <li class="page-item " th:if="${result.prev}">
             <a class="page-link" th:href="@{/board/list(page= ${result.start -1},
                     type=${pageRequestDTO.type} ,
                     keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">Previous</a>
         </li>
-
         <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
             <a class="page-link" th:href="@{/board/list(page = ${page} ,
                    type=${pageRequestDTO.type} ,
