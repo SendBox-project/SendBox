@@ -18,38 +18,41 @@
         <input type="hidden" name="keyword" th:value="${pageRequestDTO2.keyword}">
 
         <div class="form-group">
-            <label>InquaryNo</label>
-            <input type="text" class="form-control" name="inquaryNo" th:value="${dto.inquaryNo}" readonly>
+            <label for="inquaryNo">InquaryNo</label>
+            <input type="text" class="form-control" id="inquaryNo" name="inquaryNo" th:value="${dto.inquaryNo}" readonly>
         </div>
 
         <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" name="title" th:value="${dto.title}">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}">
         </div>
 
         <div class="form-group">
-            <label >Content</label>
-            <textarea class="form-control" rows="5" name="content">[[${dto.content}]]</textarea>
+            <label for="content">Content</label>
+            <textarea class="form-control" rows="5" id="content" name="content" th:text="${dto.content}"></textarea>
         </div>
+
         <div class="form-group">
-            <label >Writer</label>
-            <input type="text" class="form-control" name="member" th:value="${dto.memberMail}" readonly>
+            <label for="member">Writer</label>
+            <input type="text" class="form-control" id="member" name="member" th:value="${dto.memberName}" readonly>
         </div>
+
         <div class="form-group">
-            <label >RegDate</label>
-            <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+            <label for="regDate">RegDate</label>
+            <input type="text" class="form-control" id="regDate" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
         </div>
+
         <div class="form-group">
-            <label >ModDate</label>
-            <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+            <label for="modDate">수정일자</label>
+            <input type="text" class="form-control" id="modDate" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
         </div>
+
+        <button type="submit" class="btn btn-primary modifyBtn">Modify</button>
+        <button type="button" class="btn btn-info listBtn">List</button>
+        <button type="button" class="btn btn-danger removeBtn">Remove</button>
+
     </form>
 
-    <button type="button" class="btn btn-primary modifyBtn">Modify</button>
-
-    <button type="button" class="btn btn-info listBtn">List</button>
-
-    <button type="button" class="btn btn-danger removeBtn">Remove</button>
 
     <script th:inline="javascript">
 
@@ -58,7 +61,7 @@
         $(".removeBtn").click(function(){
 
             actionForm
-                .attr("action", "/board/remove")
+                .attr("action", "/inquary/remove")
                 .attr("method","post");
 
             actionForm.submit();
@@ -72,7 +75,7 @@
             }
 
             actionForm
-                .attr("action", "/board/modify")
+                .attr("action", "/inquary/modify")
                 .attr("method","post")
                 .submit();
         });
@@ -92,7 +95,7 @@
 
 
             actionForm
-                .attr("action", "/board/list")
+                .attr("action", "/inquary/list")
                 .attr("method","get");
 
             actionForm.submit();

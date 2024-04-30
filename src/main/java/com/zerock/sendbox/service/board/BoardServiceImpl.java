@@ -70,7 +70,7 @@ public class BoardServiceImpl implements BoardService {
     @Transactional
     @Override
     public void removeWithAdminAnswer(Integer boardNo) {
-        adminAnswerRepository.deleteByBoardNo(boardNo);
+//        adminAnswerRepository.deleteByBoardNo(boardNo);
         boardRepository.deleteById(boardNo);
     }
 
@@ -114,9 +114,9 @@ public class BoardServiceImpl implements BoardService {
                 .content(board.getContent())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
-                .writerName(adminMember != null ? adminMember.getName() : null)
-                .AdminAnswerCount(AdminAnswerCount != null ? AdminAnswerCount.intValue() : 0)
-                .adminNo(adminMember != null ? adminMember.getAdminNo() : null)
+                .writerName(adminMember.getName())
+                .AdminAnswerCount(AdminAnswerCount.intValue())
+                .adminNo(adminMember.getAdminNo())
                 .boardType(board.getBoardType())
                 .thumbnail(board.getThumbnail())
                 .build();

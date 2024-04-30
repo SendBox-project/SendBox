@@ -18,33 +18,8 @@ public interface InquaryService {
 
     void modify(InquaryDTO inquaryDTO);
 
-    default Inquary dtoToEntity(InquaryDTO dto) {
 
-        UserMember userMember = UserMember.builder().mail(dto.getMemberMail()).build();
+    Inquary dtoToEntity(InquaryDTO dto);
 
-        Inquary inquary = Inquary.builder()
-                .userMember(userMember)
-                .inquaryNo(dto.getInquaryNo())
-                .title(dto.getTitle())
-                .content(dto.getContent())
-                .build();
-        return inquary;
-    }
-
-    default InquaryDTO entityToDTO(Inquary inquary, UserMember userMember, Long replyCount) {
-
-        InquaryDTO inquaryDTO = InquaryDTO.builder()
-                .userNo(inquary.getUserMember().getUserNo())
-                .inquaryNo(inquary.getInquaryNo())
-                .title(inquary.getTitle())
-                .content(inquary.getContent())
-                .regDate(inquary.getRegDate())
-                .modDate(inquary.getModDate())
-                .memberMail(userMember.getMail())
-                .memberName(userMember.getName())
-                .replyCount(replyCount.intValue())
-                .build();
-        return inquaryDTO;
-    }
-
+    InquaryDTO entityToDTO(Inquary inquary, UserMember userMember, Long replyCount);
 }

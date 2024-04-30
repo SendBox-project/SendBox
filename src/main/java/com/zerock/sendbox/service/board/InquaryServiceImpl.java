@@ -5,6 +5,7 @@ import com.zerock.sendbox.entity.Inquary;
 import com.zerock.sendbox.entity.UserMember;
 import com.zerock.sendbox.repository.InquaryRepository;
 import com.zerock.sendbox.repository.ReplyRepository;
+import com.zerock.sendbox.repository.UserMemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -23,11 +24,18 @@ public class InquaryServiceImpl implements InquaryService{
 
     private final ReplyRepository replyRepository;
 
+    private final UserMemberRepository userMemberRepository;
+
     @Override
     public Integer register(InquaryDTO dto) {
         log.info(dto);
 
         Inquary inquary = dtoToEntity(dto);
+
+        UserMember userMember = userMemberRepository.findById(dto.getUserNo())
+                        .orElseThrow(() -> new IllegalArgumentException("해당 UserMember를 찾을 수 없습니다. AdminNo: " + dto.getUserNo()));
+
+        inquary.setUserMember(userMember);
 
         inquaryRepository.save(inquary);
 
@@ -61,15 +69,15 @@ public class InquaryServiceImpl implements InquaryService{
     @Override
     public void removeWithReplies(Integer inquaryNo) {
 
-        replyRepository.deleteByInquaryNo(inquaryNo);
+       // replyRepository.deleteByInquaryNo(inquaryNo);
 
-        replyRepository.deleteById(inquaryNo);
+        inquaryRepository.deleteById(inquaryNo);
     }
 
     @Transactional
     @Override
     public void modify(InquaryDTO inquaryDTO) {
-        Inquary inquary = inquaryRepository.getReferenceById(inquaryDTO.getInquaryNo());
+        Inquary inquary = inquaryRepository.getOne(inquaryDTO.getInquaryNo());
 
         if(inquary != null) {
             inquary.changeTitle(inquaryDTO.getTitle());
@@ -77,6 +85,37 @@ public class InquaryServiceImpl implements InquaryService{
 
             inquaryRepository.save(inquary);
         }
+    }
+
+    @Override
+    public Inquary dtoToEntity(InquaryDTO dto) {
+
+        Inquary inquary = Inquary.builder()
+                .inquaryNo(dto.getInquaryNo())
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .build();
+        return inquary;
+    }
+
+    @Override
+    public InquaryDTO entityToDTO(Inquary inquary, UserMember userMember, Long replyCount) {
+
+        if (inquary == null) {
+            return null;
+        }
+
+        InquaryDTO inquaryDTO = InquaryDTO.builder()
+
+                .inquaryNo(inquary.getInquaryNo())
+                .title(inquary.getTitle())
+                .content(inquary.getContent())
+                .regDate(inquary.getRegDate())
+                .modDate(inquary.getModDate())
+                .memberName(userMember.getName())
+                .replyCount(replyCount.intValue())
+                .build();
+        return inquaryDTO;
     }
 
 }

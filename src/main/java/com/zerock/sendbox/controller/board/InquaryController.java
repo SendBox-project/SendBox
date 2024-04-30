@@ -5,6 +5,7 @@ import com.zerock.sendbox.dto.board.PageRequestDTO2;
 import com.zerock.sendbox.service.board.InquaryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/inquary/")
+@RequestMapping("/inquary")
 @Log4j2
 @RequiredArgsConstructor
 public class InquaryController {
 
-    private final InquaryService inquaryService;
+    @Autowired
+    InquaryService inquaryService;
 
     @GetMapping("/list")
     public void list(PageRequestDTO2 pageRequestDTO2, Model model) {
@@ -48,7 +50,7 @@ public class InquaryController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(@ModelAttribute("requestDTO2") PageRequestDTO2 pageRequestDTO2, Integer inquaryNo, Model model) {
+    public void read(@ModelAttribute("pageRequestDTO2") PageRequestDTO2 pageRequestDTO2, Integer inquaryNo, Model model) {
         log.info("inquaryNo: " + inquaryNo);
 
         InquaryDTO inquaryDTO = inquaryService.get(inquaryNo);
@@ -70,15 +72,15 @@ public class InquaryController {
     }
 
     @PostMapping("/modify")
-    public String modify(InquaryDTO dto, @ModelAttribute("requestDTO2") PageRequestDTO2 pageRequestDTO2, RedirectAttributes redirectAttributes) {
+    public String modify(InquaryDTO dto, @ModelAttribute("pageRequestDTO2") PageRequestDTO2 pageRequestDTO2, RedirectAttributes redirectAttributes) {
         log.info("post modify.............................");
         log.info("dto: " + dto);
 
         inquaryService.modify(dto);
 
         redirectAttributes.addAttribute("page", pageRequestDTO2.getPage());
-        redirectAttributes.addAttribute("page", pageRequestDTO2.getType());
-        redirectAttributes.addAttribute("page", pageRequestDTO2.getKeyword());
+        redirectAttributes.addAttribute("type", pageRequestDTO2.getType());
+        redirectAttributes.addAttribute("keyword", pageRequestDTO2.getKeyword());
 
         redirectAttributes.addAttribute("inquaryNo", dto.getInquaryNo());
 

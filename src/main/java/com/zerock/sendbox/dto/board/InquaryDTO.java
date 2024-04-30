@@ -19,8 +19,6 @@ public class InquaryDTO {
 
     private String content;
 
-    private String memberMail;
-
     private String memberName;
 
     private LocalDateTime regDate;
