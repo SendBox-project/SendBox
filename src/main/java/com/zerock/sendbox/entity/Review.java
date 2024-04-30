@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 @EntityListeners(value = { AuditingEntityListener.class })
 public class Review{
