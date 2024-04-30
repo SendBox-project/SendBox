@@ -19,12 +19,12 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     //유저의 예약 내역 리스트 조회
     @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
             "inner join Store s on r.store.storeNo = s.storeNo " +
-            "where o.reservationStatus != '예약대기' and o.userMember.userNo =:userNo")
+            "where o.reservationStatus != '예약대기' and o.userMember.userNo =:userNo ORDER BY o.startDate DESC")
     List<Orders> findAllReservation(@Param("userNo") Integer userNo);
 
     //장바구니 리스트 조회
     @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
-            "inner join Store s on r.store.storeNo = s.storeNo where o.reservationStatus = '예약대기' and o.userMember.userNo =:userNo")
+            "inner join Store s on r.store.storeNo = s.storeNo where o.reservationStatus = '예약대기' and o.userMember.userNo =:userNo ORDER BY o.startDate DESC")
     List<Orders> findAllCartList(@Param("userNo") Integer userNo);
 
     //orderNo에 맞는 장바구니 품목 한 개 가져오기
@@ -40,7 +40,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
     //사업자의 예약 내역 리스트 조회
     @Query("select o,r,s from Orders o inner join Room r on o.room.roomNo = r.roomNo " +
-            "inner join Store s on r.store.storeNo = s.storeNo where o.reservationStatus != '예약대기' and s.ownerMember.ownerNo =:ownerNo ")
+            "inner join Store s on r.store.storeNo = s.storeNo where o.reservationStatus != '예약대기' and s.ownerMember.ownerNo =:ownerNo ORDER BY o.startDate DESC")
     List<Orders> findAllUserReservation(@Param("ownerNo") Integer ownerNo);
 
 

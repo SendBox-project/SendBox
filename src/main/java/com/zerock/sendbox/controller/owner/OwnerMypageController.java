@@ -2,6 +2,7 @@ package com.zerock.sendbox.controller.owner;
 
 import com.zerock.sendbox.entity.*;
 import com.zerock.sendbox.service.owner.OwnerMypageService;
+import com.zerock.sendbox.service.user.PaymentService;
 import com.zerock.sendbox.service.user.UserMypageService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +30,9 @@ public class OwnerMypageController {
 
     @Autowired
     UserMypageService userMypageService;
+
+    @Autowired
+    PaymentService paymentService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -216,6 +220,24 @@ public class OwnerMypageController {
             return "owner/member/storeForm";
         }
 
+    }
+    //결제 취소 api
+    @PostMapping("/paymentCancel/{orderNo}")
+    public String paymentCancel(@PathVariable(value = "orderNo") Integer orderNo , HttpServletResponse response) throws IOException {
+        Integer result = paymentService.paymentCancel(orderNo);
+        if (result != 0) {
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('취소 되었습니다.');</script>");
+            writer.flush();
+            return "owner/member/reservationList";
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('취소 실패 하였습니다.');</script>");
+            writer.flush();
+            return "owner/member/reservationList"; // 원래 리다이렉트를 하면 model.~ 안해도 되지만 alert창과 redirect 같이 사용이 안됨!
+        }
     }
 
 }

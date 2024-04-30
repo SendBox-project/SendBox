@@ -30,6 +30,7 @@
             <div class="order_tap">
                 <form th:action="@{/user/addCart}" th:method="post" id="order_form">
                     <input type="hidden" id="roomNo" name="roomNo" value="">
+                    <input type="hidden" id="onePrice" name="onePrice" value="">
                     <input type="hidden" id="storeName" name="storeName" th:value="${store.storeName}">
                     <input type="hidden" id="storeNo" name="storeNo" th:value="${store.storeNo}">
                     <div class="form_list">
@@ -45,19 +46,18 @@
                             <label for="sizeType">사이즈</label>
                             <select id="sizeType" onchange="updateTotalPrice()">
                                 <th:block th:each="room : ${store.rooms}">
-                                    <option th:value="${room.roomNo}" th:text="${room.size}" th:selected="${room.size}"
-                                            readonly></option>
+                                    <option th:value="${room.roomNo}+','+${room.price}" th:text="${room.size}" th:selected="s == ${room.size}"></option>
                                 </th:block>
                             </select>
                         </div>
                         <hr>
                         <div class="form_item">
-                            <label for="totalPrice">총가격</label>
-                            <input type="number" id="totalPrice" name="totalPrice" readonly>
+                            <label for="totalAmount">개수</label>
+                            <input type="number" id="totalAmount" name="totalAmount" onchange="updateTotalPrice()">
                         </div>
                         <div class="form_item">
-                            <label for="totalAmount">개수</label>
-                            <input type="number" id="totalAmount" name="totalAmount">
+                            <label for="totalPrice">총가격</label>
+                            <input type="number" id="totalPrice" name="totalPrice" readonly>
                         </div>
                     </div>
                     <hr>

@@ -67,7 +67,6 @@ public class OwnerSignUpController {
                                   @RequestParam(value = "phone") String phone,
                                   @RequestParam(value = "thumbnail") MultipartFile thumbnail,
                                   @RequestParam(value = "infoPhoto") MultipartFile infoPhoto,
-                                  @RequestParam(value = "filter") String filter,
                                   @RequestParam(value = "size1") String size1,
                                   @RequestParam(value = "size2") String size2,
                                   @RequestParam(value = "size3") String size3,
@@ -87,7 +86,6 @@ public class OwnerSignUpController {
         storeInfo.setAddress(address);
         storeInfo.setBrn(brn);
         storeInfo.setPhone(phone);
-        storeInfo.setFilter(filter);
         storeInfo.setOwnerMember(ownerMember);
 
 

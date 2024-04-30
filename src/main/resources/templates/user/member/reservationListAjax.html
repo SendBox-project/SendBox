@@ -4,15 +4,17 @@
     <colgroup>
         <col width="20%">
         <col width="20%">
-        <col width="20%">
+        <col width="10%">
         <col width="15%">
         <col width="15%">
+        <col width="10%">
         <col width="10%">
     </colgroup>
     <thead>
     <tr>
         <th>매장명</th>
         <th>예약 번호</th>
+        <th>가격</th>
         <th>사용 시작일</th>
         <th>사용 종료일</th>
         <th>예약 상태</th>
@@ -25,6 +27,7 @@
             <input type="hidden" id="orderNo" name="orderNo" th:value="${order.orderNo}">
             <td th:text="${order.room.store.storeName}"></td>
             <td th:text="${order.reservationNum}"></td>
+            <td th:text="${order.totalPrice}"></td>
             <td th:text="${order.startDate}"></td>
             <td th:text="${order.endDate}"></td>
             <td th:text="${order.reservationStatus}"></td>
@@ -42,7 +45,7 @@
     </th:block>
     <th:block th:if="${reservations.totalElements == 0}">
         <tr style="text-align: center">
-            <td colspan="6">예약 내역이 없습니다.</td>
+            <td colspan="7">예약 내역이 없습니다.</td>
         </tr>
     </th:block>
     </tbody>

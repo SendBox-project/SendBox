@@ -26,14 +26,23 @@
     <tbody>
     <th:block th:if="${reservations.totalElements != 0}">
         <tr th:each="reservation: ${reservations}">
-                    <td th:text="${reservation.userMember.name}"></td>
-                    <td th:text="${reservation.reservationNum}"></td>
-                    <td th:text="${reservation.userMember.mail}"></td>
-                    <td th:text="${reservation.userMember.phone}"></td>
-                    <td th:text="${reservation.startDate}"></td>
-                    <td th:text="${reservation.endDate}"></td>
-                    <td th:text="${reservation.reservationStatus}"></td>
-                    <td><button type="button" class="option_button">거절</button></td>
+            <td th:text="${reservation.userMember.name}"></td>
+            <td th:text="${reservation.reservationNum}"></td>
+            <td th:text="${reservation.userMember.mail}"></td>
+            <td th:text="${reservation.userMember.phone}"></td>
+            <td th:text="${reservation.startDate}"></td>
+            <td th:text="${reservation.endDate}"></td>
+            <td th:text="${reservation.reservationStatus}"></td>
+            <th:block th:if="${reservation.reservationStatus == '결제취소'}">
+                <td>
+                    <button type="button" class="option_button" disabled>거절</button>
+                </td>
+            </th:block>
+            <th:block th:if="${reservation.reservationStatus != '결제취소'}">
+                <td>
+                    <button type="button" class="option_button" th:onclick="|javascript:paymentCancel(${reservation.orderNo})|">거절</button>
+                </td>
+            </th:block>
         </tr>
     </th:block>
     <th:block th:if="${reservations.totalElements == 0}">

@@ -28,10 +28,6 @@ function registerStore() {
         alert("전화번호를 입력하세요.");
         form.phone.focus();
         return false;
-    } else if (form.filter.value === "") {
-        alert("필터를 입력하세요.");
-        form.filter.focus();
-        return false;
     } else if (form.thumbnail.value === "") {
         alert("대표 사진을 선택하세요.");
         form.thumbnail.focus();

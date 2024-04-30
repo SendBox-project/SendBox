@@ -48,9 +48,6 @@ public class Store extends BaseEntity {
     private  String phone;
 
     @Column
-    private  String filter;
-
-    @Column
     private  String thumbnail;
 
     @Column

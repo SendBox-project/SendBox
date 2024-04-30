@@ -31,5 +31,28 @@ function reservationListAjax() { // 위에서 보낸 매개변수 1을 받아줌
 
 }
 
+//결제취소
+function paymentCancel(orderNo) {
+    const innerHtml = $("#reservationListForm") //reservationListAjax.html 소스를 붙일 파일 위치 지정
+    //const orderNo = document.getElementById('orderNo').value; //id가 orderNo인 실제 값을 가져옴
+
+    console.log(orderNo)
+    $.ajax({
+        url: "/owner/paymentCancel/"+ orderNo, //백엔드 경로
+        type: 'POST',
+        cache: false,
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            $(innerHtml).html(data)
+
+            setTimeout(function () {
+            }, 1000)
+        },
+        error: function (e) {
+            $(innerHtml).html("")
+        }
+    })
+}
 
 
