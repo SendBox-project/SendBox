@@ -36,8 +36,7 @@ public class InquaryController {
     }
 
     @PostMapping("/register")
-    public String registerPost(InquaryDTO dto, RedirectAttributes
-                               redirectAttributes) {
+    public String registerPost(InquaryDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto..." + dto);
 
         Integer inquaryNo = inquaryService.register(dto);
@@ -46,7 +45,7 @@ public class InquaryController {
 
         redirectAttributes.addFlashAttribute("msg", inquaryNo);
 
-        return "redirect:/inquary/list";
+        return "redirect:/user/inquary/list";
     }
 
     @GetMapping({"/read", "/modify"})
@@ -68,7 +67,7 @@ public class InquaryController {
 
         redirectAttributes.addFlashAttribute("msg", inquaryNo);
 
-        return "redirect:/inquary/list";
+        return "redirect:/user/inquary/list";
     }
 
     @PostMapping("/modify")
@@ -84,7 +83,7 @@ public class InquaryController {
 
         redirectAttributes.addAttribute("inquaryNo", dto.getInquaryNo());
 
-        return "redirect:/inquary/read";
+        return "redirect:/user/inquary/read";
     }
 
 }
