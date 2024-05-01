@@ -159,3 +159,16 @@ form hr {
     margin: 20px 0 0 20px;
 }
 
+.kakaoBt {
+    border: none #d9d9d9;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 20px 0 0 20px;
+    width: 200px;
+    display: block;
+
+    background-color: #f9e000 !important;
+    background: url('../../image/kakao.png') center left 25px/10% no-repeat;
+    color: #371c1d;
+}

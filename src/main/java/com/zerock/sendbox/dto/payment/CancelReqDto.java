@@ -9,5 +9,4 @@ public class CancelReqDto {
     private String cancel_amount; // 취소 금액
     private String cancel_tax_free_amount; //취소 비과세 금액
 
-
 }

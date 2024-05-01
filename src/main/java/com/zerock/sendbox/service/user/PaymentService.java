@@ -1,9 +1,6 @@
 package com.zerock.sendbox.service.user;
 
-import com.zerock.sendbox.dto.payment.ApproveReqDto;
-import com.zerock.sendbox.dto.payment.ApproveResDto;
-import com.zerock.sendbox.dto.payment.PaymentReqDto;
-import com.zerock.sendbox.dto.payment.PaymentResDto;
+import com.zerock.sendbox.dto.payment.*;
 import com.zerock.sendbox.entity.Orders;
 import com.zerock.sendbox.entity.Payment;
 import com.zerock.sendbox.feign.PaymentClient;
@@ -73,5 +70,14 @@ public class PaymentService {
     //결제 취소 api
     public Integer paymentCancel(Integer orderNo) {
         return ordersRepository.paymentCancel(orderNo);
+    }
+
+    //tid 및 가격 찾기 위한 메서드
+    public Orders findPaymentInfo(Integer orderNo) {
+        return ordersRepository.findPaymentInfo(orderNo);
+    }
+
+    public CancelResDto paymentCancel(CancelReqDto cancelReqDto) {
+        return paymentClient.paymentCancel(cancelReqDto);
     }
 }
