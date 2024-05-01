@@ -45,7 +45,7 @@ public class InquaryController {
 
         redirectAttributes.addFlashAttribute("msg", inquaryNo);
 
-        return "redirect:/user/inquary/list";
+        return "redirect:/inquary/list";
     }
 
     @GetMapping({"/read", "/modify"})
@@ -67,7 +67,7 @@ public class InquaryController {
 
         redirectAttributes.addFlashAttribute("msg", inquaryNo);
 
-        return "redirect:/user/inquary/list";
+        return "redirect:/inquary/list";
     }
 
     @PostMapping("/modify")
@@ -83,7 +83,7 @@ public class InquaryController {
 
         redirectAttributes.addAttribute("inquaryNo", dto.getInquaryNo());
 
-        return "redirect:/user/inquary/read";
+        return "redirect:/inquary/read";
     }
 
 }
