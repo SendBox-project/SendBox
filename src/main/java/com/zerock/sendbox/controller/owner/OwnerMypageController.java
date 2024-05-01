@@ -1,6 +1,7 @@
 package com.zerock.sendbox.controller.owner;
 
 import com.zerock.sendbox.dto.payment.ApproveResDto;
+import com.zerock.sendbox.dto.payment.CancelReqDto;
 import com.zerock.sendbox.dto.payment.CancelResDto;
 import com.zerock.sendbox.entity.*;
 import com.zerock.sendbox.service.owner.OwnerMypageService;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -225,13 +227,18 @@ public class OwnerMypageController {
     }
     //결제 취소 api
     @PostMapping("/paymentCancel/{orderNo}")
-    public String paymentCancel(@PathVariable(value = "orderNo") Integer orderNo , HttpServletResponse response) throws IOException {
-        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
-        String userId = auth.getName();
-        UserMember user = userMypageService.findByUserId(userId);
+    public String paymentCancel(@PathVariable(value = "orderNo") Integer orderNo ,@ModelAttribute Orders orders, @ModelAttribute Room room, HttpServletResponse response) throws IOException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String ownerId = auth.getName();
+        OwnerMember owner = ownerMypageService.findByOwnerId(ownerId);
 
-        // 결제 취소 api
-        CancelResDto CancelResDto = paymentService.paymentRefund(CancelResDto);*/
+        // 룸 금액 계산
+        Room roomInfo = userMypageService.findByRoomNo(room.getRoomNo());
+        Integer betweenDays = (int) Duration.between(orders.getStartDate().atStartOfDay(), orders.getEndDate().atStartOfDay()).toDays() + 1;
+
+        CancelReqDto cancelReqDto = new CancelReqDto();
+        cancelReqDto.setCid("TC0ONETIME");
+       /* cancelReqDto.setCancel_amount(roomInfo.getPrice() * orders.getTotalAmount() * betweenDays);*/
 
 
 
