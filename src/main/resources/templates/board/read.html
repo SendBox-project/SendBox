@@ -20,19 +20,19 @@
                 <col width="40">
                 <col width="200">
                 <col width="40">
-                <col width="70">
+                <col width="60">
                 <col width="40">
                 <col width="70">
             </colgroup>
             <tr>
                 <th>No.</th>
-                <td th:text="${dto.boardNo}" class="read_td">5</td>
+                <td th:text="${dto.boardNo}" class="read_td"></td>
                 <th>제목</th>
-                <td th:text="${dto.title}" class="read_td">제목</td>
+                <td th:text="${dto.title}" class="read_td"></td>
                 <th>작성자</th>
-                <td th:text="${dto.writerName}" class="read_td">555</td>
+                <td th:text="${dto.writerName}" class="read_td"></td>
                 <th>작성일</th>
-                <td th:text="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" class="read_td">2024/04/28</td>
+                <td th:text="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" class="read_td"></td>
             </tr>
             <tr>
                 <td colspan="8" class="read_td read_content">[[${dto.content}]]</td>
@@ -46,174 +46,5 @@
             <button type="button" class="option_button">목록</button>
         </a>
     </div>
-<!--<div class="reply_wrap">-->
-<!--    <div>-->
-<!--        <p class="addAdminAnswer">어드민 답변</p>-->
-<!--        <p class="AdminAnswerCount">댓글 수 [[${dto.adminAnswerCount}]]</p>-->
-<!--    </div>-->
-<!--    <div class="list-group AdminAnswerList">댓글 리스트</div>-->
-<!--    <div class="modal" tabindex="-1" role="dialog">-->
-<!--        <div class="modal-dialog" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title">Modal title</h5>-->
-<!--                    <button type="button" class="reply_close" data-dismiss="modal" aria-label="Close">-->
-<!--                        <span aria-hidden="true" >x</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <div class="form-group">-->
-<!--                        <input class="form-control"  type="text" name="adminAnswerText" placeholder="답변을 입력하세요">-->
-<!--                        <input type="hidden" name="answerNo" >-->
-<!--                    </div>-->
-<!--&lt;!&ndash;                    <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <input class="form-control"  type="text" name="replyer" placeholder="Replyer">&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="reply_button" id="AdminAnswerSave">등록</button>-->
-<!--                    <button type="button" class="reply_button" id="replyClose" data-dismiss="modal">닫기</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
-
-
-<!--<script th:inline="javascript">-->
-<!--    $(document).ready(function() {-->
-
-<!--        var boardNo = [[${dto.boardNo}]];-->
-
-<!--        var listGroup = $(".AdminAnswerList");-->
-
-<!--        $(".AdminAnswerCount").click(function() {-->
-
-<!--            $.getJSON('/answer/board/' + boardNo, function(arr) {-->
-<!--                console.log(arr);-->
-<!--            });-->
-<!--        });-->
-
-<!--        var listGroup = $(".AdminAnswerList")-->
-
-<!--        function formatTime(str) {-->
-<!--            var date = new Date(str);-->
-<!--            return date.getFullYear() + '/' +-->
-<!--                (date.getMonth() + 1) + '/' +-->
-<!--                date.getDate() + ' ' +-->
-<!--                date.getHours() + ':' +-->
-<!--                date.getMinutes();-->
-<!--        }-->
-
-<!--        function loadJSONData() {-->
-<!--            $.getJSON('/answer/board/' + boardNo, function(arr) {-->
-<!--                console.log(arr);-->
-
-<!--                var str = "";-->
-<!--                $('.AdminAnswerCount').html("AdminAnswer Count " + arr.length);-->
-
-<!--                $.each(arr, function(idx, adminAnswer) {-->
-<!--                    console.log(adminAnswer);-->
-<!--                    str += '    <div class="card-body" data-adminAnswerNo="' + adminAnswer.adminAnswerNo + '"><b>' + adminAnswer.adminAnswerNo + '</b>';-->
-<!--                    str += '    <h5 class="card-title">' + adminAnswer.text + '</h5>';-->
-<!--                    str += '    <h6 class="card-subtitle mb-2 text-muted">' + adminAnswer.replyer + '</h6>';-->
-<!--                    str += '    <p class="card-text">' + formatTime(adminAnswer.regDate) + '</p>';-->
-<!--                    str += '    </div>';-->
-<!--                });-->
-<!--                listGroup.html(str);-->
-<!--            });-->
-<!--        }-->
-
-<!--        $(".AdminAnswerCount").click(function() {-->
-<!--            loadJSONData();-->
-<!--        });-->
-
-<!--        var modal = $('.modal');-->
-
-<!--        $(".addAdminAnswer").click(function() {-->
-
-<!--            modal.modal('show');-->
-
-<!--            $('input[name="adminAnswerText"]').val('');-->
-<!--            $('input[name="replyer"]').val('');-->
-<!--            $(".modal-footer .btn").hide();-->
-<!--            $("#AdminAnswerSave, #replyClose").show();-->
-<!--        });-->
-
-<!--        $("#AdminAnswerSave").click(function() {-->
-<!--            var adminAnswer = {-->
-<!--                boardNo: boardNo,-->
-<!--                text: $('input[name="adminAnswerText"]').val(),-->
-<!--                replyer: $('input[name="replyer"]').val()-->
-<!--            }-->
-<!--            console.log(adminAnswer);-->
-<!--            $.ajax({-->
-<!--                url: '/answer/',-->
-<!--                method: 'post',-->
-<!--                data: JSON.stringify(adminAnswer),-->
-<!--                contentType: 'application/json; charset=utf-8',-->
-<!--                dataType: 'json',-->
-<!--                success: function(data) {-->
-<!--                    console.log(data);-->
-<!--                    alert(data + "번 댓글이 등록되었습니다.");-->
-<!--                    modal.modal('hide');-->
-<!--                    loadJSONData();-->
-<!--                }-->
-<!--            })-->
-<!--        });-->
-
-<!--        $('.AdminAnswerList').on("click", ".card-body", function() {-->
-<!--            var adminAnswerNo = $(this).data("adminAnswerNo");-->
-<!--            $("input[name='adminAnswerText']").val($(this).find('.card-title').html());-->
-<!--            $("input[name='replyer']").val($(this).find('.card-subtitle').html());-->
-<!--            $("input[name='adminAnswerNo']").val(adminAnswerNo);-->
-<!--            $(".modal-footer .btn").hide();-->
-<!--            $("#AdminAnswerRemove, #AdminAnswerModify, #replyClose").show();-->
-<!--            modal.modal('show');-->
-<!--        });-->
-
-<!--        $("#AdminAnswerRemove").on("click", function() {-->
-<!--            var adminAnswerNo = $("input[name='adminAnswerNo']").val();-->
-<!--            $.ajax({-->
-<!--                url: '/answer/' + adminAnswerNo,-->
-<!--                method: 'delete',-->
-<!--                success: function(result) {-->
-<!--                    console.log("result: " + result);-->
-<!--                    if (result === 'success') {-->
-<!--                        alert("댓글이 삭제되었습니다.");-->
-<!--                        modal.modal('hide');-->
-<!--                        loadJSONData();-->
-<!--                    }-->
-<!--                }-->
-<!--            })-->
-<!--        });-->
-
-<!--        $("#AdminAnswerModify").click(function() {-->
-<!--            var adminAnswerNo = $("input[name='adminAnswerNo']").val();-->
-<!--            var adminAnswer = {-->
-<!--                adminAnswerNo: adminAnswerNo,-->
-<!--                boardNo: boardNo,-->
-<!--                text: $('input[name="adminAnswerText"]').val(),-->
-<!--                replyer: $('input[name="replyer"]').val()-->
-<!--            }-->
-<!--            console.log(adminAnswer);-->
-<!--            $.ajax({-->
-<!--                url: '/answer/' + adminAnswerNo,-->
-<!--                method: 'put',-->
-<!--                data: JSON.stringify(adminAnswer),-->
-<!--                contentType: 'application/json; charset=utf-8',-->
-<!--                success: function(result) {-->
-<!--                    console.log("RESULT: " + result);-->
-<!--                    if (result === 'success') {-->
-<!--                        alert("댓글이 수정되었습니다.");-->
-<!--                        modal.modal('hide');-->
-<!--                        loadJSONData();-->
-<!--                    }-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 </body>
 </html>

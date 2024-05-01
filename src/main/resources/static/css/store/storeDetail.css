@@ -17,7 +17,7 @@
 .detail_col1 {
     width: 100%;
     /*background-color: lightpink;*/
-    height: 550px;
+    height: 600px;
     display: flex;
     padding: 10px;
 }
@@ -32,7 +32,7 @@
 /*썸네일*/
 .detail_row1 .thumbnail {
     width: 1000px;
-    height: 380px; /*리뷰 생성시 230px설정할것*/
+    height: 500px; /*리뷰 생성시 230px설정할것*/
     background-color: tan;
     margin-bottom: 15px;
     overflow: hidden; /* 이미지를 넘치지 않도록 설정 */
@@ -57,14 +57,15 @@
 }
 
 .detail_row2 .order_tap {
-    height: 450px;
+    height: 500px;
     border-radius: 15px;
+    border: 2px solid #fc9f27;
     padding: 20px;
-    background-color: #e1e1e1;
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
-
 }
+
 
 /*상세정보*/
 .detail_col2 {
@@ -130,33 +131,54 @@ form hr {
 }
 
 .form_list input {
-    border: none;
+    border: 1px solid #fc9f27;
     background-color: #fff;
     padding: 10px;
     width: 200px;
     height: 40px;
+    border-radius: 5px;
 }
-
-.form_list select {
+#totalPrice {
     border: none;
+    font-size: 1.2em;
+    text-align: right;
+    width: 180px;
+}
+.total_price{
+    display: flex;
+    align-items: center; /* '원'과 숫자를 수직으로 정렬합니다. */
+}
+.total_price span {
+    font-size: 1.2em;
+}
+.form_list select {
+    border: 1px solid #fc9f27;
     padding: 10px;
     width: 200px;
     height: 40px;
+    border-radius: 5px;
 }
 
 .form_item {
     margin: 5px;
     padding: 5px;
 }
+.form_item label{
+    font-size: 0.8em;
+}
+.buttons_wrap {
+    text-align: center; /* 버튼을 가운데 정렬합니다. */
+    display: flex;
+}
 
 .detail_button {
     background-color: #fc9f27;
-    width: 200px;
+    width: 100px;
     color: white;
     border-radius: 5px;
     border-style: none;
     padding: 10px;
-    margin: 20px 0 0 20px;
+    margin: 20px 10px; /* 각 버튼 사이의 간격을 조절합니다. */
 }
 
 .kakaoBt {
