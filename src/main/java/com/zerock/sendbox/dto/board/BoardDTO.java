@@ -35,4 +35,8 @@ public class BoardDTO {
 
     private LocalDateTime modDate;
 
+    @Getter
+    @Setter
+    private String filePath;
+
 }
