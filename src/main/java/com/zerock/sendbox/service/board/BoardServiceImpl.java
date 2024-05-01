@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,9 +35,10 @@ public class BoardServiceImpl implements BoardService {
         // BoardDTO를 이용하여 Board 엔티티 생성
         Board board = dtoToEntity(dto);
 
-        // AdminMember 엔티티를 가져옴
-        AdminMember adminMember = adminMemberRepository.findById(dto.getAdminNo())
-                .orElseThrow(() -> new IllegalArgumentException("해당 AdminMember를 찾을 수 없습니다. AdminNo: " + dto.getAdminNo()));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String adminname = authentication.getName();
+
+        AdminMember adminMember = adminMemberRepository.findByAdminId(adminname);
 
         // Board 엔티티에 AdminMember를 설정
         board.setAdminMember(adminMember);

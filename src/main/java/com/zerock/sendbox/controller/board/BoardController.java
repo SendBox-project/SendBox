@@ -8,11 +8,15 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/board")
@@ -39,9 +43,36 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(BoardDTO dto, RedirectAttributes redirectAttributes){
+    public String registerPost(BoardDTO dto, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file){
 
         log.info("dto..." + dto);
+
+        if (!file.isEmpty()) {
+            try {
+                // 업로드된 파일의 이름을 가져옴
+                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+                // 파일 저장 디렉토리 설정
+                String uploadDir = "./uploads/";
+
+                // 파일 저장 디렉토리가 없으면 생성
+                Path uploadPath = Paths.get(uploadDir);
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                // 파일 경로 설정
+                Path filePath = uploadPath.resolve(fileName);
+                // 파일을 지정된 경로로 복사
+                Files.copy(file.getInputStream(), filePath);
+
+                // 업로드된 파일의 경로를 DTO에 설정
+                dto.setFilePath(filePath.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 파일 처리 중 에러가 발생하면 적절히 처리합니다.
+            }
+        }
+
         //새로 추가된 엔티티의 번호
         Integer boardNo = boardService.register(dto);
 
@@ -49,7 +80,7 @@ public class BoardController {
 
         redirectAttributes.addFlashAttribute("msg", boardNo);
 
-        return "redirect:/board/noticeList";
+        return "redirect:/admin/board/noticeList";
     }
 
     @GetMapping({"/read", "/modify"})
@@ -71,7 +102,7 @@ public class BoardController {
 
         redirectAttributes.addFlashAttribute("msg", boardNo);
 
-        return "redirect:/board/noticeList";
+        return "redirect:/admin/board/noticeList";
     }
 
     @PostMapping("/modify")
@@ -87,7 +118,7 @@ public class BoardController {
 
         redirectAttributes.addAttribute("boardNo",dto.getBoardNo());
 
-        return "redirect:/board/read";
+        return "redirect:/admin/board/read";
     }
 
 

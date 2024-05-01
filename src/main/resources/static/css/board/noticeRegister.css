@@ -14,7 +14,13 @@
     /*margin: 30px 20px 30px 20px;*/
     /*border: red 1px solid;*/
 }
-
+.form_item {
+    margin: 5px;
+    padding: 5px;
+}
+.form_item .readonly {
+    background-color: #dddddd;
+}
 .board_title {
     text-align: center;
     margin: 60px auto 50px auto;
@@ -49,24 +55,31 @@
     vertical-align: top;
 }
 
+input[type="file"]::file-selector-button {
+    border: 1px solid #dadada;
+    border-radius: 15px;
+    height: 30px;
+    width: 80px;
+    /*float: right;*/
+}
 .board_content hr {
     background-color: #c2c2c2;
     margin-bottom: 10px;
     margin-top: 10px;
 }
-
-.regi_button{
-    background-color: #fc9f27;
-    width: 300px;
-    color: white;
-    margin: 20px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 15px;
-    font-weight: 800;
-
+.option_button {
+    width: 70px;
+    height: 30px;
+    background-color: #ffffff;
+    border: #999 1px solid;
+    border-radius: 10px;
+    margin: 20px auto;
 }
+.option_button:hover {
+    background-color: #999;
+    color: #ffffff;
+}
+
 .requiredDot {
     color: red;
     font-weight: 800;

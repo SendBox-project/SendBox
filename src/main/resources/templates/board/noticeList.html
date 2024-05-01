@@ -58,24 +58,22 @@
 
     <ul class="pagination buttons_wrap">
         <li class="page-item " th:if="${result.prev}">
-            <a class="page-link" th:href="@{/board/list(page= ${result.start -1},
+            <a class="page-link" th:href="@{/board/noticeList(page= ${result.start -1},
                     type=${pageRequestDTO.type} ,
                     keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">Previous</a>
         </li>
         <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-            <a class="page-link" th:href="@{/board/list(page = ${page} ,
+            <a class="page-link" th:href="@{/board/noticeList(page = ${page} ,
                    type=${pageRequestDTO.type} ,
                    keyword = ${pageRequestDTO.keyword}  )}">
                 [[${page}]]
             </a>
         </li>
-
         <li class="page-item" th:if="${result.next}">
-            <a class="page-link" th:href="@{/board/list(page= ${result.end + 1} ,
+            <a class="page-link" th:href="@{/board/noticelist(page= ${result.end + 1} ,
                     type=${pageRequestDTO.type} ,
                     keyword = ${pageRequestDTO.keyword} )}">Next</a>
         </li>
-
     </ul>
 </div>
 </body>
