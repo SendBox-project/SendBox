@@ -54,10 +54,6 @@
     color: #ffffff;
 }
 
-.buttons_wrap {
-    margin: 40px auto;
-    text-align: center;
-}
 
 /*게시판 기본 틀 don't fix it!!!!!*/
 .list_wrap {
@@ -121,9 +117,18 @@
     width:10px;
     height:9px;
 }
+
 .buttons_wrap {
     margin: 40px auto;
     text-align: center;
+    /*border: 1px solid #ff7777;*/
+
+}
+
+.buttons_wrap .page-item{
+    margin: 5px;
+    /*border: 1px solid #c2c2c2;*/
+    display: inline-block;
 }
 
 .list_buttons{
