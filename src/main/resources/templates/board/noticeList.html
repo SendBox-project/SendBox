@@ -46,6 +46,16 @@
                 keyword=${pageRequestDTO.keyword})}">
                     [[${dto.title}]] [<b th:text="${dto.AdminAnswerCount}"></b>] </a></td>
                 <td><p th:text="${dto.writerName}"></p></td>
+
+
+
+
+                <!--                <td><p th:text="${adminMember.adminId}"></p></td>★★★★★★★★★★★★어드민 아이디나 이름 ★★★★★★-->
+
+
+
+
+
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
             </tr>
         </tbody>
