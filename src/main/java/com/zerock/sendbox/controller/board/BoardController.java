@@ -56,7 +56,8 @@ public class BoardController {
         if (!file.isEmpty()) {
             try {
                 // 업로드된 파일의 이름을 가져옴
-                String fileName = LocalDateTime.now()+"_"+StringUtils.cleanPath(file.getOriginalFilename());
+                String parsedLocalDateTimeNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+                String fileName = parsedLocalDateTimeNow+"_"+StringUtils.cleanPath(file.getOriginalFilename());
                 // 파일 저장 디렉토리 설정
                 String uploadDir = "./uploads/";
 
