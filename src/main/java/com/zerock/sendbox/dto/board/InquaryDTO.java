@@ -15,6 +15,8 @@ public class InquaryDTO {
 
     private Integer userNo;
 
+    private String userId;
+
     private String title;
 
     private String content;

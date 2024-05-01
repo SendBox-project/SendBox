@@ -19,7 +19,7 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
     Store findByStoreNo(Integer storeNo);
 //    Store findByStoreName(String storeName);
 
-  //검색기능
+    //검색기능
     @Query("select s from Store s where s.storeName like concat('%', :storeName ,'%') and s.ownerMember.deleteYn = 'N' and s.ownerMember.approvalYn ='Y'")
     List<Store> findAllByStoreNameContaining(@Param("storeName") String storeName);
 
@@ -33,11 +33,11 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
     //상세페이지
 //    Store findByStoreNo(Integer storeNo);
 
-//    //퀵메뉴
-//    List<Store> findByRegion(String region);
-
     // admin의 모든 업체 리스트 조회
     @Query("select s,o from Store s inner join OwnerMember o on s.ownerMember.ownerNo = o.ownerNo where o.deleteYn = 'N'")
     List<Store> findStore();
+
+    //퀵메뉴
+    List<Store> findByRegion(String region);
 
 }

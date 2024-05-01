@@ -20,6 +20,7 @@
         <form th:action="@{/user/updateCart}" th:method="post" id="form1">
             <!--readonly 혹은 disabled 있으면 백엔드로 데이터가 안 넘어가져서 히든으로 넘기기-->
             <input type="hidden" id="roomNo" name="roomNo" value="">
+            <input type="hidden" id="onePrice" name="onePrice" value="">
             <input type="hidden" id="orderNo" name="orderNo" th:value="${cart.orderNo}">
             <input type="hidden" id="userNo" name="userNo" th:value="${cart.userMember.userNo}">
             <input type="hidden" id="userId" name="userId" th:value="${cart.userMember.userId}">
@@ -37,27 +38,27 @@
                 </div>
                 <div class="form_item">
                     <label for="startDate">사용&ensp;시작일&emsp;&emsp;</label>
-                    <input id="startDate" name="startDate" th:value="${cart.startDate}" type="date">
+                    <input id="startDate" name="startDate" th:value="${cart.startDate}" type="date"  onchange="updateTotalPrice()">
                 </div>
                 <div class="form_item">
                     <label for="endDate">사용&ensp;종료일&emsp;&emsp;</label>
-                    <input id="endDate" name="endDate" th:value="${cart.endDate}" type="date">
+                    <input id="endDate" name="endDate" th:value="${cart.endDate}" type="date"  onchange="updateTotalPrice()">
                 </div>
                 <div class="form_item">
                     <label for="sizeType">사&ensp;이&ensp;즈&emsp;&emsp;&emsp;&ensp;</label>
-                    <select id = "sizeType">
+                    <select id = "sizeType"  onchange="updateTotalPrice()">
                         <th:block th:each="room : ${roomList}">
-                            <option th:value="${room.roomNo}" th:text="${room.size}" th:selected="${cart.room.size} == ${room.size}" readonly></option>
+                            <option th:value="${room.roomNo}+','+${room.price}" th:text="${room.size}" th:selected="${cart.room.size} == ${room.size}" readonly></option>
                         </th:block>
                     </select>
                 </div>
                 <div class="form_item">
                     <label for="totalAmount">수&emsp;&emsp;량&emsp;&emsp;&emsp;&ensp;</label>
-                    <input id="totalAmount" name="totalAmount" th:value="${cart.totalAmount}" type="number">
+                    <input id="totalAmount" name="totalAmount" th:value="${cart.totalAmount}" type="number"  onchange="updateTotalPrice()">
                 </div>
                 <div class="form_item">
                     <label for="totalPrice">가&emsp;&emsp;격&emsp;&emsp;&emsp;&ensp;</label>
-                    <input id="totalPrice" name="totalPrice" th:value="${cart.totalPrice}" type="text" readonly disabled>
+                    <input id="totalPrice" name="totalPrice" th:value="${cart.totalPrice}" type="text" readonly>
                 </div>
             </div>
             <button class="modify_button" type="button" onclick = "updateCart()">수정</button>

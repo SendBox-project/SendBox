@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/defaultLayout}"
       layout:fragment="Content">
@@ -56,12 +56,13 @@
 
 
 
-                <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+                <td th:if="${dto.modDate == null}">[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+                <td th:if="${dto.modDate != null}">[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
             </tr>
         </tbody>
     </table>
     <span>
-        <a th:href="@{/board/register}">
+        <a th:href="@{/board/register}" sec:authorize="hasRole('ADMIN') || hasRole('SUPERADMIN')">
             <button type="button" class="option_button">글작성</button>
         </a>
     </span>

@@ -13,11 +13,12 @@ layout:fragment="Content">
 <div id="container board_container">
     <div class="form_wrap">
         <h1 class="board_title">게시글 수정</h1>
-        <form action="/board/modify" method="post" class="board_content">
+        <form th:action="@{/board/modify}" th:method="post" class="board_content" enctype="multipart/form-data">
             <!-- 페이지 번호와 검색 조건을 전달하기 위한 hidden input -->
             <input type="hidden" name="page" th:value="${pageRequestDTO.page}">
             <input type="hidden" name="type" th:value="${pageRequestDTO.type}">
             <input type="hidden" name="keyword" th:value="${pageRequestDTO.keyword}">
+            <input type="hidden" id="boardNo" name="boardNo" th:value="${dto.boardNo}">
             <div class="form_item">
                 <label for="title">제&emsp;&emsp;&ensp; 목&ensp;&ensp;<span class="requiredDot">*</span></label>
                 <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" required>
@@ -65,11 +66,12 @@ layout:fragment="Content">
                 if(!confirm("수정하시겠습니까?")){
                     return ;
                 }
+                actionForm.submit();
 
-                actionForm
-                    .attr("action", "/inquary/modify")
-                    .attr("method","post")
-                    .submit();
+                // actionForm
+                //     .attr("action", "/inquary/modify")
+                //     .attr("method","post")
+                //     .submit();
             });
 
             $(".listBtn").click(function () {

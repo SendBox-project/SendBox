@@ -57,7 +57,7 @@
 }
 
 .detail_row2 .order_tap {
-    height: 500px;
+    /*height: 500px;*/
     border-radius: 15px;
     border: 2px solid #fc9f27;
     padding: 20px;
@@ -168,17 +168,17 @@ form hr {
 }
 .buttons_wrap {
     text-align: center; /* 버튼을 가운데 정렬합니다. */
-    display: flex;
+    /*display: flex;*/
 }
 
 .detail_button {
     background-color: #fc9f27;
-    width: 100px;
+    width: 200px;
     color: white;
     border-radius: 5px;
     border-style: none;
     padding: 10px;
-    margin: 20px 10px; /* 각 버튼 사이의 간격을 조절합니다. */
+    margin: 10px 0px 0px 0px; /* 각 버튼 사이의 간격을 조절합니다. */
 }
 
 .kakaoBt {
@@ -186,7 +186,7 @@ form hr {
     border-radius: 5px;
     box-sizing: border-box;
     padding: 10px;
-    margin: 20px 0 0 20px;
+    margin: 10px 0 0 20px;
     width: 200px;
     display: block;
 

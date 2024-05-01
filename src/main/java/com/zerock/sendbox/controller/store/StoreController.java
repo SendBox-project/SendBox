@@ -48,14 +48,12 @@ public class StoreController {
         return "store/store_detail";
     }
 
-
-
-//    //퀵메뉴
-//    @GetMapping("/{region}")
-//    public String getStoresByRegion(@RequestParam("region") String region, Model model) {
-//        List<Store> storeList = storeService.getStoresByRegion(region);
-//        model.addAttribute("storeList", storeList);
-//        return "admin/store/search_store";
-//    }
+    //퀵메뉴
+    @GetMapping
+    public String getStoresByRegion(@RequestParam("region") String region, Model model) {
+        List<Store> storeList = storeService.getStoresByRegion(region);
+        model.addAttribute("storeList", storeList);
+        return "store/search_store";
+    }
 
 }

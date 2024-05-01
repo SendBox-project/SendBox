@@ -59,7 +59,7 @@ public class InquaryController {
         model.addAttribute("dto", inquaryDTO);
     }
 
-    @PostMapping("/remove")
+    @GetMapping("/remove")
     public String remove(Integer inquaryNo, RedirectAttributes redirectAttributes) {
         log.info("inquaryNo: " + inquaryNo);
 

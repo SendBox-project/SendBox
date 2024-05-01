@@ -2,6 +2,7 @@ package com.zerock.sendbox.controller.board;
 
 import com.zerock.sendbox.dto.board.BoardDTO;
 import com.zerock.sendbox.dto.board.PageRequestDTO;
+import com.zerock.sendbox.entity.Board;
 import com.zerock.sendbox.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/board")
@@ -43,14 +46,17 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(BoardDTO dto, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file){
+    public String registerPost(@RequestParam("title") String title,@RequestParam("content") String content,
+                               RedirectAttributes redirectAttributes, @RequestParam("thumbnail") MultipartFile file){
 
-        log.info("dto..." + dto);
+        BoardDTO dto = new BoardDTO();
+        dto.setTitle(title);
+        dto.setContent(content);
 
         if (!file.isEmpty()) {
             try {
                 // 업로드된 파일의 이름을 가져옴
-                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+                String fileName = LocalDateTime.now()+"_"+StringUtils.cleanPath(file.getOriginalFilename());
                 // 파일 저장 디렉토리 설정
                 String uploadDir = "./uploads/";
 
@@ -66,7 +72,7 @@ public class BoardController {
                 Files.copy(file.getInputStream(), filePath);
 
                 // 업로드된 파일의 경로를 DTO에 설정
-                dto.setFilePath(filePath.toString());
+                dto.setThumbnail(filePath.toString());
             } catch (IOException e) {
                 e.printStackTrace();
                 // 파일 처리 중 에러가 발생하면 적절히 처리합니다.
@@ -94,8 +100,8 @@ public class BoardController {
         model.addAttribute("dto", boardDTO);
     }
 
-    @PostMapping("/remove")
-    public String remove(Integer boardNo, RedirectAttributes redirectAttributes) {
+    @GetMapping("/remove")
+    public String remove(@RequestParam("boardNo") Integer boardNo, RedirectAttributes redirectAttributes) {
         log.info("boardNo" + boardNo);
 
         boardService.removeWithAdminAnswer(boardNo);
@@ -106,9 +112,40 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(BoardDTO dto, @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
+    public String modify(@RequestParam("boardNo") Integer boardNo,@RequestParam("title") String title,@RequestParam("content") String content,
+                         @RequestParam("thumbnail") MultipartFile file, @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
         log.info("post modify...................");
-        log.info("dto" + dto);
+        BoardDTO dto = new BoardDTO();
+        dto.setTitle(title);
+        dto.setContent(content);
+        dto.setBoardNo(boardNo);
+
+        if (!file.isEmpty()) {
+            try {
+                // 업로드된 파일의 이름을 가져옴
+                String parsedLocalDateTimeNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+                String fileName = parsedLocalDateTimeNow+"_"+StringUtils.cleanPath(file.getOriginalFilename());
+                // 파일 저장 디렉토리 설정
+                String uploadDir = "./uploads/";
+
+                // 파일 저장 디렉토리가 없으면 생성
+                Path uploadPath = Paths.get(uploadDir);
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                // 파일 경로 설정
+                Path filePath = uploadPath.resolve(fileName);
+                // 파일을 지정된 경로로 복사
+                Files.copy(file.getInputStream(), filePath);
+
+                // 업로드된 파일의 경로를 DTO에 설정
+                dto.setThumbnail(filePath.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 파일 처리 중 에러가 발생하면 적절히 처리합니다.
+            }
+        }
 
         boardService.modify(dto);
 

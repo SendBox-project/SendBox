@@ -76,7 +76,7 @@ public class InquaryServiceImpl implements InquaryService{
     @Override
     public void removeWithReplies(Integer inquaryNo) {
 
-       // replyRepository.deleteByInquaryNo(inquaryNo);
+        // replyRepository.deleteByInquaryNo(inquaryNo);
 
         inquaryRepository.deleteById(inquaryNo);
     }
@@ -119,6 +119,7 @@ public class InquaryServiceImpl implements InquaryService{
                 .content(inquary.getContent())
                 .regDate(inquary.getRegDate())
                 .modDate(inquary.getModDate())
+                .userId(userMember.getUserId())
                 .memberName(userMember.getName())
                 .replyCount(replyCount.intValue())
                 .build();

@@ -34,13 +34,9 @@ public class Board extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column
     private String thumbnail;
 //    이미지 파일 등록용임 썸네일 아님!
-
-    @Column(length = 3, columnDefinition = "char(3)", nullable = false)
-    private String boardType;
-
 
     public void changeTitle(String title){
         this.title = title;
@@ -49,13 +45,5 @@ public class Board extends BaseEntity {
     public void changeContent(String content){
         this.content = content;
     }
-
-    public void setAdminMember(AdminMember adminMember) {
-        if (adminMember != null) {
-            this.adminMember = adminMember;
-            adminMember.getBoardList().add(this);
-        }
-    }
-
 
 }

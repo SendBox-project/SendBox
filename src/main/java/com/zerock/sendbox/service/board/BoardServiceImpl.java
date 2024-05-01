@@ -85,7 +85,9 @@ public class BoardServiceImpl implements BoardService {
         if (board != null) {
             board.changeTitle(boardDTO.getTitle());
             board.changeContent(boardDTO.getContent());
-
+            if(boardDTO.getThumbnail() != null){
+                board.setThumbnail(boardDTO.getThumbnail());
+            }
             boardRepository.save(board);
         }
     }
@@ -98,7 +100,6 @@ public class BoardServiceImpl implements BoardService {
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .thumbnail(dto.getThumbnail())
-                .boardType(dto.getBoardType())
                 .build();
         return board;
     }
@@ -120,7 +121,6 @@ public class BoardServiceImpl implements BoardService {
                 .writerName(adminMember.getName())
                 .AdminAnswerCount(AdminAnswerCount.intValue())
                 .adminNo(adminMember.getAdminNo())
-                .boardType(board.getBoardType())
                 .thumbnail(board.getThumbnail())
                 .build();
         return boardDTO;
