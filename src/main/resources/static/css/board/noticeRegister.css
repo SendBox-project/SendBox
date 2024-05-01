@@ -35,7 +35,7 @@
     padding: 20px;
     margin: 30px auto;
 }
-.board_content input, .board_content select{
+.board_content input[type="text"], .board_content input[type="file"]{
     border: 1px solid #dadada;
     border-radius: 5px;
     background-color: #fff;
@@ -84,3 +84,12 @@ input[type="file"]::file-selector-button {
     color: red;
     font-weight: 800;
 }
+.regi_button {
+     background-color: #fc9f27;
+     width: 300px;
+     color: white;
+     border-radius: 5px;
+     border-style: none;
+     padding: 10px;
+     margin-left: 25px;
+ }
