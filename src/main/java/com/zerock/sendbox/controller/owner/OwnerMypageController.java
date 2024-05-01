@@ -1,5 +1,7 @@
 package com.zerock.sendbox.controller.owner;
 
+import com.zerock.sendbox.dto.payment.ApproveResDto;
+import com.zerock.sendbox.dto.payment.CancelResDto;
 import com.zerock.sendbox.entity.*;
 import com.zerock.sendbox.service.owner.OwnerMypageService;
 import com.zerock.sendbox.service.user.PaymentService;
@@ -224,6 +226,15 @@ public class OwnerMypageController {
     //결제 취소 api
     @PostMapping("/paymentCancel/{orderNo}")
     public String paymentCancel(@PathVariable(value = "orderNo") Integer orderNo , HttpServletResponse response) throws IOException {
+        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 백엔드에서  글 저장하려할ㅈ때 로그인 정보 가져와서 아이디 값을 디비에 넣어주는거!
+        String userId = auth.getName();
+        UserMember user = userMypageService.findByUserId(userId);
+
+        // 결제 취소 api
+        CancelResDto CancelResDto = paymentService.paymentRefund(CancelResDto);*/
+
+
+
         Integer result = paymentService.paymentCancel(orderNo);
         if (result != 0) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
