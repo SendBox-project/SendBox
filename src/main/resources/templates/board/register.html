@@ -6,14 +6,14 @@
       layout:fragment="Content">
 <head>
     <meta charset="UTF-8">
-    <link th:inline="css" th:href="@{/css/board/noticeRegister.css}" rel="stylesheet"/>
-    <link rel="stylesheet" href="../../static/css/board/noticeRegister.css">
+    <link th:inline="css" th:href="@{/css/board/boardRegister.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../static/css/board/boardRegister.css">
 
 </head>
 <body>
 <div id="container board_container">
     <div class="form_wrap">
-        <h1 class="board_title">새로운 게시글 등록</h1>
+        <h1 class="board_title">게시글 작성</h1>
         <form action="/board/register" method="post" class="board_content">
             <div class="form_item">
                 <label for="title">제&emsp;&emsp;&ensp; 목&ensp;&ensp;<span class="requiredDot">*</span></label>
@@ -33,8 +33,29 @@
 <!--            </div>-->
             <input class="regi_button" type="submit" value="게시글 등록">
         </form>
+        <input type="button" class="listBtn option_button" value="목록으로">
     </div>
 </div>
 </body>
+<!-- JavaScript 부분 -->
+<script th:inline="javascript">
+    var actionForm = $("form");
+
+    $(".listBtn").click(function () {
+        var page = $("input[name='page']");
+        var type = $("input[name='type']");
+        var keyword = $("input[name='keyword']");
+
+        actionForm.empty();
+        actionForm.append(page);
+        actionForm.append(type);
+        actionForm.append(keyword);
+
+        actionForm
+            .attr("action", "/board/noticeList")
+            .attr("method", "get");
+        actionForm.submit();
+    });
+</script>
 </html>
 
