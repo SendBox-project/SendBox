@@ -5,6 +5,9 @@ function create_account_form() {
 
     let form = document.getElementById("create_account_from");
 
+    // 폼 제출을 중단
+    event.preventDefault();
+
     if(form.ownerId.value === "") {
         alert("아이디를 입력하세요.");
         form.ownerId.focus();

@@ -5,6 +5,9 @@ function create_account_form() {
 
  let form = document.getElementById("create_account_from");
 
+    // 폼 제출을 중단
+    event.preventDefault();
+
     if (form.adminId.value === "") {
         alert("아이디를 입력하세요.");
         form.adminId.focus();
@@ -36,9 +39,10 @@ function create_account_form() {
     } else if (form.part.value === "") {
         alert("담당지역을 선택하세요.");
         form.part.focus();
-        return false;
     } else {
         form.submit(); // 모든 필드가 채워져 있으면 폼 제출
+
     }
+
 
 }

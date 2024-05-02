@@ -2,7 +2,11 @@
 
 function registerStore() {
 
+
     let form = document.getElementById("registerStoreForm");
+
+    // 폼 제출을 중단
+    event.preventDefault();
 
     if(form.storeName.value === "") {
         alert("업체명을 입력하세요.");
