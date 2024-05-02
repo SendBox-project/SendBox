@@ -10,7 +10,8 @@
     <link  th:inline="css" rel="stylesheet" th:href="@{/css/common/account_result.css}"/>
 </head>
 <body>
-
+<!-- Navigation: 네브바-->
+<div th:replace="~{user/include/nav :: NavFragment}"></div>
 <div id="result_container">
     <div class="result">
         <h2>회원정보 수정이 완료되었습니다.</h2>

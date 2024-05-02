@@ -39,7 +39,7 @@
                 class="read_td">2024/04/28
             </td>
         </tr>
-        <tr>
+        <tr th:if="${dto.thumbnail != null}">
             <td colspan="8">
                 <img th:src="@{'/upload/'+${dto.thumbnail}}" alt="썸네일">
             </td>
