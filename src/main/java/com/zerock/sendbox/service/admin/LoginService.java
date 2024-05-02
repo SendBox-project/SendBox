@@ -14,4 +14,6 @@ public interface LoginService {
     AdminMember findByAdminIdAndMail(String adminId, String mail);
 
     boolean sendMail(String to, String subject, String body);
+
+    AdminMember findByNameAndMail(String name, String mail);
 }

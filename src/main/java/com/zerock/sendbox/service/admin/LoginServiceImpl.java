@@ -63,6 +63,11 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
+    public AdminMember findByNameAndMail(String name, String mail) {
+        return adminMemberRepository.findByNameAndMail(name,mail);
+    }
+
+    @Override
     public AdminMember findByAdminIdAndMail(String adminId, String mail) {
         return adminMemberRepository.findByAdminIdAndMail(adminId, mail);
     }

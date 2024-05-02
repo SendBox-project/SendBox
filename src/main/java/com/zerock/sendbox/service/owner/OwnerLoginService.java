@@ -15,4 +15,6 @@ public interface OwnerLoginService {
     OwnerMember findByOwnerIdAndMail(String ownerId, String mail);
 
     boolean sendMail(String mail, String subject, String text);
+
+    OwnerMember findByNameAndMail(String name, String mail);
 }

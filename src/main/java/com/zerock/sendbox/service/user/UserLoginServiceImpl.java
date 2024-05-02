@@ -59,6 +59,11 @@ public class UserLoginServiceImpl implements UserLoginService{
     }
 
     @Override
+    public UserMember findByNameAndMail(String name, String mail) {
+        return userMemberRepository.findByNameAndMail(name, mail);
+    }
+
+    @Override
     public UserMember findByUserIdAndMail(String userId, String mail) {
         return userMemberRepository.findByUserIdAndMail(userId, mail);
     }

@@ -37,4 +37,5 @@ public interface AdminMemberRepository extends JpaRepository<AdminMember, Intege
     Integer saveGrant(@Param("adminNo")Integer adminNo);
 
 
+    AdminMember findByNameAndMail(String name, String mail);
 }

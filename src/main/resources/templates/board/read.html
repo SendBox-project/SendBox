@@ -40,9 +40,13 @@
             </td>
         </tr>
         <tr>
+            <td colspan="8">
+                <img th:src="@{'/upload/'+${dto.thumbnail}}" alt="썸네일">
+            </td>
+        </tr>
+        <tr>
             <td colspan="8" class="read_td read_content">[[${dto.content}]]</td>
         </tr>
-        <tr><img th:src="@{'/upload/'+${dto.thumbnail}}" alt="썸네일"></tr>
     </table>
 
     <a sec:authorize="hasRole('ADMIN') || hasRole('SUPERADMIN')"

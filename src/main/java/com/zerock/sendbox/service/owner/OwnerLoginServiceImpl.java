@@ -55,7 +55,14 @@ public class OwnerLoginServiceImpl implements OwnerLoginService{
 
     @Override
     public OwnerMember findByMail(String mail) {
+
         return ownerMemberRepository.findByMail(mail);
+    }
+
+    @Override
+    public OwnerMember findByNameAndMail(String name, String mail) {
+
+        return ownerMemberRepository.findByNameAndMail(name, mail);
     }
 
     @Override
