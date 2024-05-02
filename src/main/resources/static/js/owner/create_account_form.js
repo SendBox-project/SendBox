@@ -1,12 +1,9 @@
-// create_account_form.html의 input이 빈칸일 경우 if문으로 경고창을 띄우는 함수
+
 
 function create_account_form() {
     console.log("create_account_from() 호출");
 
     let form = document.getElementById("create_account_from");
-
-    // 폼 제출을 중단
-    event.preventDefault();
 
     if(form.ownerId.value === "") {
         alert("아이디를 입력하세요.");
@@ -19,6 +16,10 @@ function create_account_form() {
     } else if (form.password_again.value === "") {
         alert("비밀번호 확인을 입력하세요.");
         form.password_again.focus();
+        return false;
+    } else if (form.password.value !== form.password_again.value) {
+        alert("비밀번호가 일치하지 않습니다.");
+        form.passwordAgain.focus();
         return false;
     } else if (form.name.value === "") {
         alert("이름을 입력하세요.");

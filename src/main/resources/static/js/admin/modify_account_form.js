@@ -3,6 +3,8 @@ function modifyAccount() {
     console.log("modifyAccount()");
 
     let form = document.getElementById("modify_account_form");
+// 폼 제출을 중단
+    event.preventDefault();
 
     if (form.password.value === "") {
         alert("비밀번호를 입력해주세요.");
