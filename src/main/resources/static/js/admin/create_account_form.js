@@ -20,6 +20,10 @@ function create_account_form() {
         alert("비밀번호 확인을 입력하세요.");
         form.password_again.focus();
         return false;
+    } else if (form.password.value !== form.password_again.value) {
+        alert("비밀번호가 일치하지 않습니다.");
+        form.passwordAgain.focus();
+        return false;
     } else if (form.name.value === "") {
         alert("이름을 입력하세요.");
         form.name.focus();

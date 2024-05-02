@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Owner register</title>
     <link rel="stylesheet" th:href="@{/css/owner/storeRegisterForm.css}"/>
-    <script type="text/javascript" th:src="@{/js/owner/create_account_form.js}"></script>
+    <script type="text/javascript" th:src="@{/js/owner/storeRegisterForm.js}"></script>
     <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
 </head>
 
@@ -14,7 +14,7 @@
     <div class="side_logo"><a th:href="@{/}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
     <h3>업체 등록</h3>
     <div id="register_wrap">
-        <form th:action="@{/owner/storeInfo}" th:method="post" enctype="multipart/form-data" id="registerStoreForm" onsubmit="registerStore(event)">
+        <form th:action="@{/owner/storeInfo}" th:method="post" enctype="multipart/form-data" id="registerStoreForm">
             <input type="hidden" id="ownerNo" name="ownerNo" th:value="${ownerNo}">
             <div class="form_list">
                 <div class="form_item">
@@ -94,7 +94,7 @@
                     </table>
                 </div>
             </div>
-            <button class="regi_button" type="submit" >회원가입</button>
+            <button class="regi_button" type="submit">회원가입</button>
             <button class="reset_button" type="reset"> reset </button>
         </form>
     </div>

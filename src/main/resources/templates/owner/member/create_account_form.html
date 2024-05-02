@@ -15,7 +15,7 @@
     <div class="side_logo"><a th:href="@{/}"><img th:src="@{/image/logo_orange_Removal.png}"></a></div>
     <h3>사업자 회원가입</h3>
     <div id="register_wrap">
-        <form th:action="@{/owner/create_account_form}" th:method="post" id="create_account_from" onsubmit="create_account_form(event)">
+        <form th:action="@{/owner/create_account_form}" th:method="post" id="create_account_from">
             <input type="hidden" id="roleId" name="roleId" value="4">
             <input type="hidden" id="deleteYn" name = "deleteYn" value="N">
             <div class="form_list">
@@ -47,7 +47,7 @@
                     </select>
                 </div>
             </div>
-            <button class="regi_button" type="submit">회원가입</button>
+            <button class="regi_button" type="submit" onclick="create_account_form()">회원가입</button>
         </form>
         <div class="account_links">
             <a th:href="@{/owner/login}">로그인 페이지로 이동</a>
