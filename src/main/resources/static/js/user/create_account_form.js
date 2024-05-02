@@ -36,6 +36,7 @@ function create_account_form() {
     } else if(form.password.value !== form.passwordAgain.value){
         alert("비밀번호가 일치하지 않습니다.");
         form.password.focus();
+        return false;
     } else{
         form.submit();
     }
