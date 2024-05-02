@@ -38,6 +38,7 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
     List<Store> findStore();
 
     //퀵메뉴
-    List<Store> findByRegion(String region);
+    @Query("select s,o from Store s inner join OwnerMember o on s.ownerMember.ownerNo = o.ownerNo where o.deleteYn = 'N' and o.approvalYn = 'Y' and s.region =:region")
+    List<Store> findByRegion(@Param("region")String region);
 
 }
