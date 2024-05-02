@@ -28,13 +28,13 @@
                 </div><br>
                 <div class="buttons_wrap">
                     <button type="submit" class="regi_button modifyBtn">수정완료</button><br>
+                    <button type="button" class="listBtn option_button">목록으로</button>
                 </div>
             </form>
 
 
     <script th:inline="javascript">
         var actionForm = $("form"); //form 태그 객체
-
 
         $(".listBtn").click(function() {
 
@@ -58,6 +58,13 @@
 
         })
 
+        $(".modifyBtn").click(function() {
+            if(confirm("수정하시겠습니까?")) {
+                actionForm.submit();
+            } else {
+                return "redirect:/inquary/modify?inquaryNo=${dto.inquaryNo}&page=${pageRequestDTO2.page}&type=${pageRequestDTO2.type}&keyword=${pageRequestDTO2.keyword}";
+            }
+        });
     </script>
 </body>
 </html>

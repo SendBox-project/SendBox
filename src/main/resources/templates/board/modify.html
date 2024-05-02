@@ -34,7 +34,6 @@ layout:fragment="Content">
             <div class="buttons_wrap">
                 <button type="submit" class="regi_button modifyBtn">수정완료</button><br>
                 <button type="button" class="listBtn option_button">목록으로</button>
-                <button type="button" class="btn-danger option_button"> 글삭제</button>
             </div>
 
         </form>
@@ -54,13 +53,7 @@ layout:fragment="Content">
                     return "redirect:/board/modify?boardNo=${dto.boardNo}&page=${pageRequestDTO.page}&type=${pageRequestDTO.type}"
                 }
             });
-            // 위의 스크립트와 중복기능으로 숨김처리
-            // $(".removeBtn").click(function () {
-            //     actionForm
-            //         .attr("action", "/board/remove")
-            //         .attr("method", "post");
-            //     actionForm.submit();
-            // });
+
             $(".modifyBtn").click(function() {
 
                 if(!confirm("수정하시겠습니까?")){
