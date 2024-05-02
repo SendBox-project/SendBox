@@ -8,7 +8,8 @@
     <!--    <link href="../../../static/css/include/header.css" rel="stylesheet"/>-->
     <script type="text/javascript" th:src="@{/js/searchList.js}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+    <link rel="icon" th:href="@{/image/favicon.ico}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{/image/favicon.ico}" type="image/x-icon">
 </head>
 
 <body>
@@ -110,7 +111,7 @@
                                     th:href="@{/store(region='031')}">#경기</a>
                             </li>
                             <li class="search_item"><a
-                                    th:href="@{/store/searchList(storeName='개인')}">#개인창고</a>
+                                    th:href="@{/store/searchList(storeName='창고')}">#창고</a>
                             </li>
                             <li class="search_item"><a
                                     th:href="@{/store/searchList(storeName='대형')}">#대형창고</a>
