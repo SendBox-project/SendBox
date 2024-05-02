@@ -74,13 +74,17 @@
         </div>
         <div class="main_group3">
             <!--   메인 세번 째 행 그룹 (홈페이지 사용법 기능은 없는 이미지)-->
-            <div class="visual_title">
-                <span>셀프 스토리지란?</span>
-            </div>
+<!--            <div class="visual_title">-->
+<!--                <span>셀프 스토리지란?</span>-->
+<!--            </div>-->
             <div class="manual_wrap">
                 <div class="manual_img">
                     <img th:src="@{/image/howtoUser.png}" alt="manual">
                 </div>
+            </div>
+
+            <div class="gotoBox">
+                <a th:href="@{/store/searchList(storeName='')}"><img th:src="@{/image/gotoBtn.PNG}" alt="notice4"></a>
             </div>
         </div>
     </div>

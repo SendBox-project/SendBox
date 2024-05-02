@@ -68,8 +68,12 @@
     display: flex; /* 가로 정렬 */
     align-items: center; /* 세로 가운데 정렬 */
     width: 1000px; /* 가로 너비 */
-    height: 200px; /* 높이 */
+    height: 220px; /* 높이 */
     margin-top: 30px; /* 여백 */
+    border-radius: 15px;
+    border: 1px solid #dbdbdb73;
+    padding: 10px;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
 
 .store_item > .store_link {
@@ -110,5 +114,5 @@
     text-align: right;
     margin-top: auto;
     margin-bottom: 20px;
-    margin-right: 20px;
+    margin-right: 50px;
 }
