@@ -2,8 +2,8 @@ package com.zerock.sendbox.controller.board;
 
 import com.zerock.sendbox.dto.board.BoardDTO;
 import com.zerock.sendbox.dto.board.PageRequestDTO;
-import com.zerock.sendbox.entity.Board;
 import com.zerock.sendbox.service.board.BoardService;
+import com.zerock.sendbox.service.owner.OwnerMypageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,8 @@ import java.time.format.DateTimeFormatter;
 @Log4j2
 @RequiredArgsConstructor
 public class BoardController {
+    @Autowired
+    OwnerMypageService ownerMypageService;
 
     @Autowired
     BoardService boardService;
@@ -39,45 +41,22 @@ public class BoardController {
     }
 
 
-
     @GetMapping("/register")
-    public void register(){
+    public void register() {
         log.info("register get...");
     }
 
     @PostMapping("/register")
-    public String registerPost(@RequestParam("title") String title,@RequestParam("content") String content,
-                               RedirectAttributes redirectAttributes, @RequestParam("thumbnail") MultipartFile file){
+    public String registerPost(@RequestParam("title") String title, @RequestParam("content") String content,
+                               RedirectAttributes redirectAttributes, @RequestParam("thumbnail") MultipartFile file) {
 
         BoardDTO dto = new BoardDTO();
         dto.setTitle(title);
         dto.setContent(content);
 
         if (!file.isEmpty()) {
-            try {
-                // 업로드된 파일의 이름을 가져옴
-                String parsedLocalDateTimeNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-                String fileName = parsedLocalDateTimeNow+"_"+StringUtils.cleanPath(file.getOriginalFilename());
-                // 파일 저장 디렉토리 설정
-                String uploadDir = "./uploads/";
-
-                // 파일 저장 디렉토리가 없으면 생성
-                Path uploadPath = Paths.get(uploadDir);
-                if (!Files.exists(uploadPath)) {
-                    Files.createDirectories(uploadPath);
-                }
-
-                // 파일 경로 설정
-                Path filePath = uploadPath.resolve(fileName);
-                // 파일을 지정된 경로로 복사
-                Files.copy(file.getInputStream(), filePath);
-
-                // 업로드된 파일의 경로를 DTO에 설정
-                dto.setThumbnail(filePath.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-                // 파일 처리 중 에러가 발생하면 적절히 처리합니다.
-            }
+            String thumbnail = ownerMypageService.uploadFile(file);
+            dto.setThumbnail(thumbnail);
         }
 
         //새로 추가된 엔티티의 번호
@@ -113,7 +92,7 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(@RequestParam("boardNo") Integer boardNo,@RequestParam("title") String title,@RequestParam("content") String content,
+    public String modify(@RequestParam("boardNo") Integer boardNo, @RequestParam("title") String title, @RequestParam("content") String content,
                          @RequestParam("thumbnail") MultipartFile file, @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
         log.info("post modify...................");
         BoardDTO dto = new BoardDTO();
@@ -122,43 +101,20 @@ public class BoardController {
         dto.setBoardNo(boardNo);
 
         if (!file.isEmpty()) {
-            try {
-                // 업로드된 파일의 이름을 가져옴
-                String parsedLocalDateTimeNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-                String fileName = parsedLocalDateTimeNow+"_"+StringUtils.cleanPath(file.getOriginalFilename());
-                // 파일 저장 디렉토리 설정
-                String uploadDir = "./uploads/";
-
-                // 파일 저장 디렉토리가 없으면 생성
-                Path uploadPath = Paths.get(uploadDir);
-                if (!Files.exists(uploadPath)) {
-                    Files.createDirectories(uploadPath);
-                }
-
-                // 파일 경로 설정
-                Path filePath = uploadPath.resolve(fileName);
-                // 파일을 지정된 경로로 복사
-                Files.copy(file.getInputStream(), filePath);
-
-                // 업로드된 파일의 경로를 DTO에 설정
-                dto.setThumbnail(filePath.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-                // 파일 처리 중 에러가 발생하면 적절히 처리합니다.
-            }
+            String thumbnail = ownerMypageService.uploadFile(file);
+            dto.setThumbnail(thumbnail);
         }
 
         boardService.modify(dto);
 
-        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
-        redirectAttributes.addAttribute("type",pageRequestDTO.getType());
-        redirectAttributes.addAttribute("keyword",pageRequestDTO.getKeyword());
+        redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("type", pageRequestDTO.getType());
+        redirectAttributes.addAttribute("keyword", pageRequestDTO.getKeyword());
 
-        redirectAttributes.addAttribute("boardNo",dto.getBoardNo());
+        redirectAttributes.addAttribute("boardNo", dto.getBoardNo());
 
         return "redirect:/board/read";
     }
-
 
 
 }

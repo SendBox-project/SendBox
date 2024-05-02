@@ -110,6 +110,15 @@ public class UserMypageController {
         return "user/member/reservationListAjax";
     }
 
+    //예약 번호 클릭으로 예약 내역 조회
+    @GetMapping("/findReservation")
+    public String findReservation(@RequestParam("orderNo") Integer orderNo, Model model) {
+        Orders orderInfo = userMypageService.findAllByOrderNo(orderNo);
+        model.addAttribute("orderInfo", orderInfo);
+        return "/user/member/paymentConfirm";
+    }
+
+
     //빈곽 카트폼 조회
     @GetMapping("/cartList")
     public String cartForm() {
