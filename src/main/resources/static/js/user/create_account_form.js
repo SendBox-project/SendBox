@@ -4,6 +4,8 @@ function create_account_form() {
     console.log("create_account_from() 호출");
 
     let form = document.getElementById("create_account_from");
+    // 폼 제출을 중단
+    event.preventDefault();
 
     if(form.userId.value === "") {
         alert("아이디를 입력하세요.");

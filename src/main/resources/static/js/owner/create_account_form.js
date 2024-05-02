@@ -12,7 +12,7 @@ function create_account_form() {
         alert("아이디를 입력하세요.");
         form.ownerId.focus();
         return false;
-    } else if(form.password.value === "") {
+    } else if (form.password.value === "") {
         alert("비밀번호를 입력하세요.");
         form.password.focus();
         return false;
@@ -35,14 +35,6 @@ function create_account_form() {
     } else if (form.gender.value === "") {
         alert("성별을 선택하세요.");
         form.gender.focus();
-        return false;
-    } else if (form.region.value === "") {
-        alert("지역을 선택하세요.");
-        form.region.focus();
-        return false;
-    } else if (form.brn.value === "") {
-        alert("사업자등록번호를 입력하세요.");
-        form.brn.focus();
         return false;
     } else {
         form.submit();
