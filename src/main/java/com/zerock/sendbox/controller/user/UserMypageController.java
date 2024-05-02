@@ -113,8 +113,10 @@ public class UserMypageController {
     //예약 번호 클릭으로 예약 내역 조회
     @GetMapping("/findReservation")
     public String findReservation(@RequestParam("orderNo") Integer orderNo, Model model) {
-        Orders orderInfo = userMypageService.findAllByOrderNo(orderNo);
-        model.addAttribute("orderInfo", orderInfo);
+        Orders orders = userMypageService.findAllByOrderNo(orderNo);
+        model.addAttribute("orderInfo", orders);
+        model.addAttribute("paymentInfo", orders.getPayment());
+
         return "/user/member/paymentConfirm";
     }
 

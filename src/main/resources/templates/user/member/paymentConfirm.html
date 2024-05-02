@@ -16,8 +16,7 @@
         <h2>결제 내역</h2>
         <div class="form_list">
             <div class="form_item"><label for="reservationNum">예약 번호</label>
-                <!--th:onclick="|location.href='@{/admin/managerGrant/{adminNo}(adminNo=${admin.adminNo})}'|"-->
-                <input id="reservationNum" name="reservationNum" type="text"  th:onclick="|location.href='@{/user/findReservation/{orderNo}(orderNo=${orders.orderNo})}'|" th:value="${orderInfo.reservationNum}" readonly disabled>
+                <input id="reservationNum" name="reservationNum" type="text" th:value="${orderInfo.reservationNum}" readonly disabled>
             </div>
             <div class="form_item">
                 <label for="storeName">품목</label>

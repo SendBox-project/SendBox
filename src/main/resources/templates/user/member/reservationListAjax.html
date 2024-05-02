@@ -26,14 +26,17 @@
         <tr th:each="order: ${reservations}">
             <input type="hidden" id="orderNo" name="orderNo" th:value="${order.orderNo}">
             <td th:text="${order.room.store.storeName}"></td>
-            <td th:text="${order.reservationNum}"></td>
+                <td th:text="${order.reservationNum}"
+                    th:onclick="|location.href='@{/user/findReservation(orderNo=${order.orderNo})}'|"></td>
             <td th:text="${order.totalPrice}"></td>
             <td th:text="${order.startDate}"></td>
             <td th:text="${order.endDate}"></td>
             <td th:text="${order.reservationStatus}"></td>
             <th:block th:if="${order.reservationStatus == '결제완료'}">
                 <td>
-                    <button type="button" th:onclick="|javascript:paymentCancel(${order.orderNo})|" class="option_button">취소</button>
+                    <button type="button" th:onclick="|javascript:paymentCancel(${order.orderNo})|"
+                            class="option_button">취소
+                    </button>
                 </td>
             </th:block>
             <th:block th:if="${order.reservationStatus == '결제취소'}">
