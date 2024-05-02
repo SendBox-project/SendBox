@@ -43,16 +43,18 @@ public class OwnerSignUpController {
     }
 
     @PostMapping("/create_account_form")
-    public String createOwnerMember(OwnerSignUpDTO signUpDTO, MemberRole memberRole, RedirectAttributes redirectAttributes, Model model) {
-        if (ownerSignUpService.isIdDuplicated(signUpDTO.getOwnerId())) {
-            redirectAttributes.addFlashAttribute("message", "이미 사용 중인 아이디입니다.");
-            return "/owner/member/create_account_form";
+    public String createOwnerMember(OwnerSignUpDTO signUpDTO, MemberRole memberRole, HttpServletResponse response, Model model) throws IOException {
+        if(ownerSignUpService.isIdDuplicated(signUpDTO.getOwnerId())) {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('이미 사용 중인 아이디입니다.');</script>");
+            writer.flush();
+            return "owner/member/create_account_form";
+        } else {
+            Integer ownerNo = ownerSignUpService.join(signUpDTO, memberRole);
+            model.addAttribute("ownerNo", ownerNo);
+            return "owner/member/storeRegisterForm";
         }
-
-        Integer ownerNo = ownerSignUpService.join(signUpDTO, memberRole);
-        model.addAttribute("ownerNo", ownerNo);
-        redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
-        return "owner/member/storeRegisterForm";
     }
 
     //업체 등록하기

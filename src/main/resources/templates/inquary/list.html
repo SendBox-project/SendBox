@@ -40,7 +40,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="dto, iterStat : ${result.dtoList}">
+        <tr th:if="${!#lists.isEmpty(result.dtoList)}" th:each="dto, iterStat : ${result.dtoList}">
             <td scope="row" th:text="${iterStat.index + 1}">
             </td>
             <td class="list_title"><a th:href="@{/inquary/read(inquaryNo=${dto.inquaryNo},
@@ -52,6 +52,10 @@
             <td><p th:text="${dto.memberName}"></p></td>
             <td th:if="${dto.modDate == null}">[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
             <td th:if="${dto.modDate != null}">[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
+        </tr>
+        <!-- result.dtoList가 null인 경우에 대한 처리 -->
+        <tr th:if="${#lists.isEmpty(result.dtoList)}">
+            <td colspan="4">게시물이 없습니다.</td>
         </tr>
 
         </tbody>

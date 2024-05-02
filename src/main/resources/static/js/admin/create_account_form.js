@@ -13,9 +13,9 @@ function create_account_form() {
         alert("비밀번호를 입력하세요.");
         form.password.focus();
         return false;
-    } else if (form.password_again.value === "") {
+    } else if (form.passwordAgain.value === "") {
         alert("비밀번호 확인을 입력하세요.");
-        form.password_again.focus();
+        form.passwordAgain.focus();
         return false;
     } else if (form.name.value === "") {
         alert("이름을 입력하세요.");
@@ -36,6 +36,10 @@ function create_account_form() {
     } else if (form.part.value === "") {
         alert("담당지역을 선택하세요.");
         form.part.focus();
+        return false;
+    }else if (form.password.value !== form.passwordAgain.value) {
+        alert("비밀번호가 일치하지 않습니다.");
+        form.password.focus();
         return false;
     } else {
         form.submit(); // 모든 필드가 채워져 있으면 폼 제출

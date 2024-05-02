@@ -19,22 +19,22 @@
             <input type="hidden" id="roleId" name="roleId" value="4">
             <input type="hidden" id="deleteYn" name = "deleteYn" value="N">
             <div class="form_list">
-                <div class="form_item"><label for="id"></label>
-                    <input type="text" id="id" name="ownerId" placeholder="아이디를 입력하세요" autofocus >
+                <div class="form_item"><label for="ownerId"></label>
+                    <input type="text" id="ownerId" name="ownerId" placeholder="아이디를 입력하세요" autofocus >
                 </div>
                 <div class="form_item"><label for="password"></label>
                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
                 </div>
-                <div class="form_item"><label for="password_check"></label>
-                    <input type="password" id="password_check" name="passwordAgain" placeholder="비밀번호를 다시 입력하세요">
+                <div class="form_item"><label for="passwordAgain"></label>
+                    <input type="password" id="passwordAgain" name="passwordAgain" placeholder="비밀번호를 다시 입력하세요">
                 </div>
             </div>
             <div class="form_list">
                 <div class="form_item"><label for="name"></label>
                     <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
                 </div>
-                <div class="form_item"><label for="email"></label>
-                    <input type="email" id="email" name="mail" placeholder="이메일을 입력하세요">
+                <div class="form_item"><label for="mail"></label>
+                    <input type="email" id="mail" name="mail" placeholder="이메일을 입력하세요">
                 </div>
                 <div class="form_item"><label for="phone"></label>
                     <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력하세요">
@@ -47,7 +47,7 @@
                     </select>
                 </div>
             </div>
-            <button class="regi_button" type="submit" onclick="create_account_form()">Submit</button>
+            <button class="regi_button" type="submit" onclick="return create_account_form()">Submit</button>
         </form>
         <div class="account_links">
             <a th:href="@{/owner/login}">로그인 페이지로 이동</a>

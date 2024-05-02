@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Owner register</title>
     <link rel="stylesheet" th:href="@{/css/owner/storeRegisterForm.css}"/>
-    <script type="text/javascript" th:src="@{/js/owner/create_account_form.js}"></script>
+    <script type="text/javascript" th:src="@{/js/owner/storeRegisterForm.js}"></script>
     <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
 </head>
 
@@ -94,7 +94,7 @@
                     </table>
                 </div>
             </div>
-            <button class="regi_button" type="submit" onclick="registerStore()">회원가입</button>
+            <button class="regi_button" type="submit" onclick="return registerStore()">회원가입</button>
             <button class="reset_button" type="reset"> reset </button>
         </form>
     </div>

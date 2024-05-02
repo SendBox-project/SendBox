@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 @Controller
 @RequestMapping("/owner")
 @RequiredArgsConstructor
@@ -40,17 +43,23 @@ public class OwnerLoginController {
     @PostMapping("/reset_password_form")
     public String resetPassword(@RequestParam("ownerId") String ownerId,
                                 @RequestParam("mail") String mail,
-                                RedirectAttributes redirectAttributes) {
+                                HttpServletResponse response) throws IOException {
         OwnerMember ownerMember = ownerLoginService.findByOwnerIdAndMail(ownerId, mail);
 
         if (ownerMember != null) {
             ownerLoginService.sendPasswordResetMail(mail);
-            redirectAttributes.addFlashAttribute("successMessage", "비밀번호 재설정 이메일이 전송되었습니다.");
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('비밀번호 재설정 이메일이 전송되었습니다.');</script>");
+            writer.flush();
+            return "owner/member/login_form";
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "아이디 또는 이메일 주소가 올바르지 않습니다.");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('아이디 또는 이메일 주소가 올바르지 않습니다.');</script>");
+            writer.flush();
+            return "owner/member/reset_password_form";
         }
-
-        return "owner/member/login_form";
     }
 
     @GetMapping("/forgot_id")
@@ -59,7 +68,7 @@ public class OwnerLoginController {
     }
 
     @PostMapping("/forgot_id")
-    public String processForgotIdForm(@RequestParam("name") String name,@RequestParam("mail") String mail, RedirectAttributes redirectAttributes) {
+    public String processForgotIdForm(@RequestParam("name") String name,@RequestParam("mail") String mail, HttpServletResponse response) throws IOException {
         OwnerMember ownerMember = ownerLoginService.findByNameAndMail(name, mail);
 
         if (ownerMember != null) {
@@ -67,15 +76,18 @@ public class OwnerLoginController {
             String subject = "Your ID Recovery";
             String text = "Your ID is: " + userId;
             ownerLoginService.sendMail(mail, subject, text);
-            log.info("아이디 찾기: 사용자 아이디 {}fmf {}로 전송", userId, mail);
-            redirectAttributes.addFlashAttribute("successMessage", "가입하신 이메일 주소로 아이디를 전송했습니다.");
-
+            response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄
+            PrintWriter writer = response.getWriter(); //이 PrintWriter를 통해 HTML 코드나 다른 텍스트 데이터를 클라이언트로 전송
+            writer.println("<script>alert('가입하신 이메일 주소로 아이디를 전송했습니다.');</script>");
+            writer.flush();
+            return "owner/member/login_form";
         } else {
-            log.info("아이디 찾기: 해당 이메일 주소와 연결된 사용자가 없습니다.");
-            redirectAttributes.addFlashAttribute("errorMessage", "해당 이메일 주소와 연결된 사용자가 없습니다.");
-
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('해당 이메일 주소와 연결된 사용자가 없습니다.');</script>");
+            writer.flush();
+            return "owner/member/forgot_id_form";
         }
-        return "owner/member/login_form";
     }
 
 }

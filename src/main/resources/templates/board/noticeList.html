@@ -39,7 +39,7 @@
         </thead>
         <tbody>
         <!-- result.dtoList가 null이 아닌 경우에만 반복문 실행 -->
-        <tr th:if="${result.dtoList != null}" th:each="dto, iterStat : ${result.dtoList}">
+        <tr th:if="${!#lists.isEmpty(result.dtoList)}" th:each="dto, iterStat : ${result.dtoList}">
             <td th:text="${iterStat.index + 1}" class="list_num"></td> <!-- 번호 추가 -->
             <td class="list_title">
                 <a th:href="@{/board/read(boardNo=${dto.boardNo},
@@ -54,7 +54,7 @@
             <td th:if="${dto.modDate != null}">[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
         </tr>
         <!-- result.dtoList가 null인 경우에 대한 처리 -->
-        <tr th:if="${result.dtoList == null}">
+        <tr th:if="${#lists.isEmpty(result.dtoList)}">
             <td colspan="4">게시물이 없습니다.</td>
         </tr>
         </tbody>
