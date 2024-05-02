@@ -38,28 +38,27 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="dto : ${result.dtoList}">
-                <td scope="row"> [[${dto.boardNo}]] </td>
-                <td class="list_title"><a th:href="@{/board/read(boardNo=${dto.boardNo},
+        <!-- result.dtoList가 null이 아닌 경우에만 반복문 실행 -->
+        <tr th:if="${result.dtoList != null}" th:each="dto, iterStat : ${result.dtoList}">
+            <td th:text="${iterStat.index + 1}" class="list_num"></td> <!-- 번호 추가 -->
+            <td class="list_title">
+                <a th:href="@{/board/read(boardNo=${dto.boardNo},
                 page=${result.page},
                 type=${pageRequestDTO.type},
                 keyword=${pageRequestDTO.keyword})}">
-                    [[${dto.title}]] [<b th:text="${dto.AdminAnswerCount}"></b>] </a></td>
-                <td><p th:text="${dto.writerName}"></p></td>
-
-
-
-
-                <!--                <td><p th:text="${adminMember.adminId}"></p></td>★★★★★★★★★★★★어드민 아이디나 이름 ★★★★★★-->
-
-
-
-
-
-                <td th:if="${dto.modDate == null}">[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
-                <td th:if="${dto.modDate != null}">[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
-            </tr>
+                    [[${dto.title}]]
+                </a>
+            </td>
+            <td><p th:text="${dto.writerName}"></p></td>
+            <td th:if="${dto.modDate == null}">[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+            <td th:if="${dto.modDate != null}">[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
+        </tr>
+        <!-- result.dtoList가 null인 경우에 대한 처리 -->
+        <tr th:if="${result.dtoList == null}">
+            <td colspan="4">게시물이 없습니다.</td>
+        </tr>
         </tbody>
+
     </table>
     <span>
         <a th:href="@{/board/register}" sec:authorize="hasRole('ADMIN') || hasRole('SUPERADMIN')">
