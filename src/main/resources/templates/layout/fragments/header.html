@@ -35,6 +35,8 @@
                                     th:href="@{/checkPositionLogin}">로그인</a></li>
                             <li class="link_item" sec:authorize="isAnonymous()"><a th:href="@{/checkPositionRegister}">회원가입</a>
                             </li>
+                            <li class="link_item" sec:authorize="isAuthenticated()"><a th:href="@{/user/cartList}">장바구니</a>
+                            </li>
                         </ul>
                     </div>
                 </div> <!-- top_bar -->

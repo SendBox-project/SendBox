@@ -132,6 +132,7 @@ public class OwnerMypageController {
 
     }
 
+
     //매장 정보 수정
     @PostMapping("/updateStoreInfo")
     public String updateStoreInfo(Model model, HttpServletResponse response,

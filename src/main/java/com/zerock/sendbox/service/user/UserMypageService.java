@@ -98,5 +98,9 @@ public class UserMypageService {
         return ordersRepository.save(orders);
     }
 
+    //예약 번호 클릭으로 예약 내역 조회
+    public Orders findAllByOrderNo(Integer orderNo) {
+        return ordersRepository.findPaymentInfo(orderNo);
+    }
 
 }
