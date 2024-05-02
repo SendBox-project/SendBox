@@ -59,8 +59,8 @@ public class OwnerLoginController {
     }
 
     @PostMapping("/forgot_id")
-    public String processForgotIdForm(@RequestParam("mail") String mail, RedirectAttributes redirectAttributes) {
-        OwnerMember ownerMember = ownerLoginService.findByMail(mail);
+    public String processForgotIdForm(@RequestParam("name") String name,@RequestParam("mail") String mail, RedirectAttributes redirectAttributes) {
+        OwnerMember ownerMember = ownerLoginService.findByNameAndMail(name, mail);
 
         if (ownerMember != null) {
             String userId = ownerMember.getOwnerId();

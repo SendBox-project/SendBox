@@ -58,9 +58,9 @@ public class AdminLoginController {
     }
 
     @PostMapping("/forgot_id")
-    public String processForgotIdForm(@RequestParam("mail") String mail, RedirectAttributes redirectAttributes) {
+    public String processForgotIdForm(@RequestParam("name") String name,@RequestParam("mail") String mail, RedirectAttributes redirectAttributes) {
         // 이메일 주소를 이용하여 사용자를 찾습니다.
-        AdminMember adminMember = loginService.findByMail(mail);
+        AdminMember adminMember = loginService.findByNameAndMail(name,mail);
 
         if (adminMember != null) {
             // 사용자가 존재하는 경우, 해당 이메일 주소로 아이디를 전송합니다.

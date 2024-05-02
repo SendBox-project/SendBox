@@ -15,4 +15,6 @@ public interface UserLoginService {
     boolean sendMail(String mail, String subject, String text);
 
     UserMember findByUserIdAndMail(String userId, String mail);
+
+    UserMember findByNameAndMail(String name, String mail);
 }

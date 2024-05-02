@@ -35,4 +35,6 @@ public interface OwnerMemberRepository extends JpaRepository<OwnerMember, Intege
     @Modifying
     @Query("update OwnerMember set approvalYn = 'Y' where ownerNo =:ownerNo")
     Integer saveApproval(@Param("ownerNo") Integer ownerNo);
+
+    OwnerMember findByNameAndMail(String name, String mail);
 }

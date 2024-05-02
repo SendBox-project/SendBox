@@ -59,8 +59,8 @@ public class UserLoginController {
     }
 
     @PostMapping("/forgot_id")
-    public String processForgotIdForm(@RequestParam("mail") String mail, RedirectAttributes redirectAttributes) {
-        UserMember userMember = userLoginService.findByMail(mail);
+    public String processForgotIdForm(@RequestParam("name") String name,@RequestParam("mail") String mail, RedirectAttributes redirectAttributes) {
+        UserMember userMember = userLoginService.findByNameAndMail(name,mail);
 
         if (userMember != null) {
             String userId = userMember.getUserId();

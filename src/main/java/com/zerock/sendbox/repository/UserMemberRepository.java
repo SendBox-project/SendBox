@@ -36,4 +36,5 @@ public interface UserMemberRepository extends JpaRepository<UserMember, Integer>
 
     UserMember findByUserIdAndMail(String userId, String mail);
 
+    UserMember findByNameAndMail(String name, String mail);
 }
