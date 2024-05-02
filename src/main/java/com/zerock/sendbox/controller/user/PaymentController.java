@@ -1,10 +1,7 @@
 package com.zerock.sendbox.controller.user;
 
 
-import com.zerock.sendbox.dto.payment.ApproveReqDto;
-import com.zerock.sendbox.dto.payment.ApproveResDto;
-import com.zerock.sendbox.dto.payment.PaymentReqDto;
-import com.zerock.sendbox.dto.payment.PaymentResDto;
+import com.zerock.sendbox.dto.payment.*;
 import com.zerock.sendbox.entity.*;
 import com.zerock.sendbox.service.user.PaymentService;
 import com.zerock.sendbox.service.user.UserMypageService;
@@ -149,7 +146,20 @@ public class PaymentController {
     //결제 취소 api
     @PostMapping("/paymentCancel/{orderNo}")
     public String paymentCancel(@PathVariable(value = "orderNo") Integer orderNo , HttpServletResponse response) throws IOException {
-        System.out.println("orderNo = " + orderNo);
+        //tid 및 가격 찾기 위한 메서드
+        Orders orders =paymentService.findPaymentInfo(orderNo);
+
+        //취소할 정보 저장
+        CancelReqDto cancelReqDto = new CancelReqDto();
+        cancelReqDto.setCid("TC0ONETIME");
+        cancelReqDto.setTid(orders.getPayment().getTId());
+        cancelReqDto.setCancel_amount(String.valueOf(orders.getTotalPrice()));
+        cancelReqDto.setCancel_tax_free_amount("0");
+
+        // 결제 환불 api 호출
+        CancelResDto cancelResDto = paymentService.paymentCancel(cancelReqDto); // cancelReqDto를 변수로 보내서 리턴을 cancelResDto로 받는다
+
+
         Integer result = paymentService.paymentCancel(orderNo);
         if (result != 0) {
             response.setContentType("text/html; charset=UTF-8"); //응답의 content type을 설정, "text/html"은 전송될 데이터의 종류가 HTML임을 나타냄

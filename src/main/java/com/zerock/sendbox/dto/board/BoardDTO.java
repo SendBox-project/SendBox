@@ -26,9 +26,6 @@ public class BoardDTO {
 
     private String writerName; //작성자의 이름
 
-    @Column(length = 3, columnDefinition = "char(3)")
-    private String boardType;
-
     private int AdminAnswerCount;
 
     private LocalDateTime regDate;

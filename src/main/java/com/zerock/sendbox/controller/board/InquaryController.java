@@ -36,8 +36,7 @@ public class InquaryController {
     }
 
     @PostMapping("/register")
-    public String registerPost(InquaryDTO dto, RedirectAttributes
-                               redirectAttributes) {
+    public String registerPost(InquaryDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto..." + dto);
 
         Integer inquaryNo = inquaryService.register(dto);
@@ -60,7 +59,7 @@ public class InquaryController {
         model.addAttribute("dto", inquaryDTO);
     }
 
-    @PostMapping("/remove")
+    @GetMapping("/remove")
     public String remove(Integer inquaryNo, RedirectAttributes redirectAttributes) {
         log.info("inquaryNo: " + inquaryNo);
 

@@ -26,8 +26,7 @@
                     </div>
                     <div class="account_link">
                         <ul class="link_list">
-                            <li class="link_item"><a th:href="@{/board/noticeList}">공지사항</a></li>
-                            <li class="link_item"><a th:href="@{/inquary/list}">고객센터</a></li>
+                            <li class="link_item"><a th:href="@{/board/noticeList}">고객센터</a></li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a onclick="document.getElementById('logout').submit();"> 로그아웃</a>
                             </li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a th:href="@{/user/mypageForm}">마이페이지</a>
@@ -50,10 +49,7 @@
                     </div>
                     <div class="account_link">
                         <ul class="link_list">
-                            <li class="link_item"><a th:href="@{/board/noticeList}"
-                                                     target="_blank">공지사항</a></li>
-                            <li class="link_item"><a th:href="@{/inquary/list}"
-                                                     target="_blank">고객센터</a></li>
+                            <li class="link_item"><a th:href="@{/board/noticeList}">고객센터</a></li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a onclick="document.getElementById('logout').submit();"> 로그아웃</a>
                             </li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a
@@ -78,6 +74,7 @@
                     </div>
                     <div class="account_link">
                         <ul class="link_list">
+                            <li class="link_item"><a th:href="@{/board/noticeList}">고객센터</a></li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a onclick="document.getElementById('logout').submit();"> 로그아웃</a>
                             </li>
                             <li class="link_item" sec:authorize="isAuthenticated()"><a
@@ -105,19 +102,19 @@
                     <div class="search_list_wrap">
                         <ul class="search_list">
                             <li class="search_item"><a
-                                    th:href="@{http://localhost:8080/store/searchList?storeName=%EC%84%9C%EC%9A%B8}">#서울</a>
+                                    th:href="@{/store(region='02')}">#서울 매장</a>
                             </li>
                             <li class="search_item"><a
-                                    th:href="@{http://localhost:8080/store/searchList?storeName=%EA%B2%BD%EA%B8%B0}">#경기</a>
+                                    th:href="@{/store(region='031')}">#경기 매장</a>
                             </li>
                             <li class="search_item"><a
-                                    th:href="@{http://localhost:8080/store/searchList?storeName=%EA%B0%9C%EC%9D%B8%EC%B0%BD%EA%B3%A0}">#개인창고</a>
+                                    th:href="@{/store(region='051')}">#부산 매장</a>
                             </li>
                             <li class="search_item"><a
-                                    th:href="@{http://localhost:8080/store/searchList?storeName=%ED%95%A0%EC%9D%B8}">#할인</a>
+                                    th:href="@{/store(region='032')}">#인천 매장</a>
                             </li>
                             <li class="search_item"><a
-                                    th:href="@{http://localhost:8080/store/searchList?storeName=%EC%B9%B4%ED%8E%98%EC%B0%BD%EA%B3%A0}">#카페창고</a>
+                                    th:href="@{/store(region='033')}">#강원 매장</a>
                             </li>
                         </ul>
                     </div>  <!-- search_list_wrap -->

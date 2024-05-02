@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,8 +34,12 @@ public class InquaryServiceImpl implements InquaryService{
 
         Inquary inquary = dtoToEntity(dto);
 
-        UserMember userMember = userMemberRepository.findById(dto.getUserNo())
-                        .orElseThrow(() -> new IllegalArgumentException("해당 UserMember를 찾을 수 없습니다. AdminNo: " + dto.getUserNo()));
+        // 현재 인증된 사용자 정보 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // 여기서 사용자 유저네임이 반환되는 것으로 가정합니다.
+
+        // 가져온 사용자 정보를 이용하여 필요한 작업 수행
+        UserMember userMember = userMemberRepository.findByUserId(username);
 
         inquary.setUserMember(userMember);
 
@@ -41,6 +47,7 @@ public class InquaryServiceImpl implements InquaryService{
 
         return inquary.getInquaryNo();
     }
+
 
     @Override
     public PageResultDTO2<InquaryDTO, Object[]> getList(PageRequestDTO2 pageRequestDTO2) {
@@ -69,7 +76,7 @@ public class InquaryServiceImpl implements InquaryService{
     @Override
     public void removeWithReplies(Integer inquaryNo) {
 
-       // replyRepository.deleteByInquaryNo(inquaryNo);
+        // replyRepository.deleteByInquaryNo(inquaryNo);
 
         inquaryRepository.deleteById(inquaryNo);
     }
@@ -112,6 +119,7 @@ public class InquaryServiceImpl implements InquaryService{
                 .content(inquary.getContent())
                 .regDate(inquary.getRegDate())
                 .modDate(inquary.getModDate())
+                .userId(userMember.getUserId())
                 .memberName(userMember.getName())
                 .replyCount(replyCount.intValue())
                 .build();

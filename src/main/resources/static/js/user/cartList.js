@@ -55,9 +55,10 @@ function payment() {
 function updateCart() { /*cartList.html에 form태그와 연결*/
     const f = document.getElementById("form1"); //cartList.html의 form1과 ㅇ녀결
     const select_value = document.getElementById('sizeType'); // 다큐먼트(즉 html 문서)안에 id 설정 해놓은 것 중에 sizeType 이거와 맞는 소스를 가져옴!
-    //teamList.html 에서 id가 searchType인 애의 값을 가져와서 변수 select_value에 넣는다.
-    f.roomNo.value = select_value.options[select_value.selectedIndex].value; // 옵션 중에서 셀렉트 된 것만 가져온다. 여기선 cartListAjax의 roomNo
-
+    const val1 = select_value.options[select_value.selectedIndex].value; // 옵션 중에서 셀렉트 된 것만 가져온다. 여기선 cartListAjax의 roomNo
+    const val2 = val1.split(",");
+    const no = val2[0];
+    f.roomNo.value = no;
     f.submit();
 
 }
@@ -109,6 +110,34 @@ function deleteAllCart() {
         }
     })
 
+}
+
+//가격 계산
+function updateTotalPrice() {
+    const f = document.getElementById("form1"); //cartList.html의 form1과 ㅇ녀결
+    const select_value = document.getElementById('sizeType'); // 다큐먼트(즉 html 문서)안에 id 설정 해놓은 것 중에 sizeType 이거와 맞는 소스를 가져옴!
+    const val1 = select_value.options[select_value.selectedIndex].value; // 옵션 중에서 셀렉트 된 것만 가져온다. 여기선 cartListAjax의 roomNo
+    const val2 = val1.split(",");
+    const no = val2[0];
+    const price = val2[1];
+    f.roomNo.value = Number(no);
+    f.onePrice.value = price;
+
+    // 단가가격
+    const onePrice = document.getElementById('onePrice').value;
+    // 수량
+    const amount = document.getElementById('totalAmount').value;
+    // 날짜차이 계산
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
+    const da1 = new Date(startDate);
+    const da2 = new Date(endDate);
+    const dif = da2 - da1;
+    const diffDay = dif/ (24 * 60 * 60 * 1000) +1;
+
+
+    // 보여주는 값
+    document.getElementById('totalPrice').value = onePrice * amount * diffDay;
 }
 
 

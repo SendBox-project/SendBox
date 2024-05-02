@@ -1,9 +1,6 @@
 package com.zerock.sendbox.feign;
 
-import com.zerock.sendbox.dto.payment.ApproveReqDto;
-import com.zerock.sendbox.dto.payment.ApproveResDto;
-import com.zerock.sendbox.dto.payment.PaymentReqDto;
-import com.zerock.sendbox.dto.payment.PaymentResDto;
+import com.zerock.sendbox.dto.payment.*;
 import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,6 +20,9 @@ public interface PaymentClient {
     @PostMapping(value = "/online/v1/payment/approve", headers = {"Authorization= SECRET_KEY ${kakao.secret-key}","Content-Type= application/json"})
     ApproveResDto paymentApprove(@RequestBody ApproveReqDto approveReqDto);
 
+    //카카오페이 환불 api
+    @PostMapping(value = "/online/v1/payment/cancel", headers =  {"Authorization= SECRET_KEY ${kakao.secret-key}","Content-Type= application/json"})
+    CancelResDto paymentCancel(@RequestBody CancelReqDto cancelReqDto);
 
 }
 
