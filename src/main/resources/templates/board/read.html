@@ -46,9 +46,39 @@
         <a sec:authorize="hasRole('ADMIN') || hasRole('SUPERADMIN')" th:href="@{/board/remove(boardNo=${dto.boardNo})}">
             <button type="button" class="option_button">삭제</button>
         </a>
-        <a th:href="@{/board/noticeList}">
-            <button type="button" class="option_button">목록</button>
-        </a>
+        <button type="button" class="listBtn option_button">목록으로</button>
     </div>
 </body>
+<!-- JavaScript 부분 -->
+<script th:inline="javascript">
+    var actionForm = $("form");
+    // 버튼 클릭시 삭제하시겠습니까? 라는 메시지를 띄우고 예 선택시 삭제 아니오 선택시 변동없음
+    $(".btn-danger").click(function () {
+        if (confirm("삭제하시겠습니까?")) {
+            actionForm
+                .attr("action", "/board/remove")
+                .attr("method", "post");
+            actionForm.submit();
+        } else {
+            return "redirect:/board/modify?boardNo=${dto.boardNo}&page=${pageRequestDTO.page}&type=${pageRequestDTO.type}"
+        }
+    });
+
+    $(".listBtn").click(function () {
+        var page = $("input[name='page']");
+        var type = $("input[name='type']");
+        var keyword = $("input[name='keyword']");
+
+        actionForm.empty();
+        actionForm.append(page);
+        actionForm.append(type);
+        actionForm.append(keyword);
+
+        actionForm
+            .attr("action", "/board/noticeList")
+            .attr("method", "get");
+        actionForm.submit();
+    });
+</script>
+
 </html>
