@@ -39,7 +39,7 @@
 }
 
 .form_list {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 400px;
     height: 500px;
     padding: 30px;
@@ -59,4 +59,7 @@
     height: 30px;
     border-radius: 5px;
     margin: 5px auto;
+}
+.backBtn{
+    margin-left: 65px;
 }
