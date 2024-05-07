@@ -1,0 +1,34 @@
+#sidebar {
+    height: 1200px;
+    width : 300px;
+    background-color: #27508d;
+}
+#content_wrapper {
+    height: 950px;
+    width : 1700px;
+    background-color: #ffbfbf;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#content {
+    height: 1200px;
+    width : 1400px;
+    background-color: #f2f2f2;
+}
+.header {
+    height: 60px;
+    width: 1400px;
+    background-color: #6e87a9;
+}
+.main {
+    background-color: #d08321;
+    height: 800px;
+}
+.footer {
+    width: 100%;
+    height: 200px;
+    background-color: red;
+}

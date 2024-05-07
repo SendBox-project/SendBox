@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:fragment="HeaderFragment">
+<head>
+    <meta charset="UTF-8">
+    <link th:inline="css" th:href="@{/css/zKDT/header.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../../../static/css/zKDT/header.css">
+</head>
+<body>
+<header id="container">
+        <div id="header_wrap">
+        <!-----------------top-bar start ---------------- -->
+            <div class="navbar-custom"> <!--화면 길이만큼의 topbar-->
+                <div class="topbar"> <!--사이드바를 제외한 topbar-->
+                    <div class="오른쪽플렉스요소">
+                        <button class="toggle_button"> 토글
+                            <!-- <i class=""></i>로 토글 버튼을 가져오던데 그게 뭐지-->
+                        </button>
+                    </div>
+                    <div class="왼쪽플렉스요소">
+                        <a class="드롭다운" role="button">
+                            <span class="profile_img">
+                                <img th:src="@{'/upload/' + ${member.profileImg}}" alt="profile" class="이미지모양정하는클래스"> <!--원형 혹은 사각형으로 한 60*60?-->
+                            </span>
+                            <span> <!--flex-column 주면 될 듯-->
+                                <h5 th:text="${member.name} + '님'">이름</h5>
+                                <h6 th:text="${member.position}">직책</h6>
+                            </span>
+                        </a>
+                        <div class="드롭다운메뉴" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 72px);" >
+                            <a th:href="@{/member/mypageForm}" class="dropdown_item">
+                                <span>마이페이지</span>
+                            </a>
+                            <a th:href="@{/member/menu}" class="dropdown_item">
+                                <span>메뉴메뉴메뉴</span>
+                            </a>
+                            <a th:href="@{/member/logout}" class="dropdown_item">
+                                <span>로그아웃</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
+
+</body>
+</html>

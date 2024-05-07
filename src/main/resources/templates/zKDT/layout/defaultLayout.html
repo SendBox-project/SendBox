@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--공통 JS / CSS 영역을 관리하는 환경 영역-->
+<head th:replace="~{layout/fragments/config :: ConfigFragment}">
+    <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">공통 타이틀</title>
+    <link rel="stylesheet" href="../../../static/css/zKDT/dafault.css">
+    <link rel="stylesheet" href="../../../static/css/zKDT/common.css">
+</head>
+<body>
+<!-- 사이드바-->
+<!--<div id="sidebar"></div>-->
+<div id="content_wrapper" class="flex-column">
+    <div id="content">
+        <!--Header 영역을 참조합니다.-->
+        <div class="header">헤더</div>
+
+        <!--Content 내용 영역을 참조합니다-->
+        <div class="main">main</div>
+    </div>
+    <!--Footer 영역을 참조합니다.-->
+    <div class="footer">footer</div>
+</div>
+</body>
+<!--<body>-->
+<!--&lt;!&ndash; 사이드바&ndash;&gt;-->
+<!--<th:block th:replace="~{layout/fragments/sidebar :: sidebarFragment}"></th:block>-->
+<!--    <div id="content_wrapper" class="flex-column?">-->
+<!--        <div id="content">-->
+<!--            &lt;!&ndash;Header 영역을 참조합니다.&ndash;&gt;-->
+<!--            <header th:replace="~{layout/fragments/header :: HeaderFragment}"></header>-->
+
+<!--            &lt;!&ndash;Content 내용 영역을 참조합니다&ndash;&gt;-->
+<!--            <th:block layout:fragment="Content"></th:block>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;Footer 영역을 참조합니다.&ndash;&gt;-->
+<!--        <footer th:replace="~{layout/fragments/footer :: FooterFragment}"></footer>-->
+<!--    </div>-->
+<!--</body>-->
+</html>
