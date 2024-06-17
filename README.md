@@ -135,4 +135,4 @@
 
 ## 라이센스
 
-MIT &copy; [이유리](9048jj@naver.com) , [이해준](jihae666@naver.com ), [홍민기](gyutaeg60@gmail.com)
+MIT &copy; [이유리](9048jj@naver.com) , [이해준](jihae666@naver.com ), [홍민기](mkhong916@gmail.com)
